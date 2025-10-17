@@ -6,7 +6,7 @@ from psycopg2.extras import RealDictCursor
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Business: API для управления настройками сайта, услугами, каталогом и страницами
+    Business: API для управления настройками сайта, услугами, каталогом и страницами  
     Args: event - dict with httpMethod, body, queryStringParameters
           context - object with attributes: request_id, function_name
     Returns: HTTP response dict with settings/services/catalog/pages data
