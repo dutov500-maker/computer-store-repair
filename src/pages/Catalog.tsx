@@ -43,8 +43,13 @@ const Catalog = () => {
               <Icon name="Loader2" className="animate-spin mx-auto mb-4" size={48} />
               <p className="text-muted-foreground">Загрузка...</p>
             </div>
+          ) : catalog.length === 0 ? (
+            <div className="text-center py-12">
+              <Icon name="Package" className="mx-auto mb-4 text-muted-foreground" size={64} />
+              <p className="text-muted-foreground">Товары временно отсутствуют</p>
+            </div>
           ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {catalog.map((pc, index) => (
               <Card 
                 key={pc.id} 
