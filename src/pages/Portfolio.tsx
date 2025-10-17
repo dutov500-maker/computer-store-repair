@@ -106,7 +106,7 @@ const Portfolio = () => {
   const [portfolio] = useState<any[]>(STATIC_PORTFOLIO);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen page-transition">
       <Header />
       
       <section className="py-16 container mx-auto px-4">

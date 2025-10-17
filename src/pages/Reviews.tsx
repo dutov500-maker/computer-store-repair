@@ -10,7 +10,7 @@ const Reviews = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen page-transition">
       <Header />
       <div className="pt-20">
         <ReviewsSection fullPage={true} />

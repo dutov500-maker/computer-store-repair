@@ -10,7 +10,7 @@ const PCSelection = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen page-transition">
       <Header />
       <div className="pt-20">
         <PCSelectionSection fullPage={true} />

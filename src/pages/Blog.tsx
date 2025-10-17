@@ -22,7 +22,7 @@ const Blog = () => {
     : postsWithExcerpt.filter(post => post.category === selectedCategory);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen page-transition">
       <Header />
       
       <section className="relative overflow-hidden py-20 bg-gradient-to-br from-primary/5 via-background to-primary/5">

@@ -95,6 +95,18 @@
 @layer base {
   * {
     @apply border-border;
+    scroll-behavior: smooth;
+  }
+
+  a,
+  button {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  img {
+    transition:
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.3s ease;
   }
 
   body {
@@ -135,15 +147,15 @@
 
 @layer utilities {
   .animate-fade-in {
-    animation: fadeIn 0.8s ease-in;
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .animate-slide-up {
-    animation: slideUp 0.6s ease-out;
+    animation: slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .animate-scale-in {
-    animation: scaleIn 0.5s ease-out;
+    animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .animate-bounce-slow {
@@ -201,17 +213,21 @@
 
   .hover-lift {
     transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
+      transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .hover-lift:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(255, 119, 51, 0.3);
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 25px 50px rgba(255, 119, 51, 0.4);
+  }
+
+  .hover-glow {
+    transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .hover-glow:hover {
-    box-shadow: 0 0 30px rgba(255, 119, 51, 0.6);
+    box-shadow: 0 0 40px rgba(255, 119, 51, 0.7);
   }
 
   .parallax-bg {
@@ -242,9 +258,11 @@
   @keyframes fadeIn {
     from {
       opacity: 0;
+      transform: translateY(10px);
     }
     to {
       opacity: 1;
+      transform: translateY(0);
     }
   }
 
@@ -355,15 +373,17 @@
 
   @keyframes slideInFromRight {
     from {
+      opacity: 0;
       transform: translateX(100%);
     }
     to {
+      opacity: 1;
       transform: translateX(0);
     }
   }
 
   .animate-slide-in-from-right {
-    animation: slideInFromRight 0.3s ease-out;
+    animation: slideInFromRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   @keyframes glowPulse {
@@ -425,5 +445,34 @@
     100% {
       background-position: 0% 50%;
     }
+  }
+
+  @keyframes pageEnter {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .page-transition {
+    animation: pageEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes smoothBounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .animate-smooth-bounce {
+    animation: smoothBounce 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
   }
 }

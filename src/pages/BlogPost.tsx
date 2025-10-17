@@ -29,7 +29,7 @@ const BlogPost = () => {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen page-transition">
       <Header />
       <article className="pt-8">
         <BlogPostHeader

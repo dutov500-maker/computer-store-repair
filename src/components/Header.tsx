@@ -9,6 +9,9 @@ const Header = () => {
   const [settings, setSettings] = useState<any>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
   useEffect(() => {
     initializeStorage();
@@ -29,6 +32,31 @@ const Header = () => {
       document.body.style.overflow = 'unset';
     }
   }, [mobileMenuOpen]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 75) {
+      return;
+    }
+    if (touchEnd - touchStart > 75) {
+      closeMenu();
+    }
+  };
+
+  const closeMenu = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setMobileMenuOpen(false);
+      setIsClosing(false);
+    }, 300);
+  };
 
   const fetchSettings = () => {
     const data = getSettings();
@@ -149,14 +177,20 @@ const Header = () => {
       {mobileMenuOpen && createPortal(
         <>
           <div 
-            className="fixed inset-0 bg-black/70 z-[9998] md:hidden backdrop-blur-sm animate-fade-in"
-            onClick={() => setMobileMenuOpen(false)}
+            className={`fixed inset-0 bg-black/70 z-[9998] md:hidden backdrop-blur-sm transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`}
+            onClick={closeMenu}
           />
-          <div className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white dark:bg-zinc-900 z-[9999] md:hidden shadow-2xl animate-slide-in-from-right flex flex-col" style={{ minHeight: '100vh', maxHeight: '100vh' }}>
+          <div 
+            className={`fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white dark:bg-zinc-900 z-[9999] md:hidden shadow-2xl flex flex-col transition-transform duration-300 ease-out ${isClosing ? 'translate-x-full' : 'translate-x-0'}`}
+            style={{ minHeight: '100vh', maxHeight: '100vh' }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-zinc-700 flex-shrink-0">
               <span className="font-heading font-bold text-lg text-gray-900 dark:text-white">Меню</span>
               <button
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={closeMenu}
                 className="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
               >
                 <Icon name="X" size={24} className="text-gray-900 dark:text-white" />
@@ -168,7 +202,7 @@ const Header = () => {
                   <li key={item.to} className="animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
                     <Link
                       to={item.to}
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={closeMenu}
                       className="block px-4 py-4 rounded-xl bg-gray-50 dark:bg-zinc-800 hover:bg-primary/10 dark:hover:bg-primary/20 transition-all font-medium text-lg text-gray-900 dark:text-white border border-gray-200 dark:border-zinc-700 hover:border-primary/40"
                     >
                       {item.label}
