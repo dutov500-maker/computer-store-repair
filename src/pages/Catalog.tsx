@@ -1,41 +1,102 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
-import funcUrls from '../../backend/func2url.json';
+
+const STATIC_CATALOG = [
+  {
+    id: 15,
+    title: "ECO 1 ( Ryzen 5 5500 + GTX 1080 )",
+    description: "Бюджетный игровой системный блок за 45.000 руб под Full HD Gaming",
+    price: 45000,
+    resolution: "Full HD",
+    image_url: "https://cdn.poehali.dev/files/d79b0d18-d94b-4c73-8029-cecde6393f0a.png",
+    specs: {
+      cpu: "AMD Ryzen 5 5500",
+      gpu: "GTX 1080",
+      ram: "16GB",
+      storage: "512GB SSD"
+    }
+  },
+  {
+    id: 16,
+    title: "Eco #2",
+    description: "Бюджетный игровой системный блок за 50.000 руб под Full HD Gaming",
+    price: 50000,
+    resolution: "Full HD",
+    image_url: "https://cdn.poehali.dev/files/d79b0d18-d94b-4c73-8029-cecde6393f0a.png",
+    specs: {
+      cpu: "Intel Core i3-12100F",
+      gpu: "RTX 3050",
+      ram: "16GB",
+      storage: "512GB SSD"
+    }
+  },
+  {
+    id: 17,
+    title: "ECO 3 ( Ryzen 5 5600 + RTX 3060ti )",
+    description: "Бюджетный игровой системный блок за 60.000 руб под Full HD Gaming",
+    price: 65000,
+    resolution: "Full HD",
+    image_url: "https://cdn.poehali.dev/files/d79b0d18-d94b-4c73-8029-cecde6393f0a.png",
+    specs: {
+      cpu: "AMD Ryzen 5 5600",
+      gpu: "RTX 3060ti",
+      ram: "16GB",
+      storage: "512GB SSD"
+    }
+  },
+  {
+    id: 18,
+    title: "Special 1 ( Ryzen 5600 + RTX 5060 )",
+    description: "Готовое решение для сборки за 75 тысяч рублей под Full-HD Gaming на Ультра настройках графики",
+    price: 75000,
+    resolution: "Full HD",
+    image_url: "https://cdn.poehali.dev/files/d79b0d18-d94b-4c73-8029-cecde6393f0a.png",
+    specs: {
+      cpu: "AMD Ryzen 5 5600",
+      gpu: "Palit RTX 5060 Dual 8GB",
+      ram: "16GB",
+      storage: "512GB SSD"
+    }
+  },
+  {
+    id: 19,
+    title: "Special 2 (i5 12400F + RTX 5060)",
+    description: "Готовое решение для сборки за 89 тысяч рублей под Full-HD Gaming на Ультра настройках графики",
+    price: 89000,
+    resolution: "FULL HD",
+    image_url: "https://cdn.poehali.dev/files/d79b0d18-d94b-4c73-8029-cecde6393f0a.png",
+    specs: {
+      cpu: "Intel Core i5-12400F",
+      gpu: "RTX 5060",
+      ram: "16GB DDR4",
+      storage: "512GB SSD"
+    }
+  },
+  {
+    id: 20,
+    title: "Special 3 (Ryzen 8400F + RTX 5060)",
+    description: "Готовое решение для сборки за 91 тысяч рублей под Full-HD Gaming на Ультра настройках графики",
+    price: 91000,
+    resolution: "Full HD",
+    image_url: "https://cdn.poehali.dev/files/d79b0d18-d94b-4c73-8029-cecde6393f0a.png",
+    specs: {
+      cpu: "AMD Ryzen 5 8400F",
+      gpu: "RTX 5060",
+      ram: "16GB DDR5",
+      storage: "512GB SSD"
+    }
+  }
+];
 
 const Catalog = () => {
-  const [catalog, setCatalog] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetchCatalog();
-  }, []);
-
-  const fetchCatalog = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(`${funcUrls.api}?type=catalog`);
-      
-      if (!response.ok) {
-        throw new Error('Ошибка загрузки каталога');
-      }
-      
-      const data = await response.json();
-      setCatalog(data);
-      setError(null);
-    } catch (err) {
-      console.error('Ошибка загрузки каталога:', err);
-      setError('Не удалось загрузить каталог');
-      setCatalog([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [catalog] = useState<any[]>(STATIC_CATALOG);
+  const loading = false;
+  const error = null;
 
   return (
     <div className="min-h-screen">
