@@ -115,10 +115,12 @@ const Catalog = () => {
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
             Мы подберем комплектующие специально под ваши задачи и бюджет
           </p>
-          <Button size="lg" className="bg-primary hover:bg-primary/90">
-            <Icon name="Settings" size={20} />
-            Собрать свой компьютер
-          </Button>
+          <a href="/#pc-selection">
+            <Button size="lg" className="bg-primary hover:bg-primary/90">
+              <Icon name="Settings" size={20} />
+              Собрать свой компьютер
+            </Button>
+          </a>
         </div>
       </section>
       <Footer />
