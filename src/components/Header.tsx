@@ -48,15 +48,8 @@ const Header = () => {
               Блог
             </Link>
             <Link 
-              to="/#pc-selection" 
+              to="/pc-selection" 
               className="text-sm font-medium hover:text-primary transition-colors"
-              onClick={(e) => {
-                const element = document.getElementById('pc-selection');
-                if (element) {
-                  e.preventDefault();
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
             >
               Подбор ПК
             </Link>

@@ -1,8 +1,12 @@
 import PCSelectionForm from '@/components/PCSelectionForm';
 
-export const PCSelectionSection = () => {
+interface PCSelectionSectionProps {
+  fullPage?: boolean;
+}
+
+export const PCSelectionSection = ({ fullPage = false }: PCSelectionSectionProps) => {
   return (
-    <section id="pc-selection" className="py-20 relative overflow-hidden">
+    <section id="pc-selection" className={`py-20 relative overflow-hidden ${fullPage ? 'min-h-screen' : ''}`}>
       <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background"></div>
       <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float"></div>
       <div className="absolute top-1/4 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
