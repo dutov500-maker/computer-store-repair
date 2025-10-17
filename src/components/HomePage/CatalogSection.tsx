@@ -34,7 +34,7 @@ export const CatalogSection = () => {
               style={{ animationDelay: `${index * 150}ms` }}
             >
               {config.featured && (
-                <div className="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                <div className="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse-glow z-10">
                   ХИТ
                 </div>
               )}

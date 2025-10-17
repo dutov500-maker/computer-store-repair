@@ -55,18 +55,18 @@ export const HeroSection = () => {
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-              <div className="flex items-center gap-3 p-4 gradient-card rounded-xl border border-primary/10">
-                <div className="p-2 bg-primary/20 rounded-lg">
-                  <Icon name="Package" className="text-primary" size={24} />
+              <div className="flex items-center gap-3 p-4 glass-effect rounded-xl border border-primary/20 hover:border-primary/40 transition-all hover:scale-105 group">
+                <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary group-hover:scale-110 transition-all">
+                  <Icon name="Package" className="text-primary group-hover:text-white transition-colors" size={24} />
                 </div>
                 <div>
                   <p className="font-semibold text-sm">Новые комплектующие</p>
                   <p className="text-xs text-muted-foreground">Официальные поставщики</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 gradient-card rounded-xl border border-primary/10">
-                <div className="p-2 bg-primary/20 rounded-lg">
-                  <Icon name="Truck" className="text-primary" size={24} />
+              <div className="flex items-center gap-3 p-4 glass-effect rounded-xl border border-primary/20 hover:border-primary/40 transition-all hover:scale-105 group">
+                <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary group-hover:scale-110 transition-all">
+                  <Icon name="Truck" className="text-primary group-hover:text-white transition-colors" size={24} />
                 </div>
                 <div>
                   <p className="font-semibold text-sm">Бесплатная доставка</p>
@@ -90,8 +90,12 @@ export const HeroSection = () => {
                 <p className="text-sm font-semibold">Гарантия</p>
                 <p className="text-2xl font-bold">до 3 лет</p>
               </div>
-              <div className="absolute -top-4 -left-4 bg-gradient-to-br from-green-500 to-green-600 text-white px-4 py-2 rounded-xl shadow-lg">
-                <p className="text-xs font-semibold">✓ В наличии</p>
+              <div className="absolute -top-4 -left-4 bg-gradient-to-br from-green-500 to-green-600 text-white px-4 py-2 rounded-xl shadow-lg flex items-center gap-2 animate-pulse">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+                </span>
+                <p className="text-xs font-semibold">В наличии</p>
               </div>
             </div>
           </div>

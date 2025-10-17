@@ -22,8 +22,9 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-card border-t border-border py-12">
-      <div className="container mx-auto px-4">
+    <footer className="bg-card border-t border-primary/20 py-12 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-transparent"></div>
+      <div className="container mx-auto px-4 relative">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <h3 className="font-heading font-bold text-lg mb-4">
