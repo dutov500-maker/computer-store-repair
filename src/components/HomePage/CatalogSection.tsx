@@ -28,8 +28,8 @@ export const CatalogSection = () => {
           ].map((config, index) => (
             <Card 
               key={config.res}
-              className={`relative overflow-hidden group hover:shadow-2xl transition-all duration-500 animate-slide-up ${
-                config.featured ? 'md:scale-110 border-primary shadow-lg shadow-primary/20 z-10' : 'hover:scale-105'
+              className={`relative overflow-hidden group hover:shadow-2xl transition-all duration-500 animate-slide-up hover-lift ${
+                config.featured ? 'md:scale-110 border-primary shadow-lg shadow-primary/20 z-10' : ''
               }`}
               style={{ animationDelay: `${index * 150}ms` }}
             >
@@ -61,11 +61,13 @@ export const CatalogSection = () => {
                 </div>
                 <Link to="/catalog">
                   <Button 
-                    className={`w-full ${config.featured ? 'gradient-primary' : 'bg-card hover:bg-primary hover:text-white'} group-hover:shadow-lg transition-all`}
+                    className={`w-full ${config.featured ? 'gradient-animated' : 'bg-card hover:bg-primary hover:text-white'} group-hover:shadow-lg transition-all hover:scale-105 relative overflow-hidden`}
                     size="lg"
                   >
-                    Подробнее
-                    <Icon name="ArrowRight" className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
+                    <span className="relative z-10 flex items-center justify-center w-full">
+                      Подробнее
+                      <Icon name="ArrowRight" className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
+                    </span>
                   </Button>
                 </Link>
               </div>

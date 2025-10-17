@@ -41,16 +41,17 @@ export const HeroSection = () => {
               Индивидуальная сборка под любые задачи с гарантией до 3 лет
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="#pc-selection">
-                <Button size="lg" className="gradient-primary text-lg px-8 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
-                  <Icon name="Gamepad2" className="mr-2" size={20} />
+              <Link to="/pc-selection">
+                <Button size="lg" className="gradient-animated text-lg px-8 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all hover:scale-105 relative overflow-hidden group">
+                  <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
+                  <Icon name="Gamepad2" className="mr-2 animate-glow-pulse" size={20} />
                   Подобрать компьютер
                 </Button>
-              </a>
+              </Link>
               <Link to="/catalog">
-                <Button size="lg" variant="outline" className="text-lg px-8 border-2 hover:border-primary">
+                <Button size="lg" variant="outline" className="text-lg px-8 border-2 hover:border-primary hover:scale-105 transition-all hover:bg-primary/10">
                   Каталог готовых сборок
-                  <Icon name="ArrowRight" className="ml-2" size={20} />
+                  <Icon name="ArrowRight" className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
                 </Button>
               </Link>
             </div>
