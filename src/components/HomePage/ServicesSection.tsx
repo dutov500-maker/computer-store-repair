@@ -43,24 +43,25 @@ export const ServicesSection = ({ services, advantages }: ServicesSectionProps) 
           {services.length > 0 ? services.map((service, index) => (
             <Card 
               key={service.id || index}
-              className="group relative overflow-hidden p-6 hover:shadow-xl transition-all duration-500 animate-slide-up hover:-translate-y-2"
+              className="group relative overflow-hidden p-6 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 animate-slide-up hover:-translate-y-3 border-primary/10 hover:border-primary/30"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="relative">
                 <div className="mb-4">
-                  <div className="inline-flex p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors">
-                    <Icon name={service.icon || 'Wrench'} className="text-primary" size={28} />
+                  <div className="inline-flex p-3 bg-primary/10 rounded-xl group-hover:bg-primary group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/50">
+                    <Icon name={service.icon || 'Wrench'} className="text-primary group-hover:text-white transition-colors" size={28} />
                   </div>
                 </div>
-                <h3 className="font-heading font-bold text-xl mb-2">{service.title}</h3>
+                <h3 className="font-heading font-bold text-xl mb-2 group-hover:text-primary transition-colors">{service.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{service.description}</p>
-                <div className="text-2xl font-bold text-primary mb-4">{service.price}</div>
+                <div className="text-2xl font-bold text-gradient mb-4">{service.price}</div>
                 {service.features && service.features.length > 0 && (
                   <ul className="space-y-2 border-t border-border pt-4">
                     {service.features.map((feature: string, idx: number) => (
-                      <li key={idx} className="text-sm text-muted-foreground flex items-center gap-2">
-                        <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                      <li key={idx} className="text-sm text-muted-foreground flex items-center gap-2 opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/30 transition-colors">
                           <Icon name="Check" size={12} className="text-primary" />
                         </div>
                         {feature}

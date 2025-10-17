@@ -38,11 +38,12 @@ export const CatalogSection = () => {
                   ХИТ
                 </div>
               )}
-              <div className={`absolute inset-0 bg-gradient-to-br ${config.gradient} opacity-50`}></div>
+              <div className={`absolute inset-0 bg-gradient-to-br ${config.gradient} opacity-50 group-hover:opacity-70 transition-opacity`}></div>
+              <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="relative p-6 lg:p-8">
                 <div className="mb-6">
-                  <div className="inline-block p-3 bg-primary/20 rounded-xl mb-4">
-                    <Icon name={config.icon as any} className="text-primary" size={28} />
+                  <div className="inline-block p-3 bg-primary/20 rounded-xl mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/50">
+                    <Icon name={config.icon as any} className="text-primary group-hover:text-white transition-colors" size={28} />
                   </div>
                   <div className="text-sm font-semibold text-primary mb-1">{config.res}</div>
                   <h3 className="text-2xl lg:text-3xl font-heading font-bold mb-2">

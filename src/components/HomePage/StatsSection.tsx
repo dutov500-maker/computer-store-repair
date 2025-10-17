@@ -4,8 +4,13 @@ export const StatsSection = () => {
   return (
     <section className="py-20 bg-gradient-to-b from-background to-primary/5 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.08),transparent_70%)]"></div>
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
       <div className="container mx-auto px-4 relative">
         <div className="text-center mb-16 animate-slide-up">
+          <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
+            <span className="text-sm font-semibold text-primary">📊 СТАТИСТИКА</span>
+          </div>
           <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
             Нам <span className="text-gradient">доверяют</span>
           </h2>

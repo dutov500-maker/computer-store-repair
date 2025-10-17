@@ -35,19 +35,24 @@ export const PortfolioSection = ({ portfolio }: PortfolioSectionProps) => {
             portfolio.map((work, index) => (
               <Card 
                 key={index}
-                className="overflow-hidden group hover:shadow-2xl transition-all duration-500 animate-slide-up hover:-translate-y-2"
+                className="overflow-hidden group hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 animate-slide-up hover:-translate-y-2 border-primary/10 hover:border-primary/30"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="relative h-72 overflow-hidden">
                   <img 
                     src={work.image_url} 
                     alt={work.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 group-hover:brightness-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-90"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent opacity-90 group-hover:opacity-95 transition-opacity"></div>
+                  <div className="absolute top-4 right-4 bg-primary/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-semibold opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
+                    Подробнее →
+                  </div>
                   <div className="absolute inset-0 flex flex-col justify-end p-6">
-                    <h3 className="text-2xl font-heading font-bold mb-2 group-hover:text-primary transition-colors">{work.title}</h3>
-                    <p className="text-sm text-muted-foreground line-clamp-2">{work.description}</p>
+                    <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
+                      <h3 className="text-2xl font-heading font-bold mb-2 group-hover:text-primary transition-colors">{work.title}</h3>
+                      <p className="text-sm text-muted-foreground line-clamp-2">{work.description}</p>
+                    </div>
                   </div>
                 </div>
               </Card>
