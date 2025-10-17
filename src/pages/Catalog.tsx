@@ -6,54 +6,30 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
 
-const catalogData = [
-  {
-    id: 1,
-    title: 'Игровой ПК "Starter"',
-    description: 'Отличное решение для игр в Full HD',
-    price: 55000,
-    resolution: 'Full HD',
-    specs: {
-      cpu: 'Intel Core i5-12400F',
-      gpu: 'NVIDIA GTX 1660 Super',
-      ram: '16GB DDR4',
-      storage: '512GB SSD'
-    },
-    image_url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/6e6034b2-0447-4527-99a2-474f04b96139.jpg'
-  },
-  {
-    id: 2,
-    title: 'Игровой ПК "Gamer"',
-    description: 'Мощная система для игр в 2K',
-    price: 85000,
-    resolution: '2K',
-    specs: {
-      cpu: 'AMD Ryzen 5 5600X',
-      gpu: 'NVIDIA RTX 3060 Ti',
-      ram: '16GB DDR4',
-      storage: '1TB SSD'
-    },
-    image_url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/c16c9903-a020-453e-91e0-066e4f6a4d86.jpg'
-  },
-  {
-    id: 3,
-    title: 'Игровой ПК "Pro"',
-    description: 'Топовая конфигурация для 4K',
-    price: 150000,
-    resolution: '4K',
-    specs: {
-      cpu: 'Intel Core i7-13700K',
-      gpu: 'NVIDIA RTX 4070 Ti',
-      ram: '32GB DDR5',
-      storage: '2TB NVMe SSD'
-    },
-    image_url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/2cdddf73-2ad1-46ba-a26c-d3a8c72bd730.jpg'
-  }
-];
-
 const Catalog = () => {
-  const [catalog] = useState<any[]>(catalogData);
-  const [loading] = useState(false);
+  const [catalog, setCatalog] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchCatalog();
+  }, []);
+
+  const fetchCatalog = async () => {
+    try {
+      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=catalog');
+      const data = await response.json();
+      if (response.ok && data.catalog && data.catalog.length > 0) {
+        setCatalog(data.catalog.filter((item: any) => item.is_active));
+      } else {
+        setCatalog([]);
+      }
+    } catch (error) {
+      console.error('Failed to fetch catalog:', error);
+      setCatalog([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen">
