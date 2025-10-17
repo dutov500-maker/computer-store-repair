@@ -61,6 +61,9 @@ const AdminDashboard = () => {
     completion_date: ''
   });
 
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [imagePreview, setImagePreview] = useState<string>('');
+
   useEffect(() => {
     checkAuth();
     fetchOrders();
@@ -125,6 +128,7 @@ const AdminDashboard = () => {
       price_range: '',
       completion_date: ''
     });
+    setImagePreview('');
     setPortfolioDialog(true);
   };
 
@@ -139,6 +143,7 @@ const AdminDashboard = () => {
       price_range: item.price_range || '',
       completion_date: item.completion_date || ''
     });
+    setImagePreview(item.image_url);
     setPortfolioDialog(true);
   };
 
@@ -192,6 +197,48 @@ const AdminDashboard = () => {
         description: 'Не удалось удалить',
         variant: 'destructive'
       });
+    }
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: 'Ошибка',
+        description: 'Размер файла не должен превышать 5 МБ',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    setUploadingImage(true);
+
+    try {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const dataUrl = event.target?.result as string;
+        setImagePreview(dataUrl);
+        setFormData({...formData, image_url: dataUrl});
+        setUploadingImage(false);
+      };
+      reader.onerror = () => {
+        toast({
+          title: 'Ошибка',
+          description: 'Не удалось загрузить изображение',
+          variant: 'destructive'
+        });
+        setUploadingImage(false);
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      toast({
+        title: 'Ошибка',
+        description: 'Не удалось обработать файл',
+        variant: 'destructive'
+      });
+      setUploadingImage(false);
     }
   };
 
@@ -503,13 +550,56 @@ const AdminDashboard = () => {
               />
             </div>
 
-            <div>
-              <Label htmlFor="image_url">URL изображения *</Label>
+            <div className="space-y-3">
+              <Label>Изображение *</Label>
+              
+              {imagePreview && (
+                <div className="relative w-full h-48 rounded-lg overflow-hidden border">
+                  <img 
+                    src={imagePreview} 
+                    alt="Preview" 
+                    className="w-full h-full object-cover"
+                  />
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    className="absolute top-2 right-2"
+                    onClick={() => {
+                      setImagePreview('');
+                      setFormData({...formData, image_url: ''});
+                    }}
+                  >
+                    <Icon name="X" size={16} />
+                  </Button>
+                </div>
+              )}
+
+              <div className="flex gap-2">
+                <div className="flex-1">
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    disabled={uploadingImage}
+                    className="cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <div className="flex-1 h-px bg-border"></div>
+                <span className="text-xs text-muted-foreground">или</span>
+                <div className="flex-1 h-px bg-border"></div>
+              </div>
+
               <Input
                 id="image_url"
-                value={formData.image_url}
-                onChange={(e) => setFormData({...formData, image_url: e.target.value})}
-                placeholder="https://..."
+                value={formData.image_url.startsWith('data:') ? '' : formData.image_url}
+                onChange={(e) => {
+                  setFormData({...formData, image_url: e.target.value});
+                  setImagePreview(e.target.value);
+                }}
+                placeholder="Вставьте URL изображения"
               />
             </div>
 
