@@ -52,30 +52,58 @@ const Header = () => {
             <Link to="/blog" className="text-sm font-medium hover:text-primary transition-colors">
               Блог
             </Link>
-            <a href="/#pc-selection" className="text-sm font-medium hover:text-primary transition-colors" onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('pc-selection')?.scrollIntoView({ behavior: 'smooth' });
-            }}>
+            <Link 
+              to="/#pc-selection" 
+              className="text-sm font-medium hover:text-primary transition-colors"
+              onClick={(e) => {
+                const element = document.getElementById('pc-selection');
+                if (element) {
+                  e.preventDefault();
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               Подбор ПК
-            </a>
-            <a href="/#services" className="text-sm font-medium hover:text-primary transition-colors" onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-            }}>
+            </Link>
+            <Link 
+              to="/#services" 
+              className="text-sm font-medium hover:text-primary transition-colors"
+              onClick={(e) => {
+                const element = document.getElementById('services');
+                if (element) {
+                  e.preventDefault();
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               Услуги
-            </a>
-            <a href="/#portfolio" className="text-sm font-medium hover:text-primary transition-colors" onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' });
-            }}>
+            </Link>
+            <Link 
+              to="/#portfolio" 
+              className="text-sm font-medium hover:text-primary transition-colors"
+              onClick={(e) => {
+                const element = document.getElementById('portfolio');
+                if (element) {
+                  e.preventDefault();
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               Работы
-            </a>
-            <a href="/#reviews" className="text-sm font-medium hover:text-primary transition-colors" onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' });
-            }}>
+            </Link>
+            <Link 
+              to="/#reviews" 
+              className="text-sm font-medium hover:text-primary transition-colors"
+              onClick={(e) => {
+                const element = document.getElementById('reviews');
+                if (element) {
+                  e.preventDefault();
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               Отзывы
-            </a>
+            </Link>
           </nav>
 
           <div className="flex items-center gap-4">
