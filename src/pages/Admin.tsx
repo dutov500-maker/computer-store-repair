@@ -28,6 +28,27 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import {
+  initializeStorage,
+  getServices,
+  getCatalog,
+  getPortfolio,
+  getRequests,
+  getSettings,
+  addService,
+  addCatalogItem,
+  addPortfolioItem,
+  updateService,
+  updateCatalogItem,
+  updatePortfolioItem,
+  updateRequest,
+  deleteService,
+  deleteCatalogItem,
+  deletePortfolioItem,
+  saveServices,
+  saveCatalog,
+  savePortfolio,
+} from '@/lib/localStorage';
 
 interface ServiceRequest {
   id: number;
@@ -138,37 +159,32 @@ const Admin = () => {
       return;
     }
     
-    fetchRequests();
-    fetchServices();
-    fetchCatalog();
-    fetchPortfolio();
-    fetchSettings();
+    initializeStorage();
+    loadRequests();
+    loadServices();
+    loadCatalog();
+    loadPortfolio();
+    loadSettings();
   }, [navigate]);
 
   useEffect(() => {
     const token = localStorage.getItem('admin_token');
     if (token && activeTab === 'requests') {
-      fetchRequests();
+      loadRequests();
     }
   }, [filterStatus]);
 
-  const fetchRequests = async () => {
+  const loadRequests = () => {
     setLoading(true);
     try {
-      const url = filterStatus && filterStatus !== 'all'
-        ? `https://functions.poehali.dev/7e2e325a-8609-4daf-b054-a52bf0b1040c?status=${filterStatus}`
-        : 'https://functions.poehali.dev/7e2e325a-8609-4daf-b054-a52bf0b1040c';
+      const allRequests = getRequests();
+      const filteredRequests = filterStatus && filterStatus !== 'all'
+        ? allRequests.filter((req: ServiceRequest) => req.status === filterStatus)
+        : allRequests;
       
-      const response = await fetch(url);
-      const data = await response.json();
-      
-      if (response.ok) {
-        setRequests(data.requests || []);
-      } else {
-        throw new Error('Failed to fetch');
-      }
+      setRequests(filteredRequests);
     } catch (error) {
-      console.error('Fetch error:', error);
+      console.error('Load error:', error);
       toast({
         title: 'Ошибка',
         description: 'Не удалось загрузить заявки',
@@ -179,73 +195,50 @@ const Admin = () => {
     }
   };
 
-  const fetchServices = async () => {
+  const loadServices = () => {
     try {
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=services');
-      const data = await response.json();
-      if (response.ok) {
-        setServices(data.services || []);
-      }
+      const data = getServices();
+      setServices(data || []);
     } catch (error) {
-      console.error('Fetch services error:', error);
+      console.error('Load services error:', error);
     }
   };
 
-  const fetchCatalog = async () => {
+  const loadCatalog = () => {
     try {
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=catalog');
-      const data = await response.json();
-      if (response.ok) {
-        setCatalog(data.catalog || []);
-      }
+      const data = getCatalog();
+      setCatalog(data || []);
     } catch (error) {
-      console.error('Fetch catalog error:', error);
+      console.error('Load catalog error:', error);
     }
   };
 
-  const fetchPortfolio = async () => {
+  const loadPortfolio = () => {
     try {
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=portfolio');
-      const data = await response.json();
-      if (response.ok) {
-        setPortfolio(data.portfolio || []);
-      }
+      const data = getPortfolio();
+      setPortfolio(data || []);
     } catch (error) {
-      console.error('Fetch portfolio error:', error);
+      console.error('Load portfolio error:', error);
     }
   };
 
-  const fetchSettings = async () => {
+  const loadSettings = () => {
     try {
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=settings');
-      const data = await response.json();
-      if (response.ok) {
-        setSettings(data.settings);
-      }
+      const data = getSettings();
+      setSettings(data);
     } catch (error) {
-      console.error('Fetch settings error:', error);
+      console.error('Load settings error:', error);
     }
   };
 
-  const updateStatus = async (id: number, newStatus: string) => {
+  const updateStatus = (id: number, newStatus: string) => {
     try {
-      const response = await fetch('https://functions.poehali.dev/7e2e325a-8609-4daf-b054-a52bf0b1040c', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id, status: newStatus })
+      updateRequest(id, { status: newStatus });
+      toast({
+        title: 'Успех',
+        description: 'Статус заявки обновлен'
       });
-
-      if (response.ok) {
-        toast({
-          title: 'Успех',
-          description: 'Статус заявки обновлен'
-        });
-        fetchRequests();
-      } else {
-        throw new Error('Failed to update');
-      }
+      loadRequests();
     } catch (error) {
       console.error('Update error:', error);
       toast({
@@ -256,206 +249,172 @@ const Admin = () => {
     }
   };
 
-  const createService = async () => {
+  const handleCreateService = () => {
     try {
       const newService = {
-        resource: 'service',
         title: 'Новая услуга',
         description: 'Описание услуги',
         price: 'от 5000 ₽',
         features: ['Консультация', 'Гарантия'],
         icon: 'Wrench',
-        display_order: services.length
+        display_order: services.length,
+        is_active: true,
       };
       
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newService)
-      });
-
-      if (response.ok) {
-        toast({ title: 'Успех', description: 'Услуга добавлена' });
-        fetchServices();
-      }
+      addService(newService);
+      toast({ title: 'Успех', description: 'Услуга добавлена' });
+      loadServices();
     } catch (error) {
       toast({ title: 'Ошибка', description: 'Не удалось добавить услугу', variant: 'destructive' });
     }
   };
 
-  const updateService = async (service: Service) => {
+  const handleUpdateService = (service: Service) => {
     try {
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ resource: 'service', ...service })
-      });
-
-      if (response.ok) {
-        toast({ title: 'Успех', description: 'Услуга обновлена' });
-        fetchServices();
-      }
+      updateService(service.id, service);
+      toast({ title: 'Успех', description: 'Услуга обновлена' });
+      loadServices();
     } catch (error) {
       toast({ title: 'Ошибка', description: 'Не удалось обновить услугу', variant: 'destructive' });
     }
   };
 
-  const deleteService = async (id: number) => {
-    if (!confirm('Удалить эту услугу?')) return;
-    
-    try {
-      const response = await fetch(`https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=service&id=${id}`, {
-        method: 'DELETE'
-      });
-
-      if (response.ok) {
+  const handleDeleteService = (id: number) => {
+    if (confirm('Удалить услугу?')) {
+      try {
+        deleteService(id);
         toast({ title: 'Успех', description: 'Услуга удалена' });
-        fetchServices();
+        loadServices();
+      } catch (error) {
+        toast({ title: 'Ошибка', description: 'Не удалось удалить услугу', variant: 'destructive' });
       }
-    } catch (error) {
-      toast({ title: 'Ошибка', description: 'Не удалось удалить услугу', variant: 'destructive' });
     }
   };
 
-  const createPortfolioItem = async () => {
+  const handleCreateCatalogItem = () => {
     try {
       const newItem = {
-        resource: 'portfolio_item',
-        title: 'Новая работа',
-        description: 'Описание работы',
-        image_url: '',
-        display_order: portfolio.length
+        title: 'Новый компьютер',
+        description: 'Описание компьютера',
+        price: 50000,
+        resolution: 'Full HD',
+        specs: {
+          cpu: 'Intel Core i5',
+          gpu: 'GTX 1660',
+          ram: '16GB',
+          storage: '512GB SSD'
+        },
+        display_order: catalog.length,
+        is_active: true,
       };
       
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newItem)
-      });
+      addCatalogItem(newItem);
+      toast({ title: 'Успех', description: 'Компьютер добавлен' });
+      loadCatalog();
+    } catch (error) {
+      toast({ title: 'Ошибка', description: 'Не удалось добавить компьютер', variant: 'destructive' });
+    }
+  };
 
-      if (response.ok) {
-        toast({ title: 'Успех', description: 'Работа добавлена' });
-        fetchPortfolio();
+  const handleUpdateCatalogItem = (item: CatalogItem) => {
+    try {
+      updateCatalogItem(item.id, item);
+      toast({ title: 'Успех', description: 'Компьютер обновлен' });
+      loadCatalog();
+    } catch (error) {
+      toast({ title: 'Ошибка', description: 'Не удалось обновить компьютер', variant: 'destructive' });
+    }
+  };
+
+  const handleDeleteCatalogItem = (id: number) => {
+    if (confirm('Удалить компьютер?')) {
+      try {
+        deleteCatalogItem(id);
+        toast({ title: 'Успех', description: 'Компьютер удален' });
+        loadCatalog();
+      } catch (error) {
+        toast({ title: 'Ошибка', description: 'Не удалось удалить компьютер', variant: 'destructive' });
       }
+    }
+  };
+
+  const handleCreatePortfolioItem = () => {
+    try {
+      const newItem = {
+        title: 'Новая работа',
+        description: 'Описание работы',
+        image_url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/e101c528-ba74-4da4-87b5-a003d4a18478.jpg',
+        display_order: portfolio.length,
+        is_active: true,
+      };
+      
+      addPortfolioItem(newItem);
+      toast({ title: 'Успех', description: 'Работа добавлена' });
+      loadPortfolio();
     } catch (error) {
       toast({ title: 'Ошибка', description: 'Не удалось добавить работу', variant: 'destructive' });
     }
   };
 
-  const updatePortfolioItem = async (item: PortfolioItem) => {
+  const handleUpdatePortfolioItem = (item: PortfolioItem) => {
     try {
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ resource: 'portfolio_item', ...item })
-      });
-
-      if (response.ok) {
-        toast({ title: 'Успех', description: 'Работа обновлена' });
-        fetchPortfolio();
-      }
+      updatePortfolioItem(item.id, item);
+      toast({ title: 'Успех', description: 'Работа обновлена' });
+      loadPortfolio();
     } catch (error) {
       toast({ title: 'Ошибка', description: 'Не удалось обновить работу', variant: 'destructive' });
     }
   };
 
-  const deletePortfolioItem = async (id: number) => {
-    if (!confirm('Удалить эту работу?')) return;
-    
-    try {
-      const response = await fetch(`https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=portfolio_item&id=${id}`, {
-        method: 'DELETE'
-      });
-
-      if (response.ok) {
+  const handleDeletePortfolioItem = (id: number) => {
+    if (confirm('Удалить работу?')) {
+      try {
+        deletePortfolioItem(id);
         toast({ title: 'Успех', description: 'Работа удалена' });
-        fetchPortfolio();
+        loadPortfolio();
+      } catch (error) {
+        toast({ title: 'Ошибка', description: 'Не удалось удалить работу', variant: 'destructive' });
       }
-    } catch (error) {
-      toast({ title: 'Ошибка', description: 'Не удалось удалить работу', variant: 'destructive' });
     }
   };
 
-  const createCatalogItem = async () => {
-    try {
-      const newItem = {
-        resource: 'catalog_item',
-        title: 'Новый компьютер',
-        description: 'Описание компьютера',
-        price: 50000,
-        resolution: 'FHD',
-        specs: { cpu: 'Intel Core i5', gpu: 'GTX 1660', ram: '16GB' },
-        display_order: catalog.length
-      };
-      
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newItem)
-      });
-
-      if (response.ok) {
-        toast({ title: 'Успех', description: 'Товар добавлен' });
-        fetchCatalog();
-      }
-    } catch (error) {
-      toast({ title: 'Ошибка', description: 'Не удалось добавить товар', variant: 'destructive' });
+  const handleServiceDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      const oldIndex = services.findIndex((s) => s.id === active.id);
+      const newIndex = services.findIndex((s) => s.id === over.id);
+      const newServices = arrayMove(services, oldIndex, newIndex);
+      const updatedServices = newServices.map((s, idx) => ({ ...s, display_order: idx }));
+      setServices(updatedServices);
+      saveServices(updatedServices);
+      toast({ title: 'Порядок обновлен' });
     }
   };
 
-  const updateCatalogItem = async (item: CatalogItem) => {
-    try {
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ resource: 'catalog_item', ...item })
-      });
-
-      if (response.ok) {
-        toast({ title: 'Успех', description: 'Товар обновлен' });
-        fetchCatalog();
-      }
-    } catch (error) {
-      toast({ title: 'Ошибка', description: 'Не удалось обновить товар', variant: 'destructive' });
+  const handleCatalogDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      const oldIndex = catalog.findIndex((c) => c.id === active.id);
+      const newIndex = catalog.findIndex((c) => c.id === over.id);
+      const newCatalog = arrayMove(catalog, oldIndex, newIndex);
+      const updatedCatalog = newCatalog.map((c, idx) => ({ ...c, display_order: idx }));
+      setCatalog(updatedCatalog);
+      saveCatalog(updatedCatalog);
+      toast({ title: 'Порядок обновлен' });
     }
   };
 
-  const deleteCatalogItem = async (id: number) => {
-    if (!confirm('Удалить этот товар?')) return;
-    
-    try {
-      const response = await fetch(`https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=catalog_item&id=${id}`, {
-        method: 'DELETE'
-      });
-
-      if (response.ok) {
-        toast({ title: 'Успех', description: 'Товар удален' });
-        fetchCatalog();
-      }
-    } catch (error) {
-      toast({ title: 'Ошибка', description: 'Не удалось удалить товар', variant: 'destructive' });
+  const handlePortfolioDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      const oldIndex = portfolio.findIndex((p) => p.id === active.id);
+      const newIndex = portfolio.findIndex((p) => p.id === over.id);
+      const newPortfolio = arrayMove(portfolio, oldIndex, newIndex);
+      const updatedPortfolio = newPortfolio.map((p, idx) => ({ ...p, display_order: idx }));
+      setPortfolio(updatedPortfolio);
+      savePortfolio(updatedPortfolio);
+      toast({ title: 'Порядок обновлен' });
     }
-  };
-
-  const updateSettings = async () => {
-    try {
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ resource: 'settings', settings })
-      });
-
-      if (response.ok) {
-        toast({ title: 'Успех', description: 'Настройки сохранены' });
-      }
-    } catch (error) {
-      toast({ title: 'Ошибка', description: 'Не удалось сохранить настройки', variant: 'destructive' });
-    }
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('admin_token');
-    navigate('/admin/login');
   };
 
   const sensors = useSensors(
@@ -465,615 +424,671 @@ const Admin = () => {
     })
   );
 
-  const handleDragEndCatalog = async (event: DragEndEvent) => {
-    const { active, over } = event;
-    
-    if (over && active.id !== over.id) {
-      const oldIndex = catalog.findIndex((item) => item.id === active.id);
-      const newIndex = catalog.findIndex((item) => item.id === over.id);
-      
-      const newCatalog = arrayMove(catalog, oldIndex, newIndex);
-      setCatalog(newCatalog);
-      
-      for (let i = 0; i < newCatalog.length; i++) {
-        await updateCatalogItem({ ...newCatalog[i], display_order: i });
-      }
-    }
-  };
-
-  const handleDragEndServices = async (event: DragEndEvent) => {
-    const { active, over } = event;
-    
-    if (over && active.id !== over.id) {
-      const oldIndex = services.findIndex((item) => item.id === active.id);
-      const newIndex = services.findIndex((item) => item.id === over.id);
-      
-      const newServices = arrayMove(services, oldIndex, newIndex);
-      setServices(newServices);
-      
-      for (let i = 0; i < newServices.length; i++) {
-        await updateService({ ...newServices[i], display_order: i });
-      }
-    }
-  };
-
-  const handleDragEndPortfolio = async (event: DragEndEvent) => {
-    const { active, over } = event;
-    
-    if (over && active.id !== over.id) {
-      const oldIndex = portfolio.findIndex((item) => item.id === active.id);
-      const newIndex = portfolio.findIndex((item) => item.id === over.id);
-      
-      const newPortfolio = arrayMove(portfolio, oldIndex, newIndex);
-      setPortfolio(newPortfolio);
-      
-      for (let i = 0; i < newPortfolio.length; i++) {
-        await updatePortfolioItem({ ...newPortfolio[i], display_order: i });
-      }
-    }
+  const handleLogout = () => {
+    localStorage.removeItem('admin_token');
+    navigate('/admin/login');
   };
 
   const getStatusBadge = (status: string) => {
-    const variants: Record<string, { variant: any; label: string }> = {
-      new: { variant: 'default', label: 'Новая' },
-      in_progress: { variant: 'secondary', label: 'В работе' },
-      completed: { variant: 'outline', label: 'Завершена' },
-      cancelled: { variant: 'destructive', label: 'Отменена' }
+    const variants: Record<string, 'default' | 'secondary' | 'destructive' | 'outline'> = {
+      new: 'default',
+      in_progress: 'secondary',
+      completed: 'outline',
+      cancelled: 'destructive'
     };
-    
-    const config = variants[status] || { variant: 'default', label: status };
-    return <Badge variant={config.variant}>{config.label}</Badge>;
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleString('ru-RU');
+    const labels: Record<string, string> = {
+      new: 'Новая',
+      in_progress: 'В работе',
+      completed: 'Завершена',
+      cancelled: 'Отменена'
+    };
+    return <Badge variant={variants[status] || 'default'}>{labels[status] || status}</Badge>;
   };
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="border-b bg-card">
+      <header className="border-b">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
               <Link to="/">
-                <Icon name="Home" className="text-muted-foreground hover:text-foreground transition-colors" />
+                <h1 className="text-2xl font-bold">Админ-панель</h1>
               </Link>
-              <h1 className="text-2xl font-heading font-bold">Панель управления</h1>
             </div>
             <Button onClick={handleLogout} variant="outline">
-              <Icon name="LogOut" className="mr-2" size={18} />
+              <Icon name="LogOut" size={16} className="mr-2" />
               Выйти
             </Button>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="container mx-auto px-4 py-8">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="requests">
-              <Icon name="MessageSquare" className="mr-2" size={18} />
-              Заявки
-            </TabsTrigger>
-            <TabsTrigger value="catalog">
-              <Icon name="Monitor" className="mr-2" size={18} />
-              Каталог
-            </TabsTrigger>
-            <TabsTrigger value="services">
-              <Icon name="Wrench" className="mr-2" size={18} />
-              Услуги
-            </TabsTrigger>
-            <TabsTrigger value="portfolio">
-              <Icon name="Image" className="mr-2" size={18} />
-              Портфолио
-            </TabsTrigger>
-            <TabsTrigger value="settings">
-              <Icon name="Settings" className="mr-2" size={18} />
-              Настройки
-            </TabsTrigger>
+      <main className="container mx-auto px-4 py-8">
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList className="grid w-full grid-cols-5">
+            <TabsTrigger value="requests">Заявки</TabsTrigger>
+            <TabsTrigger value="services">Услуги</TabsTrigger>
+            <TabsTrigger value="catalog">Каталог</TabsTrigger>
+            <TabsTrigger value="portfolio">Портфолио</TabsTrigger>
+            <TabsTrigger value="settings">Настройки</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="requests" className="space-y-6">
-            <div className="flex items-center gap-4">
-              <Select value={filterStatus} onValueChange={setFilterStatus}>
-                <SelectTrigger className="w-48">
-                  <SelectValue placeholder="Все заявки" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Все заявки</SelectItem>
-                  <SelectItem value="new">Новые</SelectItem>
-                  <SelectItem value="in_progress">В работе</SelectItem>
-                  <SelectItem value="completed">Завершенные</SelectItem>
-                  <SelectItem value="cancelled">Отмененные</SelectItem>
-                </SelectContent>
-              </Select>
-              <div className="ml-auto">
-                <Badge variant="secondary" className="text-lg px-4 py-2">
-                  Всего: {requests.length}
-                </Badge>
+          <TabsContent value="requests">
+            <Card className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-semibold">Заявки на услуги</h2>
+                <Select value={filterStatus} onValueChange={setFilterStatus}>
+                  <SelectTrigger className="w-48">
+                    <SelectValue placeholder="Фильтр по статусу" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Все</SelectItem>
+                    <SelectItem value="new">Новые</SelectItem>
+                    <SelectItem value="in_progress">В работе</SelectItem>
+                    <SelectItem value="completed">Завершенные</SelectItem>
+                    <SelectItem value="cancelled">Отмененные</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
-            </div>
 
-            {loading ? (
-              <div className="text-center py-12">
-                <Icon name="Loader2" className="animate-spin mx-auto mb-4" size={48} />
-                <p className="text-muted-foreground">Загрузка заявок...</p>
-              </div>
-            ) : requests.length === 0 ? (
-              <Card className="p-12 text-center">
-                <Icon name="Inbox" className="mx-auto mb-4 text-muted-foreground" size={64} />
-                <h3 className="text-xl font-heading font-bold mb-2">Заявок пока нет</h3>
-                <p className="text-muted-foreground">Новые заявки появятся здесь</p>
-              </Card>
-            ) : (
-              <div className="grid gap-4">
-                {requests.map((request) => (
-                  <Card key={request.id} className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="text-lg font-heading font-bold mb-1">{request.name}</h3>
-                        <p className="text-sm text-muted-foreground">{formatDate(request.created_at)}</p>
-                      </div>
-                      {getStatusBadge(request.status)}
-                    </div>
-
-                    <div className="grid gap-3 mb-4">
-                      <div className="flex items-center gap-2 text-sm">
-                        <Icon name="Phone" size={16} className="text-muted-foreground" />
-                        <span>{request.phone}</span>
-                      </div>
-                      {request.email && (
-                        <div className="flex items-center gap-2 text-sm">
-                          <Icon name="Mail" size={16} className="text-muted-foreground" />
-                          <span>{request.email}</span>
+              {loading ? (
+                <p>Загрузка...</p>
+              ) : requests.length === 0 ? (
+                <p className="text-muted-foreground text-center py-8">Заявок нет</p>
+              ) : (
+                <div className="space-y-4">
+                  {requests.map((request) => (
+                    <Card key={request.id} className="p-4">
+                      <div className="flex justify-between items-start mb-3">
+                        <div>
+                          <h3 className="font-semibold">{request.name}</h3>
+                          <p className="text-sm text-muted-foreground">
+                            {new Date(request.created_at).toLocaleString('ru-RU')}
+                          </p>
                         </div>
-                      )}
-                      {request.service_type && (
-                        <div className="flex items-center gap-2 text-sm">
-                          <Icon name="Wrench" size={16} className="text-muted-foreground" />
-                          <span>{request.service_type}</span>
+                        {getStatusBadge(request.status)}
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4 mb-3">
+                        <div>
+                          <p className="text-sm font-medium">Телефон:</p>
+                          <p className="text-sm">{request.phone}</p>
                         </div>
-                      )}
+                        {request.email && (
+                          <div>
+                            <p className="text-sm font-medium">Email:</p>
+                            <p className="text-sm">{request.email}</p>
+                          </div>
+                        )}
+                        {request.service_type && (
+                          <div>
+                            <p className="text-sm font-medium">Тип услуги:</p>
+                            <p className="text-sm">{request.service_type}</p>
+                          </div>
+                        )}
+                      </div>
+                      
                       {request.message && (
-                        <div className="mt-2 p-3 bg-muted rounded-md">
+                        <div className="mb-3">
+                          <p className="text-sm font-medium">Сообщение:</p>
                           <p className="text-sm">{request.message}</p>
                         </div>
                       )}
-                    </div>
-
-                    <div className="flex gap-2">
-                      {request.status !== 'in_progress' && (
-                        <Button size="sm" onClick={() => updateStatus(request.id, 'in_progress')}>
-                          В работу
-                        </Button>
-                      )}
-                      {request.status !== 'completed' && (
-                        <Button size="sm" variant="outline" onClick={() => updateStatus(request.id, 'completed')}>
-                          Завершить
-                        </Button>
-                      )}
-                      {request.status !== 'cancelled' && (
-                        <Button size="sm" variant="destructive" onClick={() => updateStatus(request.id, 'cancelled')}>
-                          Отменить
-                        </Button>
-                      )}
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </TabsContent>
-
-          <TabsContent value="catalog" className="space-y-6">
-            <div className="flex justify-between items-center mb-6">
-              <div>
-                <h3 className="text-lg font-heading font-bold">Управление каталогом</h3>
-                <p className="text-sm text-muted-foreground mt-1">
-                  <Icon name="GripVertical" size={14} className="inline mr-1" />
-                  Перетащите карточки для изменения порядка
-                </p>
-              </div>
-              <Button onClick={createCatalogItem}>
-                <Icon name="Plus" className="mr-2" size={18} />
-                Добавить компьютер
-              </Button>
-            </div>
-            <DndContext
-              sensors={sensors}
-              collisionDetection={closestCenter}
-              onDragEnd={handleDragEndCatalog}
-            >
-              <SortableContext
-                items={catalog.map(item => item.id)}
-                strategy={verticalListSortingStrategy}
-              >
-                <div className="grid gap-6">
-                  {catalog.map((item) => (
-                    <SortableItem key={item.id} id={item.id}>
-                      <Card className="p-6 pl-16">
-                        <div className="grid gap-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label>Название</Label>
-                        <Input 
-                          value={item.title}
-                          onChange={(e) => {
-                            const updated = catalog.map(c => 
-                              c.id === item.id ? { ...c, title: e.target.value } : c
-                            );
-                            setCatalog(updated);
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <Label>Цена (₽)</Label>
-                        <Input 
-                          type="number"
-                          value={item.price}
-                          onChange={(e) => {
-                            const updated = catalog.map(c => 
-                              c.id === item.id ? { ...c, price: parseInt(e.target.value) } : c
-                            );
-                            setCatalog(updated);
-                          }}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label>Разрешение</Label>
-                        <Select 
-                          value={item.resolution}
-                          onValueChange={(value) => {
-                            const updated = catalog.map(c => 
-                              c.id === item.id ? { ...c, resolution: value } : c
-                            );
-                            setCatalog(updated);
-                          }}
+                      
+                      <div className="flex gap-2">
+                        <Select
+                          value={request.status}
+                          onValueChange={(value) => updateStatus(request.id, value)}
                         >
-                          <SelectTrigger>
+                          <SelectTrigger className="w-48">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="FHD">FHD (1920x1080)</SelectItem>
-                            <SelectItem value="QHD">QHD (2560x1440)</SelectItem>
-                            <SelectItem value="UHD">UHD (3840x2160)</SelectItem>
+                            <SelectItem value="new">Новая</SelectItem>
+                            <SelectItem value="in_progress">В работе</SelectItem>
+                            <SelectItem value="completed">Завершена</SelectItem>
+                            <SelectItem value="cancelled">Отменена</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
-                      <div>
-                        <Label>URL изображения</Label>
-                        <Input 
-                          value={item.image_url || ''}
-                          placeholder="https://..."
-                          onChange={(e) => {
-                            const updated = catalog.map(c => 
-                              c.id === item.id ? { ...c, image_url: e.target.value } : c
-                            );
-                            setCatalog(updated);
-                          }}
-                        />
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <Label>Описание</Label>
-                      <Textarea 
-                        value={item.description}
-                        onChange={(e) => {
-                          const updated = catalog.map(c => 
-                            c.id === item.id ? { ...c, description: e.target.value } : c
-                          );
-                          setCatalog(updated);
-                        }}
-                      />
-                    </div>
-
-                    <div>
-                      <Label>Характеристики (JSON)</Label>
-                      <Textarea 
-                        value={JSON.stringify(item.specs, null, 2)}
-                        onChange={(e) => {
-                          try {
-                            const specs = JSON.parse(e.target.value);
-                            const updated = catalog.map(c => 
-                              c.id === item.id ? { ...c, specs } : c
-                            );
-                            setCatalog(updated);
-                          } catch (err) {
-                            // Invalid JSON, ignore
-                          }
-                        }}
-                        rows={4}
-                      />
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Пример: {`{"cpu": "Intel Core i5", "gpu": "RTX 3060"}`}
-                      </p>
-                    </div>
-
-                          <div className="flex justify-between">
-                            <Button variant="destructive" onClick={() => deleteCatalogItem(item.id)}>
-                              <Icon name="Trash2" className="mr-2" size={18} />
-                              Удалить
-                            </Button>
-                            <Button onClick={() => updateCatalogItem(item)}>
-                              <Icon name="Save" className="mr-2" size={18} />
-                              Сохранить изменения
-                            </Button>
-                          </div>
-                        </div>
-                      </Card>
-                    </SortableItem>
+                    </Card>
                   ))}
                 </div>
-              </SortableContext>
-            </DndContext>
+              )}
+            </Card>
           </TabsContent>
 
-          <TabsContent value="services" className="space-y-6">
-            <div className="flex justify-between items-center mb-6">
-              <div>
-                <h3 className="text-lg font-heading font-bold">Управление услугами</h3>
-                <p className="text-sm text-muted-foreground mt-1">
-                  <Icon name="GripVertical" size={14} className="inline mr-1" />
-                  Перетащите карточки для изменения порядка
-                </p>
+          <TabsContent value="services">
+            <Card className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-semibold">Управление услугами</h2>
+                <Button onClick={handleCreateService}>
+                  <Icon name="Plus" size={16} className="mr-2" />
+                  Добавить услугу
+                </Button>
               </div>
-              <Button onClick={createService}>
-                <Icon name="Plus" className="mr-2" size={18} />
-                Добавить услугу
-              </Button>
-            </div>
-            <DndContext
-              sensors={sensors}
-              collisionDetection={closestCenter}
-              onDragEnd={handleDragEndServices}
-            >
-              <SortableContext
-                items={services.map(s => s.id)}
-                strategy={verticalListSortingStrategy}
+
+              <DndContext
+                sensors={sensors}
+                collisionDetection={closestCenter}
+                onDragEnd={handleServiceDragEnd}
               >
-                <div className="grid gap-6">
-                  {services.map((service) => (
-                    <SortableItem key={service.id} id={service.id}>
-                      <Card className="p-6 pl-16">
-                        <div className="grid gap-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label>Название услуги</Label>
-                        <Input 
-                          value={service.title}
-                          onChange={(e) => {
-                            const updated = services.map(s => 
-                              s.id === service.id ? { ...s, title: e.target.value } : s
-                            );
-                            setServices(updated);
-                          }}
+                <SortableContext
+                  items={services.map((s) => s.id)}
+                  strategy={verticalListSortingStrategy}
+                >
+                  <div className="space-y-4">
+                    {services.map((service) => (
+                      <SortableItem key={service.id} id={service.id}>
+                        <ServiceEditCard
+                          service={service}
+                          onUpdate={handleUpdateService}
+                          onDelete={handleDeleteService}
                         />
-                      </div>
-                      <div>
-                        <Label>Цена</Label>
-                        <Input 
-                          value={service.price}
-                          onChange={(e) => {
-                            const updated = services.map(s => 
-                              s.id === service.id ? { ...s, price: e.target.value } : s
-                            );
-                            setServices(updated);
-                          }}
-                        />
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <Label>Описание</Label>
-                      <Textarea 
-                        value={service.description}
-                        onChange={(e) => {
-                          const updated = services.map(s => 
-                            s.id === service.id ? { ...s, description: e.target.value } : s
-                          );
-                          setServices(updated);
-                        }}
-                      />
-                    </div>
-
-                    <div>
-                      <Label>Особенности (через запятую)</Label>
-                      <Input 
-                        value={service.features.join(', ')}
-                        onChange={(e) => {
-                          const updated = services.map(s => 
-                            s.id === service.id ? { ...s, features: e.target.value.split(',').map(f => f.trim()) } : s
-                          );
-                          setServices(updated);
-                        }}
-                      />
-                    </div>
-
-                          <div className="flex justify-between">
-                            <Button variant="destructive" onClick={() => deleteService(service.id)}>
-                              <Icon name="Trash2" className="mr-2" size={18} />
-                              Удалить
-                            </Button>
-                            <Button onClick={() => updateService(service)}>
-                              <Icon name="Save" className="mr-2" size={18} />
-                              Сохранить изменения
-                            </Button>
-                          </div>
-                        </div>
-                      </Card>
-                    </SortableItem>
-                  ))}
-                </div>
-              </SortableContext>
-            </DndContext>
+                      </SortableItem>
+                    ))}
+                  </div>
+                </SortableContext>
+              </DndContext>
+            </Card>
           </TabsContent>
 
-          <TabsContent value="portfolio" className="space-y-6">
-            <div className="flex justify-between items-center mb-6">
-              <div>
-                <h3 className="text-lg font-heading font-bold">Портфолио (Наши работы)</h3>
-                <p className="text-sm text-muted-foreground mt-1">
-                  <Icon name="GripVertical" size={14} className="inline mr-1" />
-                  Перетащите карточки для изменения порядка
-                </p>
+          <TabsContent value="catalog">
+            <Card className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-semibold">Каталог компьютеров</h2>
+                <Button onClick={handleCreateCatalogItem}>
+                  <Icon name="Plus" size={16} className="mr-2" />
+                  Добавить компьютер
+                </Button>
               </div>
-              <Button onClick={createPortfolioItem}>
-                <Icon name="Plus" className="mr-2" size={18} />
-                Добавить работу
-              </Button>
-            </div>
-            <DndContext
-              sensors={sensors}
-              collisionDetection={closestCenter}
-              onDragEnd={handleDragEndPortfolio}
-            >
-              <SortableContext
-                items={portfolio.map(p => p.id)}
-                strategy={verticalListSortingStrategy}
+
+              <DndContext
+                sensors={sensors}
+                collisionDetection={closestCenter}
+                onDragEnd={handleCatalogDragEnd}
               >
-                <div className="grid gap-6">
-                  {portfolio.map((item) => (
-                    <SortableItem key={item.id} id={item.id}>
-                      <Card className="p-6 pl-16">
-                        <div className="grid gap-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label>Название</Label>
-                        <Input 
-                          value={item.title}
-                          onChange={(e) => {
-                            const updated = portfolio.map(p => 
-                              p.id === item.id ? { ...p, title: e.target.value } : p
-                            );
-                            setPortfolio(updated);
-                          }}
+                <SortableContext
+                  items={catalog.map((c) => c.id)}
+                  strategy={verticalListSortingStrategy}
+                >
+                  <div className="space-y-4">
+                    {catalog.map((item) => (
+                      <SortableItem key={item.id} id={item.id}>
+                        <CatalogEditCard
+                          item={item}
+                          onUpdate={handleUpdateCatalogItem}
+                          onDelete={handleDeleteCatalogItem}
                         />
-                      </div>
-                      <div>
-                        <Label>Описание</Label>
-                        <Input 
-                          value={item.description}
-                          onChange={(e) => {
-                            const updated = portfolio.map(p => 
-                              p.id === item.id ? { ...p, description: e.target.value } : p
-                            );
-                            setPortfolio(updated);
-                          }}
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <Label>URL изображения</Label>
-                      <Input 
-                        value={item.image_url}
-                        placeholder="https://..."
-                        onChange={(e) => {
-                          const updated = portfolio.map(p => 
-                            p.id === item.id ? { ...p, image_url: e.target.value } : p
-                          );
-                          setPortfolio(updated);
-                        }}
-                      />
-                      {item.image_url && (
-                        <div className="mt-2">
-                          <img 
-                            src={item.image_url} 
-                            alt={item.title}
-                            className="w-full max-w-md h-48 object-cover rounded-lg"
-                          />
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="flex justify-between">
-                      <Button variant="destructive" onClick={() => deletePortfolioItem(item.id)}>
-                        <Icon name="Trash2" className="mr-2" size={18} />
-                        Удалить
-                      </Button>
-                      <Button onClick={() => updatePortfolioItem(item)}>
-                        <Icon name="Save" className="mr-2" size={18} />
-                        Сохранить изменения
-                      </Button>
-                    </div>
+                      </SortableItem>
+                    ))}
                   </div>
-                </Card>
-              </SortableItem>
-            ))}
-                </div>
-              </SortableContext>
-            </DndContext>
+                </SortableContext>
+              </DndContext>
+            </Card>
           </TabsContent>
 
-          <TabsContent value="settings" className="space-y-6">
-            {settings && (
-              <Card className="p-6">
-                <h3 className="text-lg font-heading font-bold mb-6">Настройки сайта</h3>
-                <div className="grid gap-4">
-                  <div>
-                    <Label>Название компании</Label>
-                    <Input 
-                      value={settings.company_name}
-                      onChange={(e) => setSettings({ ...settings, company_name: e.target.value })}
-                    />
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label>Телефон</Label>
-                      <Input 
-                        value={settings.phone}
-                        onChange={(e) => setSettings({ ...settings, phone: e.target.value })}
-                      />
-                    </div>
-                    <div>
-                      <Label>Email</Label>
-                      <Input 
-                        value={settings.email}
-                        onChange={(e) => setSettings({ ...settings, email: e.target.value })}
-                      />
-                    </div>
-                  </div>
+          <TabsContent value="portfolio">
+            <Card className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-semibold">Портфолио работ</h2>
+                <Button onClick={handleCreatePortfolioItem}>
+                  <Icon name="Plus" size={16} className="mr-2" />
+                  Добавить работу
+                </Button>
+              </div>
 
-                  <div>
-                    <Label>Адрес</Label>
-                    <Input 
-                      value={settings.address}
-                      onChange={(e) => setSettings({ ...settings, address: e.target.value })}
-                    />
+              <DndContext
+                sensors={sensors}
+                collisionDetection={closestCenter}
+                onDragEnd={handlePortfolioDragEnd}
+              >
+                <SortableContext
+                  items={portfolio.map((p) => p.id)}
+                  strategy={verticalListSortingStrategy}
+                >
+                  <div className="space-y-4">
+                    {portfolio.map((item) => (
+                      <SortableItem key={item.id} id={item.id}>
+                        <PortfolioEditCard
+                          item={item}
+                          onUpdate={handleUpdatePortfolioItem}
+                          onDelete={handleDeletePortfolioItem}
+                        />
+                      </SortableItem>
+                    ))}
                   </div>
+                </SortableContext>
+              </DndContext>
+            </Card>
+          </TabsContent>
 
-                  <div>
-                    <Label>Часы работы</Label>
-                    <Input 
-                      value={settings.work_hours}
-                      onChange={(e) => setSettings({ ...settings, work_hours: e.target.value })}
-                    />
-                  </div>
-
-                  <div>
-                    <Label>О компании</Label>
-                    <Textarea 
-                      value={settings.about_text}
-                      onChange={(e) => setSettings({ ...settings, about_text: e.target.value })}
-                      rows={4}
-                    />
-                  </div>
-
-                  <div className="flex justify-end">
-                    <Button onClick={updateSettings}>
-                      Сохранить настройки
-                    </Button>
-                  </div>
-                </div>
-              </Card>
-            )}
+          <TabsContent value="settings">
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-6">Настройки сайта</h2>
+              {settings && <SettingsForm settings={settings} onUpdate={loadSettings} />}
+            </Card>
           </TabsContent>
         </Tabs>
+      </main>
+    </div>
+  );
+};
+
+interface ServiceEditCardProps {
+  service: Service;
+  onUpdate: (service: Service) => void;
+  onDelete: (id: number) => void;
+}
+
+const ServiceEditCard = ({ service, onUpdate, onDelete }: ServiceEditCardProps) => {
+  const [editing, setEditing] = useState(false);
+  const [editedService, setEditedService] = useState(service);
+
+  const handleSave = () => {
+    onUpdate(editedService);
+    setEditing(false);
+  };
+
+  if (!editing) {
+    return (
+      <Card className="p-4 pl-16">
+        <div className="flex justify-between items-start">
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-2">
+              <Icon name={service.icon as any} size={20} />
+              <h3 className="font-semibold">{service.title}</h3>
+              {!service.is_active && <Badge variant="outline">Неактивна</Badge>}
+            </div>
+            <p className="text-sm text-muted-foreground mb-2">{service.description}</p>
+            <p className="font-semibold text-primary mb-2">{service.price}</p>
+            <div className="flex flex-wrap gap-2">
+              {service.features.map((feature, idx) => (
+                <Badge key={idx} variant="secondary">{feature}</Badge>
+              ))}
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <Button onClick={() => setEditing(true)} size="sm" variant="outline">
+              <Icon name="Edit" size={16} />
+            </Button>
+            <Button onClick={() => onDelete(service.id)} size="sm" variant="destructive">
+              <Icon name="Trash2" size={16} />
+            </Button>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  return (
+    <Card className="p-4 pl-16">
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <Label>Название</Label>
+            <Input
+              value={editedService.title}
+              onChange={(e) => setEditedService({ ...editedService, title: e.target.value })}
+            />
+          </div>
+          <div>
+            <Label>Цена</Label>
+            <Input
+              value={editedService.price}
+              onChange={(e) => setEditedService({ ...editedService, price: e.target.value })}
+            />
+          </div>
+        </div>
+        
+        <div>
+          <Label>Описание</Label>
+          <Textarea
+            value={editedService.description}
+            onChange={(e) => setEditedService({ ...editedService, description: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <Label>Иконка</Label>
+          <Input
+            value={editedService.icon}
+            onChange={(e) => setEditedService({ ...editedService, icon: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <Label>Характеристики (через запятую)</Label>
+          <Input
+            value={editedService.features.join(', ')}
+            onChange={(e) => setEditedService({ ...editedService, features: e.target.value.split(',').map(f => f.trim()) })}
+          />
+        </div>
+
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={editedService.is_active}
+            onChange={(e) => setEditedService({ ...editedService, is_active: e.target.checked })}
+            id={`active-${service.id}`}
+          />
+          <Label htmlFor={`active-${service.id}`}>Активна</Label>
+        </div>
+
+        <div className="flex gap-2">
+          <Button onClick={handleSave}>Сохранить</Button>
+          <Button onClick={() => setEditing(false)} variant="outline">Отмена</Button>
+        </div>
       </div>
+    </Card>
+  );
+};
+
+interface CatalogEditCardProps {
+  item: CatalogItem;
+  onUpdate: (item: CatalogItem) => void;
+  onDelete: (id: number) => void;
+}
+
+const CatalogEditCard = ({ item, onUpdate, onDelete }: CatalogEditCardProps) => {
+  const [editing, setEditing] = useState(false);
+  const [editedItem, setEditedItem] = useState(item);
+
+  const handleSave = () => {
+    onUpdate(editedItem);
+    setEditing(false);
+  };
+
+  if (!editing) {
+    return (
+      <Card className="p-4 pl-16">
+        <div className="flex gap-4">
+          {item.image_url && (
+            <img src={item.image_url} alt={item.title} className="w-32 h-32 object-cover rounded" />
+          )}
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-2">
+              <h3 className="font-semibold">{item.title}</h3>
+              {!item.is_active && <Badge variant="outline">Неактивен</Badge>}
+            </div>
+            <p className="text-sm text-muted-foreground mb-2">{item.description}</p>
+            <p className="font-semibold text-primary mb-2">{item.price} ₽</p>
+            <p className="text-sm mb-1">Разрешение: {item.resolution}</p>
+            {item.specs && (
+              <div className="text-sm space-y-1">
+                <p>CPU: {item.specs.cpu}</p>
+                <p>GPU: {item.specs.gpu}</p>
+                <p>RAM: {item.specs.ram}</p>
+                <p>Storage: {item.specs.storage}</p>
+              </div>
+            )}
+          </div>
+          <div className="flex gap-2">
+            <Button onClick={() => setEditing(true)} size="sm" variant="outline">
+              <Icon name="Edit" size={16} />
+            </Button>
+            <Button onClick={() => onDelete(item.id)} size="sm" variant="destructive">
+              <Icon name="Trash2" size={16} />
+            </Button>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  return (
+    <Card className="p-4 pl-16">
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <Label>Название</Label>
+            <Input
+              value={editedItem.title}
+              onChange={(e) => setEditedItem({ ...editedItem, title: e.target.value })}
+            />
+          </div>
+          <div>
+            <Label>Цена (₽)</Label>
+            <Input
+              type="number"
+              value={editedItem.price}
+              onChange={(e) => setEditedItem({ ...editedItem, price: Number(e.target.value) })}
+            />
+          </div>
+        </div>
+        
+        <div>
+          <Label>Описание</Label>
+          <Textarea
+            value={editedItem.description}
+            onChange={(e) => setEditedItem({ ...editedItem, description: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <Label>Разрешение</Label>
+          <Input
+            value={editedItem.resolution}
+            onChange={(e) => setEditedItem({ ...editedItem, resolution: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <Label>URL изображения</Label>
+          <Input
+            value={editedItem.image_url || ''}
+            onChange={(e) => setEditedItem({ ...editedItem, image_url: e.target.value })}
+          />
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <Label>CPU</Label>
+            <Input
+              value={editedItem.specs?.cpu || ''}
+              onChange={(e) => setEditedItem({ ...editedItem, specs: { ...editedItem.specs, cpu: e.target.value } })}
+            />
+          </div>
+          <div>
+            <Label>GPU</Label>
+            <Input
+              value={editedItem.specs?.gpu || ''}
+              onChange={(e) => setEditedItem({ ...editedItem, specs: { ...editedItem.specs, gpu: e.target.value } })}
+            />
+          </div>
+          <div>
+            <Label>RAM</Label>
+            <Input
+              value={editedItem.specs?.ram || ''}
+              onChange={(e) => setEditedItem({ ...editedItem, specs: { ...editedItem.specs, ram: e.target.value } })}
+            />
+          </div>
+          <div>
+            <Label>Storage</Label>
+            <Input
+              value={editedItem.specs?.storage || ''}
+              onChange={(e) => setEditedItem({ ...editedItem, specs: { ...editedItem.specs, storage: e.target.value } })}
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={editedItem.is_active}
+            onChange={(e) => setEditedItem({ ...editedItem, is_active: e.target.checked })}
+            id={`catalog-active-${item.id}`}
+          />
+          <Label htmlFor={`catalog-active-${item.id}`}>Активен</Label>
+        </div>
+
+        <div className="flex gap-2">
+          <Button onClick={handleSave}>Сохранить</Button>
+          <Button onClick={() => setEditing(false)} variant="outline">Отмена</Button>
+        </div>
+      </div>
+    </Card>
+  );
+};
+
+interface PortfolioEditCardProps {
+  item: PortfolioItem;
+  onUpdate: (item: PortfolioItem) => void;
+  onDelete: (id: number) => void;
+}
+
+const PortfolioEditCard = ({ item, onUpdate, onDelete }: PortfolioEditCardProps) => {
+  const [editing, setEditing] = useState(false);
+  const [editedItem, setEditedItem] = useState(item);
+
+  const handleSave = () => {
+    onUpdate(editedItem);
+    setEditing(false);
+  };
+
+  if (!editing) {
+    return (
+      <Card className="p-4 pl-16">
+        <div className="flex gap-4">
+          <img src={item.image_url} alt={item.title} className="w-32 h-32 object-cover rounded" />
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-2">
+              <h3 className="font-semibold">{item.title}</h3>
+              {!item.is_active && <Badge variant="outline">Неактивна</Badge>}
+            </div>
+            <p className="text-sm text-muted-foreground">{item.description}</p>
+          </div>
+          <div className="flex gap-2">
+            <Button onClick={() => setEditing(true)} size="sm" variant="outline">
+              <Icon name="Edit" size={16} />
+            </Button>
+            <Button onClick={() => onDelete(item.id)} size="sm" variant="destructive">
+              <Icon name="Trash2" size={16} />
+            </Button>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  return (
+    <Card className="p-4 pl-16">
+      <div className="space-y-4">
+        <div>
+          <Label>Название</Label>
+          <Input
+            value={editedItem.title}
+            onChange={(e) => setEditedItem({ ...editedItem, title: e.target.value })}
+          />
+        </div>
+        
+        <div>
+          <Label>Описание</Label>
+          <Textarea
+            value={editedItem.description}
+            onChange={(e) => setEditedItem({ ...editedItem, description: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <Label>URL изображения</Label>
+          <Input
+            value={editedItem.image_url}
+            onChange={(e) => setEditedItem({ ...editedItem, image_url: e.target.value })}
+          />
+        </div>
+
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={editedItem.is_active}
+            onChange={(e) => setEditedItem({ ...editedItem, is_active: e.target.checked })}
+            id={`portfolio-active-${item.id}`}
+          />
+          <Label htmlFor={`portfolio-active-${item.id}`}>Активна</Label>
+        </div>
+
+        <div className="flex gap-2">
+          <Button onClick={handleSave}>Сохранить</Button>
+          <Button onClick={() => setEditing(false)} variant="outline">Отмена</Button>
+        </div>
+      </div>
+    </Card>
+  );
+};
+
+interface SettingsFormProps {
+  settings: Settings;
+  onUpdate: () => void;
+}
+
+const SettingsForm = ({ settings, onUpdate }: SettingsFormProps) => {
+  const [editedSettings, setEditedSettings] = useState(settings);
+  const { toast } = useToast();
+
+  const handleSave = () => {
+    try {
+      const { saveSettings } = require('@/lib/localStorage');
+      saveSettings(editedSettings);
+      toast({ title: 'Успех', description: 'Настройки сохранены' });
+      onUpdate();
+    } catch (error) {
+      toast({ title: 'Ошибка', description: 'Не удалось сохранить настройки', variant: 'destructive' });
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <Label>Название компании</Label>
+        <Input
+          value={editedSettings.company_name}
+          onChange={(e) => setEditedSettings({ ...editedSettings, company_name: e.target.value })}
+        />
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <Label>Телефон</Label>
+          <Input
+            value={editedSettings.phone}
+            onChange={(e) => setEditedSettings({ ...editedSettings, phone: e.target.value })}
+          />
+        </div>
+        <div>
+          <Label>Email</Label>
+          <Input
+            value={editedSettings.email}
+            onChange={(e) => setEditedSettings({ ...editedSettings, email: e.target.value })}
+          />
+        </div>
+      </div>
+
+      <div>
+        <Label>Адрес</Label>
+        <Input
+          value={editedSettings.address}
+          onChange={(e) => setEditedSettings({ ...editedSettings, address: e.target.value })}
+        />
+      </div>
+
+      <div>
+        <Label>Часы работы</Label>
+        <Input
+          value={editedSettings.work_hours}
+          onChange={(e) => setEditedSettings({ ...editedSettings, work_hours: e.target.value })}
+        />
+      </div>
+
+      <div>
+        <Label>О компании</Label>
+        <Textarea
+          value={editedSettings.about_text}
+          onChange={(e) => setEditedSettings({ ...editedSettings, about_text: e.target.value })}
+        />
+      </div>
+
+      <Button onClick={handleSave}>Сохранить настройки</Button>
     </div>
   );
 };

@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
+import { initializeStorage, getCatalog, addRequest } from '@/lib/localStorage';
 
 interface CatalogItem {
   id: number;
@@ -37,46 +38,31 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id]);
 
-  const fetchProduct = async () => {
+  const fetchProduct = () => {
     setLoading(true);
-    try {
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=catalog');
-      const data = await response.json();
-      if (response.ok && data.catalog) {
-        const item = data.catalog.find((p: CatalogItem) => p.id === parseInt(id || '0'));
-        setProduct(item || null);
-      }
-    } catch (error) {
-      console.error('Error loading product:', error);
-    } finally {
-      setLoading(false);
-    }
+    initializeStorage();
+    const catalog = getCatalog();
+    const item = catalog.find((p: CatalogItem) => p.id === parseInt(id || '0'));
+    setProduct(item || null);
+    setLoading(false);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
     try {
-      const response = await fetch('https://functions.poehali.dev/25621ff4-c4e5-4302-9356-43afeac8b2c5', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          service_type: `Заказ: ${product?.title}`,
-          message: `${formData.message}\n\nТовар: ${product?.title}\nЦена: ${product?.price.toLocaleString()} ₽`
-        })
+      addRequest({
+        ...formData,
+        service_type: `Заказ: ${product?.title}`,
+        message: `${formData.message}\n\nТовар: ${product?.title}\nЦена: ${product?.price.toLocaleString()} ₽`
       });
 
-      if (response.ok) {
-        toast({
-          title: 'Заявка отправлена!',
-          description: 'Мы свяжемся с вами в ближайшее время'
-        });
-        setFormData({ name: '', phone: '', email: '', message: '' });
-      } else {
-        throw new Error('Failed to submit');
-      }
+      toast({
+        title: 'Заявка отправлена!',
+        description: 'Мы свяжемся с вами в ближайшее время'
+      });
+      setFormData({ name: '', phone: '', email: '', message: '' });
     } catch (error) {
       toast({
         title: 'Ошибка',

@@ -11,41 +11,23 @@ import { ReviewsSection } from '@/components/HomePage/ReviewsSection';
 import { FAQSection } from '@/components/HomePage/FAQSection';
 import { StatsSection } from '@/components/HomePage/StatsSection';
 import { ConsultationFormSection } from '@/components/HomePage/ConsultationFormSection';
+import { initializeStorage, getServices, getPortfolio } from '@/lib/localStorage';
 
 const Index = () => {
   const [services, setServices] = useState<any[]>([]);
   const [portfolio, setPortfolio] = useState<any[]>([]);
 
   useEffect(() => {
+    initializeStorage();
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    try {
-      const [servicesRes, portfolioRes] = await Promise.all([
-        fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=services'),
-        fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=portfolio')
-      ]);
-
-      const servicesData = await servicesRes.json();
-      const portfolioData = await portfolioRes.json();
-
-      if (servicesRes.ok && servicesData.services && servicesData.services.length > 0) {
-        setServices(servicesData.services.filter((s: any) => s.is_active));
-      } else {
-        setServices([]);
-      }
-
-      if (portfolioRes.ok && portfolioData.portfolio && portfolioData.portfolio.length > 0) {
-        setPortfolio(portfolioData.portfolio.filter((p: any) => p.is_active));
-      } else {
-        setPortfolio([]);
-      }
-    } catch (error) {
-      console.error('Failed to fetch data:', error);
-      setServices([]);
-      setPortfolio([]);
-    }
+  const fetchData = () => {
+    const servicesData = getServices();
+    const portfolioData = getPortfolio();
+    
+    setServices(servicesData.filter((s: any) => s.is_active));
+    setPortfolio(portfolioData.filter((p: any) => p.is_active));
   };
 
   const advantages = [

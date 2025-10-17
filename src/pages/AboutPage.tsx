@@ -23,19 +23,21 @@ const AboutPage = () => {
     }
   }, [slug]);
 
-  const fetchPage = async (pageSlug: string) => {
+  const fetchPage = (pageSlug: string) => {
     setLoading(true);
-    try {
-      const response = await fetch(`https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=page&slug=${pageSlug}`);
-      const data = await response.json();
-      if (response.ok && data.page) {
-        setPage(data.page);
+    // Static page data
+    const staticPages: Record<string, any> = {
+      'about': {
+        title: 'О компании',
+        content: 'Мы занимаемся профессиональной сборкой и ремонтом компьютеров с 2010 года.'
+      },
+      'services': {
+        title: 'Наши услуги',
+        content: 'Предоставляем полный спектр услуг по сборке, ремонту и обслуживанию компьютеров.'
       }
-    } catch (error) {
-      console.error('Error loading page:', error);
-    } finally {
-      setLoading(false);
-    }
+    };
+    setPage(staticPages[pageSlug] || null);
+    setLoading(false);
   };
 
   return (

@@ -5,30 +5,21 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
+import { initializeStorage, getCatalog } from '@/lib/localStorage';
 
 const Catalog = () => {
   const [catalog, setCatalog] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    initializeStorage();
     fetchCatalog();
   }, []);
 
-  const fetchCatalog = async () => {
-    try {
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=catalog');
-      const data = await response.json();
-      if (response.ok && data.catalog && data.catalog.length > 0) {
-        setCatalog(data.catalog.filter((item: any) => item.is_active));
-      } else {
-        setCatalog([]);
-      }
-    } catch (error) {
-      console.error('Failed to fetch catalog:', error);
-      setCatalog([]);
-    } finally {
-      setLoading(false);
-    }
+  const fetchCatalog = () => {
+    const data = getCatalog();
+    setCatalog(data.filter((item: any) => item.is_active));
+    setLoading(false);
   };
 
   return (

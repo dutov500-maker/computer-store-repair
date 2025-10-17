@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
+import { initializeStorage, getSettings } from '@/lib/localStorage';
 
 const Header = () => {
   const [settings, setSettings] = useState<any>(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    initializeStorage();
     fetchSettings();
     
     const handleScroll = () => {
@@ -18,16 +20,9 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const fetchSettings = async () => {
-    try {
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=settings');
-      const data = await response.json();
-      if (response.ok) {
-        setSettings(data.settings);
-      }
-    } catch (error) {
-      console.error('Error loading settings:', error);
-    }
+  const fetchSettings = () => {
+    const data = getSettings();
+    setSettings(data);
   };
 
   return (

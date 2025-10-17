@@ -1,24 +1,19 @@
 import { Link } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import { useState, useEffect } from 'react';
+import { initializeStorage, getSettings } from '@/lib/localStorage';
 
 const Footer = () => {
   const [settings, setSettings] = useState<any>(null);
 
   useEffect(() => {
+    initializeStorage();
     fetchSettings();
   }, []);
 
-  const fetchSettings = async () => {
-    try {
-      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=settings');
-      const data = await response.json();
-      if (response.ok) {
-        setSettings(data.settings);
-      }
-    } catch (error) {
-      console.error('Error loading settings:', error);
-    }
+  const fetchSettings = () => {
+    const data = getSettings();
+    setSettings(data);
   };
 
   return (
