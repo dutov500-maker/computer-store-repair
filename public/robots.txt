@@ -1,14 +1,17 @@
+User-agent: *
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-User-agent: Twitterbot
-Allow: /
+Sitemap: https://computer-store-repair.poehali.dev/sitemap.xml
 
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: *
-Allow: /
+# Запрет индексации админки
+Disallow: /admin/
+Disallow: /admin/login
