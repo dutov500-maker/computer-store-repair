@@ -23,7 +23,7 @@ interface ServiceRequest {
 const Admin = () => {
   const [requests, setRequests] = useState<ServiceRequest[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filterStatus, setFilterStatus] = useState('');
+  const [filterStatus, setFilterStatus] = useState('all');
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ const Admin = () => {
   const fetchRequests = async () => {
     setLoading(true);
     try {
-      const url = filterStatus 
+      const url = filterStatus && filterStatus !== 'all'
         ? `https://functions.poehali.dev/7e2e325a-8609-4daf-b054-a52bf0b1040c?status=${filterStatus}`
         : 'https://functions.poehali.dev/7e2e325a-8609-4daf-b054-a52bf0b1040c';
       
@@ -179,7 +179,7 @@ const Admin = () => {
               <SelectValue placeholder="Все заявки" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">Все заявки</SelectItem>
+              <SelectItem value="all">Все заявки</SelectItem>
               <SelectItem value="new">Новые</SelectItem>
               <SelectItem value="in_progress">В работе</SelectItem>
               <SelectItem value="completed">Завершенные</SelectItem>
