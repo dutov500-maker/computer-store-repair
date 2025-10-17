@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
@@ -145,13 +146,13 @@ const Header = () => {
         </div>
       </div>
 
-      {mobileMenuOpen && (
+      {mobileMenuOpen && createPortal(
         <>
           <div 
             className="fixed inset-0 bg-black/70 z-[9998] md:hidden backdrop-blur-sm animate-fade-in"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white dark:bg-zinc-900 z-[9999] md:hidden shadow-2xl animate-slide-in-from-right flex flex-col">
+          <div className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white dark:bg-zinc-900 z-[9999] md:hidden shadow-2xl animate-slide-in-from-right flex flex-col" style={{ minHeight: '100vh', maxHeight: '100vh' }}>
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-zinc-700 flex-shrink-0">
               <span className="font-heading font-bold text-lg text-gray-900 dark:text-white">Меню</span>
               <button
@@ -200,7 +201,8 @@ const Header = () => {
               </div>
             </nav>
           </div>
-        </>
+        </>,
+        document.body
       )}
     </header>
   );
