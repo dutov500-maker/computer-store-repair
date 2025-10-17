@@ -11,91 +11,106 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
           context - object with attributes: request_id, function_name
     Returns: HTTP response dict with settings/services/catalog/pages data
     '''
-    method: str = event.get('httpMethod', 'GET')
+    try:
+        method: str = event.get('httpMethod', 'GET')
+        
+        if method == 'OPTIONS':
+            return {
+                'statusCode': 200,
+                'headers': {
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Token',
+                    'Access-Control-Max-Age': '86400'
+                },
+                'body': '',
+                'isBase64Encoded': False
+            }
+        
+        dsn = os.environ.get('DATABASE_URL')
+        if not dsn:
+            return error_response('Database not configured', 500)
+        
+        conn = psycopg2.connect(dsn)
+        
+        try:
+            if method == 'GET':
+                query_params = event.get('queryStringParameters') or {}
+                resource = query_params.get('resource', 'settings') if query_params else 'settings'
+                
+                if resource == 'settings':
+                    return get_settings(conn)
+                elif resource == 'services':
+                    return get_services(conn)
+                elif resource == 'catalog':
+                    return get_catalog(conn)
+                elif resource == 'portfolio':
+                    return get_portfolio(conn)
+                elif resource == 'page':
+                    slug = query_params.get('slug')
+                    return get_page(conn, slug)
+                else:
+                    return error_response('Invalid resource', 400)
+            
+            elif method == 'PUT':
+                body_data = json.loads(event.get('body', '{}'))
+                resource = body_data.get('resource')
+                
+                if resource == 'settings':
+                    return update_settings(conn, body_data)
+                elif resource == 'service':
+                    return update_service(conn, body_data)
+                elif resource == 'catalog_item':
+                    return update_catalog_item(conn, body_data)
+                elif resource == 'portfolio_item':
+                    return update_portfolio_item(conn, body_data)
+                elif resource == 'page':
+                    return update_page(conn, body_data)
+                else:
+                    return error_response('Invalid resource', 400)
+            
+            elif method == 'POST':
+                body_data = json.loads(event.get('body', '{}'))
+                resource = body_data.get('resource')
+                if resource == 'service':
+                    return create_service(conn, body_data)
+                elif resource == 'catalog_item':
+                    return create_catalog_item(conn, body_data)
+                elif resource == 'portfolio_item':
+                    return create_portfolio_item(conn, body_data)
+                else:
+                    return error_response('Invalid resource', 400)
+            
+            elif method == 'DELETE':
+                query_params = event.get('queryStringParameters') or {}
+                resource = query_params.get('resource')
+                item_id = query_params.get('id')
+                if not item_id:
+                    return error_response('Missing ID', 400)
+                if resource == 'service':
+                    return delete_service(conn, int(item_id))
+                elif resource == 'catalog_item':
+                    return delete_catalog_item(conn, int(item_id))
+                elif resource == 'portfolio_item':
+                    return delete_portfolio_item(conn, int(item_id))
+                else:
+                    return error_response('Invalid resource', 400)
+            
+            return error_response('Method not allowed', 405)
+        
+        finally:
+            conn.close()
     
-    if method == 'OPTIONS':
+    except Exception as e:
         return {
-            'statusCode': 200,
+            'statusCode': 500,
             'headers': {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Token',
-                'Access-Control-Max-Age': '86400'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
-            'body': '',
+            'body': json.dumps({'error': str(e)}),
             'isBase64Encoded': False
         }
-    
-    dsn = os.environ.get('DATABASE_URL')
-    conn = psycopg2.connect(dsn)
-    
-    try:
-        if method == 'GET':
-            query_params = event.get('queryStringParameters') or {}
-            resource = query_params.get('resource', 'settings') if query_params else 'settings'
-            
-            if resource == 'settings':
-                return get_settings(conn)
-            elif resource == 'services':
-                return get_services(conn)
-            elif resource == 'catalog':
-                return get_catalog(conn)
-            elif resource == 'portfolio':
-                return get_portfolio(conn)
-            elif resource == 'page':
-                slug = query_params.get('slug')
-                return get_page(conn, slug)
-            else:
-                return error_response('Invalid resource', 400)
-        
-        elif method == 'PUT':
-            body_data = json.loads(event.get('body', '{}'))
-            resource = body_data.get('resource')
-            
-            if resource == 'settings':
-                return update_settings(conn, body_data)
-            elif resource == 'service':
-                return update_service(conn, body_data)
-            elif resource == 'catalog_item':
-                return update_catalog_item(conn, body_data)
-            elif resource == 'portfolio_item':
-                return update_portfolio_item(conn, body_data)
-            elif resource == 'page':
-                return update_page(conn, body_data)
-            else:
-                return error_response('Invalid resource', 400)
-        
-        elif method == 'POST':
-            body_data = json.loads(event.get('body', '{}'))
-            resource = body_data.get('resource')
-            if resource == 'service':
-                return create_service(conn, body_data)
-            elif resource == 'catalog_item':
-                return create_catalog_item(conn, body_data)
-            elif resource == 'portfolio_item':
-                return create_portfolio_item(conn, body_data)
-            else:
-                return error_response('Invalid resource', 400)
-        
-        elif method == 'DELETE':
-            query_params = event.get('queryStringParameters') or {}
-            resource = query_params.get('resource')
-            item_id = query_params.get('id')
-            if not item_id:
-                return error_response('Missing ID', 400)
-            if resource == 'service':
-                return delete_service(conn, int(item_id))
-            elif resource == 'catalog_item':
-                return delete_catalog_item(conn, int(item_id))
-            elif resource == 'portfolio_item':
-                return delete_portfolio_item(conn, int(item_id))
-            else:
-                return error_response('Invalid resource', 400)
-        
-        return error_response('Method not allowed', 405)
-    
-    finally:
-        conn.close()
 
 
 def get_settings(conn) -> Dict[str, Any]:
