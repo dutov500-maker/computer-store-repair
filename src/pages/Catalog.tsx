@@ -13,7 +13,7 @@ const STATIC_CATALOG = [
     description: "Бюджетный игровой системный блок за 45.000 руб под Full HD Gaming",
     price: 45000,
     resolution: "Full HD",
-    image_url: "https://cdn.poehali.dev/files/ae489047-44a3-4dde-932f-ed6a5199e352.jpg",
+    image_url: "https://cdn.poehali.dev/files/c34a83da-49a6-4f23-be6f-9170e632efa2.jpg",
     specs: {
       cpu: "AMD Ryzen 5 5500",
       gpu: "GTX 1080",
@@ -41,7 +41,7 @@ const STATIC_CATALOG = [
     description: "Бюджетный игровой системный блок за 60.000 руб под Full HD Gaming",
     price: 65000,
     resolution: "Full HD",
-    image_url: "https://cdn.poehali.dev/files/47a9814a-0246-4ac6-aa93-a35c472f606f.jpg",
+    image_url: "https://cdn.poehali.dev/files/8a36ec5e-21fd-46cb-8e25-bc66341b14c9.jpg",
     specs: {
       cpu: "AMD Ryzen 5 5600",
       gpu: "RTX 3060ti",
@@ -111,7 +111,7 @@ const STATIC_CATALOG = [
     description: "Игровой компьютер за 145 тысяч рублей под QHD Gaming на Ультра настройках графики",
     price: 145000,
     resolution: "QHD",
-    image_url: "https://cdn.poehali.dev/files/c34a83da-49a6-4f23-be6f-9170e632efa2.jpg",
+    image_url: "https://cdn.poehali.dev/files/ae489047-44a3-4dde-932f-ed6a5199e352.jpg",
     specs: {
       cpu: "Intel Core i5-14400F",
       gpu: "RTX 4070 Super",
@@ -181,7 +181,7 @@ const STATIC_CATALOG = [
     description: "Абсолютный топ для профессионального гейминга и стриминга в 4K",
     price: 450000,
     resolution: "4K",
-    image_url: "https://cdn.poehali.dev/files/8a36ec5e-21fd-46cb-8e25-bc66341b14c9.jpg",
+    image_url: "https://cdn.poehali.dev/files/47a9814a-0246-4ac6-aa93-a35c472f606f.jpg",
     specs: {
       cpu: "Intel Core i9-14900KS",
       gpu: "RTX 4090",
