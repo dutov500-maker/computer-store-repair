@@ -1,6 +1,6 @@
 """
-Business: Универсальное API для получения каталога, услуг и ремонта
-Args: event - dict с httpMethod, queryStringParameters (type: catalog/services/repairs)
+Business: Универсальное API для получения каталога, услуг, ремонта и портфолио
+Args: event - dict с httpMethod, queryStringParameters (type: catalog/services/repairs/portfolio)
       context - объект с request_id
 Returns: HTTP response с JSON данными
 """
@@ -97,6 +97,27 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'icon': row[4],
                 'display_order': row[5],
                 'is_active': row[6]
+            })
+    
+    elif data_type == 'portfolio':
+        cursor.execute("""
+            SELECT id, title, description, image_url, display_order, is_active
+            FROM portfolio_items
+            WHERE is_active = true
+            ORDER BY display_order, id
+        """)
+        
+        rows = cursor.fetchall()
+        items = []
+        
+        for row in rows:
+            items.append({
+                'id': row[0],
+                'title': row[1],
+                'description': row[2],
+                'image_url': row[3],
+                'display_order': row[4],
+                'is_active': row[5]
             })
     
     else:

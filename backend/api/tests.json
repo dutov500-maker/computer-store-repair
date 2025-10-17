@@ -38,6 +38,19 @@
         }
       },
       "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get portfolio",
+      "method": "GET",
+      "path": "/?type=portfolio",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "0": {
+          "id": "number",
+          "title": "string"
+        }
+      },
+      "bodyMatcher": "partial"
     }
   ]
 }

@@ -10,6 +10,7 @@ import { RepairsSection } from '@/components/HomePage/RepairsSection';
 import { FAQSection } from '@/components/HomePage/FAQSection';
 import { StatsSection } from '@/components/HomePage/StatsSection';
 import { ConsultationFormSection } from '@/components/HomePage/ConsultationFormSection';
+import { PortfolioSection } from '@/components/HomePage/PortfolioSection';
 import funcUrls from '../../backend/func2url.json';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -20,6 +21,7 @@ import { useToast } from '@/hooks/use-toast';
 const Index = () => {
   const [services, setServices] = useState<any[]>([]);
   const [repairs, setRepairs] = useState<any[]>([]);
+  const [portfolio, setPortfolio] = useState<any[]>([]);
   const [orderDialog, setOrderDialog] = useState(false);
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [orderType, setOrderType] = useState('service');
@@ -38,6 +40,10 @@ const Index = () => {
       const repairsRes = await fetch(`${funcUrls.api}?type=repairs`);
       const repairsData = await repairsRes.json();
       setRepairs(repairsData);
+
+      const portfolioRes = await fetch(`${funcUrls.api}?type=portfolio`);
+      const portfolioData = await portfolioRes.json();
+      setPortfolio(portfolioData);
     } catch (error) {
       console.error('Ошибка загрузки данных:', error);
     }
@@ -116,6 +122,7 @@ const Index = () => {
       <CatalogSection />
       <ServicesSection services={services} advantages={advantages} />
       <RepairsSection repairs={repairs} onOrderClick={(item) => handleOrderClick(item, 'repair')} />
+      <PortfolioSection portfolio={portfolio} />
       <FAQSection />
       <ConsultationFormSection />
       <Footer />
