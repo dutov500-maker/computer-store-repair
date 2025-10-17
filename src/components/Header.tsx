@@ -151,7 +151,7 @@ const Header = () => {
             className="fixed inset-0 top-16 bg-black/70 z-[60] md:hidden backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed left-0 right-0 top-16 bottom-0 bg-card z-[70] md:hidden overflow-y-auto shadow-2xl">
+          <div className="fixed left-0 right-0 top-16 bottom-0 bg-white dark:bg-zinc-900 z-[70] md:hidden overflow-y-auto shadow-2xl">
             <nav className="px-4 py-6">
               <ul className="space-y-2">
                 {menuItems.map((item, index) => (
@@ -159,7 +159,7 @@ const Header = () => {
                     <Link
                       to={item.to}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block px-4 py-4 rounded-xl hover:bg-primary/10 transition-all font-medium text-lg border border-transparent hover:border-primary/20"
+                      className="block px-4 py-4 rounded-xl bg-gray-50 dark:bg-zinc-800 hover:bg-primary/10 dark:hover:bg-primary/20 transition-all font-medium text-lg text-gray-900 dark:text-white border border-gray-200 dark:border-zinc-700 hover:border-primary/40"
                     >
                       {item.label}
                     </Link>
@@ -167,21 +167,21 @@ const Header = () => {
                 ))}
               </ul>
 
-              <div className="mt-8 pt-6 border-t border-border space-y-3">
+              <div className="mt-8 pt-6 border-t border-gray-200 dark:border-zinc-700 space-y-3">
                 <a
                   href="tel:+79950272707"
-                  className="flex items-center gap-3 px-4 py-4 rounded-xl border border-border hover:border-primary transition-all"
+                  className="flex items-center gap-3 px-4 py-4 rounded-xl border-2 border-gray-200 dark:border-zinc-700 hover:border-primary dark:hover:border-primary transition-all bg-gray-50 dark:bg-zinc-800"
                 >
                   <div className="p-2 bg-primary/10 rounded-lg">
                     <Icon name="Phone" size={20} className="text-primary" />
                   </div>
-                  <span className="font-semibold">+7 995 027 27 07</span>
+                  <span className="font-semibold text-gray-900 dark:text-white">+7 995 027 27 07</span>
                 </a>
                 <a
                   href="https://wa.me/79950272707"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-4 rounded-xl bg-[#25D366] text-white shadow-lg"
+                  className="flex items-center gap-3 px-4 py-4 rounded-xl bg-[#25D366] text-white shadow-lg hover:bg-[#20BA5A] transition-all"
                 >
                   <div className="p-2 bg-white/20 rounded-lg">
                     <Icon name="MessageCircle" size={20} />
