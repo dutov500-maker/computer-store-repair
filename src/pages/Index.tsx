@@ -623,37 +623,6 @@ const Index = () => {
               </div>
             </div>
           </div>
-            {[
-              {
-                question: 'Какие гарантии вы предоставляете?',
-                answer: 'Мы предоставляем гарантию до 3 лет на все комплектующие от официальных производителей. На нашу работу по сборке действует гарантия 1 год.'
-              },
-              {
-                question: 'Сколько времени занимает сборка компьютера?',
-                answer: 'Стандартная сборка занимает 1-2 дня. Если требуются комплектующие под заказ, срок может увеличиться до 5-7 дней.'
-              },
-              {
-                question: 'Можно ли принести свои комплектующие?',
-                answer: 'Да, мы можем собрать компьютер из ваших комплектующих. Стоимость работы по сборке составит от 2000 ₽.'
-              },
-              {
-                question: 'Делаете ли вы выездной ремонт?',
-                answer: 'Да, мы предоставляем услугу выездного ремонта. Стоимость выезда в пределах города - 500 ₽.'
-              },
-              {
-                question: 'Какие способы оплаты вы принимаете?',
-                answer: 'Мы принимаем оплату наличными, банковскими картами, переводом на карту и по безналичному расчету для юридических лиц.'
-              }
-            ].map((faq, index) => (
-              <Card key={index} className="p-6 hover:border-primary transition-colors animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
-                <h3 className="font-heading font-bold text-lg mb-3 flex items-start gap-3">
-                  <Icon name="HelpCircle" className="text-primary flex-shrink-0 mt-1" size={20} />
-                  {faq.question}
-                </h3>
-                <p className="text-muted-foreground pl-8">{faq.answer}</p>
-              </Card>
-            ))}
-          </div>
         </div>
       </section>
 
