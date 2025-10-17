@@ -204,8 +204,8 @@ const Index = () => {
                 <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 via-primary/20 to-transparent rounded-3xl blur-3xl animate-pulse"></div>
                 <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-primary/20">
                   <img 
-                    src="https://cdn.poehali.dev/files/abecf990-0148-4af7-ace4-2c4056d6be5b.jpg"
-                    alt="Gaming Setup"
+                    src="https://cdn.poehali.dev/files/80e5488c-2bfa-4e1c-9cbb-85c091071149.jpg"
+                    alt="Gaming PC Components"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -232,7 +232,7 @@ const Index = () => {
 
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-12">
             {[
-              { res: 'FHD', title: 'Начальный', desc: 'Full HD с высокими настройками', price: '70 000', gradient: 'from-blue-500/20 to-cyan-500/20', icon: 'Zap' },
+              { res: 'FHD', title: 'Начальный', desc: 'Full HD с высокими настройками', price: '50 000', gradient: 'from-blue-500/20 to-cyan-500/20', icon: 'Zap' },
               { res: 'QHD', title: 'Оптимальный', desc: 'Идеальный баланс для QHD', price: '120 000', gradient: 'from-primary/20 to-orange-500/20', icon: 'Sparkles', featured: true },
               { res: 'UHD', title: 'Максимум', desc: 'Безграничная мощь для 4K', price: '200 000', gradient: 'from-purple-500/20 to-pink-500/20', icon: 'Flame' }
             ].map((config, index) => (
@@ -622,6 +622,60 @@ const Index = () => {
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-gradient-to-b from-background to-primary/5">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16 animate-slide-up">
+            <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
+              <span className="text-sm font-semibold text-primary">🏆 НАДЁЖНЫЕ БРЕНДЫ</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+              Работаем только с <span className="text-gradient">лучшими брендами</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              Официальные комплектующие от проверенных производителей
+            </p>
+          </div>
+
+          <div className="max-w-5xl mx-auto mb-20">
+            <Card className="p-8 md:p-12 gradient-card border-primary/20 shadow-xl">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center">
+                {[
+                  { name: 'Intel', icon: 'Cpu' },
+                  { name: 'AMD', icon: 'Cpu' },
+                  { name: 'NVIDIA', icon: 'Gpu' },
+                  { name: 'Corsair', icon: 'Server' },
+                  { name: 'ASUS', icon: 'Monitor' },
+                  { name: 'MSI', icon: 'Cpu' },
+                  { name: 'Gigabyte', icon: 'HardDrive' },
+                  { name: 'Kingston', icon: 'Database' },
+                  { name: 'Samsung', icon: 'HardDrive' },
+                  { name: 'Cooler Master', icon: 'Fan' }
+                ].map((brand, index) => (
+                  <div 
+                    key={brand.name}
+                    className="flex flex-col items-center justify-center p-4 rounded-xl hover:bg-primary/5 transition-all duration-300 group animate-fade-in"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <div className="w-16 h-16 mb-3 flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl group-hover:scale-110 transition-transform">
+                      <Icon name={brand.icon as any} className="text-primary" size={32} />
+                    </div>
+                    <p className="font-semibold text-sm text-center group-hover:text-primary transition-colors">
+                      {brand.name}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8 pt-8 border-t border-border text-center">
+                <p className="text-muted-foreground">
+                  <Icon name="Shield" className="inline mr-2 text-primary" size={18} />
+                  Гарантия качества и официальная поддержка производителей
+                </p>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
