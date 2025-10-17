@@ -57,6 +57,87 @@ const STATIC_PORTFOLIO = [
     category: "Премиум",
     specs: "Процессор AMD Ryzen 7 7800X3D • Видеокарта Palit GeForce RTX 5070 Ti GameRock",
     price_range: "220000 ₽"
+  },
+  {
+    id: 7,
+    title: "Бюджетный игровой ПК для Full HD",
+    description: "Оптимальное решение для игр в Full HD",
+    image_url: "https://cdn.poehali.dev/files/ae489047-44a3-4dde-932f-ed6a5199e352.jpg",
+    category: "Игровой ПК",
+    specs: "Процессор Intel Core i5-12400F • Видеокарта RTX 3060",
+    price_range: "70000 ₽"
+  },
+  {
+    id: 8,
+    title: "Стримерская станция",
+    description: "Мощный ПК для стриминга и контент-создания",
+    image_url: "https://cdn.poehali.dev/files/56cb3b09-3249-4909-977d-b29d88f7b9a3.jpg",
+    category: "Профессиональный",
+    specs: "Процессор AMD Ryzen 9 7950X • Видеокарта RTX 4070 Ti",
+    price_range: "280000 ₽"
+  },
+  {
+    id: 9,
+    title: "Рабочая станция для 3D моделирования",
+    description: "Профессиональная сборка для работы с 3D графикой",
+    image_url: "https://cdn.poehali.dev/files/8a36ec5e-21fd-46cb-8e25-bc66341b14c9.jpg",
+    category: "Профессиональный",
+    specs: "Процессор AMD Threadripper 3970X • Видеокарта RTX A5000",
+    price_range: "450000 ₽"
+  },
+  {
+    id: 10,
+    title: "Минималистичная сборка для офиса",
+    description: "Тихий и энергоэффективный компьютер для работы",
+    image_url: "https://cdn.poehali.dev/files/c34a83da-49a6-4f23-be6f-9170e632efa2.jpg",
+    category: "Офисный",
+    specs: "Процессор Intel Core i3-13100 • Встроенная графика",
+    price_range: "40000 ₽"
+  },
+  {
+    id: 11,
+    title: "Игровой ПК с водяным охлаждением",
+    description: "Кастомная система водяного охлаждения",
+    image_url: "https://cdn.poehali.dev/files/25848486-d127-48bf-bfdc-36a0c277e5c8.jpg",
+    category: "Премиум",
+    specs: "Процессор Intel Core i9-14900K • Видеокарта RTX 4090",
+    price_range: "500000 ₽"
+  },
+  {
+    id: 12,
+    title: "Компактная сборка Mini-ITX",
+    description: "Мощный компьютер в компактном корпусе",
+    image_url: "https://cdn.poehali.dev/files/cd49eac6-95f0-48e5-a2e2-3987a99a7e44.jpg",
+    category: "Игровой ПК",
+    specs: "Процессор AMD Ryzen 7 5800X3D • Видеокарта RTX 4060 Ti",
+    price_range: "110000 ₽"
+  },
+  {
+    id: 13,
+    title: "RGB монстр для ярких геймеров",
+    description: "Максимум RGB подсветки и производительности",
+    image_url: "https://cdn.poehali.dev/files/8f7c4b94-c6cc-4755-acd9-b8a2a84bd597.jpg",
+    category: "Игровой ПК",
+    specs: "Процессор Intel Core i7-14700KF • Видеокарта RTX 4070 Super",
+    price_range: "190000 ₽"
+  },
+  {
+    id: 14,
+    title: "Сборка для монтажа видео",
+    description: "Оптимизированная система для Adobe Premiere Pro",
+    image_url: "https://cdn.poehali.dev/files/8f7c4b94-c6cc-4755-acd9-b8a2a84bd597.jpg",
+    category: "Профессиональный",
+    specs: "Процессор AMD Ryzen 9 5950X • Видеокарта RTX 4060",
+    price_range: "160000 ₽"
+  },
+  {
+    id: 15,
+    title: "Киберпанк-стиль с неоновой подсветкой",
+    description: "Уникальный дизайн с кастомной подсветкой",
+    image_url: "https://cdn.poehali.dev/files/8f7c4b94-c6cc-4755-acd9-b8a2a84bd597.jpg",
+    category: "Премиум",
+    specs: "Процессор AMD Ryzen 7 9800X3D • Видеокарта RTX 4080 Super",
+    price_range: "320000 ₽"
   }
 ];
 
