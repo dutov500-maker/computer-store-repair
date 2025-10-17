@@ -121,22 +121,22 @@ const Header = () => {
             </Link>
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
             <a href="tel:+79950272707" className="hidden lg:flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
               <Icon name="Phone" size={18} />
               +7 995 027 27 07
             </a>
-            <a href="https://wa.me/79950272707" target="_blank" rel="noopener noreferrer" className="hidden sm:block">
+            <a href="https://wa.me/79950272707" target="_blank" rel="noopener noreferrer" className="hidden md:block">
               <Button size="sm" className="bg-[#25D366] hover:bg-[#25D366]/90 text-white shadow-md hover:shadow-xl hover:scale-105 transition-all relative overflow-hidden group">
                 <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
                 <Icon name="MessageCircle" size={18} className="mr-2 relative z-10" />
-                <span className="hidden sm:inline relative z-10">Написать</span>
+                <span className="relative z-10">Написать</span>
               </Button>
             </a>
             
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 hover:bg-secondary rounded-lg transition-colors"
+              className="md:hidden p-2.5 hover:bg-secondary rounded-lg transition-colors border border-border"
               aria-label="Меню"
             >
               <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} />
@@ -146,8 +146,13 @@ const Header = () => {
       </div>
 
       {mobileMenuOpen && (
-        <div className="fixed inset-0 top-16 bg-background z-40 md:hidden overflow-y-auto animate-fade-in">
-          <nav className="container mx-auto px-4 py-6">
+        <>
+          <div 
+            className="fixed inset-0 bg-black/50 z-[60] md:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div className="fixed inset-0 top-16 bg-background z-[70] md:hidden overflow-y-auto">
+            <nav className="container mx-auto px-4 py-6">
             <ul className="space-y-1">
               {menuItems.map((item, index) => (
                 <li key={item.to} className="animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
@@ -182,6 +187,7 @@ const Header = () => {
             </div>
           </nav>
         </div>
+        </>
       )}
     </header>
   );
