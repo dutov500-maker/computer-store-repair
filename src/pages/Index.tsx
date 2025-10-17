@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import ConsultationForm from '@/components/ConsultationForm';
+import ServiceRequestForm from '@/components/ServiceRequestForm';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
@@ -210,7 +211,11 @@ const Index = () => {
             ))}
           </div>
 
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-center mb-12">
+          <div className="text-center mt-8">
+            <ServiceRequestForm />
+          </div>
+
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-center mb-12 mt-20">
             Наши преимущества
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">

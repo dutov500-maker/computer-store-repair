@@ -1,0 +1,36 @@
+{
+  "tests": [
+    {
+      "name": "OPTIONS request for CORS",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Submit valid service request",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Иван Иванов",
+        "phone": "+79991234567",
+        "email": "test@example.com",
+        "service_type": "Диагностика",
+        "message": "Компьютер не включается"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Reject request without name",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "phone": "+79991234567"
+      },
+      "expectedStatus": 400
+    }
+  ]
+}
