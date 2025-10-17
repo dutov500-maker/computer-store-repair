@@ -268,13 +268,15 @@ const Index = () => {
                       {config.price} ₽
                     </div>
                   </div>
-                  <Button 
-                    className={`w-full ${config.featured ? 'gradient-primary' : 'bg-card hover:bg-primary hover:text-white'} group-hover:shadow-lg transition-all`}
-                    size="lg"
-                  >
-                    Подробнее
-                    <Icon name="ArrowRight" className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
-                  </Button>
+                  <Link to="/catalog">
+                    <Button 
+                      className={`w-full ${config.featured ? 'gradient-primary' : 'bg-card hover:bg-primary hover:text-white'} group-hover:shadow-lg transition-all`}
+                      size="lg"
+                    >
+                      Подробнее
+                      <Icon name="ArrowRight" className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
+                    </Button>
+                  </Link>
                 </div>
               </Card>
             ))}
