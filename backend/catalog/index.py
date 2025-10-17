@@ -53,11 +53,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     cursor = conn.cursor()
     
     if item_id:
-        cursor.execute("""
+        safe_id = item_id.replace("'", "''")
+        cursor.execute(f"""
             SELECT id, title, description, price, resolution, specs, image_url, display_order, is_active
             FROM catalog
-            WHERE id = %s AND is_active = true
-        """, (item_id,))
+            WHERE id = '{safe_id}' AND is_active = true
+        """)
         
         row = cursor.fetchone()
         cursor.close()
@@ -70,6 +71,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'
                 },
+                'isBase64Encoded': False,
                 'body': json.dumps({'error': 'Item not found'})
             }
         
