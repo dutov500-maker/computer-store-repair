@@ -64,7 +64,7 @@ const Header = () => {
               to="/services" 
               className="text-sm font-medium hover:text-primary transition-colors"
             >
-              Услуги
+              Ремонт и Услуги
             </Link>
             <Link 
               to="/portfolio" 
