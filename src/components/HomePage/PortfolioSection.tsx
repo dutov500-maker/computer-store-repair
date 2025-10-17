@@ -11,11 +11,12 @@ interface PortfolioItem {
 
 interface PortfolioSectionProps {
   portfolio: PortfolioItem[];
+  fullPage?: boolean;
 }
 
-export const PortfolioSection = ({ portfolio }: PortfolioSectionProps) => {
+export const PortfolioSection = ({ portfolio, fullPage = false }: PortfolioSectionProps) => {
   return (
-    <section id="portfolio" className="py-20 bg-gradient-to-b from-primary/5 to-background relative overflow-hidden">
+    <section id="portfolio" className={`py-20 bg-gradient-to-b from-primary/5 to-background relative overflow-hidden ${fullPage ? 'min-h-screen' : ''}`}>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,hsl(var(--primary)/0.08),transparent_70%)]"></div>
       <div className="container mx-auto px-4 relative">
         <div className="text-center mb-16 animate-slide-up">
@@ -64,18 +65,20 @@ export const PortfolioSection = ({ portfolio }: PortfolioSectionProps) => {
           )}
         </div>
 
-        <div className="text-center">
-          <a 
-            href="https://vk.com/labkomp" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            <Button size="lg" variant="outline" className="text-lg px-8">
-              <Icon name="ExternalLink" size={20} />
-              Больше работ в нашей группе ВК
-            </Button>
-          </a>
-        </div>
+        {!fullPage && (
+          <div className="text-center">
+            <a 
+              href="https://vk.com/labkomp" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" variant="outline" className="text-lg px-8">
+                <Icon name="ExternalLink" size={20} />
+                Больше работ в нашей группе ВК
+              </Button>
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );

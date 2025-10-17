@@ -74,8 +74,14 @@ const Header = () => {
               Услуги
             </Link>
             <Link 
-              to="/#portfolio" 
+              to="/portfolio" 
               className="text-sm font-medium hover:text-primary transition-colors"
+            >
+              Портфолио
+            </Link>
+            <Link 
+              to="/#about-old" 
+              className="text-sm font-medium hover:text-primary transition-colors hidden"
               onClick={(e) => {
                 const element = document.getElementById('portfolio');
                 if (element) {

@@ -5,17 +5,15 @@ import { HeroSection } from '@/components/HomePage/HeroSection';
 import { ConsultationSection } from '@/components/HomePage/ConsultationSection';
 import { CatalogSection } from '@/components/HomePage/CatalogSection';
 import { ServicesSection } from '@/components/HomePage/ServicesSection';
-import { PortfolioSection } from '@/components/HomePage/PortfolioSection';
 import { PCSelectionSection } from '@/components/HomePage/PCSelectionSection';
 import { ReviewsSection } from '@/components/HomePage/ReviewsSection';
 import { FAQSection } from '@/components/HomePage/FAQSection';
 import { StatsSection } from '@/components/HomePage/StatsSection';
 import { ConsultationFormSection } from '@/components/HomePage/ConsultationFormSection';
-import { initializeStorage, getServices, getPortfolio } from '@/lib/localStorage';
+import { initializeStorage, getServices } from '@/lib/localStorage';
 
 const Index = () => {
   const [services, setServices] = useState<any[]>([]);
-  const [portfolio, setPortfolio] = useState<any[]>([]);
 
   useEffect(() => {
     initializeStorage();
@@ -24,10 +22,8 @@ const Index = () => {
 
   const fetchData = () => {
     const servicesData = getServices();
-    const portfolioData = getPortfolio();
     
     setServices(servicesData.filter((s: any) => s.is_active));
-    setPortfolio(portfolioData.filter((p: any) => p.is_active));
   };
 
   const advantages = [
@@ -60,7 +56,6 @@ const Index = () => {
       <ConsultationSection />
       <CatalogSection />
       <ServicesSection services={services} advantages={advantages} />
-      <PortfolioSection portfolio={portfolio} />
       <PCSelectionSection />
       <ReviewsSection />
       <FAQSection />
