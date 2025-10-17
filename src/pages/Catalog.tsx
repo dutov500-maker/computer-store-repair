@@ -19,10 +19,7 @@ const Catalog = () => {
     try {
       const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=catalog', {
         method: 'GET',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        mode: 'cors'
       });
       if (!response.ok) {
         console.error('Fetch error:', response.status, response.statusText);
