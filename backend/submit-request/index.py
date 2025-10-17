@@ -100,10 +100,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             )
             
             with request.urlopen(req, timeout=10) as response:
-                response.read()
+                result = response.read()
+                print(f'Telegram notification sent successfully: {result.decode()}')
                 
-        except (error.URLError, Exception):
-            pass
+        except error.URLError as e:
+            print(f'Telegram URL error: {e}')
+        except Exception as e:
+            print(f'Telegram error: {e}')
     
     return {
         'statusCode': 200,
