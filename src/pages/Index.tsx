@@ -9,7 +9,6 @@ import { FAQSection } from '@/components/HomePage/FAQSection';
 import { StatsSection } from '@/components/HomePage/StatsSection';
 import { ConsultationFormSection } from '@/components/HomePage/ConsultationFormSection';
 import { initializeStorage, getServices } from '@/lib/localStorage';
-import { useState } from 'react';
 
 const Index = () => {
   const [services, setServices] = useState<any[]>([]);
