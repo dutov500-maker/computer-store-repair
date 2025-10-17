@@ -36,20 +36,20 @@ const Header = () => {
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">
-            <Link to="/catalog" className="text-sm hover:text-primary transition-colors">
+            <Link to="/catalog" className="text-sm font-medium hover:text-primary transition-colors">
               Каталог
             </Link>
-            <a href="#selection" className="text-sm hover:text-primary transition-colors">
-              Подбор компьютера
+            <a href="#pc-selection" className="text-sm font-medium hover:text-primary transition-colors">
+              Подбор ПК
             </a>
-            <a href="#services" className="text-sm hover:text-primary transition-colors">
+            <a href="#services" className="text-sm font-medium hover:text-primary transition-colors">
               Услуги
             </a>
-            <a href="#works" className="text-sm hover:text-primary transition-colors">
-              Наши работы
+            <a href="#works" className="text-sm font-medium hover:text-primary transition-colors">
+              Работы
             </a>
-            <a href="#blog" className="text-sm hover:text-primary transition-colors">
-              Блог
+            <a href="#reviews" className="text-sm font-medium hover:text-primary transition-colors">
+              Отзывы
             </a>
           </nav>
 

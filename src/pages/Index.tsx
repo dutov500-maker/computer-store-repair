@@ -83,62 +83,90 @@ const Index = () => {
     <div className="min-h-screen">
       <Header />
       
-      <section className="relative overflow-hidden bg-gradient-to-br from-background via-secondary to-background py-20 md:py-32">
-        <div className="container mx-auto px-4">
+      <section className="relative overflow-hidden py-20 md:py-32">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-primary/5"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsl(var(--primary)/0.1),transparent_50%),radial-gradient(circle_at_70%_80%,hsl(var(--primary)/0.08),transparent_50%)]"></div>
+        
+        <div className="container mx-auto px-4 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in">
-              <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6 leading-tight">
-                Создадим компьютер вашей мечты
+            <div className="animate-fade-in space-y-8">
+              <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
+                <span className="text-sm font-semibold text-primary">🎮 Игровые ПК от 70 000 ₽</span>
+              </div>
+              <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
+                Создадим компьютер <span className="text-gradient">вашей мечты</span>
               </h1>
-              <p className="text-lg text-muted-foreground mb-8">
-                Игровые компьютеры от 70 000 рублей
+              <p className="text-xl text-muted-foreground">
+                Индивидуальная сборка под любые задачи с гарантией до 3 лет
               </p>
               <div className="flex flex-wrap gap-4">
-                <ConsultationForm trigger={
-                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8">
+                <a href="#pc-selection">
+                  <Button size="lg" className="gradient-primary text-lg px-8 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
+                    <Icon name="Gamepad2" className="mr-2" size={20} />
                     Подобрать компьютер
                   </Button>
-                } />
+                </a>
                 <Link to="/catalog">
-                  <Button size="lg" variant="outline" className="text-lg px-8">
-                    Каталог
-                    <Icon name="ArrowRight" size={20} />
+                  <Button size="lg" variant="outline" className="text-lg px-8 border-2 hover:border-primary">
+                    Каталог готовых сборок
+                    <Icon name="ArrowRight" className="ml-2" size={20} />
                   </Button>
                 </Link>
               </div>
-              <div className="flex gap-6 mt-8">
-                <div className="flex items-center gap-3 px-4 py-3 bg-card rounded-lg border border-border">
-                  <Icon name="Cpu" className="text-primary" size={24} />
-                  <span className="text-sm">Только новые комплектующие</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                <div className="flex items-center gap-3 p-4 gradient-card rounded-xl border border-primary/10">
+                  <div className="p-2 bg-primary/20 rounded-lg">
+                    <Icon name="Package" className="text-primary" size={24} />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm">Новые комплектующие</p>
+                    <p className="text-xs text-muted-foreground">Официальные поставщики</p>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3 px-4 py-3 bg-card rounded-lg border border-border">
-                  <Icon name="Truck" className="text-primary" size={24} />
-                  <span className="text-sm">Бесплатная доставка</span>
+                <div className="flex items-center gap-3 p-4 gradient-card rounded-xl border border-primary/10">
+                  <div className="p-2 bg-primary/20 rounded-lg">
+                    <Icon name="Truck" className="text-primary" size={24} />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm">Бесплатная доставка</p>
+                    <p className="text-xs text-muted-foreground">По всей России от 50к</p>
+                  </div>
                 </div>
               </div>
             </div>
             <div className="relative animate-scale-in">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl blur-3xl"></div>
-              <img 
-                src="https://cdn.poehali.dev/files/abecf990-0148-4af7-ace4-2c4056d6be5b.jpg"
-                alt="Gaming PC"
-                className="relative rounded-2xl shadow-2xl w-full"
-              />
+              <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 via-primary/10 to-transparent rounded-3xl blur-3xl animate-pulse"></div>
+              <div className="relative group">
+                <img 
+                  src="https://cdn.poehali.dev/files/abecf990-0148-4af7-ace4-2c4056d6be5b.jpg"
+                  alt="Gaming PC"
+                  className="relative rounded-2xl shadow-2xl w-full border border-primary/20 group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute -bottom-6 -right-6 bg-primary text-white px-6 py-4 rounded-2xl shadow-xl">
+                  <p className="text-sm font-semibold">Гарантия</p>
+                  <p className="text-2xl font-bold">до 3 лет</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-12 bg-gradient-to-br from-primary/5 to-background">
-        <div className="container mx-auto px-4">
-          <Card className="p-8 md:p-12 bg-gradient-to-r from-card to-card/80 border-primary/20">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
+      <section className="py-16 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background"></div>
+        <div className="container mx-auto px-4 relative">
+          <Card className="p-8 md:p-12 gradient-card border-primary/20 shadow-xl overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+            <div className="grid md:grid-cols-2 gap-8 items-center relative">
               <div>
-                <h2 className="text-2xl md:text-3xl font-heading font-bold mb-4">
-                  Давайте подберём компьютер под ваши задачи
+                <div className="inline-block px-3 py-1 bg-primary/20 rounded-full mb-4">
+                  <span className="text-xs font-bold text-primary">💬 БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+                  Подберём компьютер под ваши задачи
                 </h2>
-                <p className="text-muted-foreground mb-6">
-                  Мы создаём компьютеры для решения любых задач. Наши сборки идеально сбалансированы - вы получаете лучшую производительность за свой бюджет
+                <p className="text-muted-foreground mb-6 text-lg">
+                  Мы создаём сбалансированные сборки, где каждый компонент идеально дополняет другой
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a 
@@ -174,74 +202,93 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="selection" className="py-20 bg-card/50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-              Выгодные решения под любой бюджет
+      <section id="selection" className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(var(--primary)/0.08),transparent_70%)]"></div>
+        <div className="container mx-auto px-4 relative">
+          <div className="text-center mb-16 animate-slide-up">
+            <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
+              <span className="text-sm font-semibold text-primary">💰 ГОТОВЫЕ СБОРКИ</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+              Решения под <span className="text-gradient">любой бюджет</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Мы подберем комплектующие соблюдая баланс - цена/производительность, и не экономим на качестве в погоне за самой низкой ценой
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              Сбалансированная производительность без переплат
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {['FHD', 'QHD', 'UHD'].map((resolution, index) => (
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-12">
+            {[
+              { res: 'FHD', title: 'Начальный', desc: 'Full HD с высокими настройками', price: '70 000', gradient: 'from-blue-500/20 to-cyan-500/20', icon: 'Zap' },
+              { res: 'QHD', title: 'Оптимальный', desc: 'Идеальный баланс для QHD', price: '120 000', gradient: 'from-primary/20 to-orange-500/20', icon: 'Sparkles', featured: true },
+              { res: 'UHD', title: 'Максимум', desc: 'Безграничная мощь для 4K', price: '200 000', gradient: 'from-purple-500/20 to-pink-500/20', icon: 'Flame' }
+            ].map((config, index) => (
               <Card 
-                key={resolution}
-                className="relative overflow-hidden group hover:border-primary transition-all duration-300 hover:scale-105 animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
+                key={config.res}
+                className={`relative overflow-hidden group hover:shadow-2xl transition-all duration-500 animate-slide-up ${
+                  config.featured ? 'md:scale-110 border-primary shadow-lg shadow-primary/20 z-10' : 'hover:scale-105'
+                }`}
+                style={{ animationDelay: `${index * 150}ms` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div className="relative p-8">
-                  <div className="text-6xl font-heading font-bold text-muted mb-4">{resolution}</div>
-                  <h3 className="text-2xl font-heading font-bold mb-4">
-                    {resolution === 'FHD' && 'Начальный уровень'}
-                    {resolution === 'QHD' && 'Оптимальный выбор'}
-                    {resolution === 'UHD' && 'Максимум мощности'}
-                  </h3>
-                  <p className="text-muted-foreground mb-6">
-                    {resolution === 'FHD' && 'Отличное решение для игр в Full HD с высокими настройками графики'}
-                    {resolution === 'QHD' && 'Идеальный баланс производительности и цены для QHD-гейминга'}
-                    {resolution === 'UHD' && 'Безграничная мощность для 4K-игр и профессиональных задач'}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="text-sm text-muted-foreground">От</div>
-                      <div className="text-2xl font-heading font-bold">
-                        {resolution === 'FHD' && '70 000 ₽'}
-                        {resolution === 'QHD' && '120 000 ₽'}
-                        {resolution === 'UHD' && '200 000 ₽'}
-                      </div>
-                    </div>
-                    <Button variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground">
-                      <Icon name="ArrowRight" size={18} />
-                    </Button>
+                {config.featured && (
+                  <div className="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                    ХИТ
                   </div>
+                )}
+                <div className={`absolute inset-0 bg-gradient-to-br ${config.gradient} opacity-50`}></div>
+                <div className="relative p-6 lg:p-8">
+                  <div className="mb-6">
+                    <div className="inline-block p-3 bg-primary/20 rounded-xl mb-4">
+                      <Icon name={config.icon as any} className="text-primary" size={28} />
+                    </div>
+                    <div className="text-sm font-semibold text-primary mb-1">{config.res}</div>
+                    <h3 className="text-2xl lg:text-3xl font-heading font-bold mb-2">
+                      {config.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm">
+                      {config.desc}
+                    </p>
+                  </div>
+                  <div className="mb-6">
+                    <div className="text-sm text-muted-foreground mb-1">От</div>
+                    <div className="text-3xl lg:text-4xl font-heading font-bold">
+                      {config.price} ₽
+                    </div>
+                  </div>
+                  <Button 
+                    className={`w-full ${config.featured ? 'gradient-primary' : 'bg-card hover:bg-primary hover:text-white'} group-hover:shadow-lg transition-all`}
+                    size="lg"
+                  >
+                    Подробнее
+                    <Icon name="ArrowRight" className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
+                  </Button>
                 </div>
               </Card>
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center">
             <Link to="/catalog">
-              <Button size="lg" className="bg-primary hover:bg-primary/90">
-                Смотреть все сборки
-                <Icon name="ArrowRight" size={20} />
+              <Button size="lg" variant="outline" className="border-2 hover:border-primary hover:bg-primary hover:text-white text-lg px-8">
+                Смотреть весь каталог
+                <Icon name="ExternalLink" className="ml-2" size={20} />
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      <section id="services" className="py-20">
+      <section id="services" className="py-20 bg-gradient-to-b from-background to-primary/5">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-              Услуги по ремонту
+          <div className="text-center mb-16 animate-slide-up">
+            <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
+              <span className="text-sm font-semibold text-primary">🔧 РЕМОНТ И ОБСЛУЖИВАНИЕ</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+              Услуги по <span className="text-gradient">ремонту</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Профессиональный ремонт компьютеров и ноутбуков любой сложности
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              Профессиональный ремонт любой сложности с гарантией
             </p>
           </div>
           
@@ -249,28 +296,31 @@ const Index = () => {
             {services.length > 0 ? services.map((service, index) => (
               <Card 
                 key={service.id || index}
-                className="p-6 hover:border-primary transition-all duration-300 hover:scale-105 animate-fade-in"
+                className="group relative overflow-hidden p-6 hover:shadow-xl transition-all duration-500 animate-slide-up hover:-translate-y-2"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Icon name={service.icon || 'Wrench'} className="text-primary" size={24} />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="relative">
+                  <div className="mb-4">
+                    <div className="inline-flex p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors">
+                      <Icon name={service.icon || 'Wrench'} className="text-primary" size={28} />
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-heading font-bold mb-2">{service.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-3">{service.description}</p>
-                    <div className="text-primary font-bold">{service.price}</div>
-                    {service.features && service.features.length > 0 && (
-                      <ul className="mt-3 space-y-1">
-                        {service.features.map((feature: string, idx: number) => (
-                          <li key={idx} className="text-xs text-muted-foreground flex items-center gap-1">
+                  <h3 className="font-heading font-bold text-xl mb-2">{service.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-4">{service.description}</p>
+                  <div className="text-2xl font-bold text-primary mb-4">{service.price}</div>
+                  {service.features && service.features.length > 0 && (
+                    <ul className="space-y-2 border-t border-border pt-4">
+                      {service.features.map((feature: string, idx: number) => (
+                        <li key={idx} className="text-sm text-muted-foreground flex items-center gap-2">
+                          <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
                             <Icon name="Check" size={12} className="text-primary" />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
+                          </div>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </Card>
             )) : (
@@ -284,55 +334,64 @@ const Index = () => {
             <ServiceRequestForm />
           </div>
 
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-center mb-12 mt-20">
-            Наши преимущества
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="text-center mb-12 mt-20">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+              Почему <span className="text-gradient">выбирают нас</span>
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {advantages.map((item, index) => (
               <Card 
                 key={index} 
-                className="p-6 text-center hover:border-primary transition-all duration-300 hover:scale-105 animate-fade-in"
+                className="group p-6 text-center hover:shadow-xl transition-all duration-500 animate-slide-up hover:-translate-y-2"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Icon name={item.icon as any} className="text-primary" size={32} />
+                <div className="relative">
+                  <div className="absolute inset-0 bg-primary/5 rounded-2xl blur-xl group-hover:bg-primary/10 transition-colors"></div>
+                  <div className="relative w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <Icon name={item.icon as any} className="text-primary" size={32} />
+                  </div>
                 </div>
-                <h3 className="font-heading font-bold mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
+                <h3 className="font-heading font-bold text-lg mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="works" className="py-20 bg-card/50">
+      <section id="works" className="py-20 bg-gradient-to-b from-primary/5 to-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-              Наши работы
+          <div className="text-center mb-16 animate-slide-up">
+            <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
+              <span className="text-sm font-semibold text-primary">🖥️ ПОРТФОЛИО</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+              Наши <span className="text-gradient">работы</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Примеры собранных нами компьютеров для игр, работы и творчества
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              Примеры собранных компьютеров для различных задач
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {portfolio.length > 0 ? (
               portfolio.map((work, index) => (
                 <Card 
                   key={index}
-                  className="overflow-hidden group hover:border-primary transition-all duration-300 hover:scale-105 animate-fade-in"
+                  className="overflow-hidden group hover:shadow-2xl transition-all duration-500 animate-slide-up hover:-translate-y-2"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className="relative h-64 overflow-hidden">
+                  <div className="relative h-72 overflow-hidden">
                     <img 
                       src={work.image_url} 
                       alt={work.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex flex-col justify-end p-6">
-                      <h3 className="text-xl font-heading font-bold mb-1">{work.title}</h3>
-                      <p className="text-sm text-muted-foreground">{work.description}</p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-90"></div>
+                    <div className="absolute inset-0 flex flex-col justify-end p-6">
+                      <h3 className="text-2xl font-heading font-bold mb-2 group-hover:text-primary transition-colors">{work.title}</h3>
+                      <p className="text-sm text-muted-foreground line-clamp-2">{work.description}</p>
                     </div>
                   </div>
                 </Card>
@@ -359,33 +418,42 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="pc-selection" className="py-20 bg-gradient-to-b from-background to-card/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-              Подбор компьютера
+      <section id="pc-selection" className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background"></div>
+        <div className="container mx-auto px-4 relative">
+          <div className="text-center mb-16 animate-slide-up">
+            <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
+              <span className="text-sm font-semibold text-primary">📋 ПОДБОР ПК</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+              Подберём <span className="text-gradient">компьютер мечты</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-              Заполните анкету и мы поможем подобрать идеальный компьютер для ваших задач
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg mb-8">
+              Ответьте на несколько вопросов и получите персональную сборку
             </p>
           </div>
-          <PCSelectionForm />
+          <div className="animate-scale-in">
+            <PCSelectionForm />
+          </div>
         </div>
       </section>
 
-      <section id="reviews" className="py-20 bg-gradient-to-b from-card/30 to-background">
+      <section id="reviews" className="py-20 bg-gradient-to-b from-background to-primary/5">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-              Отзывы наших клиентов
+          <div className="text-center mb-16 animate-slide-up">
+            <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
+              <span className="text-sm font-semibold text-primary">⭐ ОТЗЫВЫ</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+              Что говорят <span className="text-gradient">наши клиенты</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-              Реальные отзывы с Яндекс Карт от наших клиентов
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg mb-8">
+              Реальные отзывы с Яндекс Карт
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
-            <Card className="p-6 bg-card/80 backdrop-blur">
+          <div className="max-w-4xl mx-auto animate-scale-in">
+            <Card className="p-6 gradient-card border-primary/20 shadow-xl">
               <div 
                 style={{
                   position: 'relative',
