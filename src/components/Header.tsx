@@ -93,15 +93,8 @@ const Header = () => {
               Работы
             </Link>
             <Link 
-              to="/#reviews" 
+              to="/reviews" 
               className="text-sm font-medium hover:text-primary transition-colors"
-              onClick={(e) => {
-                const element = document.getElementById('reviews');
-                if (element) {
-                  e.preventDefault();
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
             >
               Отзывы
             </Link>

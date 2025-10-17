@@ -6,7 +6,6 @@ import { ConsultationSection } from '@/components/HomePage/ConsultationSection';
 import { CatalogSection } from '@/components/HomePage/CatalogSection';
 import { ServicesSection } from '@/components/HomePage/ServicesSection';
 import { PCSelectionSection } from '@/components/HomePage/PCSelectionSection';
-import { ReviewsSection } from '@/components/HomePage/ReviewsSection';
 import { FAQSection } from '@/components/HomePage/FAQSection';
 import { StatsSection } from '@/components/HomePage/StatsSection';
 import { ConsultationFormSection } from '@/components/HomePage/ConsultationFormSection';
@@ -57,7 +56,6 @@ const Index = () => {
       <CatalogSection />
       <ServicesSection services={services} advantages={advantages} />
       <PCSelectionSection />
-      <ReviewsSection />
       <FAQSection />
       <StatsSection />
       <ConsultationFormSection />

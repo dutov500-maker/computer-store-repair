@@ -2,9 +2,13 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
-export const ReviewsSection = () => {
+interface ReviewsSectionProps {
+  fullPage?: boolean;
+}
+
+export const ReviewsSection = ({ fullPage = false }: ReviewsSectionProps) => {
   return (
-    <section id="reviews" className="py-20 bg-gradient-to-b from-background to-primary/5">
+    <section id="reviews" className={`py-20 bg-gradient-to-b from-background to-primary/5 ${fullPage ? 'min-h-screen' : ''}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-slide-up">
           <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
