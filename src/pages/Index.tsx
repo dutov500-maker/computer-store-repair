@@ -74,7 +74,7 @@ const portfolioData = [
     id: 1,
     title: 'Игровой ПК для киберспорта',
     description: 'Сборка мощного компьютера для профессионального гейминга',
-    image_url: 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=800',
+    image_url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/7ce5968e-7e5b-4c60-9373-f858c5c625d8.jpg',
     specs: { cpu: 'Intel i9-13900K', gpu: 'RTX 4080', ram: '32GB DDR5' },
     is_active: true
   },
@@ -82,7 +82,7 @@ const portfolioData = [
     id: 2,
     title: 'Рабочая станция для дизайна',
     description: 'Компьютер для работы с графикой и 3D-моделированием',
-    image_url: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800',
+    image_url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/5cb84848-df29-46a1-8a92-15598168f17c.jpg',
     specs: { cpu: 'AMD Ryzen 9 5950X', gpu: 'RTX 4070', ram: '64GB DDR4' },
     is_active: true
   },
@@ -90,7 +90,7 @@ const portfolioData = [
     id: 3,
     title: 'Офисная конфигурация Pro',
     description: 'Надёжный компьютер для работы с документами и интернетом',
-    image_url: 'https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=800',
+    image_url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/26bdd8a8-f50e-4b82-ab8b-9350c35ea7c6.jpg',
     specs: { cpu: 'Intel i5-12400', gpu: 'Intel UHD 730', ram: '16GB DDR4' },
     is_active: true
   },
@@ -98,7 +98,7 @@ const portfolioData = [
     id: 4,
     title: 'Стример-сборка 4K',
     description: 'Мощная система для стриминга и записи видео',
-    image_url: 'https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?w=800',
+    image_url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/ea9a7115-026e-4dab-a031-6a18e5477583.jpg',
     specs: { cpu: 'AMD Ryzen 9 7950X', gpu: 'RTX 4090', ram: '64GB DDR5' },
     is_active: true
   },
@@ -106,7 +106,7 @@ const portfolioData = [
     id: 5,
     title: 'Компактный Mini-ITX',
     description: 'Небольшой, но производительный компьютер для дома',
-    image_url: 'https://images.unsplash.com/photo-1555680202-c0d7dac84a0b?w=800',
+    image_url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/f42f0239-7a8a-4bc7-8618-509d0ccc635e.jpg',
     specs: { cpu: 'AMD Ryzen 7 5800X3D', gpu: 'RTX 3070', ram: '32GB DDR4' },
     is_active: true
   },
@@ -114,7 +114,7 @@ const portfolioData = [
     id: 6,
     title: 'Монтажная станция 4K',
     description: 'Специализированная сборка для видеомонтажа',
-    image_url: 'https://images.unsplash.com/photo-1587202372583-49330a15584d?w=800',
+    image_url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/df14b2bc-cb92-495c-a2c3-d763703c08a9.jpg',
     specs: { cpu: 'Intel i9-13900KS', gpu: 'RTX 4080', ram: '128GB DDR5' },
     is_active: true
   }
