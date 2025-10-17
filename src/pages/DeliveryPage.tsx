@@ -1,11 +1,22 @@
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import { Link } from 'react-router-dom';
 
 export default function DeliveryPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
+          <div className="mb-8 animate-fade-in">
+            <Link to="/">
+              <Button variant="outline" className="gap-2">
+                <Icon name="ArrowLeft" size={18} />
+                На главную
+              </Button>
+            </Link>
+          </div>
+          
           <div className="text-center mb-12 animate-fade-in">
             <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
               <span className="text-gradient">Доставка и оплата</span>
@@ -34,7 +45,7 @@ export default function DeliveryPage() {
                         <span className="text-primary font-bold whitespace-nowrap">Бесплатно</span>
                       </div>
                       <p className="text-sm text-muted-foreground mb-2">
-                        Забрать готовый компьютер можно по адресу в Санкт-Петербурге. 
+                        Забрать готовый компьютер можно по адресу в городе Волжский. 
                         Мы проведём тестирование при вас и покажем, как работает ваш новый ПК.
                       </p>
                       <p className="text-sm text-muted-foreground">
@@ -46,7 +57,7 @@ export default function DeliveryPage() {
                       <div className="flex items-start justify-between gap-4 mb-2">
                         <div className="flex items-center gap-3">
                           <Icon name="MapPin" size={24} className="text-primary" />
-                          <h3 className="font-semibold text-lg">Доставка по Санкт-Петербургу</h3>
+                          <h3 className="font-semibold text-lg">Доставка по городу Волжский</h3>
                         </div>
                         <span className="text-primary font-bold whitespace-nowrap">от 500 ₽</span>
                       </div>
