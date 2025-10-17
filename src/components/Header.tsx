@@ -35,7 +35,7 @@ const Header = () => {
             <img 
               src="https://cdn.poehali.dev/files/1258a3ce-944b-46de-88b7-5a629a1775c1.png" 
               alt="КЛАБ"
-              className="h-10 w-auto"
+              className="h-10 w-10 rounded-full object-cover"
             />
             <span className="text-xl font-heading font-bold">{settings?.company_name || 'Компьютерная Лаборатория'}</span>
           </Link>
