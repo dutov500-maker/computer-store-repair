@@ -33,9 +33,9 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-4">
-            <a href="tel:+79500059822" className="hidden lg:flex items-center gap-2 text-sm font-medium">
+            <a href="tel:+79950272707" className="hidden lg:flex items-center gap-2 text-sm font-medium">
               <Icon name="Phone" size={18} />
-              8 950 005 98 22
+              +7 995 027 27 07
             </a>
             <Button size="sm" className="bg-primary hover:bg-primary/90">
               <Icon name="MessageCircle" size={18} />

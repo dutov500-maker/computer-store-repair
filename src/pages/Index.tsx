@@ -162,6 +162,70 @@ const Index = () => {
         </div>
       </section>
 
+      <section className="py-20 bg-card/50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              Наши работы
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Примеры собранных нами компьютеров для игр, работы и творчества
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            {[
+              {
+                image: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/4411866f-6b88-4906-b361-b61006c52f6b.jpg',
+                title: 'Игровая станция Premium',
+                description: 'Мощная сборка для 4K-гейминга'
+              },
+              {
+                image: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/f640ba71-1984-4233-ad18-c61376c8d6de.jpg',
+                title: 'Рабочая станция',
+                description: 'Оптимальная конфигурация для работы'
+              },
+              {
+                image: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/b7124fb7-4401-4730-9bb4-9d4c2a163e21.jpg',
+                title: 'Стримерская сборка',
+                description: 'Для стриминга и контент-создания'
+              }
+            ].map((work, index) => (
+              <Card 
+                key={index}
+                className="overflow-hidden group hover:border-primary transition-all duration-300 hover:scale-105 animate-fade-in"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <img 
+                    src={work.image} 
+                    alt={work.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex flex-col justify-end p-6">
+                    <h3 className="text-xl font-heading font-bold mb-1">{work.title}</h3>
+                    <p className="text-sm text-muted-foreground">{work.description}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <a 
+              href="https://vk.com/labkomp" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" variant="outline" className="text-lg px-8">
+                <Icon name="ExternalLink" size={20} />
+                Больше работ в нашей группе ВК
+              </Button>
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className="py-20 bg-gradient-to-br from-primary to-primary/80">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-primary-foreground">
@@ -218,7 +282,7 @@ const Index = () => {
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-2 text-muted-foreground">
                   <Icon name="Phone" size={16} />
-                  <a href="tel:+79500059822" className="hover:text-primary transition-colors">8 950 005 98 22</a>
+                  <a href="tel:+79950272707" className="hover:text-primary transition-colors">+7 995 027 27 07</a>
                 </li>
                 <li className="flex items-center gap-2 text-muted-foreground">
                   <Icon name="Mail" size={16} />
