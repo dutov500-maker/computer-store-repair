@@ -173,7 +173,7 @@ export const ReviewsSection = ({ fullPage = false }: ReviewsSectionProps) => {
             </div>
             <div className="mt-6 text-center">
               <a 
-                href="https://www.avito.ru/profile/rating" 
+                href="https://www.avito.ru/brands/54e5b9245dfb13dda34429b64ed9ab14/all?sellerId=838f5cfc85832c17ec8cdf8faab5817d" 
                 target="_blank" 
                 rel="noopener noreferrer"
               >
