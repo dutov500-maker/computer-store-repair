@@ -11,6 +11,23 @@ import { Link } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 interface ServiceRequest {
   id: number;
@@ -64,6 +81,43 @@ interface PortfolioItem {
   display_order: number;
   is_active: boolean;
 }
+
+interface SortableItemProps {
+  id: number;
+  children: React.ReactNode;
+}
+
+const SortableItem = ({ id, children }: SortableItemProps) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
+
+  return (
+    <div ref={setNodeRef} style={style}>
+      <div className="relative">
+        <div
+          {...attributes}
+          {...listeners}
+          className="absolute left-2 top-2 cursor-move p-2 hover:bg-muted rounded z-10"
+        >
+          <Icon name="GripVertical" size={20} className="text-muted-foreground" />
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+};
 
 const Admin = () => {
   const [requests, setRequests] = useState<ServiceRequest[]>([]);
@@ -404,6 +458,61 @@ const Admin = () => {
     navigate('/admin/login');
   };
 
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEndCatalog = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    
+    if (over && active.id !== over.id) {
+      const oldIndex = catalog.findIndex((item) => item.id === active.id);
+      const newIndex = catalog.findIndex((item) => item.id === over.id);
+      
+      const newCatalog = arrayMove(catalog, oldIndex, newIndex);
+      setCatalog(newCatalog);
+      
+      for (let i = 0; i < newCatalog.length; i++) {
+        await updateCatalogItem({ ...newCatalog[i], display_order: i });
+      }
+    }
+  };
+
+  const handleDragEndServices = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    
+    if (over && active.id !== over.id) {
+      const oldIndex = services.findIndex((item) => item.id === active.id);
+      const newIndex = services.findIndex((item) => item.id === over.id);
+      
+      const newServices = arrayMove(services, oldIndex, newIndex);
+      setServices(newServices);
+      
+      for (let i = 0; i < newServices.length; i++) {
+        await updateService({ ...newServices[i], display_order: i });
+      }
+    }
+  };
+
+  const handleDragEndPortfolio = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    
+    if (over && active.id !== over.id) {
+      const oldIndex = portfolio.findIndex((item) => item.id === active.id);
+      const newIndex = portfolio.findIndex((item) => item.id === over.id);
+      
+      const newPortfolio = arrayMove(portfolio, oldIndex, newIndex);
+      setPortfolio(newPortfolio);
+      
+      for (let i = 0; i < newPortfolio.length; i++) {
+        await updatePortfolioItem({ ...newPortfolio[i], display_order: i });
+      }
+    }
+  };
+
   const getStatusBadge = (status: string) => {
     const variants: Record<string, { variant: any; label: string }> = {
       new: { variant: 'default', label: 'Новая' },
@@ -557,16 +666,32 @@ const Admin = () => {
 
           <TabsContent value="catalog" className="space-y-6">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-heading font-bold">Управление каталогом</h3>
+              <div>
+                <h3 className="text-lg font-heading font-bold">Управление каталогом</h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  <Icon name="GripVertical" size={14} className="inline mr-1" />
+                  Перетащите карточки для изменения порядка
+                </p>
+              </div>
               <Button onClick={createCatalogItem}>
                 <Icon name="Plus" className="mr-2" size={18} />
                 Добавить компьютер
               </Button>
             </div>
-            <div className="grid gap-6">
-              {catalog.map((item) => (
-                <Card key={item.id} className="p-6">
-                  <div className="grid gap-4">
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEndCatalog}
+            >
+              <SortableContext
+                items={catalog.map(item => item.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                <div className="grid gap-6">
+                  {catalog.map((item) => (
+                    <SortableItem key={item.id} id={item.id}>
+                      <Card className="p-6 pl-16">
+                        <div className="grid gap-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <Label>Название</Label>
@@ -667,34 +792,53 @@ const Admin = () => {
                       </p>
                     </div>
 
-                    <div className="flex justify-between">
-                      <Button variant="destructive" onClick={() => deleteCatalogItem(item.id)}>
-                        <Icon name="Trash2" className="mr-2" size={18} />
-                        Удалить
-                      </Button>
-                      <Button onClick={() => updateCatalogItem(item)}>
-                        <Icon name="Save" className="mr-2" size={18} />
-                        Сохранить изменения
-                      </Button>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
+                          <div className="flex justify-between">
+                            <Button variant="destructive" onClick={() => deleteCatalogItem(item.id)}>
+                              <Icon name="Trash2" className="mr-2" size={18} />
+                              Удалить
+                            </Button>
+                            <Button onClick={() => updateCatalogItem(item)}>
+                              <Icon name="Save" className="mr-2" size={18} />
+                              Сохранить изменения
+                            </Button>
+                          </div>
+                        </div>
+                      </Card>
+                    </SortableItem>
+                  ))}
+                </div>
+              </SortableContext>
+            </DndContext>
           </TabsContent>
 
           <TabsContent value="services" className="space-y-6">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-heading font-bold">Управление услугами</h3>
+              <div>
+                <h3 className="text-lg font-heading font-bold">Управление услугами</h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  <Icon name="GripVertical" size={14} className="inline mr-1" />
+                  Перетащите карточки для изменения порядка
+                </p>
+              </div>
               <Button onClick={createService}>
                 <Icon name="Plus" className="mr-2" size={18} />
                 Добавить услугу
               </Button>
             </div>
-            <div className="grid gap-6">
-              {services.map((service) => (
-                <Card key={service.id} className="p-6">
-                  <div className="grid gap-4">
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEndServices}
+            >
+              <SortableContext
+                items={services.map(s => s.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                <div className="grid gap-6">
+                  {services.map((service) => (
+                    <SortableItem key={service.id} id={service.id}>
+                      <Card className="p-6 pl-16">
+                        <div className="grid gap-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <Label>Название услуги</Label>
@@ -748,34 +892,53 @@ const Admin = () => {
                       />
                     </div>
 
-                    <div className="flex justify-between">
-                      <Button variant="destructive" onClick={() => deleteService(service.id)}>
-                        <Icon name="Trash2" className="mr-2" size={18} />
-                        Удалить
-                      </Button>
-                      <Button onClick={() => updateService(service)}>
-                        <Icon name="Save" className="mr-2" size={18} />
-                        Сохранить изменения
-                      </Button>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
+                          <div className="flex justify-between">
+                            <Button variant="destructive" onClick={() => deleteService(service.id)}>
+                              <Icon name="Trash2" className="mr-2" size={18} />
+                              Удалить
+                            </Button>
+                            <Button onClick={() => updateService(service)}>
+                              <Icon name="Save" className="mr-2" size={18} />
+                              Сохранить изменения
+                            </Button>
+                          </div>
+                        </div>
+                      </Card>
+                    </SortableItem>
+                  ))}
+                </div>
+              </SortableContext>
+            </DndContext>
           </TabsContent>
 
           <TabsContent value="portfolio" className="space-y-6">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-heading font-bold">Портфолио (Наши работы)</h3>
+              <div>
+                <h3 className="text-lg font-heading font-bold">Портфолио (Наши работы)</h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  <Icon name="GripVertical" size={14} className="inline mr-1" />
+                  Перетащите карточки для изменения порядка
+                </p>
+              </div>
               <Button onClick={createPortfolioItem}>
                 <Icon name="Plus" className="mr-2" size={18} />
                 Добавить работу
               </Button>
             </div>
-            <div className="grid gap-6">
-              {portfolio.map((item) => (
-                <Card key={item.id} className="p-6">
-                  <div className="grid gap-4">
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEndPortfolio}
+            >
+              <SortableContext
+                items={portfolio.map(p => p.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                <div className="grid gap-6">
+                  {portfolio.map((item) => (
+                    <SortableItem key={item.id} id={item.id}>
+                      <Card className="p-6 pl-16">
+                        <div className="grid gap-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <Label>Название</Label>
@@ -838,8 +1001,11 @@ const Admin = () => {
                     </div>
                   </div>
                 </Card>
-              ))}
-            </div>
+              </SortableItem>
+            ))}
+                </div>
+              </SortableContext>
+            </DndContext>
           </TabsContent>
 
           <TabsContent value="settings" className="space-y-6">

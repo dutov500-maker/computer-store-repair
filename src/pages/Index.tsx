@@ -128,6 +128,59 @@ const Index = () => {
         </div>
       </section>
 
+      <section className="py-12 bg-gradient-to-br from-primary/5 to-background">
+        <div className="container mx-auto px-4">
+          <Card className="p-8 md:p-12 bg-gradient-to-r from-card to-card/80 border-primary/20">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-heading font-bold mb-4">
+                  Давайте подберём компьютер под ваши задачи
+                </h2>
+                <p className="text-muted-foreground mb-6">
+                  Мы создаём компьютеры для решения любых задач. Наши сборки идеально сбалансированы - вы получаете лучшую производительность за свой бюджет
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a 
+                    href="https://t.me/+79950272707" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex-1"
+                  >
+                    <Button size="lg" className="w-full bg-[#0088cc] hover:bg-[#0088cc]/90 text-white">
+                      <Icon name="Send" className="mr-2" size={20} />
+                      Написать в Telegram
+                    </Button>
+                  </a>
+                  <a 
+                    href="https://wa.me/79950272707" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex-1"
+                  >
+                    <Button size="lg" className="w-full bg-[#25D366] hover:bg-[#25D366]/90 text-white">
+                      <Icon name="MessageCircle" className="mr-2" size={20} />
+                      Написать в WhatsApp
+                    </Button>
+                  </a>
+                </div>
+                <p className="text-sm text-muted-foreground mt-4">
+                  <Icon name="Phone" className="inline mr-1" size={14} />
+                  +7 (995) 027-27-07
+                </p>
+              </div>
+              <div className="relative hidden md:block">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-2xl blur-2xl"></div>
+                <img 
+                  src="https://cdn.poehali.dev/files/7eda6f1c-255e-4b2f-b1c8-5657d9aa415c.png"
+                  alt="Gaming PC"
+                  className="relative w-full rounded-xl"
+                />
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+
       <section id="selection" className="py-20 bg-card/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -309,6 +362,56 @@ const Index = () => {
                 Больше работ в нашей группе ВК
               </Button>
             </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="reviews" className="py-20 bg-gradient-to-b from-background to-card/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              Отзывы наших клиентов
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+              Реальные отзывы с Яндекс Карт от наших клиентов
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <Card className="p-6 bg-card/80 backdrop-blur">
+              <div 
+                style={{
+                  position: 'relative',
+                  overflow: 'hidden',
+                  width: '100%',
+                  height: '600px'
+                }}
+              >
+                <iframe
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    border: '1px solid #e6e6e6',
+                    borderRadius: '8px',
+                    boxSizing: 'border-box'
+                  }}
+                  src="https://yandex.ru/maps-reviews-widget/1279007835?comments"
+                  title="Отзывы на Яндекс Картах"
+                ></iframe>
+              </div>
+              <div className="mt-6 text-center">
+                <a 
+                  href="https://yandex.ru/maps/org/kompyuternaya_laboratoriya/1279007835/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="outline" size="lg">
+                    <Icon name="ExternalLink" className="mr-2" size={18} />
+                    Посмотреть все отзывы на Яндекс Картах
+                  </Button>
+                </a>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
