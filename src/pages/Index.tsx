@@ -295,6 +295,78 @@ const Index = () => {
         </div>
       </section>
 
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              Частые вопросы
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Ответы на популярные вопросы наших клиентов
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-4">
+            {[
+              {
+                question: 'Какие гарантии вы предоставляете?',
+                answer: 'Мы предоставляем гарантию до 3 лет на все комплектующие от официальных производителей. На нашу работу по сборке действует гарантия 1 год.'
+              },
+              {
+                question: 'Сколько времени занимает сборка компьютера?',
+                answer: 'Стандартная сборка занимает 1-2 дня. Если требуются комплектующие под заказ, срок может увеличиться до 5-7 дней.'
+              },
+              {
+                question: 'Можно ли принести свои комплектующие?',
+                answer: 'Да, мы можем собрать компьютер из ваших комплектующих. Стоимость работы по сборке составит от 2000 ₽.'
+              },
+              {
+                question: 'Делаете ли вы выездной ремонт?',
+                answer: 'Да, мы предоставляем услугу выездного ремонта. Стоимость выезда в пределах города - 500 ₽.'
+              },
+              {
+                question: 'Какие способы оплаты вы принимаете?',
+                answer: 'Мы принимаем оплату наличными, банковскими картами, переводом на карту и по безналичному расчету для юридических лиц.'
+              }
+            ].map((faq, index) => (
+              <Card key={index} className="p-6 hover:border-primary transition-colors animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
+                <h3 className="font-heading font-bold text-lg mb-3 flex items-start gap-3">
+                  <Icon name="HelpCircle" className="text-primary flex-shrink-0 mt-1" size={20} />
+                  {faq.question}
+                </h3>
+                <p className="text-muted-foreground pl-8">{faq.answer}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-card/50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              Где мы находимся
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Приходите к нам в мастерскую или закажите выездное обслуживание
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <Card className="overflow-hidden">
+              <iframe 
+                src="https://yandex.ru/map-widget/v1/?z=12&ol=biz&oid=105118454033" 
+                width="100%" 
+                height="400" 
+                frameBorder="0"
+                className="w-full"
+                title="Компьютерная Лаборатория на карте"
+              />
+            </Card>
+          </div>
+        </div>
+      </section>
+
       <section className="py-20 bg-gradient-to-br from-primary to-primary/80">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-primary-foreground">
