@@ -115,7 +115,7 @@ ${formData.additionalInfo ? `Дополнительно: ${formData.additionalIn
     `.trim();
 
     try {
-      const response = await fetch('https://functions.poehali.dev/d6f4fe03-53d6-44bb-be39-1d7dd4bbb6c5', {
+      const response = await fetch('https://functions.poehali.dev/25621ff4-c4e5-4302-9356-43afeac8b2c5', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

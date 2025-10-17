@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface BlogPost {
   id: number;
@@ -19,6 +19,7 @@ interface BlogPost {
 }
 
 const Blog = () => {
+  const navigate = useNavigate();
   const blogPosts: BlogPost[] = [
     {
       id: 1,
@@ -216,8 +217,9 @@ const Blog = () => {
             {filteredPosts.map((post, index) => (
               <Card
                 key={post.id}
-                className="group overflow-hidden hover:shadow-2xl transition-all duration-500 animate-slide-up hover:-translate-y-2"
+                className="group overflow-hidden hover:shadow-2xl transition-all duration-500 animate-slide-up hover:-translate-y-2 cursor-pointer"
                 style={{ animationDelay: `${index * 100}ms` }}
+                onClick={() => navigate(`/blog/${post.id}`)}
               >
                 <div className="relative overflow-hidden aspect-video">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
