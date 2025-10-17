@@ -33,15 +33,16 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         status_filter = query_params.get('status', '')
         
         if status_filter:
-            query = """
+            status_safe = status_filter.replace("'", "''")
+            query = f"""
                 SELECT id, name, phone, email, service_type, message, status, 
                        created_at, updated_at
                 FROM service_requests
-                WHERE status = %s
+                WHERE status = '{status_safe}'
                 ORDER BY created_at DESC
                 LIMIT 100
             """
-            cur.execute(query, (status_filter,))
+            cur.execute(query)
         else:
             query = """
                 SELECT id, name, phone, email, service_type, message, status, 
@@ -99,12 +100,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'isBase64Encoded': False
             }
         
-        query = """
+        status_safe = new_status.replace("'", "''")
+        query = f"""
             UPDATE service_requests
-            SET status = %s, updated_at = CURRENT_TIMESTAMP
-            WHERE id = %s
+            SET status = '{status_safe}', updated_at = CURRENT_TIMESTAMP
+            WHERE id = {int(request_id)}
         """
-        cur.execute(query, (new_status, request_id))
+        cur.execute(query)
         conn.commit()
         
         cur.close()
