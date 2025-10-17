@@ -67,9 +67,9 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="#services" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/services" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Услуги
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
