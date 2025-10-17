@@ -1,6 +1,6 @@
 """
-Business: Универсальное API для получения каталога, услуг, ремонта и портфолио
-Args: event - dict с httpMethod, queryStringParameters (type: catalog/services/repairs/portfolio)
+Business: Универсальное API для получения и управления каталогом, услугами, ремонтом и портфолио
+Args: event - dict с httpMethod, queryStringParameters (type, action, id), body
       context - объект с request_id
 Returns: HTTP response с JSON данными
 """
@@ -18,23 +18,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'statusCode': 200,
             'headers': {
                 'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Token',
                 'Access-Control-Max-Age': '86400'
             },
             'isBase64Encoded': False,
             'body': ''
-        }
-    
-    if method != 'GET':
-        return {
-            'statusCode': 405,
-            'headers': {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            },
-            'isBase64Encoded': False,
-            'body': json.dumps({'error': 'Method not allowed'})
         }
     
     dsn = os.environ.get('DATABASE_URL')
@@ -51,9 +40,108 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     query_params = event.get('queryStringParameters', {}) or {}
     data_type = query_params.get('type', 'catalog')
+    action = query_params.get('action', 'list')
     
     conn = psycopg2.connect(dsn)
+    conn.autocommit = True
     cursor = conn.cursor()
+    
+    if method == 'POST' and data_type == 'portfolio':
+        try:
+            if action == 'create':
+                body_data = json.loads(event.get('body', '{}'))
+                
+                cursor.execute("""
+                    INSERT INTO portfolio_items 
+                    (title, description, image_url, category, specs, price_range, completion_date, is_active)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, true)
+                    RETURNING id
+                """, (
+                    body_data.get('title'),
+                    body_data.get('description'),
+                    body_data.get('image_url'),
+                    body_data.get('category', 'Игровой ПК'),
+                    body_data.get('specs'),
+                    body_data.get('price_range'),
+                    body_data.get('completion_date') or None
+                ))
+                
+                new_id = cursor.fetchone()[0]
+                cursor.close()
+                conn.close()
+                
+                return {
+                    'statusCode': 200,
+                    'headers': {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    'isBase64Encoded': False,
+                    'body': json.dumps({'id': new_id, 'message': 'Created successfully'})
+                }
+            
+            elif action == 'update':
+                item_id = query_params.get('id')
+                body_data = json.loads(event.get('body', '{}'))
+                
+                cursor.execute("""
+                    UPDATE portfolio_items 
+                    SET title = %s, description = %s, image_url = %s, category = %s,
+                        specs = %s, price_range = %s, completion_date = %s
+                    WHERE id = %s
+                """, (
+                    body_data.get('title'),
+                    body_data.get('description'),
+                    body_data.get('image_url'),
+                    body_data.get('category'),
+                    body_data.get('specs'),
+                    body_data.get('price_range'),
+                    body_data.get('completion_date') or None,
+                    item_id
+                ))
+                
+                cursor.close()
+                conn.close()
+                
+                return {
+                    'statusCode': 200,
+                    'headers': {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    'isBase64Encoded': False,
+                    'body': json.dumps({'message': 'Updated successfully'})
+                }
+            
+            elif action == 'delete':
+                item_id = query_params.get('id')
+                
+                cursor.execute("UPDATE portfolio_items SET is_active = false WHERE id = %s", (item_id,))
+                
+                cursor.close()
+                conn.close()
+                
+                return {
+                    'statusCode': 200,
+                    'headers': {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    'isBase64Encoded': False,
+                    'body': json.dumps({'message': 'Deleted successfully'})
+                }
+        except Exception as e:
+            cursor.close()
+            conn.close()
+            return {
+                'statusCode': 400,
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                'isBase64Encoded': False,
+                'body': json.dumps({'error': str(e)})
+            }
     
     if data_type == 'services':
         cursor.execute("""
@@ -101,7 +189,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     elif data_type == 'portfolio':
         cursor.execute("""
-            SELECT id, title, description, image_url, display_order, is_active
+            SELECT id, title, description, image_url, category, specs, price_range, 
+                   completion_date, display_order, is_active
             FROM portfolio_items
             WHERE is_active = true
             ORDER BY display_order, id
@@ -116,8 +205,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'title': row[1],
                 'description': row[2],
                 'image_url': row[3],
-                'display_order': row[4],
-                'is_active': row[5]
+                'category': row[4],
+                'specs': row[5],
+                'price_range': row[6],
+                'completion_date': row[7],
+                'display_order': row[8],
+                'is_active': row[9]
             })
     
     else:

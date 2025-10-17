@@ -51,6 +51,31 @@
         }
       },
       "bodyMatcher": "partial"
+    },
+    {
+      "name": "Create portfolio item",
+      "method": "POST",
+      "path": "/?type=portfolio&action=create",
+      "body": {
+        "title": "Test Gaming PC",
+        "description": "High-end gaming build",
+        "image_url": "https://example.com/pc.jpg",
+        "category": "Игровой ПК",
+        "specs": "RTX 4090, i9-14900K",
+        "price_range": "300000 ₽"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "id": "number",
+        "message": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Handle OPTIONS request",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
     }
   ]
 }
