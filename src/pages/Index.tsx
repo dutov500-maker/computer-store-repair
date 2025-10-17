@@ -98,7 +98,7 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in space-y-8">
               <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
-                <span className="text-sm font-semibold text-primary">🎮 Игровые ПК от 70 000 ₽</span>
+                <span className="text-sm font-semibold text-primary">🎮 Игровые ПК от 50 000 ₽</span>
               </div>
               <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
                 Создадим компьютер <span className="text-gradient">вашей мечты</span>
@@ -200,9 +200,9 @@ const Index = () => {
                   </a>
                 </div>
               </div>
-              <div className="relative hidden md:block">
+              <div className="relative hidden md:block max-w-md ml-auto">
                 <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 via-primary/20 to-transparent rounded-3xl blur-3xl animate-pulse"></div>
-                <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-primary/20">
+                <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-primary/20 aspect-[3/4]">
                   <img 
                     src="https://cdn.poehali.dev/files/80e5488c-2bfa-4e1c-9cbb-85c091071149.jpg"
                     alt="Gaming PC Components"

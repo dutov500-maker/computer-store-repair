@@ -39,6 +39,9 @@ const Header = () => {
             <Link to="/catalog" className="text-sm font-medium hover:text-primary transition-colors">
               Каталог
             </Link>
+            <Link to="/blog" className="text-sm font-medium hover:text-primary transition-colors">
+              Блог
+            </Link>
             <a href="#pc-selection" className="text-sm font-medium hover:text-primary transition-colors">
               Подбор ПК
             </a>
