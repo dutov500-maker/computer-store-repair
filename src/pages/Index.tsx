@@ -68,7 +68,7 @@ const Index = () => {
     {
       icon: 'Truck',
       title: 'Бесплатная доставка',
-      description: 'По всей России при заказе от 50 000 ₽'
+      description: 'По Волжскому при заказе от 50 000 ₽'
     },
     {
       icon: 'Shield',

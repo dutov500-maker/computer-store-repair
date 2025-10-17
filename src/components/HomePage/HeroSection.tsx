@@ -50,7 +50,7 @@ export const HeroSection = () => {
                 </div>
                 <div>
                   <p className="font-semibold text-sm">Бесплатная доставка</p>
-                  <p className="text-xs text-muted-foreground">По всей России от 50к</p>
+                  <p className="text-xs text-muted-foreground">По Волжскому от 50к</p>
                 </div>
               </div>
             </div>

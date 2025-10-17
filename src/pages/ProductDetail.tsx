@@ -58,7 +58,7 @@ const ProductDetail = () => {
     setSubmitting(true);
 
     try {
-      const response = await fetch('https://functions.poehali.dev/d6f4fe03-53d6-44bb-be39-1d7dd4bbb6c5', {
+      const response = await fetch('https://functions.poehali.dev/25621ff4-c4e5-4302-9356-43afeac8b2c5', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -209,7 +209,7 @@ const ProductDetail = () => {
                   <div>
                     <h4 className="font-heading font-bold mb-2">Бесплатная доставка</h4>
                     <p className="text-sm text-muted-foreground">
-                      По Москве при заказе от 50 000 ₽. По России от 100 000 ₽.
+                      По Волжскому при заказе от 50 000 ₽. По России от 100 000 ₽.
                     </p>
                   </div>
                 </div>
