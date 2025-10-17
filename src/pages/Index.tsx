@@ -5,7 +5,6 @@ import { HeroSection } from '@/components/HomePage/HeroSection';
 import { ConsultationSection } from '@/components/HomePage/ConsultationSection';
 import { CatalogSection } from '@/components/HomePage/CatalogSection';
 import { ServicesSection } from '@/components/HomePage/ServicesSection';
-import { RepairServicesSection } from '@/components/HomePage/RepairServicesSection';
 import { PortfolioSection } from '@/components/HomePage/PortfolioSection';
 import { PCSelectionSection } from '@/components/HomePage/PCSelectionSection';
 import { ReviewsSection } from '@/components/HomePage/ReviewsSection';
@@ -90,7 +89,6 @@ const Index = () => {
       <ConsultationSection />
       <CatalogSection />
       <ServicesSection services={services} advantages={advantages} />
-      <RepairServicesSection />
       <PortfolioSection portfolio={portfolio} />
       <PCSelectionSection />
       <ReviewsSection />
