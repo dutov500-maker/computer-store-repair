@@ -168,14 +168,6 @@ const Index = () => {
                   +7 (995) 027-27-07
                 </p>
               </div>
-              <div className="relative hidden md:block">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-2xl blur-2xl"></div>
-                <img 
-                  src="https://cdn.poehali.dev/files/7eda6f1c-255e-4b2f-b1c8-5657d9aa415c.png"
-                  alt="Gaming PC"
-                  className="relative w-full rounded-xl"
-                />
-              </div>
             </div>
           </Card>
         </div>
@@ -395,13 +387,13 @@ const Index = () => {
                     borderRadius: '8px',
                     boxSizing: 'border-box'
                   }}
-                  src="https://yandex.ru/maps-reviews-widget/1279007835?comments"
+                  src="https://yandex.ru/maps-reviews-widget/105118454033?comments"
                   title="Отзывы на Яндекс Картах"
                 ></iframe>
               </div>
               <div className="mt-6 text-center">
                 <a 
-                  href="https://yandex.ru/maps/org/kompyuternaya_laboratoriya/1279007835/" 
+                  href="https://yandex.ru/profile/105118454033" 
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
