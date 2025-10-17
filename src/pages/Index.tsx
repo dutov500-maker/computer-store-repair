@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ConsultationForm from '@/components/ConsultationForm';
 import ServiceRequestForm from '@/components/ServiceRequestForm';
+import PCSelectionForm from '@/components/PCSelectionForm';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
@@ -358,7 +359,21 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="reviews" className="py-20 bg-gradient-to-b from-background to-card/30">
+      <section id="pc-selection" className="py-20 bg-gradient-to-b from-background to-card/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              Подбор компьютера
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+              Заполните анкету и мы поможем подобрать идеальный компьютер для ваших задач
+            </p>
+          </div>
+          <PCSelectionForm />
+        </div>
+      </section>
+
+      <section id="reviews" className="py-20 bg-gradient-to-b from-card/30 to-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
