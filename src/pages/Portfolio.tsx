@@ -95,15 +95,6 @@ const STATIC_PORTFOLIO = [
     price_range: "40000 ₽"
   },
   {
-    id: 11,
-    title: "Игровой ПК с водяным охлаждением",
-    description: "Кастомная система водяного охлаждения",
-    image_url: "https://cdn.poehali.dev/files/25848486-d127-48bf-bfdc-36a0c277e5c8.jpg",
-    category: "Премиум",
-    specs: "Процессор Intel Core i9-14900K • Видеокарта RTX 4090",
-    price_range: "500000 ₽"
-  },
-  {
     id: 12,
     title: "Компактная сборка Mini-ITX",
     description: "Мощный компьютер в компактном корпусе",
@@ -113,15 +104,6 @@ const STATIC_PORTFOLIO = [
     price_range: "110000 ₽"
   },
   {
-    id: 13,
-    title: "RGB монстр для ярких геймеров",
-    description: "Максимум RGB подсветки и производительности",
-    image_url: "https://cdn.poehali.dev/files/8f7c4b94-c6cc-4755-acd9-b8a2a84bd597.jpg",
-    category: "Игровой ПК",
-    specs: "Процессор Intel Core i7-14700KF • Видеокарта RTX 4070 Super",
-    price_range: "190000 ₽"
-  },
-  {
     id: 14,
     title: "Сборка для монтажа видео",
     description: "Оптимизированная система для Adobe Premiere Pro",
@@ -129,15 +111,6 @@ const STATIC_PORTFOLIO = [
     category: "Профессиональный",
     specs: "Процессор AMD Ryzen 9 5950X • Видеокарта RTX 4060",
     price_range: "160000 ₽"
-  },
-  {
-    id: 15,
-    title: "Киберпанк-стиль с неоновой подсветкой",
-    description: "Уникальный дизайн с кастомной подсветкой",
-    image_url: "https://cdn.poehali.dev/files/8f7c4b94-c6cc-4755-acd9-b8a2a84bd597.jpg",
-    category: "Премиум",
-    specs: "Процессор AMD Ryzen 7 9800X3D • Видеокарта RTX 4080 Super",
-    price_range: "320000 ₽"
   }
 ];
 
