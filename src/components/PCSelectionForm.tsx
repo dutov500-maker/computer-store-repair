@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Checkbox } from '@/components/ui/checkbox';
-import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
+import { StepIndicator } from './PCSelectionForm/StepIndicator';
+import { Step1Purpose } from './PCSelectionForm/Step1Purpose';
+import { Step2Budget } from './PCSelectionForm/Step2Budget';
+import { Step3Details } from './PCSelectionForm/Step3Details';
+import { Step4Contacts } from './PCSelectionForm/Step4Contacts';
 
 const PCSelectionForm = () => {
   const { toast } = useToast();
@@ -180,329 +179,57 @@ ${formData.additionalInfo ? `Дополнительно: ${formData.additionalIn
     setStep(step + 1);
   };
 
-  const gamingPurposes = purposes.filter(p => p.category === 'gaming');
-  const workPurposes = purposes.filter(p => p.category === 'work');
-  const otherPurposes = purposes.filter(p => p.category === 'other');
-
   return (
     <Card className="p-6 md:p-8 max-w-5xl mx-auto">
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          {[1, 2, 3, 4].map((s) => (
-            <div key={s} className="flex items-center flex-1">
-              <div
-                className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold transition-colors ${
-                  step >= s
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-muted-foreground'
-                }`}
-              >
-                {s}
-              </div>
-              {s < 4 && (
-                <div
-                  className={`flex-1 h-1 mx-1 md:mx-2 transition-colors ${
-                    step > s ? 'bg-primary' : 'bg-muted'
-                  }`}
-                />
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
+      <StepIndicator currentStep={step} totalSteps={4} />
 
       {step === 1 && (
-        <div className="space-y-8">
-          <div className="text-center">
-            <h3 className="text-2xl md:text-3xl font-heading font-bold mb-2 text-primary">
-              Для каких задач нужен компьютер?
-            </h3>
-          </div>
-
-          <div className="space-y-6">
-            <div>
-              <h4 className="text-lg font-semibold mb-3 text-primary">Для игр</h4>
-              <div className="space-y-2">
-                {gamingPurposes.map((purpose) => (
-                  <div
-                    key={purpose.id}
-                    className={`flex items-center space-x-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                      formData.purpose.includes(purpose.id)
-                        ? 'border-primary bg-primary/5'
-                        : 'border-muted hover:border-primary/50'
-                    }`}
-                    onClick={() => handlePurposeToggle(purpose.id)}
-                  >
-                    <Checkbox
-                      checked={formData.purpose.includes(purpose.id)}
-                      onCheckedChange={() => handlePurposeToggle(purpose.id)}
-                    />
-                    <label className="text-sm flex-1 cursor-pointer">
-                      {purpose.label}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold mb-3 text-primary">Для работы</h4>
-              <div className="space-y-2">
-                {workPurposes.map((purpose) => (
-                  <div
-                    key={purpose.id}
-                    className={`flex items-center space-x-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                      formData.purpose.includes(purpose.id)
-                        ? 'border-primary bg-primary/5'
-                        : 'border-muted hover:border-primary/50'
-                    }`}
-                    onClick={() => handlePurposeToggle(purpose.id)}
-                  >
-                    <Checkbox
-                      checked={formData.purpose.includes(purpose.id)}
-                      onCheckedChange={() => handlePurposeToggle(purpose.id)}
-                    />
-                    <label className="text-sm flex-1 cursor-pointer">
-                      {purpose.label}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {otherPurposes.map((purpose) => (
-              <div
-                key={purpose.id}
-                className={`flex items-center space-x-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                  formData.purpose.includes(purpose.id)
-                    ? 'border-primary bg-primary/5'
-                    : 'border-muted hover:border-primary/50'
-                }`}
-                onClick={() => handlePurposeToggle(purpose.id)}
-              >
-                <Checkbox
-                  checked={formData.purpose.includes(purpose.id)}
-                  onCheckedChange={() => handlePurposeToggle(purpose.id)}
-                />
-                <label className="text-sm flex-1 cursor-pointer">
-                  {purpose.label}
-                </label>
-              </div>
-            ))}
-          </div>
-
-          <Button onClick={nextStep} className="w-full" size="lg">
-            Далее
-          </Button>
-        </div>
+        <Step1Purpose
+          purposes={purposes}
+          selectedPurposes={formData.purpose}
+          onPurposeToggle={handlePurposeToggle}
+          onNext={nextStep}
+        />
       )}
 
       {step === 2 && (
-        <div className="space-y-8">
-          <div className="text-center">
-            <h3 className="text-2xl md:text-3xl font-heading font-bold mb-2 text-primary">
-              Укажите ваш бюджет на ПК
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {budgetRanges.map((range) => (
-              <div
-                key={range.value}
-                className={`relative cursor-pointer rounded-xl overflow-hidden transition-all ${
-                  formData.budget === range.value
-                    ? 'ring-4 ring-primary scale-105'
-                    : 'hover:scale-102'
-                }`}
-                onClick={() => setFormData({ ...formData, budget: range.value })}
-              >
-                <div className="aspect-square relative">
-                  <img
-                    src={range.image}
-                    alt={range.label}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${range.color} opacity-40`} />
-                  <div className="absolute inset-0 flex items-end justify-center pb-4">
-                    <div className="text-center bg-background/90 backdrop-blur px-4 py-2 rounded-lg">
-                      <p className="text-lg font-bold">{range.label}</p>
-                    </div>
-                  </div>
-                  {formData.budget === range.value && (
-                    <div className="absolute top-2 right-2 bg-primary text-primary-foreground rounded-full p-1">
-                      <Icon name="Check" size={20} />
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex gap-3">
-            <Button onClick={() => setStep(1)} variant="outline" className="flex-1">
-              Назад
-            </Button>
-            <Button onClick={nextStep} className="flex-1">
-              Далее
-            </Button>
-          </div>
-        </div>
+        <Step2Budget
+          budgetRanges={budgetRanges}
+          selectedBudget={formData.budget}
+          onBudgetSelect={(budget) => setFormData(prev => ({ ...prev, budget }))}
+          onNext={nextStep}
+          onBack={() => setStep(step - 1)}
+        />
       )}
 
       {step === 3 && (
-        <div className="space-y-8">
-          <div className="text-center">
-            <h3 className="text-2xl md:text-3xl font-heading font-bold mb-2 text-primary">
-              Разрешение вашего монитора
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
-            {resolutions.map((res) => (
-              <div
-                key={res.value}
-                className={`p-6 rounded-xl border-2 cursor-pointer transition-all text-center ${
-                  formData.resolution === res.value
-                    ? 'border-primary bg-primary/5 scale-105'
-                    : 'border-muted hover:border-primary/50'
-                }`}
-                onClick={() => setFormData({ ...formData, resolution: res.value })}
-              >
-                <p className="font-bold text-lg">{res.label}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="space-y-4 max-w-2xl mx-auto">
-            <div className="text-center">
-              <h4 className="text-xl font-heading font-bold mb-4 text-primary">
-                Важен внешний вид компьютера?
-              </h4>
-              <div className="grid grid-cols-2 gap-4">
-                <div
-                  className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                    formData.hasMonitor === 'yes'
-                      ? 'border-primary bg-primary/5'
-                      : 'border-muted hover:border-primary/50'
-                  }`}
-                  onClick={() => setFormData({ ...formData, hasMonitor: 'yes' })}
-                >
-                  <p className="font-semibold">Да</p>
-                </div>
-                <div
-                  className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                    formData.hasMonitor === 'no'
-                      ? 'border-primary bg-primary/5'
-                      : 'border-muted hover:border-primary/50'
-                  }`}
-                  onClick={() => setFormData({ ...formData, hasMonitor: 'no' })}
-                >
-                  <p className="font-semibold">Нет</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <h4 className="text-xl font-heading font-bold mb-4 text-primary">
-                Когда планируете покупку?
-              </h4>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {['Сейчас', 'В течение 1-2 недель', 'В течение месяца', 'Через 1-2 месяца'].map((time) => (
-                  <div
-                    key={time}
-                    className={`p-3 rounded-xl border-2 cursor-pointer transition-all text-center ${
-                      formData.timing === time
-                        ? 'border-primary bg-primary/5'
-                        : 'border-muted hover:border-primary/50'
-                    }`}
-                    onClick={() => setFormData({ ...formData, timing: time })}
-                  >
-                    <p className="text-sm font-medium">{time}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="flex gap-3">
-            <Button onClick={() => setStep(2)} variant="outline" className="flex-1">
-              Назад
-            </Button>
-            <Button onClick={nextStep} className="flex-1">
-              Далее
-            </Button>
-          </div>
-        </div>
+        <Step3Details
+          resolutions={resolutions}
+          selectedResolution={formData.resolution}
+          hasMonitor={formData.hasMonitor}
+          timing={formData.timing}
+          additionalInfo={formData.additionalInfo}
+          onResolutionSelect={(resolution) => setFormData(prev => ({ ...prev, resolution }))}
+          onMonitorSelect={(hasMonitor) => setFormData(prev => ({ ...prev, hasMonitor }))}
+          onTimingChange={(timing) => setFormData(prev => ({ ...prev, timing }))}
+          onAdditionalInfoChange={(info) => setFormData(prev => ({ ...prev, additionalInfo: info }))}
+          onNext={nextStep}
+          onBack={() => setStep(step - 1)}
+        />
       )}
 
       {step === 4 && (
-        <div className="space-y-6">
-          <div className="text-center mb-6">
-            <h3 className="text-2xl md:text-3xl font-heading font-bold mb-2 text-primary">
-              Отправим информацию в WhatsApp
-            </h3>
-            <p className="text-muted-foreground">
-              Минимальная стоимость игрового компьютера 70 000 руб.
-            </p>
-          </div>
-
-          <div className="space-y-4 max-w-xl mx-auto">
-            <div>
-              <Input
-                placeholder="Ваше имя"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              />
-            </div>
-
-            <div>
-              <Input
-                type="tel"
-                placeholder="Номер телефона (WhatsApp)"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              />
-            </div>
-
-            <div>
-              <Input
-                type="text"
-                placeholder="Ваш город"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              />
-            </div>
-
-            <div>
-              <Textarea
-                placeholder="Дополнительная информация (необязательно)"
-                value={formData.additionalInfo}
-                onChange={(e) => setFormData({ ...formData, additionalInfo: e.target.value })}
-                rows={3}
-              />
-            </div>
-
-            <div className="flex items-start space-x-2 pt-2">
-              <Checkbox id="agreement" defaultChecked />
-              <label htmlFor="agreement" className="text-xs text-muted-foreground leading-relaxed">
-                Нажимая кнопку Отправить вы даёте согласие на обработку персональных данных
-              </label>
-            </div>
-          </div>
-
-          <div className="flex gap-3 max-w-xl mx-auto">
-            <Button onClick={() => setStep(3)} variant="outline" className="flex-1">
-              Назад
-            </Button>
-            <Button
-              onClick={handleSubmit}
-              className="flex-1 bg-primary hover:bg-primary/90"
-              disabled={submitting}
-            >
-              {submitting ? 'Отправка...' : 'Отправить заявку'}
-            </Button>
-          </div>
-        </div>
+        <Step4Contacts
+          name={formData.name}
+          phone={formData.phone}
+          email={formData.email}
+          onNameChange={(name) => setFormData(prev => ({ ...prev, name }))}
+          onPhoneChange={(phone) => setFormData(prev => ({ ...prev, phone }))}
+          onEmailChange={(email) => setFormData(prev => ({ ...prev, email }))}
+          onSubmit={handleSubmit}
+          onBack={() => setStep(step - 1)}
+          submitting={submitting}
+        />
       )}
     </Card>
   );
