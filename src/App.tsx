@@ -15,6 +15,8 @@ import ProductDetail from "./pages/ProductDetail";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 import AboutPage from "./pages/AboutPage";
+import WarrantyPage from "./pages/WarrantyPage";
+import DeliveryPage from "./pages/DeliveryPage";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
@@ -39,6 +41,8 @@ const App = () => (
           <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/page/:slug" element={<AboutPage />} />
+          <Route path="/warranty" element={<WarrantyPage />} />
+          <Route path="/delivery" element={<DeliveryPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<Admin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

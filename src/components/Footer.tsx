@@ -41,12 +41,12 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/page/warranty" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/warranty" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Гарантия
                 </Link>
               </li>
               <li>
-                <Link to="/page/delivery" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/delivery" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Доставка и оплата
                 </Link>
               </li>
