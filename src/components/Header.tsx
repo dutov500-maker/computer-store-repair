@@ -93,6 +93,13 @@ const Header = () => {
               <span className="relative z-10">Отзывы</span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all"></span>
             </Link>
+            <Link 
+              to="/contact" 
+              className="text-sm font-medium hover:text-primary transition-all relative group"
+            >
+              <span className="relative z-10">Контакты</span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all"></span>
+            </Link>
           </nav>
 
           <div className="flex items-center gap-4">
