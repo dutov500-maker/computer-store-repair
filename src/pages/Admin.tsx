@@ -498,10 +498,16 @@ const Admin = () => {
                 <h1 className="text-2xl font-bold">Админ-панель</h1>
               </Link>
             </div>
-            <Button onClick={handleLogout} variant="outline">
-              <Icon name="LogOut" size={16} className="mr-2" />
-              Выйти
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button onClick={() => navigate('/admin/dashboard')} variant="default">
+                <Icon name="LayoutDashboard" size={18} className="mr-2" />
+                Dashboard
+              </Button>
+              <Button onClick={handleLogout} variant="outline">
+                <Icon name="LogOut" size={16} className="mr-2" />
+                Выйти
+              </Button>
+            </div>
           </div>
         </div>
       </header>

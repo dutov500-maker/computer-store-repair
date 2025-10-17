@@ -2,19 +2,27 @@ import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ServicesSection } from '@/components/HomePage/ServicesSection';
-import { initializeStorage, getServices } from '@/lib/localStorage';
+import funcUrls from '../../backend/func2url.json';
 
 const Services = () => {
   const [services, setServices] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    initializeStorage();
     fetchData();
   }, []);
 
-  const fetchData = () => {
-    const servicesData = getServices();
-    setServices(servicesData.filter((s: any) => s.is_active));
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${funcUrls.api}?type=services`);
+      const data = await response.json();
+      setServices(data);
+    } catch (error) {
+      console.error('Ошибка загрузки услуг:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const advantages = [

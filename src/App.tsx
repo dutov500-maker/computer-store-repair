@@ -14,6 +14,7 @@ import PCSelection from "./pages/PCSelection";
 import ProductDetail from "./pages/ProductDetail";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
 import AboutPage from "./pages/AboutPage";
 import WarrantyPage from "./pages/WarrantyPage";
 import DeliveryPage from "./pages/DeliveryPage";
@@ -44,6 +45,7 @@ const App = () => (
           <Route path="/warranty" element={<WarrantyPage />} />
           <Route path="/delivery" element={<DeliveryPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin" element={<Admin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

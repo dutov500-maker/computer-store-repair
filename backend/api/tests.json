@@ -1,0 +1,43 @@
+{
+  "tests": [
+    {
+      "name": "Get catalog items",
+      "method": "GET",
+      "path": "/?type=catalog",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "0": {
+          "id": "number",
+          "title": "string"
+        }
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get services",
+      "method": "GET",
+      "path": "/?type=services",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "0": {
+          "id": "number",
+          "title": "string"
+        }
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get repairs",
+      "method": "GET",
+      "path": "/?type=repairs",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "0": {
+          "id": "number",
+          "title": "string"
+        }
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
