@@ -98,9 +98,9 @@ const DEFAULT_PORTFOLIO = [
 
 const DEFAULT_SETTINGS = {
   company_name: 'Компьютерная Лаборатория',
-  phone: '+7 (999) 950-27-27',
+  phone: '+7 (905) 333-05-33',
   email: 'info@klab.ru',
-  address: 'Москва',
+  address: 'Волжский',
   work_hours: 'Пн-Пт: 9:00-18:00',
   about_text: 'Профессиональная сборка и ремонт компьютеров',
 };
