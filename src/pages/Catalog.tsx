@@ -19,7 +19,7 @@ const catalogData = [
       ram: '16GB DDR4',
       storage: '512GB SSD'
     },
-    image_url: 'https://storage.yandexcloud.net/poehali-static/dalle-gaming-pc-1.webp'
+    image_url: 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=800'
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const catalogData = [
       ram: '16GB DDR4',
       storage: '1TB SSD'
     },
-    image_url: 'https://storage.yandexcloud.net/poehali-static/dalle-gaming-pc-2.webp'
+    image_url: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800'
   },
   {
     id: 3,
@@ -47,7 +47,7 @@ const catalogData = [
       ram: '32GB DDR5',
       storage: '2TB NVMe SSD'
     },
-    image_url: 'https://storage.yandexcloud.net/poehali-static/dalle-gaming-pc-3.webp'
+    image_url: 'https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?w=800'
   }
 ];
 
