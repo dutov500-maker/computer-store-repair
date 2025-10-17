@@ -7,6 +7,12 @@ import PCSelectionForm from '@/components/PCSelectionForm';
 import CounterStat from '@/components/CounterStat';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
 
@@ -195,12 +201,14 @@ const Index = () => {
                 </div>
               </div>
               <div className="relative hidden md:block">
-                <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent rounded-3xl blur-2xl"></div>
-                <img 
-                  src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600&h=400&fit=crop"
-                  alt="Gaming Setup"
-                  className="relative rounded-2xl shadow-2xl w-full border border-primary/20"
-                />
+                <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 via-primary/20 to-transparent rounded-3xl blur-3xl animate-pulse"></div>
+                <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-primary/20">
+                  <img 
+                    src="https://cdn.poehali.dev/files/abecf990-0148-4af7-ace4-2c4056d6be5b.jpg"
+                    alt="Gaming Setup"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
             </div>
           </Card>
@@ -513,18 +521,108 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="blog" className="py-20">
+      <section id="faq" className="py-20 bg-gradient-to-b from-primary/5 to-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-              Частые вопросы
+          <div className="text-center mb-16 animate-slide-up">
+            <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
+              <span className="text-sm font-semibold text-primary">❓ FAQ</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+              Частые <span className="text-gradient">вопросы</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Ответы на популярные вопросы наших клиентов
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              Ответы на популярные вопросы о сборке компьютеров
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto space-y-4">
+          <div className="max-w-3xl mx-auto">
+            <Card className="p-6 md:p-8 gradient-card border-primary/20 shadow-xl">
+              <Accordion type="single" collapsible className="w-full space-y-4">
+                <AccordionItem value="item-1" className="border-border">
+                  <AccordionTrigger className="text-left text-lg font-semibold hover:text-primary">
+                    Какие гарантии на собранный компьютер?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed">
+                    Мы предоставляем гарантию до 3 лет на все комплектующие. Бесплатный ремонт и техническая поддержка в течение всего гарантийного срока. Работаем только с официальными поставщиками.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-2" className="border-border">
+                  <AccordionTrigger className="text-left text-lg font-semibold hover:text-primary">
+                    Как долго собирается компьютер?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed">
+                    Стандартная сборка занимает 1-3 рабочих дня. Если все комплектующие есть в наличии - можем собрать за 1 день. При необходимости заказа редких компонентов срок может увеличиться до 5-7 дней.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-3" className="border-border">
+                  <AccordionTrigger className="text-left text-lg font-semibold hover:text-primary">
+                    Можно ли изменить комплектацию готовой сборки?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed">
+                    Да, абсолютно! Все наши сборки можно кастомизировать под ваши задачи и бюджет. Мы поможем подобрать оптимальные комплектующие с учётом ваших пожеланий.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-4" className="border-border">
+                  <AccordionTrigger className="text-left text-lg font-semibold hover:text-primary">
+                    Есть ли доставка в другие города?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed">
+                    Да, доставляем по всей России. Бесплатная доставка при заказе от 50 000 ₽. Надёжно упаковываем каждый компьютер для безопасной транспортировки.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-5" className="border-border">
+                  <AccordionTrigger className="text-left text-lg font-semibold hover:text-primary">
+                    Устанавливаете ли вы Windows и программы?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed">
+                    Да, устанавливаем лицензионную Windows, все необходимые драйверы и базовый набор программ. Также можем установить специализированное ПО по вашему запросу.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-6" className="border-border">
+                  <AccordionTrigger className="text-left text-lg font-semibold hover:text-primary">
+                    Можно ли посмотреть сборку перед покупкой?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed">
+                    Конечно! Вы можете приехать к нам в мастерскую, посмотреть готовые сборки, протестировать компьютер и задать любые вопросы нашим специалистам. Предварительно согласуйте визит по телефону.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-7" className="border-border">
+                  <AccordionTrigger className="text-left text-lg font-semibold hover:text-primary">
+                    Работаете ли вы с юридическими лицами?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed">
+                    Да, работаем как с физическими, так и с юридическими лицами. Предоставляем все необходимые документы, работаем по договору, возможна оплата по безналичному расчёту.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </Card>
+
+            <div className="mt-12 text-center">
+              <p className="text-muted-foreground mb-6 text-lg">
+                Не нашли ответ на свой вопрос?
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://t.me/+79950272707" target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" className="bg-[#0088cc] hover:bg-[#0088cc]/90 text-white shadow-lg">
+                    <Icon name="Send" className="mr-2" size={20} />
+                    Задать вопрос в Telegram
+                  </Button>
+                </a>
+                <a href="https://wa.me/79950272707" target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" className="bg-[#25D366] hover:bg-[#25D366]/90 text-white shadow-lg">
+                    <Icon name="MessageCircle" className="mr-2" size={20} />
+                    Написать в WhatsApp
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </div>
             {[
               {
                 question: 'Какие гарантии вы предоставляете?',

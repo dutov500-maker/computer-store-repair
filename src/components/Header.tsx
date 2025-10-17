@@ -54,13 +54,16 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-4">
-            <a href={`tel:${settings?.phone || '+79950272707'}`} className="hidden lg:flex items-center gap-2 text-sm font-medium">
+            <a href={`tel:${settings?.phone || '+79950272707'}`} className="hidden lg:flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
               <Icon name="Phone" size={18} />
               {settings?.phone || '+7 995 027 27 07'}
             </a>
-            <Button size="sm" className="bg-primary hover:bg-primary/90">
-              <Icon name="MessageCircle" size={18} />
-            </Button>
+            <a href="https://wa.me/79950272707" target="_blank" rel="noopener noreferrer">
+              <Button size="sm" className="bg-[#25D366] hover:bg-[#25D366]/90 text-white shadow-md hover:shadow-lg transition-all">
+                <Icon name="MessageCircle" size={18} className="mr-2" />
+                <span className="hidden sm:inline">Написать</span>
+              </Button>
+            </a>
           </div>
         </div>
       </div>
