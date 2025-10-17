@@ -202,7 +202,7 @@ const Admin = () => {
 
   const loadCatalog = async () => {
     try {
-      const response = await fetch(funcUrls['admin-catalog']);
+      const response = await fetch(`${funcUrls.api}?type=catalog`);
       if (response.ok) {
         const data = await response.json();
         setCatalog(data || []);
@@ -312,7 +312,7 @@ const Admin = () => {
         is_active: true,
       };
       
-      const response = await fetch(funcUrls['admin-catalog'], {
+      const response = await fetch(`${funcUrls.api}?type=catalog&action=create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newItem)
@@ -331,8 +331,8 @@ const Admin = () => {
 
   const handleUpdateCatalogItem = async (item: CatalogItem) => {
     try {
-      const response = await fetch(funcUrls['admin-catalog'], {
-        method: 'PUT',
+      const response = await fetch(`${funcUrls.api}?type=catalog&action=update&id=${item.id}`, {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(item)
       });
@@ -351,8 +351,8 @@ const Admin = () => {
   const handleDeleteCatalogItem = async (id: number) => {
     if (confirm('Удалить компьютер?')) {
       try {
-        const response = await fetch(`${funcUrls['admin-catalog']}?id=${id}`, {
-          method: 'DELETE'
+        const response = await fetch(`${funcUrls.api}?type=catalog&action=delete&id=${id}`, {
+          method: 'POST'
         });
         
         if (response.ok) {

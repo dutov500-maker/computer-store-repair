@@ -42,9 +42,20 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     data_type = query_params.get('type', 'catalog')
     action = query_params.get('action', 'list')
     
-    conn = psycopg2.connect(dsn)
-    conn.autocommit = True
-    cursor = conn.cursor()
+    try:
+        conn = psycopg2.connect(dsn)
+        conn.autocommit = True
+        cursor = conn.cursor()
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            'isBase64Encoded': False,
+            'body': json.dumps({'error': f'Database connection failed: {str(e)}'})
+        }
     
     if method == 'POST' and data_type == 'catalog':
         try:
@@ -52,19 +63,19 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 body_data = json.loads(event.get('body', '{}'))
                 specs = body_data.get('specs', {})
                 
-                cursor.execute("""
+                title = body_data.get('title', '').replace("'", "''")
+                description = body_data.get('description', '').replace("'", "''")
+                price = body_data.get('price', 0)
+                resolution = body_data.get('resolution', 'Full HD').replace("'", "''")
+                specs_json = json.dumps(specs).replace("'", "''")
+                image_url = body_data.get('image_url', '').replace("'", "''")
+                
+                cursor.execute(f"""
                     INSERT INTO catalog 
                     (title, description, price, resolution, specs, image_url, is_active)
-                    VALUES (%s, %s, %s, %s, %s, %s, true)
+                    VALUES ('{title}', '{description}', {price}, '{resolution}', '{specs_json}', '{image_url}', true)
                     RETURNING id
-                """, (
-                    body_data.get('title'),
-                    body_data.get('description'),
-                    body_data.get('price'),
-                    body_data.get('resolution', 'Full HD'),
-                    json.dumps(specs),
-                    body_data.get('image_url')
-                ))
+                """)
                 
                 new_id = cursor.fetchone()[0]
                 cursor.close()
@@ -85,20 +96,19 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 body_data = json.loads(event.get('body', '{}'))
                 specs = body_data.get('specs', {})
                 
-                cursor.execute("""
+                title = body_data.get('title', '').replace("'", "''")
+                description = body_data.get('description', '').replace("'", "''")
+                price = body_data.get('price', 0)
+                resolution = body_data.get('resolution', 'Full HD').replace("'", "''")
+                specs_json = json.dumps(specs).replace("'", "''")
+                image_url = body_data.get('image_url', '').replace("'", "''")
+                
+                cursor.execute(f"""
                     UPDATE catalog 
-                    SET title = %s, description = %s, price = %s, resolution = %s,
-                        specs = %s, image_url = %s
-                    WHERE id = %s
-                """, (
-                    body_data.get('title'),
-                    body_data.get('description'),
-                    body_data.get('price'),
-                    body_data.get('resolution'),
-                    json.dumps(specs),
-                    body_data.get('image_url'),
-                    item_id
-                ))
+                    SET title = '{title}', description = '{description}', price = {price}, 
+                        resolution = '{resolution}', specs = '{specs_json}', image_url = '{image_url}'
+                    WHERE id = {item_id}
+                """)
                 
                 cursor.close()
                 conn.close()
@@ -116,7 +126,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             elif action == 'delete':
                 item_id = query_params.get('id')
                 
-                cursor.execute("UPDATE catalog SET is_active = false WHERE id = %s", (item_id,))
+                cursor.execute(f"UPDATE catalog SET is_active = false WHERE id = {item_id}")
                 
                 cursor.close()
                 conn.close()
@@ -148,20 +158,22 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             if action == 'create':
                 body_data = json.loads(event.get('body', '{}'))
                 
-                cursor.execute("""
+                title = body_data.get('title', '').replace("'", "''")
+                description = body_data.get('description', '').replace("'", "''")
+                image_url = body_data.get('image_url', '').replace("'", "''")
+                category = body_data.get('category', 'Игровой ПК').replace("'", "''")
+                specs = body_data.get('specs', '').replace("'", "''")
+                price_range = body_data.get('price_range', '').replace("'", "''")
+                completion_date = body_data.get('completion_date', 'NULL')
+                if completion_date != 'NULL':
+                    completion_date = f"'{completion_date}'"
+                
+                cursor.execute(f"""
                     INSERT INTO portfolio_items 
                     (title, description, image_url, category, specs, price_range, completion_date, is_active)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, true)
+                    VALUES ('{title}', '{description}', '{image_url}', '{category}', '{specs}', '{price_range}', {completion_date}, true)
                     RETURNING id
-                """, (
-                    body_data.get('title'),
-                    body_data.get('description'),
-                    body_data.get('image_url'),
-                    body_data.get('category', 'Игровой ПК'),
-                    body_data.get('specs'),
-                    body_data.get('price_range'),
-                    body_data.get('completion_date') or None
-                ))
+                """)
                 
                 new_id = cursor.fetchone()[0]
                 cursor.close()
@@ -181,21 +193,23 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 item_id = query_params.get('id')
                 body_data = json.loads(event.get('body', '{}'))
                 
-                cursor.execute("""
+                title = body_data.get('title', '').replace("'", "''")
+                description = body_data.get('description', '').replace("'", "''")
+                image_url = body_data.get('image_url', '').replace("'", "''")
+                category = body_data.get('category', '').replace("'", "''")
+                specs = body_data.get('specs', '').replace("'", "''")
+                price_range = body_data.get('price_range', '').replace("'", "''")
+                completion_date = body_data.get('completion_date', 'NULL')
+                if completion_date != 'NULL':
+                    completion_date = f"'{completion_date}'"
+                
+                cursor.execute(f"""
                     UPDATE portfolio_items 
-                    SET title = %s, description = %s, image_url = %s, category = %s,
-                        specs = %s, price_range = %s, completion_date = %s
-                    WHERE id = %s
-                """, (
-                    body_data.get('title'),
-                    body_data.get('description'),
-                    body_data.get('image_url'),
-                    body_data.get('category'),
-                    body_data.get('specs'),
-                    body_data.get('price_range'),
-                    body_data.get('completion_date') or None,
-                    item_id
-                ))
+                    SET title = '{title}', description = '{description}', image_url = '{image_url}', 
+                        category = '{category}', specs = '{specs}', price_range = '{price_range}', 
+                        completion_date = {completion_date}
+                    WHERE id = {item_id}
+                """)
                 
                 cursor.close()
                 conn.close()
@@ -213,7 +227,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             elif action == 'delete':
                 item_id = query_params.get('id')
                 
-                cursor.execute("UPDATE portfolio_items SET is_active = false WHERE id = %s", (item_id,))
+                cursor.execute(f"UPDATE portfolio_items SET is_active = false WHERE id = {item_id}")
                 
                 cursor.close()
                 conn.close()

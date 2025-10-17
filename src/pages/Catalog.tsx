@@ -19,7 +19,7 @@ const Catalog = () => {
   const fetchCatalog = async () => {
     try {
       setLoading(true);
-      const response = await fetch(funcUrls.catalog);
+      const response = await fetch(`${funcUrls.api}?type=catalog`);
       
       if (!response.ok) {
         throw new Error('Ошибка загрузки каталога');

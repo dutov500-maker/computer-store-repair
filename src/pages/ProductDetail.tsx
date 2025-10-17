@@ -42,7 +42,7 @@ const ProductDetail = () => {
   const fetchProduct = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${funcUrls.catalog}?id=${id}`);
+      const response = await fetch(`${funcUrls.api}?type=catalog&id=${id}`);
       
       if (!response.ok) {
         throw new Error('Товар не найден');
