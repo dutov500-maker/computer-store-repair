@@ -65,7 +65,7 @@ Intel и AMD предлагают отличные решения для игр.
     category: 'Гайды',
     date: '15 октября 2024',
     readTime: '5 мин',
-    image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=1200&q=80',
+    image: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/e867504e-ea4d-43fb-b89f-6d56f5c4674b.jpg',
     icon: 'Cpu'
   },
   {
@@ -150,7 +150,7 @@ RTX 4070 на 35% быстрее в играх с RT благодаря боль
     category: 'Обзоры',
     date: '12 октября 2024',
     readTime: '7 мин',
-    image: 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=1200&q=80',
+    image: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/62a35dd8-2e91-48de-9634-507c602470a0.jpg',
     icon: 'Sparkles'
   },
   {
@@ -272,7 +272,7 @@ RTX 4070 на 35% быстрее в играх с RT благодаря боль
     category: 'Сборки',
     date: '8 октября 2024',
     readTime: '10 мин',
-    image: 'https://images.unsplash.com/photo-1587202372583-49330a15584d?w=1200&q=80',
+    image: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/e101c528-ba74-4da4-87b5-a003d4a18478.jpg',
     icon: 'Layers'
   },
   {
@@ -406,7 +406,7 @@ RTX 4070 на 35% быстрее в играх с RT благодаря боль
     category: 'Советы',
     date: '5 октября 2024',
     readTime: '8 мин',
-    image: 'https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=1200&q=80',
+    image: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/cb9c78e4-74d7-4e80-a242-8865a839178f.jpg',
     icon: 'Thermometer'
   },
   {
@@ -612,7 +612,7 @@ RTX 4070 на 35% быстрее в играх с RT благодаря боль
     category: 'Гайды',
     date: '1 октября 2024',
     readTime: '9 мин',
-    image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=1200&q=80',
+    image: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/a5e70eeb-dc6a-41fb-a93a-0593f8d7c75b.jpg',
     icon: 'HardDrive'
   },
   {
@@ -867,7 +867,7 @@ A: Да, высокие планки могут не влезть под баш�
     category: 'Гайды',
     date: '28 сентября 2024',
     readTime: '10 мин',
-    image: 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=1200&q=80',
+    image: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/12235629-e8a1-42cc-b10f-987aecb03d89.jpg',
     icon: 'MemoryStick'
   }
 ];
