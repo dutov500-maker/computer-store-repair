@@ -24,6 +24,7 @@ const Admin = () => {
   const [requests, setRequests] = useState<ServiceRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState('');
+  const [isAuthorized, setIsAuthorized] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -31,6 +32,8 @@ const Admin = () => {
     const token = localStorage.getItem('admin_token');
     if (!token) {
       navigate('/admin/login');
+    } else {
+      setIsAuthorized(true);
     }
   }, [navigate]);
 
@@ -59,8 +62,10 @@ const Admin = () => {
   };
 
   useEffect(() => {
-    fetchRequests();
-  }, [filterStatus]);
+    if (isAuthorized) {
+      fetchRequests();
+    }
+  }, [filterStatus, isAuthorized]);
 
   const updateStatus = async (id: number, newStatus: string) => {
     try {
@@ -127,6 +132,10 @@ const Admin = () => {
       description: 'Вы вышли из панели администратора',
     });
   };
+
+  if (!isAuthorized) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-background">
