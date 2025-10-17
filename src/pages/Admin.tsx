@@ -31,24 +31,20 @@ import { CSS } from '@dnd-kit/utilities';
 import {
   initializeStorage,
   getServices,
-  getCatalog,
   getPortfolio,
   getRequests,
   getSettings,
   addService,
-  addCatalogItem,
   addPortfolioItem,
   updateService,
-  updateCatalogItem,
   updatePortfolioItem,
   updateRequest,
   deleteService,
-  deleteCatalogItem,
   deletePortfolioItem,
   saveServices,
-  saveCatalog,
   savePortfolio,
 } from '@/lib/localStorage';
+import funcUrls from '../../backend/func2url.json';
 
 interface ServiceRequest {
   id: number;
@@ -204,12 +200,20 @@ const Admin = () => {
     }
   };
 
-  const loadCatalog = () => {
+  const loadCatalog = async () => {
     try {
-      const data = getCatalog();
-      setCatalog(data || []);
+      const response = await fetch(funcUrls['admin-catalog']);
+      if (response.ok) {
+        const data = await response.json();
+        setCatalog(data || []);
+      }
     } catch (error) {
       console.error('Load catalog error:', error);
+      toast({
+        title: 'Ошибка',
+        description: 'Не удалось загрузить каталог',
+        variant: 'destructive'
+      });
     }
   };
 
@@ -291,7 +295,7 @@ const Admin = () => {
     }
   };
 
-  const handleCreateCatalogItem = () => {
+  const handleCreateCatalogItem = async () => {
     try {
       const newItem = {
         title: 'Новый компьютер',
@@ -308,30 +312,55 @@ const Admin = () => {
         is_active: true,
       };
       
-      addCatalogItem(newItem);
-      toast({ title: 'Успех', description: 'Компьютер добавлен' });
-      loadCatalog();
+      const response = await fetch(funcUrls['admin-catalog'], {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newItem)
+      });
+      
+      if (response.ok) {
+        toast({ title: 'Успех', description: 'Компьютер добавлен' });
+        loadCatalog();
+      } else {
+        throw new Error('Failed to create');
+      }
     } catch (error) {
       toast({ title: 'Ошибка', description: 'Не удалось добавить компьютер', variant: 'destructive' });
     }
   };
 
-  const handleUpdateCatalogItem = (item: CatalogItem) => {
+  const handleUpdateCatalogItem = async (item: CatalogItem) => {
     try {
-      updateCatalogItem(item.id, item);
-      toast({ title: 'Успех', description: 'Компьютер обновлен' });
-      loadCatalog();
+      const response = await fetch(funcUrls['admin-catalog'], {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item)
+      });
+      
+      if (response.ok) {
+        toast({ title: 'Успех', description: 'Компьютер обновлен' });
+        loadCatalog();
+      } else {
+        throw new Error('Failed to update');
+      }
     } catch (error) {
       toast({ title: 'Ошибка', description: 'Не удалось обновить компьютер', variant: 'destructive' });
     }
   };
 
-  const handleDeleteCatalogItem = (id: number) => {
+  const handleDeleteCatalogItem = async (id: number) => {
     if (confirm('Удалить компьютер?')) {
       try {
-        deleteCatalogItem(id);
-        toast({ title: 'Успех', description: 'Компьютер удален' });
-        loadCatalog();
+        const response = await fetch(`${funcUrls['admin-catalog']}?id=${id}`, {
+          method: 'DELETE'
+        });
+        
+        if (response.ok) {
+          toast({ title: 'Успех', description: 'Компьютер удален' });
+          loadCatalog();
+        } else {
+          throw new Error('Failed to delete');
+        }
       } catch (error) {
         toast({ title: 'Ошибка', description: 'Не удалось удалить компьютер', variant: 'destructive' });
       }
@@ -391,7 +420,7 @@ const Admin = () => {
     }
   };
 
-  const handleCatalogDragEnd = (event: DragEndEvent) => {
+  const handleCatalogDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
     if (over && active.id !== over.id) {
       const oldIndex = catalog.findIndex((c) => c.id === active.id);
@@ -399,8 +428,22 @@ const Admin = () => {
       const newCatalog = arrayMove(catalog, oldIndex, newIndex);
       const updatedCatalog = newCatalog.map((c, idx) => ({ ...c, display_order: idx }));
       setCatalog(updatedCatalog);
-      saveCatalog(updatedCatalog);
-      toast({ title: 'Порядок обновлен' });
+      
+      try {
+        await Promise.all(
+          updatedCatalog.map(item =>
+            fetch(funcUrls['admin-catalog'], {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(item)
+            })
+          )
+        );
+        toast({ title: 'Порядок обновлен' });
+      } catch (error) {
+        toast({ title: 'Ошибка', description: 'Не удалось обновить порядок', variant: 'destructive' });
+        loadCatalog();
+      }
     }
   };
 
