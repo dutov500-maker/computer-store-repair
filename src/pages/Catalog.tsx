@@ -6,35 +6,54 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
 
+const catalogData = [
+  {
+    id: 1,
+    title: 'Игровой ПК "Starter"',
+    description: 'Отличное решение для игр в Full HD',
+    price: 55000,
+    resolution: 'Full HD',
+    specs: {
+      cpu: 'Intel Core i5-12400F',
+      gpu: 'NVIDIA GTX 1660 Super',
+      ram: '16GB DDR4',
+      storage: '512GB SSD'
+    },
+    image_url: 'https://storage.yandexcloud.net/poehali-static/dalle-gaming-pc-1.webp'
+  },
+  {
+    id: 2,
+    title: 'Игровой ПК "Gamer"',
+    description: 'Мощная система для игр в 2K',
+    price: 85000,
+    resolution: '2K',
+    specs: {
+      cpu: 'AMD Ryzen 5 5600X',
+      gpu: 'NVIDIA RTX 3060 Ti',
+      ram: '16GB DDR4',
+      storage: '1TB SSD'
+    },
+    image_url: 'https://storage.yandexcloud.net/poehali-static/dalle-gaming-pc-2.webp'
+  },
+  {
+    id: 3,
+    title: 'Игровой ПК "Pro"',
+    description: 'Топовая конфигурация для 4K',
+    price: 150000,
+    resolution: '4K',
+    specs: {
+      cpu: 'Intel Core i7-13700K',
+      gpu: 'NVIDIA RTX 4070 Ti',
+      ram: '32GB DDR5',
+      storage: '2TB NVMe SSD'
+    },
+    image_url: 'https://storage.yandexcloud.net/poehali-static/dalle-gaming-pc-3.webp'
+  }
+];
+
 const Catalog = () => {
-  const [catalog, setCatalog] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchCatalog();
-  }, []);
-
-  const fetchCatalog = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=catalog', {
-        method: 'GET',
-        mode: 'cors'
-      });
-      if (!response.ok) {
-        console.error('Fetch error:', response.status, response.statusText);
-        return;
-      }
-      const data = await response.json();
-      if (data.catalog) {
-        setCatalog(data.catalog);
-      }
-    } catch (error) {
-      console.error('Fetch error:', error, 'for', 'https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=catalog');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [catalog] = useState<any[]>(catalogData);
+  const [loading] = useState(false);
 
   return (
     <div className="min-h-screen">
