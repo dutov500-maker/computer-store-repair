@@ -31,8 +31,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     try:
         if method == 'GET':
-            query_params = event.get('queryStringParameters', {})
-            resource = query_params.get('resource', 'settings')
+            query_params = event.get('queryStringParameters') or {}
+            resource = query_params.get('resource', 'settings') if query_params else 'settings'
             
             if resource == 'settings':
                 return get_settings(conn)
@@ -78,7 +78,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 return error_response('Invalid resource', 400)
         
         elif method == 'DELETE':
-            query_params = event.get('queryStringParameters', {})
+            query_params = event.get('queryStringParameters') or {}
             resource = query_params.get('resource')
             item_id = query_params.get('id')
             if not item_id:
