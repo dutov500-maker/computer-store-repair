@@ -5,6 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
+import { addRequest } from '@/lib/localStorage';
 
 interface ConsultationFormProps {
   trigger?: React.ReactNode;
@@ -18,47 +19,32 @@ const ConsultationForm = ({ trigger }: ConsultationFormProps) => {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await fetch('https://functions.poehali.dev/25621ff4-c4e5-4302-9356-43afeac8b2c5', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          phone,
-          message,
-          service_type: 'Консультация'
-        }),
+      addRequest({
+        name,
+        phone,
+        email: '',
+        message,
+        service_type: 'Консультация'
       });
 
-      const data = await response.json();
+      toast({
+        title: 'Заявка отправлена!',
+        description: 'Мы свяжемся с вами в ближайшее время.',
+      });
 
-      if (response.ok) {
-        toast({
-          title: 'Заявка отправлена!',
-          description: 'Мы свяжемся с вами в ближайшее время.',
-        });
-
-        setName('');
-        setPhone('');
-        setMessage('');
-        setOpen(false);
-      } else {
-        toast({
-          title: 'Ошибка',
-          description: data.error || 'Не удалось отправить заявку. Попробуйте позже.',
-          variant: 'destructive',
-        });
-      }
+      setName('');
+      setPhone('');
+      setMessage('');
+      setOpen(false);
     } catch (error) {
       toast({
         title: 'Ошибка',
-        description: 'Не удалось отправить заявку. Проверьте подключение к интернету.',
+        description: 'Не удалось отправить заявку. Попробуйте позже.',
         variant: 'destructive',
       });
     } finally {

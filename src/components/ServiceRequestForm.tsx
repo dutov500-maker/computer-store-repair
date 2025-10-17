@@ -33,7 +33,7 @@ const ServiceRequestForm = ({ trigger }: ServiceRequestFormProps) => {
     'Другое'
   ];
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
