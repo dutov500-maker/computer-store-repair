@@ -61,15 +61,8 @@ const Header = () => {
               Подбор ПК
             </Link>
             <Link 
-              to="/#services" 
+              to="/services" 
               className="text-sm font-medium hover:text-primary transition-colors"
-              onClick={(e) => {
-                const element = document.getElementById('services');
-                if (element) {
-                  e.preventDefault();
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
             >
               Услуги
             </Link>

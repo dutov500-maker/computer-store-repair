@@ -21,11 +21,12 @@ interface Advantage {
 interface ServicesSectionProps {
   services: Service[];
   advantages: Advantage[];
+  fullPage?: boolean;
 }
 
-export const ServicesSection = ({ services, advantages }: ServicesSectionProps) => {
+export const ServicesSection = ({ services, advantages, fullPage = false }: ServicesSectionProps) => {
   return (
-    <section id="services" className="py-20 bg-gradient-to-b from-background to-primary/5">
+    <section id="services" className={`py-20 bg-gradient-to-b from-background to-primary/5 ${fullPage ? 'min-h-screen' : ''}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-slide-up">
           <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
