@@ -84,11 +84,11 @@ const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <a 
-                  href={`tel:${settings?.phone || '+79950272707'}`}
+                  href="tel:+79950272707"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
                 >
                   <Icon name="Phone" size={16} />
-                  {settings?.phone || '+7 995 027 27 07'}
+                  +7 995 027 27 07
                 </a>
               </li>
               <li>
@@ -102,7 +102,7 @@ const Footer = () => {
               </li>
               <li className="text-sm text-muted-foreground flex items-start gap-2">
                 <Icon name="MapPin" size={16} className="mt-1" />
-                {settings?.address || 'Москва, ул. Примерная, д. 1'}
+                {settings?.address || 'г. Волжский, ул. Александрова д. 24а'}
               </li>
             </ul>
           </div>

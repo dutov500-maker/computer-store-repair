@@ -7,6 +7,7 @@ import { initializeStorage, getSettings } from '@/lib/localStorage';
 const Header = () => {
   const [settings, setSettings] = useState<any>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     initializeStorage();
@@ -20,10 +21,28 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [mobileMenuOpen]);
+
   const fetchSettings = () => {
     const data = getSettings();
     setSettings(data);
   };
+
+  const menuItems = [
+    { to: '/catalog', label: 'Каталог' },
+    { to: '/blog', label: 'Блог' },
+    { to: '/pc-selection', label: 'Подбор ПК' },
+    { to: '/services', label: 'Ремонт и Услуги' },
+    { to: '/portfolio', label: 'Портфолио' },
+    { to: '/reviews', label: 'Отзывы' },
+    { to: '/contact', label: 'Контакты' }
+  ];
 
   return (
     <header className={`bg-background/95 backdrop-blur-md border-b sticky top-0 z-50 transition-all duration-300 ${
@@ -103,20 +122,67 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-4">
-            <a href={`tel:${settings?.phone || '+79950272707'}`} className="hidden lg:flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
+            <a href="tel:+79950272707" className="hidden lg:flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
               <Icon name="Phone" size={18} />
-              {settings?.phone || '+7 995 027 27 07'}
+              +7 995 027 27 07
             </a>
-            <a href="https://wa.me/79950272707" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/79950272707" target="_blank" rel="noopener noreferrer" className="hidden sm:block">
               <Button size="sm" className="bg-[#25D366] hover:bg-[#25D366]/90 text-white shadow-md hover:shadow-xl hover:scale-105 transition-all relative overflow-hidden group">
                 <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
                 <Icon name="MessageCircle" size={18} className="mr-2 relative z-10" />
                 <span className="hidden sm:inline relative z-10">Написать</span>
               </Button>
             </a>
+            
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 hover:bg-secondary rounded-lg transition-colors"
+              aria-label="Меню"
+            >
+              <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} />
+            </button>
           </div>
         </div>
       </div>
+
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 top-16 bg-background z-40 md:hidden overflow-y-auto animate-fade-in">
+          <nav className="container mx-auto px-4 py-6">
+            <ul className="space-y-1">
+              {menuItems.map((item, index) => (
+                <li key={item.to} className="animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
+                  <Link
+                    to={item.to}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-4 py-3 rounded-lg hover:bg-secondary transition-colors font-medium"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 pt-6 border-t border-border space-y-3">
+              <a
+                href="tel:+79950272707"
+                className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary transition-colors"
+              >
+                <Icon name="Phone" size={20} className="text-primary" />
+                <span className="font-medium">+7 995 027 27 07</span>
+              </a>
+              <a
+                href="https://wa.me/79950272707"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-4 py-3 rounded-lg bg-[#25D366] text-white"
+              >
+                <Icon name="MessageCircle" size={20} />
+                <span className="font-medium">Написать в WhatsApp</span>
+              </a>
+            </div>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };

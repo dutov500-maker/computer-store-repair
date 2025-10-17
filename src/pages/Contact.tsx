@@ -14,8 +14,8 @@ const Contact = () => {
     {
       icon: 'Phone',
       title: 'Телефон',
-      content: '+7 (900) 123-45-67',
-      subtitle: 'Звоните с 9:00 до 20:00'
+      content: '+7 995 027 27 07',
+      subtitle: 'Звоните в рабочее время'
     },
     {
       icon: 'Mail',
@@ -26,16 +26,16 @@ const Contact = () => {
     {
       icon: 'Clock',
       title: 'Режим работы',
-      content: 'Пн-Пт: 9:00 - 20:00',
-      subtitle: 'Сб-Вс: 10:00 - 18:00'
+      content: 'Пн-Пт: 11:00 - 18:00',
+      subtitle: 'Сб: 11:00 - 16:00, Вс: выходной'
     }
   ];
 
   const socialLinks = [
-    { icon: 'MessageCircle', name: 'Telegram', color: 'hover:text-[#0088cc]' },
-    { icon: 'Phone', name: 'WhatsApp', color: 'hover:text-[#25D366]' },
-    { icon: 'Instagram', name: 'Instagram', color: 'hover:text-[#E4405F]' },
-    { icon: 'Send', name: 'VK', color: 'hover:text-[#0077FF]' }
+    { icon: 'Send', name: 'Telegram', color: 'hover:text-[#0088cc]', url: 'https://t.me/+79950272707' },
+    { icon: 'Phone', name: 'Звонок', color: 'hover:text-primary', url: 'tel:+79950272707' },
+    { icon: 'MessageCircle', name: 'WhatsApp', color: 'hover:text-[#25D366]', url: 'https://wa.me/79950272707' },
+    { icon: 'Users', name: 'VK', color: 'hover:text-[#0077FF]', url: 'https://vk.com/labkomp' }
   ];
 
   return (
@@ -166,13 +166,16 @@ const Contact = () => {
                 <p className="text-sm text-muted-foreground mb-3">Мы в социальных сетях:</p>
                 <div className="flex gap-3">
                   {socialLinks.map((social, index) => (
-                    <button
+                    <a
                       key={index}
+                      href={social.url}
+                      target={social.url.startsWith('http') ? '_blank' : undefined}
+                      rel={social.url.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className={`p-3 bg-secondary hover:bg-secondary/80 rounded-lg transition-all duration-300 hover:scale-110 ${social.color}`}
                       title={social.name}
                     >
                       <Icon name={social.icon} size={22} />
-                    </button>
+                    </a>
                   ))}
                 </div>
               </div>
