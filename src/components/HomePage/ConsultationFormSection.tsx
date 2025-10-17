@@ -16,7 +16,7 @@ export const ConsultationFormSection = () => {
             Наши специалисты ответят на все ваши вопросы и помогут подобрать идеальную конфигурацию
           </p>
         </div>
-        <div className="max-w-2xl mx-auto animate-scale-in">
+        <div className="flex justify-center animate-scale-in">
           <ConsultationForm />
         </div>
       </div>
