@@ -20,7 +20,7 @@ export const StatsSection = () => {
         </div>
         <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           <CounterStat end={500} suffix="+" label="Собранных ПК" duration={2.5} />
-          <CounterStat end={100} suffix="%" label="Довольных клиентов" duration={2} />
+          <CounterStat end={98} suffix="%" label="Довольных клиентов" duration={2} />
           <CounterStat end={3} suffix=" года" label="Гарантия" duration={1.5} />
         </div>
       </div>

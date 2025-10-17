@@ -52,16 +52,28 @@ const Header = () => {
             <Link to="/blog" className="text-sm font-medium hover:text-primary transition-colors">
               Блог
             </Link>
-            <a href="#pc-selection" className="text-sm font-medium hover:text-primary transition-colors">
+            <a href="/#pc-selection" className="text-sm font-medium hover:text-primary transition-colors" onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('pc-selection')?.scrollIntoView({ behavior: 'smooth' });
+            }}>
               Подбор ПК
             </a>
-            <a href="#services" className="text-sm font-medium hover:text-primary transition-colors">
+            <a href="/#services" className="text-sm font-medium hover:text-primary transition-colors" onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+            }}>
               Услуги
             </a>
-            <a href="#works" className="text-sm font-medium hover:text-primary transition-colors">
+            <a href="/#portfolio" className="text-sm font-medium hover:text-primary transition-colors" onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' });
+            }}>
               Работы
             </a>
-            <a href="#reviews" className="text-sm font-medium hover:text-primary transition-colors">
+            <a href="/#reviews" className="text-sm font-medium hover:text-primary transition-colors" onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' });
+            }}>
               Отзывы
             </a>
           </nav>
