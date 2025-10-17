@@ -10,8 +10,7 @@ const STATIC_PORTFOLIO = [
     description: "Мощная сборка для 4K-гейминга с RTX 4080",
     image_url: "https://cdn.poehali.dev/files/47a9814a-0246-4ac6-aa93-a35c472f606f.jpg",
     category: "Игровой ПК",
-    specs: "Процессор AMD Ryzen 7 7800X3D • Видеокарта RTX 4080",
-    price_range: "200000 ₽"
+    specs: "Процессор AMD Ryzen 7 7800X3D • Видеокарта RTX 4080"
   },
   {
     id: 2,
@@ -19,8 +18,7 @@ const STATIC_PORTFOLIO = [
     description: "Тихая и производительная сборка для игр и работы",
     image_url: "https://cdn.poehali.dev/files/1a84e611-89ea-4feb-9364-5ab4c578d6fe.jpg",
     category: "Игровой ПК",
-    specs: "Процессор AMD Ryzen 5 5600X • Видеокарта KFA2 GeForce RTX 5070 ROCK(X) OC White",
-    price_range: "120000 ₽"
+    specs: "Процессор AMD Ryzen 5 5600X • Видеокарта KFA2 GeForce RTX 5070 ROCK(X) OC White"
   },
   {
     id: 3,
@@ -28,8 +26,7 @@ const STATIC_PORTFOLIO = [
     description: "Топовая сборка с мощной видеокартой",
     image_url: "https://cdn.poehali.dev/files/022b9002-704a-432c-8640-8b6877016612.jpg",
     category: "Игровой ПК",
-    specs: "Процессор AMD Ryzen 7 7800X3D • Видеокарта MSI GeForce RTX 5070 Ti GAMING TRIO OC",
-    price_range: "250000 ₽"
+    specs: "Процессор AMD Ryzen 7 7800X3D • Видеокарта MSI GeForce RTX 5070 Ti GAMING TRIO OC"
   },
   {
     id: 4,
@@ -37,8 +34,7 @@ const STATIC_PORTFOLIO = [
     description: "Стильная белая сборка с RGB подсветкой",
     image_url: "https://cdn.poehali.dev/files/e2cab568-abdf-41af-9a9f-740013842310.jpg",
     category: "Игровой ПК",
-    specs: "Процессор AMD Ryzen 5 9600X • Видеокарта KFA2 GeForce RTX 5070 ROCK(X) OC White",
-    price_range: "150000 ₽"
+    specs: "Процессор AMD Ryzen 5 9600X • Видеокарта KFA2 GeForce RTX 5070 ROCK(X) OC White"
   },
   {
     id: 5,
@@ -46,8 +42,7 @@ const STATIC_PORTFOLIO = [
     description: "Высокопроизводительная система для соревнований",
     image_url: "https://cdn.poehali.dev/files/b7be6eda-2639-4f88-86a8-48abdbd07051.jpg",
     category: "Профессиональный",
-    specs: "Процессор AMD Ryzen 7 9800X3D • Видеокарта Palit GeForce RTX 5070 GamingPro OC",
-    price_range: "180000 ₽"
+    specs: "Процессор AMD Ryzen 7 9800X3D • Видеокарта Palit GeForce RTX 5070 GamingPro OC"
   },
   {
     id: 6,
@@ -55,8 +50,7 @@ const STATIC_PORTFOLIO = [
     description: "Премиальная сборка в легендарном корпусе",
     image_url: "https://cdn.poehali.dev/files/7ab77389-609a-4e35-8e36-e100031e6bae.jpg",
     category: "Премиум",
-    specs: "Процессор AMD Ryzen 7 7800X3D • Видеокарта Palit GeForce RTX 5070 Ti GameRock",
-    price_range: "220000 ₽"
+    specs: "Процессор AMD Ryzen 7 7800X3D • Видеокарта Palit GeForce RTX 5070 Ti GameRock"
   },
   {
     id: 7,
@@ -64,8 +58,7 @@ const STATIC_PORTFOLIO = [
     description: "Оптимальное решение для игр в Full HD",
     image_url: "https://cdn.poehali.dev/files/ae489047-44a3-4dde-932f-ed6a5199e352.jpg",
     category: "Игровой ПК",
-    specs: "Процессор Intel Core i5-12400F • Видеокарта RTX 3060",
-    price_range: "70000 ₽"
+    specs: "Процессор Intel Core i5-12400F • Видеокарта RTX 3060"
   },
   {
     id: 8,
@@ -73,8 +66,7 @@ const STATIC_PORTFOLIO = [
     description: "Мощный ПК для стриминга и контент-создания",
     image_url: "https://cdn.poehali.dev/files/56cb3b09-3249-4909-977d-b29d88f7b9a3.jpg",
     category: "Профессиональный",
-    specs: "Процессор AMD Ryzen 9 7950X • Видеокарта RTX 4070 Ti",
-    price_range: "280000 ₽"
+    specs: "Процессор AMD Ryzen 9 7950X • Видеокарта RTX 4070 Ti"
   },
   {
     id: 9,
@@ -82,8 +74,7 @@ const STATIC_PORTFOLIO = [
     description: "Профессиональная сборка для работы с 3D графикой",
     image_url: "https://cdn.poehali.dev/files/8a36ec5e-21fd-46cb-8e25-bc66341b14c9.jpg",
     category: "Профессиональный",
-    specs: "Процессор AMD Threadripper 3970X • Видеокарта RTX A5000",
-    price_range: "450000 ₽"
+    specs: "Процессор AMD Threadripper 3970X • Видеокарта RTX A5000"
   },
   {
     id: 10,
@@ -91,8 +82,7 @@ const STATIC_PORTFOLIO = [
     description: "Тихий и энергоэффективный компьютер для работы",
     image_url: "https://cdn.poehali.dev/files/c34a83da-49a6-4f23-be6f-9170e632efa2.jpg",
     category: "Офисный",
-    specs: "Процессор Intel Core i3-13100 • Встроенная графика",
-    price_range: "40000 ₽"
+    specs: "Процессор Intel Core i3-13100 • Встроенная графика"
   },
   {
     id: 12,
@@ -100,8 +90,7 @@ const STATIC_PORTFOLIO = [
     description: "Мощный компьютер в компактном корпусе",
     image_url: "https://cdn.poehali.dev/files/cd49eac6-95f0-48e5-a2e2-3987a99a7e44.jpg",
     category: "Игровой ПК",
-    specs: "Процессор AMD Ryzen 7 5800X3D • Видеокарта RTX 4060 Ti",
-    price_range: "110000 ₽"
+    specs: "Процессор AMD Ryzen 7 5800X3D • Видеокарта RTX 4060 Ti"
   },
   {
     id: 14,
@@ -109,8 +98,7 @@ const STATIC_PORTFOLIO = [
     description: "Оптимизированная система для Adobe Premiere Pro",
     image_url: "https://cdn.poehali.dev/files/8f7c4b94-c6cc-4755-acd9-b8a2a84bd597.jpg",
     category: "Профессиональный",
-    specs: "Процессор AMD Ryzen 9 5950X • Видеокарта RTX 4060",
-    price_range: "160000 ₽"
+    specs: "Процессор AMD Ryzen 9 5950X • Видеокарта RTX 4060"
   }
 ];
 
@@ -153,14 +141,9 @@ const Portfolio = () => {
                     {item.description}
                   </p>
                   {item.specs && (
-                    <p className="text-xs text-white/80 mb-2 drop-shadow">
+                    <p className="text-xs text-white/80 drop-shadow">
                       {item.specs}
                     </p>
-                  )}
-                  {item.price_range && (
-                    <div className="text-lg font-bold text-primary drop-shadow">
-                      {item.price_range}
-                    </div>
                   )}
                 </div>
               </div>
