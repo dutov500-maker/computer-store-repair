@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import ConsultationForm from '@/components/ConsultationForm';
 import ServiceRequestForm from '@/components/ServiceRequestForm';
@@ -7,6 +8,38 @@ import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
 
 const Index = () => {
+  const [services, setServices] = useState<any[]>([]);
+  const [settings, setSettings] = useState<any>(null);
+
+  useEffect(() => {
+    fetchServices();
+    fetchSettings();
+  }, []);
+
+  const fetchServices = async () => {
+    try {
+      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=services');
+      const data = await response.json();
+      if (response.ok && data.services) {
+        setServices(data.services.filter((s: any) => s.is_active));
+      }
+    } catch (error) {
+      console.error('Error loading services:', error);
+    }
+  };
+
+  const fetchSettings = async () => {
+    try {
+      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=settings');
+      const data = await response.json();
+      if (response.ok) {
+        setSettings(data.settings);
+      }
+    } catch (error) {
+      console.error('Error loading settings:', error);
+    }
+  };
+
   const advantages = [
     {
       icon: 'Package',
@@ -27,45 +60,6 @@ const Index = () => {
       icon: 'Wrench',
       title: 'Бесплатный ремонт',
       description: 'В течение гарантийного срока'
-    }
-  ];
-
-  const services = [
-    {
-      icon: 'Wrench',
-      title: 'Диагностика компьютера',
-      description: 'Полная диагностика системы и выявление неисправностей',
-      price: 'от 500 ₽'
-    },
-    {
-      icon: 'HardDrive',
-      title: 'Замена комплектующих',
-      description: 'Замена процессора, видеокарты, оперативной памяти и других компонентов',
-      price: 'от 1 000 ₽'
-    },
-    {
-      icon: 'Droplets',
-      title: 'Чистка от пыли',
-      description: 'Профессиональная чистка системы охлаждения и внутренних компонентов',
-      price: 'от 800 ₽'
-    },
-    {
-      icon: 'Wind',
-      title: 'Замена термопасты',
-      description: 'Замена термоинтерфейса процессора и видеокарты',
-      price: 'от 600 ₽'
-    },
-    {
-      icon: 'Laptop',
-      title: 'Ремонт ноутбуков',
-      description: 'Ремонт любой сложности: замена матрицы, клавиатуры, батареи',
-      price: 'от 1 500 ₽'
-    },
-    {
-      icon: 'Settings',
-      title: 'Установка ПО',
-      description: 'Установка Windows, драйверов, программ и настройка системы',
-      price: 'от 700 ₽'
     }
   ];
 
@@ -191,24 +185,38 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-            {services.map((service, index) => (
+            {services.length > 0 ? services.map((service, index) => (
               <Card 
-                key={index}
+                key={service.id || index}
                 className="p-6 hover:border-primary transition-all duration-300 hover:scale-105 animate-fade-in"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Icon name={service.icon as any} className="text-primary" size={24} />
+                    <Icon name={service.icon || 'Wrench'} className="text-primary" size={24} />
                   </div>
                   <div className="flex-1">
                     <h3 className="font-heading font-bold mb-2">{service.title}</h3>
                     <p className="text-sm text-muted-foreground mb-3">{service.description}</p>
                     <div className="text-primary font-bold">{service.price}</div>
+                    {service.features && service.features.length > 0 && (
+                      <ul className="mt-3 space-y-1">
+                        {service.features.map((feature: string, idx: number) => (
+                          <li key={idx} className="text-xs text-muted-foreground flex items-center gap-1">
+                            <Icon name="Check" size={12} className="text-primary" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               </Card>
-            ))}
+            )) : (
+              <div className="col-span-full text-center py-12 text-muted-foreground">
+                Загрузка услуг...
+              </div>
+            )}
           </div>
 
           <div className="text-center mt-8">
