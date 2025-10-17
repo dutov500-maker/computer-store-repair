@@ -20,16 +20,16 @@ const Header = () => {
             <Link to="/catalog" className="text-sm hover:text-primary transition-colors">
               Каталог
             </Link>
-            <a href="#" className="text-sm hover:text-primary transition-colors">
+            <a href="#selection" className="text-sm hover:text-primary transition-colors">
               Подбор компьютера
             </a>
-            <a href="#" className="text-sm hover:text-primary transition-colors">
+            <a href="#services" className="text-sm hover:text-primary transition-colors">
               Услуги
             </a>
-            <a href="#" className="text-sm hover:text-primary transition-colors">
+            <a href="#works" className="text-sm hover:text-primary transition-colors">
               Наши работы
             </a>
-            <a href="#" className="text-sm hover:text-primary transition-colors">
+            <a href="#blog" className="text-sm hover:text-primary transition-colors">
               Блог
             </a>
           </nav>

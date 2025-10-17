@@ -24,7 +24,6 @@ const Admin = () => {
   const [requests, setRequests] = useState<ServiceRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState('');
-  const [isAuthorized, setIsAuthorized] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -32,10 +31,18 @@ const Admin = () => {
     const token = localStorage.getItem('admin_token');
     if (!token) {
       navigate('/admin/login');
-    } else {
-      setIsAuthorized(true);
+      return;
     }
+    
+    fetchRequests();
   }, [navigate]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('admin_token');
+    if (token) {
+      fetchRequests();
+    }
+  }, [filterStatus]);
 
   const fetchRequests = async () => {
     setLoading(true);
@@ -49,8 +56,11 @@ const Admin = () => {
       
       if (response.ok) {
         setRequests(data.requests || []);
+      } else {
+        throw new Error('Failed to fetch');
       }
     } catch (error) {
+      console.error('Fetch error:', error);
       toast({
         title: 'Ошибка',
         description: 'Не удалось загрузить заявки',
@@ -60,12 +70,6 @@ const Admin = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    if (isAuthorized) {
-      fetchRequests();
-    }
-  }, [filterStatus, isAuthorized]);
 
   const updateStatus = async (id: number, newStatus: string) => {
     try {
@@ -85,8 +89,11 @@ const Admin = () => {
           description: 'Статус заявки успешно изменен',
         });
         fetchRequests();
+      } else {
+        throw new Error('Update failed');
       }
     } catch (error) {
+      console.error('Update error:', error);
       toast({
         title: 'Ошибка',
         description: 'Не удалось обновить статус',
@@ -132,10 +139,6 @@ const Admin = () => {
       description: 'Вы вышли из панели администратора',
     });
   };
-
-  if (!isAuthorized) {
-    return null;
-  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -244,36 +247,24 @@ const Admin = () => {
                 </div>
 
                 {request.message && (
-                  <div className="bg-muted p-4 rounded-lg mb-4">
-                    <p className="text-sm">{request.message}</p>
+                  <div className="bg-muted/30 p-4 rounded-lg mb-4">
+                    <p className="text-sm whitespace-pre-wrap">{request.message}</p>
                   </div>
                 )}
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
                   <span className="text-sm font-medium">Изменить статус:</span>
-                  <div className="flex gap-2">
-                    <Button 
-                      size="sm" 
-                      variant={request.status === 'in_progress' ? 'default' : 'outline'}
-                      onClick={() => updateStatus(request.id, 'in_progress')}
-                    >
-                      В работе
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant={request.status === 'completed' ? 'default' : 'outline'}
-                      onClick={() => updateStatus(request.id, 'completed')}
-                    >
-                      Завершена
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant={request.status === 'cancelled' ? 'destructive' : 'outline'}
-                      onClick={() => updateStatus(request.id, 'cancelled')}
-                    >
-                      Отменена
-                    </Button>
-                  </div>
+                  <Select value={request.status} onValueChange={(value) => updateStatus(request.id, value)}>
+                    <SelectTrigger className="w-48">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="new">Новая</SelectItem>
+                      <SelectItem value="in_progress">В работе</SelectItem>
+                      <SelectItem value="completed">Завершена</SelectItem>
+                      <SelectItem value="cancelled">Отменена</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </Card>
             ))}

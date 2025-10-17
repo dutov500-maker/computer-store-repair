@@ -110,7 +110,7 @@ const Index = () => {
             <div className="relative animate-scale-in">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl blur-3xl"></div>
               <img 
-                src="https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/b60f8712-bfd3-4260-86d2-608aea8266d6.jpg"
+                src="https://cdn.poehali.dev/files/abecf990-0148-4af7-ace4-2c4056d6be5b.jpg"
                 alt="Gaming PC"
                 className="relative rounded-2xl shadow-2xl w-full"
               />
@@ -119,7 +119,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-card/50">
+      <section id="selection" className="py-20 bg-card/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
@@ -179,7 +179,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20">
+      <section id="services" className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
@@ -236,7 +236,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-card/50">
+      <section id="works" className="py-20 bg-card/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
@@ -300,7 +300,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20">
+      <section id="blog" className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
