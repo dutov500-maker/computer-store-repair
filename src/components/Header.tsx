@@ -148,45 +148,49 @@ const Header = () => {
       {mobileMenuOpen && (
         <>
           <div 
-            className="fixed inset-0 bg-black/50 z-[60] md:hidden"
+            className="fixed inset-0 top-16 bg-black/70 z-[60] md:hidden backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed inset-0 top-16 bg-background z-[70] md:hidden overflow-y-auto">
-            <nav className="container mx-auto px-4 py-6">
-            <ul className="space-y-1">
-              {menuItems.map((item, index) => (
-                <li key={item.to} className="animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
-                  <Link
-                    to={item.to}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block px-4 py-3 rounded-lg hover:bg-secondary transition-colors font-medium"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="fixed left-0 right-0 top-16 bottom-0 bg-card z-[70] md:hidden overflow-y-auto shadow-2xl">
+            <nav className="px-4 py-6">
+              <ul className="space-y-2">
+                {menuItems.map((item, index) => (
+                  <li key={item.to} className="animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
+                    <Link
+                      to={item.to}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block px-4 py-4 rounded-xl hover:bg-primary/10 transition-all font-medium text-lg border border-transparent hover:border-primary/20"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
 
-            <div className="mt-6 pt-6 border-t border-border space-y-3">
-              <a
-                href="tel:+79950272707"
-                className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary transition-colors"
-              >
-                <Icon name="Phone" size={20} className="text-primary" />
-                <span className="font-medium">+7 995 027 27 07</span>
-              </a>
-              <a
-                href="https://wa.me/79950272707"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 px-4 py-3 rounded-lg bg-[#25D366] text-white"
-              >
-                <Icon name="MessageCircle" size={20} />
-                <span className="font-medium">Написать в WhatsApp</span>
-              </a>
-            </div>
-          </nav>
-        </div>
+              <div className="mt-8 pt-6 border-t border-border space-y-3">
+                <a
+                  href="tel:+79950272707"
+                  className="flex items-center gap-3 px-4 py-4 rounded-xl border border-border hover:border-primary transition-all"
+                >
+                  <div className="p-2 bg-primary/10 rounded-lg">
+                    <Icon name="Phone" size={20} className="text-primary" />
+                  </div>
+                  <span className="font-semibold">+7 995 027 27 07</span>
+                </a>
+                <a
+                  href="https://wa.me/79950272707"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-4 py-4 rounded-xl bg-[#25D366] text-white shadow-lg"
+                >
+                  <div className="p-2 bg-white/20 rounded-lg">
+                    <Icon name="MessageCircle" size={20} />
+                  </div>
+                  <span className="font-semibold">Написать в WhatsApp</span>
+                </a>
+              </div>
+            </nav>
+          </div>
         </>
       )}
     </header>
