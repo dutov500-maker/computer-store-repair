@@ -151,8 +151,8 @@ const Header = () => {
             className="fixed inset-0 bg-black/70 z-[9998] md:hidden backdrop-blur-sm animate-fade-in"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white dark:bg-zinc-900 z-[9999] md:hidden overflow-y-auto shadow-2xl animate-slide-in-from-right">
-            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-zinc-700">
+          <div className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white dark:bg-zinc-900 z-[9999] md:hidden shadow-2xl animate-slide-in-from-right flex flex-col">
+            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-zinc-700 flex-shrink-0">
               <span className="font-heading font-bold text-lg text-gray-900 dark:text-white">Меню</span>
               <button
                 onClick={() => setMobileMenuOpen(false)}
@@ -161,7 +161,7 @@ const Header = () => {
                 <Icon name="X" size={24} className="text-gray-900 dark:text-white" />
               </button>
             </div>
-            <nav className="px-4 py-6">
+            <nav className="px-4 py-6 flex-1 overflow-y-auto">
               <ul className="space-y-2">
                 {menuItems.map((item, index) => (
                   <li key={item.to} className="animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
