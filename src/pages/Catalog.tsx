@@ -5,21 +5,36 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
-import { initializeStorage, getCatalog } from '@/lib/localStorage';
+import funcUrls from '../../backend/func2url.json';
 
 const Catalog = () => {
   const [catalog, setCatalog] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    initializeStorage();
     fetchCatalog();
   }, []);
 
-  const fetchCatalog = () => {
-    const data = getCatalog();
-    setCatalog(data.filter((item: any) => item.is_active));
-    setLoading(false);
+  const fetchCatalog = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(funcUrls.catalog);
+      
+      if (!response.ok) {
+        throw new Error('Ошибка загрузки каталога');
+      }
+      
+      const data = await response.json();
+      setCatalog(data);
+      setError(null);
+    } catch (err) {
+      console.error('Ошибка загрузки каталога:', err);
+      setError('Не удалось загрузить каталог');
+      setCatalog([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -42,6 +57,12 @@ const Catalog = () => {
             <div className="text-center py-12">
               <Icon name="Loader2" className="animate-spin mx-auto mb-4" size={48} />
               <p className="text-muted-foreground">Загрузка...</p>
+            </div>
+          ) : error ? (
+            <div className="text-center py-12">
+              <Icon name="AlertCircle" className="mx-auto mb-4 text-destructive" size={64} />
+              <p className="text-muted-foreground mb-4">{error}</p>
+              <Button onClick={fetchCatalog}>Повторить</Button>
             </div>
           ) : catalog.length === 0 ? (
             <div className="text-center py-12">

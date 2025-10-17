@@ -9,7 +9,8 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
-import { initializeStorage, getCatalog, addRequest } from '@/lib/localStorage';
+import { addRequest } from '@/lib/localStorage';
+import funcUrls from '../../backend/func2url.json';
 
 interface CatalogItem {
   id: number;
@@ -38,13 +39,23 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id]);
 
-  const fetchProduct = () => {
-    setLoading(true);
-    initializeStorage();
-    const catalog = getCatalog();
-    const item = catalog.find((p: CatalogItem) => p.id === parseInt(id || '0'));
-    setProduct(item || null);
-    setLoading(false);
+  const fetchProduct = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${funcUrls.catalog}?id=${id}`);
+      
+      if (!response.ok) {
+        throw new Error('Товар не найден');
+      }
+      
+      const data = await response.json();
+      setProduct(data);
+    } catch (err) {
+      console.error('Ошибка загрузки товара:', err);
+      setProduct(null);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
