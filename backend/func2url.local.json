@@ -1,0 +1,5 @@
+{
+  "api": "http://localhost:3001/api",
+  "submit-request": "http://localhost:3001/submit-request",
+  "admin-requests": "http://localhost:3001/admin-requests"
+}

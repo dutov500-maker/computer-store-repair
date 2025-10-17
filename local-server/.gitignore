@@ -1,0 +1,17 @@
+# База данных SQLite
+database.db
+database.db-shm
+database.db-wal
+*.db
+*.db-journal
+
+# Резервные копии
+*.backup.db
+
+# Node modules
+node_modules/
+
+# Логи
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
