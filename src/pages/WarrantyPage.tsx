@@ -1,11 +1,22 @@
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import { Link } from 'react-router-dom';
 
 export default function WarrantyPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
+          <div className="mb-8 animate-fade-in">
+            <Link to="/">
+              <Button variant="outline" className="gap-2">
+                <Icon name="ArrowLeft" size={18} />
+                На главную
+              </Button>
+            </Link>
+          </div>
+          
           <div className="text-center mb-12 animate-fade-in">
             <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
               <span className="text-gradient">Гарантия</span>
