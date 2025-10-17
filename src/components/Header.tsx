@@ -151,7 +151,7 @@ const Header = () => {
             className="fixed inset-0 bg-black/70 z-[9998] md:hidden backdrop-blur-sm animate-fade-in"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed right-0 top-0 bottom-0 w-[85%] max-w-sm bg-white dark:bg-zinc-900 z-[9999] md:hidden overflow-y-auto shadow-2xl animate-slide-in-from-right">
+          <div className="fixed right-0 top-0 h-full w-[85%] max-w-sm bg-white dark:bg-zinc-900 z-[9999] md:hidden overflow-y-auto shadow-2xl animate-slide-in-from-right" style={{ height: '100vh', height: '100dvh' }}>
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-zinc-700">
               <span className="font-heading font-bold text-lg text-gray-900 dark:text-white">Меню</span>
               <button
