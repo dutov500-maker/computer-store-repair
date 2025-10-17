@@ -23,11 +23,3 @@ dist-ssr
 *.sln
 *.sw?
 builds
-
-# Local database
-local-server/database.db
-local-server/database.db-shm
-local-server/database.db-wal
-local-server/*.db
-local-server/*.backup.db
-local-server/node_modules

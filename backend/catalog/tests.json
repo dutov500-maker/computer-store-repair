@@ -1,0 +1,18 @@
+{
+  "tests": [
+    {
+      "name": "Get catalog items",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": [
+        {
+          "id": "number",
+          "title": "string",
+          "price": "number"
+        }
+      ],
+      "bodyMatcher": "partial"
+    }
+  ]
+}

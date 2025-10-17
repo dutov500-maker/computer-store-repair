@@ -2,27 +2,19 @@ import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { PortfolioSection } from '@/components/HomePage/PortfolioSection';
-import funcUrls from '../../backend/func2url.json';
+import { initializeStorage, getPortfolio } from '@/lib/localStorage';
 
 const Portfolio = () => {
   const [portfolio, setPortfolio] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    initializeStorage();
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(`${funcUrls.api}?type=portfolio`);
-      const data = await response.json();
-      setPortfolio(data);
-    } catch (error) {
-      console.error('Ошибка загрузки портфолио:', error);
-    } finally {
-      setLoading(false);
-    }
+  const fetchData = () => {
+    const portfolioData = getPortfolio();
+    setPortfolio(portfolioData.filter((p: any) => p.is_active));
   };
 
   return (
