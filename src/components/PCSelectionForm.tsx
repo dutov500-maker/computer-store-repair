@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { addRequest } from '@/lib/localStorage';
 import { StepIndicator } from './PCSelectionForm/StepIndicator';
 import { Step1Purpose } from './PCSelectionForm/Step1Purpose';
 import { Step2Budget } from './PCSelectionForm/Step2Budget';
@@ -80,7 +81,7 @@ const PCSelectionForm = () => {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (!formData.name || !formData.phone) {
       toast({
         title: 'Ошибка',
@@ -114,41 +115,33 @@ ${formData.additionalInfo ? `Дополнительно: ${formData.additionalIn
     `.trim();
 
     try {
-      const response = await fetch('https://functions.poehali.dev/25621ff4-c4e5-4302-9356-43afeac8b2c5', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          service_type: 'Подбор компьютера',
-          message
-        })
+      addRequest({
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        service_type: 'Подбор компьютера',
+        message
       });
 
-      if (response.ok) {
-        toast({
-          title: 'Заявка отправлена!',
-          description: 'Мы свяжемся с вами в ближайшее время'
-        });
-        
-        setFormData({
-          name: '',
-          phone: '',
-          email: '',
-          budget: '',
-          purpose: [],
-          resolution: '',
-          games: [],
-          programs: '',
-          hasMonitor: '',
-          timing: '',
-          additionalInfo: ''
-        });
-        setStep(1);
-      } else {
-        throw new Error('Failed');
-      }
+      toast({
+        title: 'Заявка отправлена!',
+        description: 'Мы свяжемся с вами в ближайшее время'
+      });
+      
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        budget: '',
+        purpose: [],
+        resolution: '',
+        games: [],
+        programs: '',
+        hasMonitor: '',
+        timing: '',
+        additionalInfo: ''
+      });
+      setStep(1);
     } catch (error) {
       toast({
         title: 'Ошибка',
