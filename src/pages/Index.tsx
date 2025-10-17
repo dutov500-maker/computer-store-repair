@@ -1,4 +1,5 @@
 import Header from '@/components/Header';
+import ConsultationForm from '@/components/ConsultationForm';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
@@ -43,9 +44,11 @@ const Index = () => {
                 Игровые компьютеры от 70 000 рублей
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8">
-                  Подобрать компьютер
-                </Button>
+                <ConsultationForm trigger={
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8">
+                    Подобрать компьютер
+                  </Button>
+                } />
                 <Link to="/catalog">
                   <Button size="lg" variant="outline" className="text-lg px-8">
                     Каталог
@@ -167,10 +170,7 @@ const Index = () => {
           <p className="text-lg text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
             Оставьте заявку, и наши специалисты помогут подобрать идеальную конфигурацию
           </p>
-          <Button size="lg" variant="secondary" className="text-lg px-8">
-            <Icon name="MessageCircle" size={20} />
-            Получить консультацию
-          </Button>
+          <ConsultationForm />
         </div>
       </section>
 
@@ -182,11 +182,20 @@ const Index = () => {
                 <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
                   <Icon name="Cpu" className="text-primary-foreground" size={24} />
                 </div>
-                <span className="text-xl font-heading font-bold">GURUPC</span>
+                <span className="text-xl font-heading font-bold">Компьютерная Лаборатория</span>
               </div>
               <p className="text-sm text-muted-foreground">
                 Профессиональная сборка игровых компьютеров и ноутбуков
               </p>
+              <a 
+                href="https://yandex.ru/profile/105118454033?lang=ru" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 mt-3 text-sm text-primary hover:text-primary/80 transition-colors"
+              >
+                <Icon name="MapPin" size={16} />
+                Мы на Яндекс.Картах
+              </a>
             </div>
             <div>
               <h4 className="font-heading font-bold mb-4">Навигация</h4>
@@ -219,7 +228,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-            © 2024 GURUPC. Все права защищены.
+            © 2024 Компьютерная Лаборатория. Все права защищены.
           </div>
         </div>
       </footer>

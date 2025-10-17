@@ -11,7 +11,7 @@ const Header = () => {
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
               <Icon name="Cpu" className="text-primary-foreground" size={24} />
             </div>
-            <span className="text-xl font-heading font-bold">GURUPC</span>
+            <span className="text-xl font-heading font-bold">Компьютерная Лаборатория</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">
