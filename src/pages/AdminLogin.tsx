@@ -12,44 +12,29 @@ const AdminLogin = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      const response = await fetch('https://functions.poehali.dev/35ca592c-b5e1-4da3-a6e6-da092b41633e', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ password })
-      });
+    // Простая локальная проверка пароля
+    const ADMIN_PASSWORD = 'admin123'; // Можно изменить на любой
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        localStorage.setItem('admin_token', data.token);
-        toast({
-          title: 'Вход выполнен',
-          description: 'Добро пожаловать в панель администратора',
-        });
-        navigate('/admin');
-      } else {
-        toast({
-          title: 'Ошибка входа',
-          description: 'Неверный пароль',
-          variant: 'destructive'
-        });
-      }
-    } catch (error) {
+    if (password === ADMIN_PASSWORD) {
+      localStorage.setItem('admin_token', 'local_admin_token');
       toast({
-        title: 'Ошибка',
-        description: 'Не удалось выполнить вход',
+        title: 'Вход выполнен',
+        description: 'Добро пожаловать в панель администратора',
+      });
+      navigate('/admin');
+    } else {
+      toast({
+        title: 'Ошибка входа',
+        description: 'Неверный пароль',
         variant: 'destructive'
       });
-    } finally {
-      setLoading(false);
     }
+
+    setLoading(false);
   };
 
   return (
