@@ -7,10 +7,12 @@ const Header = () => {
     <header className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <Icon name="Cpu" className="text-primary-foreground" size={24} />
-            </div>
+          <Link to="/" className="flex items-center gap-3">
+            <img 
+              src="https://cdn.poehali.dev/files/1258a3ce-944b-46de-88b7-5a629a1775c1.png" 
+              alt="КЛАБ"
+              className="h-10 w-auto"
+            />
             <span className="text-xl font-heading font-bold">Компьютерная Лаборатория</span>
           </Link>
 

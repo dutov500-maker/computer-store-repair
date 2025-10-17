@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -24,6 +25,14 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState('');
   const { toast } = useToast();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('admin_token');
+    if (!token) {
+      navigate('/admin/login');
+    }
+  }, [navigate]);
 
   const fetchRequests = async () => {
     setLoading(true);
@@ -110,6 +119,15 @@ const Admin = () => {
     });
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('admin_token');
+    navigate('/admin/login');
+    toast({
+      title: 'Выход выполнен',
+      description: 'Вы вышли из панели администратора',
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <header className="bg-card border-b border-border py-4">
@@ -124,10 +142,16 @@ const Admin = () => {
               </Link>
               <h1 className="text-2xl font-heading font-bold">Панель администратора</h1>
             </div>
-            <Button onClick={fetchRequests} variant="outline" size="sm">
-              <Icon name="RefreshCw" size={18} />
-              Обновить
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button onClick={fetchRequests} variant="outline" size="sm">
+                <Icon name="RefreshCw" size={18} />
+                Обновить
+              </Button>
+              <Button onClick={handleLogout} variant="ghost" size="sm">
+                <Icon name="LogOut" size={18} />
+                Выйти
+              </Button>
+            </div>
           </div>
         </div>
       </header>
