@@ -52,11 +52,11 @@ const Index = () => {
       <ParticlesBackground />
       <Header />
       <HeroSection />
+      <StatsSection />
       <ConsultationSection />
       <CatalogSection />
       <ServicesSection services={services} advantages={advantages} />
       <FAQSection />
-      <StatsSection />
       <ConsultationFormSection />
       <Footer />
     </div>
