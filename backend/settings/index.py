@@ -6,10 +6,10 @@ from psycopg2.extras import RealDictCursor
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Business: API для управления настройками сайта и услугами
+    Business: API для управления настройками сайта, услугами, каталогом и страницами
     Args: event - dict with httpMethod, body, queryStringParameters
           context - object with attributes: request_id, function_name
-    Returns: HTTP response dict with settings/services data
+    Returns: HTTP response dict with settings/services/catalog/pages data
     '''
     method: str = event.get('httpMethod', 'GET')
     
@@ -38,6 +38,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 return get_settings(conn)
             elif resource == 'services':
                 return get_services(conn)
+            elif resource == 'catalog':
+                return get_catalog(conn)
+            elif resource == 'page':
+                slug = query_params.get('slug')
+                return get_page(conn, slug)
             else:
                 return error_response('Invalid resource', 400)
         
@@ -49,19 +54,35 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 return update_settings(conn, body_data)
             elif resource == 'service':
                 return update_service(conn, body_data)
+            elif resource == 'catalog_item':
+                return update_catalog_item(conn, body_data)
+            elif resource == 'page':
+                return update_page(conn, body_data)
             else:
                 return error_response('Invalid resource', 400)
         
         elif method == 'POST':
             body_data = json.loads(event.get('body', '{}'))
-            return create_service(conn, body_data)
+            resource = body_data.get('resource')
+            if resource == 'service':
+                return create_service(conn, body_data)
+            elif resource == 'catalog_item':
+                return create_catalog_item(conn, body_data)
+            else:
+                return error_response('Invalid resource', 400)
         
         elif method == 'DELETE':
             query_params = event.get('queryStringParameters', {})
-            service_id = query_params.get('id')
-            if not service_id:
-                return error_response('Missing service ID', 400)
-            return delete_service(conn, int(service_id))
+            resource = query_params.get('resource')
+            item_id = query_params.get('id')
+            if not item_id:
+                return error_response('Missing ID', 400)
+            if resource == 'service':
+                return delete_service(conn, int(item_id))
+            elif resource == 'catalog_item':
+                return delete_catalog_item(conn, int(item_id))
+            else:
+                return error_response('Invalid resource', 400)
         
         return error_response('Method not allowed', 405)
     
@@ -209,6 +230,160 @@ def delete_service(conn, service_id: int) -> Dict[str, Any]:
             'Access-Control-Allow-Origin': '*'
         },
         'body': json.dumps({'success': True, 'message': 'Услуга удалена'}),
+        'isBase64Encoded': False
+    }
+
+
+def get_catalog(conn) -> Dict[str, Any]:
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    cursor.execute("""
+        SELECT id, title, description, price, resolution, specs, image_url, display_order, is_active
+        FROM catalog_items 
+        WHERE is_active = true
+        ORDER BY display_order, id
+    """)
+    items = cursor.fetchall()
+    cursor.close()
+    
+    return {
+        'statusCode': 200,
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        'body': json.dumps({'catalog': items}),
+        'isBase64Encoded': False
+    }
+
+
+def get_page(conn, slug: str) -> Dict[str, Any]:
+    if not slug:
+        return error_response('Missing page slug', 400)
+    
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    cursor.execute("SELECT slug, title, content, meta_description FROM pages WHERE slug = %s", (slug,))
+    page = cursor.fetchone()
+    cursor.close()
+    
+    if not page:
+        return error_response('Page not found', 404)
+    
+    return {
+        'statusCode': 200,
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        'body': json.dumps({'page': page}),
+        'isBase64Encoded': False
+    }
+
+
+def update_catalog_item(conn, data: Dict[str, Any]) -> Dict[str, Any]:
+    item_id = data.get('id')
+    title = data.get('title')
+    description = data.get('description')
+    price = data.get('price')
+    resolution = data.get('resolution')
+    specs = data.get('specs', {})
+    image_url = data.get('image_url')
+    display_order = data.get('display_order', 0)
+    is_active = data.get('is_active', True)
+    
+    cursor = conn.cursor()
+    cursor.execute("""
+        UPDATE catalog_items 
+        SET title = %s, description = %s, price = %s, resolution = %s, 
+            specs = %s, image_url = %s, display_order = %s, is_active = %s, 
+            updated_at = CURRENT_TIMESTAMP
+        WHERE id = %s
+    """, (title, description, price, resolution, json.dumps(specs), image_url, display_order, is_active, item_id))
+    
+    conn.commit()
+    cursor.close()
+    
+    return {
+        'statusCode': 200,
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        'body': json.dumps({'success': True, 'message': 'Товар обновлен'}),
+        'isBase64Encoded': False
+    }
+
+
+def update_page(conn, data: Dict[str, Any]) -> Dict[str, Any]:
+    slug = data.get('slug')
+    title = data.get('title')
+    content = data.get('content')
+    meta_description = data.get('meta_description')
+    
+    cursor = conn.cursor()
+    cursor.execute("""
+        UPDATE pages 
+        SET title = %s, content = %s, meta_description = %s, updated_at = CURRENT_TIMESTAMP
+        WHERE slug = %s
+    """, (title, content, meta_description, slug))
+    
+    conn.commit()
+    cursor.close()
+    
+    return {
+        'statusCode': 200,
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        'body': json.dumps({'success': True, 'message': 'Страница обновлена'}),
+        'isBase64Encoded': False
+    }
+
+
+def create_catalog_item(conn, data: Dict[str, Any]) -> Dict[str, Any]:
+    title = data.get('title')
+    description = data.get('description', '')
+    price = data.get('price', 0)
+    resolution = data.get('resolution', 'FHD')
+    specs = data.get('specs', {})
+    image_url = data.get('image_url')
+    display_order = data.get('display_order', 0)
+    
+    cursor = conn.cursor()
+    cursor.execute("""
+        INSERT INTO catalog_items (title, description, price, resolution, specs, image_url, display_order)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
+        RETURNING id
+    """, (title, description, price, resolution, json.dumps(specs), image_url, display_order))
+    
+    new_id = cursor.fetchone()[0]
+    conn.commit()
+    cursor.close()
+    
+    return {
+        'statusCode': 201,
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        'body': json.dumps({'success': True, 'id': new_id, 'message': 'Товар создан'}),
+        'isBase64Encoded': False
+    }
+
+
+def delete_catalog_item(conn, item_id: int) -> Dict[str, Any]:
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM catalog_items WHERE id = %s", (item_id,))
+    conn.commit()
+    cursor.close()
+    
+    return {
+        'statusCode': 200,
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        'body': json.dumps({'success': True, 'message': 'Товар удален'}),
         'isBase64Encoded': False
     }
 

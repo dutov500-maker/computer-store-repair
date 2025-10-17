@@ -44,9 +44,22 @@ interface Settings {
   about_text: string;
 }
 
+interface CatalogItem {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  resolution: string;
+  specs: any;
+  image_url?: string;
+  display_order: number;
+  is_active: boolean;
+}
+
 const Admin = () => {
   const [requests, setRequests] = useState<ServiceRequest[]>([]);
   const [services, setServices] = useState<Service[]>([]);
+  const [catalog, setCatalog] = useState<CatalogItem[]>([]);
   const [settings, setSettings] = useState<Settings | null>(null);
   const [loading, setLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState('all');
@@ -63,6 +76,7 @@ const Admin = () => {
     
     fetchRequests();
     fetchServices();
+    fetchCatalog();
     fetchSettings();
   }, [navigate]);
 
@@ -109,6 +123,18 @@ const Admin = () => {
       }
     } catch (error) {
       console.error('Fetch services error:', error);
+    }
+  };
+
+  const fetchCatalog = async () => {
+    try {
+      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=catalog');
+      const data = await response.json();
+      if (response.ok) {
+        setCatalog(data.catalog || []);
+      }
+    } catch (error) {
+      console.error('Fetch catalog error:', error);
     }
   };
 
@@ -170,6 +196,23 @@ const Admin = () => {
     }
   };
 
+  const updateCatalogItem = async (item: CatalogItem) => {
+    try {
+      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ resource: 'catalog_item', ...item })
+      });
+
+      if (response.ok) {
+        toast({ title: 'Успех', description: 'Товар обновлен' });
+        fetchCatalog();
+      }
+    } catch (error) {
+      toast({ title: 'Ошибка', description: 'Не удалось обновить товар', variant: 'destructive' });
+    }
+  };
+
   const updateSettings = async () => {
     try {
       const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
@@ -228,10 +271,14 @@ const Admin = () => {
 
       <div className="container mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="requests">
               <Icon name="MessageSquare" className="mr-2" size={18} />
               Заявки
+            </TabsTrigger>
+            <TabsTrigger value="catalog">
+              <Icon name="Monitor" className="mr-2" size={18} />
+              Каталог
             </TabsTrigger>
             <TabsTrigger value="services">
               <Icon name="Wrench" className="mr-2" size={18} />
@@ -332,6 +379,122 @@ const Admin = () => {
                 ))}
               </div>
             )}
+          </TabsContent>
+
+          <TabsContent value="catalog" className="space-y-6">
+            <div className="grid gap-6">
+              {catalog.map((item) => (
+                <Card key={item.id} className="p-6">
+                  <div className="grid gap-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label>Название</Label>
+                        <Input 
+                          value={item.title}
+                          onChange={(e) => {
+                            const updated = catalog.map(c => 
+                              c.id === item.id ? { ...c, title: e.target.value } : c
+                            );
+                            setCatalog(updated);
+                          }}
+                        />
+                      </div>
+                      <div>
+                        <Label>Цена (₽)</Label>
+                        <Input 
+                          type="number"
+                          value={item.price}
+                          onChange={(e) => {
+                            const updated = catalog.map(c => 
+                              c.id === item.id ? { ...c, price: parseInt(e.target.value) } : c
+                            );
+                            setCatalog(updated);
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label>Разрешение</Label>
+                        <Select 
+                          value={item.resolution}
+                          onValueChange={(value) => {
+                            const updated = catalog.map(c => 
+                              c.id === item.id ? { ...c, resolution: value } : c
+                            );
+                            setCatalog(updated);
+                          }}
+                        >
+                          <SelectTrigger>
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="FHD">FHD (1920x1080)</SelectItem>
+                            <SelectItem value="QHD">QHD (2560x1440)</SelectItem>
+                            <SelectItem value="UHD">UHD (3840x2160)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label>URL изображения</Label>
+                        <Input 
+                          value={item.image_url || ''}
+                          placeholder="https://..."
+                          onChange={(e) => {
+                            const updated = catalog.map(c => 
+                              c.id === item.id ? { ...c, image_url: e.target.value } : c
+                            );
+                            setCatalog(updated);
+                          }}
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <Label>Описание</Label>
+                      <Textarea 
+                        value={item.description}
+                        onChange={(e) => {
+                          const updated = catalog.map(c => 
+                            c.id === item.id ? { ...c, description: e.target.value } : c
+                          );
+                          setCatalog(updated);
+                        }}
+                      />
+                    </div>
+
+                    <div>
+                      <Label>Характеристики (JSON)</Label>
+                      <Textarea 
+                        value={JSON.stringify(item.specs, null, 2)}
+                        onChange={(e) => {
+                          try {
+                            const specs = JSON.parse(e.target.value);
+                            const updated = catalog.map(c => 
+                              c.id === item.id ? { ...c, specs } : c
+                            );
+                            setCatalog(updated);
+                          } catch (err) {
+                            // Invalid JSON, ignore
+                          }
+                        }}
+                        rows={4}
+                      />
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Пример: {`{"cpu": "Intel Core i5", "gpu": "RTX 3060"}`}
+                      </p>
+                    </div>
+
+                    <div className="flex justify-end">
+                      <Button onClick={() => updateCatalogItem(item)}>
+                        Сохранить изменения
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
           </TabsContent>
 
           <TabsContent value="services" className="space-y-6">

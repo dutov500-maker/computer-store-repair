@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import ConsultationForm from '@/components/ConsultationForm';
 import ServiceRequestForm from '@/components/ServiceRequestForm';
 import { Button } from '@/components/ui/button';
@@ -392,66 +393,7 @@ const Index = () => {
         </div>
       </section>
 
-      <footer className="bg-card border-t border-border py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <img 
-                  src="https://cdn.poehali.dev/files/1258a3ce-944b-46de-88b7-5a629a1775c1.png" 
-                  alt="КЛАБ"
-                  className="h-10 w-auto"
-                />
-                <span className="text-xl font-heading font-bold">Компьютерная Лаборатория</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Профессиональная сборка игровых компьютеров и ноутбуков
-              </p>
-              <a 
-                href="https://yandex.ru/profile/105118454033?lang=ru" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-3 text-sm text-primary hover:text-primary/80 transition-colors"
-              >
-                <Icon name="MapPin" size={16} />
-                Мы на Яндекс.Картах
-              </a>
-            </div>
-            <div>
-              <h4 className="font-heading font-bold mb-4">Навигация</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Каталог</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Подбор ПК</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Услуги</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-heading font-bold mb-4">Информация</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">О компании</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Гарантия</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Доставка</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-heading font-bold mb-4">Контакты</h4>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2 text-muted-foreground">
-                  <Icon name="Phone" size={16} />
-                  <a href="tel:+79950272707" className="hover:text-primary transition-colors">+7 995 027 27 07</a>
-                </li>
-                <li className="flex items-center gap-2 text-muted-foreground">
-                  <Icon name="Mail" size={16} />
-                  <a href="mailto:info@gurupc.ru" className="hover:text-primary transition-colors">info@gurupc.ru</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-            © 2024 Компьютерная Лаборатория. Все права защищены.
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
