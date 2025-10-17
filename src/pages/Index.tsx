@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import ConsultationForm from '@/components/ConsultationForm';
 import ServiceRequestForm from '@/components/ServiceRequestForm';
 import PCSelectionForm from '@/components/PCSelectionForm';
+import CounterStat from '@/components/CounterStat';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
@@ -175,7 +176,7 @@ const Index = () => {
                     rel="noopener noreferrer"
                     className="flex-1"
                   >
-                    <Button size="lg" className="w-full bg-[#0088cc] hover:bg-[#0088cc]/90 text-white">
+                    <Button size="lg" className="w-full bg-[#0088cc] hover:bg-[#0088cc]/90 text-white shadow-lg hover:shadow-xl transition-all">
                       <Icon name="Send" className="mr-2" size={20} />
                       Написать в Telegram
                     </Button>
@@ -186,16 +187,20 @@ const Index = () => {
                     rel="noopener noreferrer"
                     className="flex-1"
                   >
-                    <Button size="lg" className="w-full bg-[#25D366] hover:bg-[#25D366]/90 text-white">
+                    <Button size="lg" className="w-full bg-[#25D366] hover:bg-[#25D366]/90 text-white shadow-lg hover:shadow-xl transition-all">
                       <Icon name="MessageCircle" className="mr-2" size={20} />
                       Написать в WhatsApp
                     </Button>
                   </a>
                 </div>
-                <p className="text-sm text-muted-foreground mt-4">
-                  <Icon name="Phone" className="inline mr-1" size={14} />
-                  +7 (995) 027-27-07
-                </p>
+              </div>
+              <div className="relative hidden md:block">
+                <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent rounded-3xl blur-2xl"></div>
+                <img 
+                  src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600&h=400&fit=crop"
+                  alt="Gaming Setup"
+                  className="relative rounded-2xl shadow-2xl w-full border border-primary/20"
+                />
               </div>
             </div>
           </Card>
@@ -356,6 +361,23 @@ const Index = () => {
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-gradient-to-b from-background to-primary/5 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent_60%)]"></div>
+        <div className="container mx-auto px-4 relative">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-2">
+              Наши <span className="text-gradient">достижения</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <CounterStat end={500} suffix="+" label="Собранных ПК" icon="Cpu" delay={0} />
+            <CounterStat end={3} label="Года на рынке" icon="Award" delay={100} />
+            <CounterStat end={450} suffix="+" label="Довольных клиентов" icon="Users" delay={200} />
+            <CounterStat end={99} suffix="%" label="Положительных отзывов" icon="Star" delay={300} />
           </div>
         </div>
       </section>
