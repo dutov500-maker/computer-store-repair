@@ -20,7 +20,7 @@ const Header = () => {
 
   const fetchSettings = async () => {
     try {
-      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=settings');
+      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=settings');
       const data = await response.json();
       if (response.ok) {
         setSettings(data.settings);

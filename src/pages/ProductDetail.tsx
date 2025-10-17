@@ -40,7 +40,7 @@ const ProductDetail = () => {
   const fetchProduct = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=catalog');
+      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=catalog');
       const data = await response.json();
       if (response.ok && data.catalog) {
         const item = data.catalog.find((p: CatalogItem) => p.id === parseInt(id || '0'));

@@ -181,7 +181,7 @@ const Admin = () => {
 
   const fetchServices = async () => {
     try {
-      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=services');
+      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=services');
       const data = await response.json();
       if (response.ok) {
         setServices(data.services || []);
@@ -193,7 +193,7 @@ const Admin = () => {
 
   const fetchCatalog = async () => {
     try {
-      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=catalog');
+      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=catalog');
       const data = await response.json();
       if (response.ok) {
         setCatalog(data.catalog || []);
@@ -205,7 +205,7 @@ const Admin = () => {
 
   const fetchPortfolio = async () => {
     try {
-      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=portfolio');
+      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=portfolio');
       const data = await response.json();
       if (response.ok) {
         setPortfolio(data.portfolio || []);
@@ -217,7 +217,7 @@ const Admin = () => {
 
   const fetchSettings = async () => {
     try {
-      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=settings');
+      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=settings');
       const data = await response.json();
       if (response.ok) {
         setSettings(data.settings);
@@ -268,7 +268,7 @@ const Admin = () => {
         display_order: services.length
       };
       
-      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
+      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newService)
@@ -285,7 +285,7 @@ const Admin = () => {
 
   const updateService = async (service: Service) => {
     try {
-      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
+      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ resource: 'service', ...service })
@@ -304,7 +304,7 @@ const Admin = () => {
     if (!confirm('Удалить эту услугу?')) return;
     
     try {
-      const response = await fetch(`https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=service&id=${id}`, {
+      const response = await fetch(`https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=service&id=${id}`, {
         method: 'DELETE'
       });
 
@@ -327,7 +327,7 @@ const Admin = () => {
         display_order: portfolio.length
       };
       
-      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
+      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newItem)
@@ -344,7 +344,7 @@ const Admin = () => {
 
   const updatePortfolioItem = async (item: PortfolioItem) => {
     try {
-      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
+      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ resource: 'portfolio_item', ...item })
@@ -363,7 +363,7 @@ const Admin = () => {
     if (!confirm('Удалить эту работу?')) return;
     
     try {
-      const response = await fetch(`https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=portfolio_item&id=${id}`, {
+      const response = await fetch(`https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=portfolio_item&id=${id}`, {
         method: 'DELETE'
       });
 
@@ -388,7 +388,7 @@ const Admin = () => {
         display_order: catalog.length
       };
       
-      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
+      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newItem)
@@ -405,7 +405,7 @@ const Admin = () => {
 
   const updateCatalogItem = async (item: CatalogItem) => {
     try {
-      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
+      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ resource: 'catalog_item', ...item })
@@ -424,7 +424,7 @@ const Admin = () => {
     if (!confirm('Удалить этот товар?')) return;
     
     try {
-      const response = await fetch(`https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=catalog_item&id=${id}`, {
+      const response = await fetch(`https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=catalog_item&id=${id}`, {
         method: 'DELETE'
       });
 
@@ -439,7 +439,7 @@ const Admin = () => {
 
   const updateSettings = async () => {
     try {
-      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
+      const response = await fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ resource: 'settings', settings })

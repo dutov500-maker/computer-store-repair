@@ -23,8 +23,8 @@ const Index = () => {
   const fetchData = async () => {
     try {
       const [servicesRes, portfolioRes] = await Promise.all([
-        fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=services'),
-        fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=portfolio')
+        fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=services'),
+        fetch('https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=portfolio')
       ]);
 
       const servicesData = await servicesRes.json();

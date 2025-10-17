@@ -26,7 +26,7 @@ const AboutPage = () => {
   const fetchPage = async (pageSlug: string) => {
     setLoading(true);
     try {
-      const response = await fetch(`https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=page&slug=${pageSlug}`);
+      const response = await fetch(`https://functions.poehali.dev/c67940be-1583-4617-bdf4-2518f115d753?resource=page&slug=${pageSlug}`);
       const data = await response.json();
       if (response.ok && data.page) {
         setPage(data.page);
