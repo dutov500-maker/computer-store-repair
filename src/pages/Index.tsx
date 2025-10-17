@@ -10,10 +10,12 @@ import { Link } from 'react-router-dom';
 
 const Index = () => {
   const [services, setServices] = useState<any[]>([]);
+  const [portfolio, setPortfolio] = useState<any[]>([]);
   const [settings, setSettings] = useState<any>(null);
 
   useEffect(() => {
     fetchServices();
+    fetchPortfolio();
     fetchSettings();
   }, []);
 
@@ -26,6 +28,18 @@ const Index = () => {
       }
     } catch (error) {
       console.error('Error loading services:', error);
+    }
+  };
+
+  const fetchPortfolio = async () => {
+    try {
+      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=portfolio');
+      const data = await response.json();
+      if (response.ok && data.portfolio) {
+        setPortfolio(data.portfolio.filter((p: any) => p.is_active));
+      }
+    } catch (error) {
+      console.error('Error loading portfolio:', error);
     }
   };
 
@@ -257,41 +271,31 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-8">
-            {[
-              {
-                image: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/4411866f-6b88-4906-b361-b61006c52f6b.jpg',
-                title: 'Игровая станция Premium',
-                description: 'Мощная сборка для 4K-гейминга'
-              },
-              {
-                image: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/f640ba71-1984-4233-ad18-c61376c8d6de.jpg',
-                title: 'Рабочая станция',
-                description: 'Оптимальная конфигурация для работы'
-              },
-              {
-                image: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/b7124fb7-4401-4730-9bb4-9d4c2a163e21.jpg',
-                title: 'Стримерская сборка',
-                description: 'Для стриминга и контент-создания'
-              }
-            ].map((work, index) => (
-              <Card 
-                key={index}
-                className="overflow-hidden group hover:border-primary transition-all duration-300 hover:scale-105 animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="relative h-64 overflow-hidden">
-                  <img 
-                    src={work.image} 
-                    alt={work.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex flex-col justify-end p-6">
-                    <h3 className="text-xl font-heading font-bold mb-1">{work.title}</h3>
-                    <p className="text-sm text-muted-foreground">{work.description}</p>
+            {portfolio.length > 0 ? (
+              portfolio.map((work, index) => (
+                <Card 
+                  key={index}
+                  className="overflow-hidden group hover:border-primary transition-all duration-300 hover:scale-105 animate-fade-in"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="relative h-64 overflow-hidden">
+                    <img 
+                      src={work.image_url} 
+                      alt={work.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex flex-col justify-end p-6">
+                      <h3 className="text-xl font-heading font-bold mb-1">{work.title}</h3>
+                      <p className="text-sm text-muted-foreground">{work.description}</p>
+                    </div>
                   </div>
-                </div>
-              </Card>
-            ))}
+                </Card>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12 text-muted-foreground">
+                Загрузка работ...
+              </div>
+            )}
           </div>
 
           <div className="text-center">

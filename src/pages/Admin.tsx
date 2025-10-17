@@ -56,10 +56,20 @@ interface CatalogItem {
   is_active: boolean;
 }
 
+interface PortfolioItem {
+  id: number;
+  title: string;
+  description: string;
+  image_url: string;
+  display_order: number;
+  is_active: boolean;
+}
+
 const Admin = () => {
   const [requests, setRequests] = useState<ServiceRequest[]>([]);
   const [services, setServices] = useState<Service[]>([]);
   const [catalog, setCatalog] = useState<CatalogItem[]>([]);
+  const [portfolio, setPortfolio] = useState<PortfolioItem[]>([]);
   const [settings, setSettings] = useState<Settings | null>(null);
   const [loading, setLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState('all');
@@ -77,6 +87,7 @@ const Admin = () => {
     fetchRequests();
     fetchServices();
     fetchCatalog();
+    fetchPortfolio();
     fetchSettings();
   }, [navigate]);
 
@@ -138,6 +149,18 @@ const Admin = () => {
     }
   };
 
+  const fetchPortfolio = async () => {
+    try {
+      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=portfolio');
+      const data = await response.json();
+      if (response.ok) {
+        setPortfolio(data.portfolio || []);
+      }
+    } catch (error) {
+      console.error('Fetch portfolio error:', error);
+    }
+  };
+
   const fetchSettings = async () => {
     try {
       const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=settings');
@@ -179,6 +202,33 @@ const Admin = () => {
     }
   };
 
+  const createService = async () => {
+    try {
+      const newService = {
+        resource: 'service',
+        title: 'Новая услуга',
+        description: 'Описание услуги',
+        price: 'от 5000 ₽',
+        features: ['Консультация', 'Гарантия'],
+        icon: 'Wrench',
+        display_order: services.length
+      };
+      
+      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newService)
+      });
+
+      if (response.ok) {
+        toast({ title: 'Успех', description: 'Услуга добавлена' });
+        fetchServices();
+      }
+    } catch (error) {
+      toast({ title: 'Ошибка', description: 'Не удалось добавить услугу', variant: 'destructive' });
+    }
+  };
+
   const updateService = async (service: Service) => {
     try {
       const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
@@ -196,6 +246,109 @@ const Admin = () => {
     }
   };
 
+  const deleteService = async (id: number) => {
+    if (!confirm('Удалить эту услугу?')) return;
+    
+    try {
+      const response = await fetch(`https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=service&id=${id}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        toast({ title: 'Успех', description: 'Услуга удалена' });
+        fetchServices();
+      }
+    } catch (error) {
+      toast({ title: 'Ошибка', description: 'Не удалось удалить услугу', variant: 'destructive' });
+    }
+  };
+
+  const createPortfolioItem = async () => {
+    try {
+      const newItem = {
+        resource: 'portfolio_item',
+        title: 'Новая работа',
+        description: 'Описание работы',
+        image_url: '',
+        display_order: portfolio.length
+      };
+      
+      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newItem)
+      });
+
+      if (response.ok) {
+        toast({ title: 'Успех', description: 'Работа добавлена' });
+        fetchPortfolio();
+      }
+    } catch (error) {
+      toast({ title: 'Ошибка', description: 'Не удалось добавить работу', variant: 'destructive' });
+    }
+  };
+
+  const updatePortfolioItem = async (item: PortfolioItem) => {
+    try {
+      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ resource: 'portfolio_item', ...item })
+      });
+
+      if (response.ok) {
+        toast({ title: 'Успех', description: 'Работа обновлена' });
+        fetchPortfolio();
+      }
+    } catch (error) {
+      toast({ title: 'Ошибка', description: 'Не удалось обновить работу', variant: 'destructive' });
+    }
+  };
+
+  const deletePortfolioItem = async (id: number) => {
+    if (!confirm('Удалить эту работу?')) return;
+    
+    try {
+      const response = await fetch(`https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=portfolio_item&id=${id}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        toast({ title: 'Успех', description: 'Работа удалена' });
+        fetchPortfolio();
+      }
+    } catch (error) {
+      toast({ title: 'Ошибка', description: 'Не удалось удалить работу', variant: 'destructive' });
+    }
+  };
+
+  const createCatalogItem = async () => {
+    try {
+      const newItem = {
+        resource: 'catalog_item',
+        title: 'Новый компьютер',
+        description: 'Описание компьютера',
+        price: 50000,
+        resolution: 'FHD',
+        specs: { cpu: 'Intel Core i5', gpu: 'GTX 1660', ram: '16GB' },
+        display_order: catalog.length
+      };
+      
+      const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newItem)
+      });
+
+      if (response.ok) {
+        toast({ title: 'Успех', description: 'Товар добавлен' });
+        fetchCatalog();
+      }
+    } catch (error) {
+      toast({ title: 'Ошибка', description: 'Не удалось добавить товар', variant: 'destructive' });
+    }
+  };
+
   const updateCatalogItem = async (item: CatalogItem) => {
     try {
       const response = await fetch('https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e', {
@@ -210,6 +363,23 @@ const Admin = () => {
       }
     } catch (error) {
       toast({ title: 'Ошибка', description: 'Не удалось обновить товар', variant: 'destructive' });
+    }
+  };
+
+  const deleteCatalogItem = async (id: number) => {
+    if (!confirm('Удалить этот товар?')) return;
+    
+    try {
+      const response = await fetch(`https://functions.poehali.dev/d482cb50-56d5-4575-ad25-e175833c831e?resource=catalog_item&id=${id}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        toast({ title: 'Успех', description: 'Товар удален' });
+        fetchCatalog();
+      }
+    } catch (error) {
+      toast({ title: 'Ошибка', description: 'Не удалось удалить товар', variant: 'destructive' });
     }
   };
 
@@ -283,6 +453,10 @@ const Admin = () => {
             <TabsTrigger value="services">
               <Icon name="Wrench" className="mr-2" size={18} />
               Услуги
+            </TabsTrigger>
+            <TabsTrigger value="portfolio">
+              <Icon name="Image" className="mr-2" size={18} />
+              Портфолио
             </TabsTrigger>
             <TabsTrigger value="settings">
               <Icon name="Settings" className="mr-2" size={18} />
@@ -382,6 +556,13 @@ const Admin = () => {
           </TabsContent>
 
           <TabsContent value="catalog" className="space-y-6">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-lg font-heading font-bold">Управление каталогом</h3>
+              <Button onClick={createCatalogItem}>
+                <Icon name="Plus" className="mr-2" size={18} />
+                Добавить компьютер
+              </Button>
+            </div>
             <div className="grid gap-6">
               {catalog.map((item) => (
                 <Card key={item.id} className="p-6">
@@ -486,8 +667,13 @@ const Admin = () => {
                       </p>
                     </div>
 
-                    <div className="flex justify-end">
+                    <div className="flex justify-between">
+                      <Button variant="destructive" onClick={() => deleteCatalogItem(item.id)}>
+                        <Icon name="Trash2" className="mr-2" size={18} />
+                        Удалить
+                      </Button>
                       <Button onClick={() => updateCatalogItem(item)}>
+                        <Icon name="Save" className="mr-2" size={18} />
                         Сохранить изменения
                       </Button>
                     </div>
@@ -498,6 +684,13 @@ const Admin = () => {
           </TabsContent>
 
           <TabsContent value="services" className="space-y-6">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-lg font-heading font-bold">Управление услугами</h3>
+              <Button onClick={createService}>
+                <Icon name="Plus" className="mr-2" size={18} />
+                Добавить услугу
+              </Button>
+            </div>
             <div className="grid gap-6">
               {services.map((service) => (
                 <Card key={service.id} className="p-6">
@@ -555,8 +748,91 @@ const Admin = () => {
                       />
                     </div>
 
-                    <div className="flex justify-end">
+                    <div className="flex justify-between">
+                      <Button variant="destructive" onClick={() => deleteService(service.id)}>
+                        <Icon name="Trash2" className="mr-2" size={18} />
+                        Удалить
+                      </Button>
                       <Button onClick={() => updateService(service)}>
+                        <Icon name="Save" className="mr-2" size={18} />
+                        Сохранить изменения
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="portfolio" className="space-y-6">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-lg font-heading font-bold">Портфолио (Наши работы)</h3>
+              <Button onClick={createPortfolioItem}>
+                <Icon name="Plus" className="mr-2" size={18} />
+                Добавить работу
+              </Button>
+            </div>
+            <div className="grid gap-6">
+              {portfolio.map((item) => (
+                <Card key={item.id} className="p-6">
+                  <div className="grid gap-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label>Название</Label>
+                        <Input 
+                          value={item.title}
+                          onChange={(e) => {
+                            const updated = portfolio.map(p => 
+                              p.id === item.id ? { ...p, title: e.target.value } : p
+                            );
+                            setPortfolio(updated);
+                          }}
+                        />
+                      </div>
+                      <div>
+                        <Label>Описание</Label>
+                        <Input 
+                          value={item.description}
+                          onChange={(e) => {
+                            const updated = portfolio.map(p => 
+                              p.id === item.id ? { ...p, description: e.target.value } : p
+                            );
+                            setPortfolio(updated);
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label>URL изображения</Label>
+                      <Input 
+                        value={item.image_url}
+                        placeholder="https://..."
+                        onChange={(e) => {
+                          const updated = portfolio.map(p => 
+                            p.id === item.id ? { ...p, image_url: e.target.value } : p
+                          );
+                          setPortfolio(updated);
+                        }}
+                      />
+                      {item.image_url && (
+                        <div className="mt-2">
+                          <img 
+                            src={item.image_url} 
+                            alt={item.title}
+                            className="w-full max-w-md h-48 object-cover rounded-lg"
+                          />
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex justify-between">
+                      <Button variant="destructive" onClick={() => deletePortfolioItem(item.id)}>
+                        <Icon name="Trash2" className="mr-2" size={18} />
+                        Удалить
+                      </Button>
+                      <Button onClick={() => updatePortfolioItem(item)}>
+                        <Icon name="Save" className="mr-2" size={18} />
                         Сохранить изменения
                       </Button>
                     </div>

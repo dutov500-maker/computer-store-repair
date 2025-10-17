@@ -40,6 +40,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 return get_services(conn)
             elif resource == 'catalog':
                 return get_catalog(conn)
+            elif resource == 'portfolio':
+                return get_portfolio(conn)
             elif resource == 'page':
                 slug = query_params.get('slug')
                 return get_page(conn, slug)
@@ -56,6 +58,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 return update_service(conn, body_data)
             elif resource == 'catalog_item':
                 return update_catalog_item(conn, body_data)
+            elif resource == 'portfolio_item':
+                return update_portfolio_item(conn, body_data)
             elif resource == 'page':
                 return update_page(conn, body_data)
             else:
@@ -68,6 +72,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 return create_service(conn, body_data)
             elif resource == 'catalog_item':
                 return create_catalog_item(conn, body_data)
+            elif resource == 'portfolio_item':
+                return create_portfolio_item(conn, body_data)
             else:
                 return error_response('Invalid resource', 400)
         
@@ -81,6 +87,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 return delete_service(conn, int(item_id))
             elif resource == 'catalog_item':
                 return delete_catalog_item(conn, int(item_id))
+            elif resource == 'portfolio_item':
+                return delete_portfolio_item(conn, int(item_id))
             else:
                 return error_response('Invalid resource', 400)
         
@@ -384,6 +392,103 @@ def delete_catalog_item(conn, item_id: int) -> Dict[str, Any]:
             'Access-Control-Allow-Origin': '*'
         },
         'body': json.dumps({'success': True, 'message': 'Товар удален'}),
+        'isBase64Encoded': False
+    }
+
+
+def get_portfolio(conn) -> Dict[str, Any]:
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    cursor.execute("""
+        SELECT id, title, description, image_url, display_order, is_active
+        FROM portfolio_items 
+        WHERE is_active = true
+        ORDER BY display_order, id
+    """)
+    items = cursor.fetchall()
+    cursor.close()
+    
+    return {
+        'statusCode': 200,
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        'body': json.dumps({'portfolio': items}),
+        'isBase64Encoded': False
+    }
+
+
+def create_portfolio_item(conn, data: Dict[str, Any]) -> Dict[str, Any]:
+    title = data.get('title')
+    description = data.get('description', '')
+    image_url = data.get('image_url')
+    display_order = data.get('display_order', 0)
+    
+    cursor = conn.cursor()
+    cursor.execute("""
+        INSERT INTO portfolio_items (title, description, image_url, display_order)
+        VALUES (%s, %s, %s, %s)
+        RETURNING id
+    """, (title, description, image_url, display_order))
+    
+    new_id = cursor.fetchone()[0]
+    conn.commit()
+    cursor.close()
+    
+    return {
+        'statusCode': 201,
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        'body': json.dumps({'success': True, 'id': new_id, 'message': 'Работа добавлена'}),
+        'isBase64Encoded': False
+    }
+
+
+def update_portfolio_item(conn, data: Dict[str, Any]) -> Dict[str, Any]:
+    item_id = data.get('id')
+    title = data.get('title')
+    description = data.get('description')
+    image_url = data.get('image_url')
+    display_order = data.get('display_order', 0)
+    is_active = data.get('is_active', True)
+    
+    cursor = conn.cursor()
+    cursor.execute("""
+        UPDATE portfolio_items 
+        SET title = %s, description = %s, image_url = %s, 
+            display_order = %s, is_active = %s, updated_at = CURRENT_TIMESTAMP
+        WHERE id = %s
+    """, (title, description, image_url, display_order, is_active, item_id))
+    
+    conn.commit()
+    cursor.close()
+    
+    return {
+        'statusCode': 200,
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        'body': json.dumps({'success': True, 'message': 'Работа обновлена'}),
+        'isBase64Encoded': False
+    }
+
+
+def delete_portfolio_item(conn, item_id: int) -> Dict[str, Any]:
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM portfolio_items WHERE id = %s", (item_id,))
+    conn.commit()
+    cursor.close()
+    
+    return {
+        'statusCode': 200,
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        'body': json.dumps({'success': True, 'message': 'Работа удалена'}),
         'isBase64Encoded': False
     }
 
