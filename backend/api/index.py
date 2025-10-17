@@ -46,6 +46,103 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     conn.autocommit = True
     cursor = conn.cursor()
     
+    if method == 'POST' and data_type == 'catalog':
+        try:
+            if action == 'create':
+                body_data = json.loads(event.get('body', '{}'))
+                specs = body_data.get('specs', {})
+                
+                cursor.execute("""
+                    INSERT INTO catalog 
+                    (title, description, price, resolution, specs, image_url, is_active)
+                    VALUES (%s, %s, %s, %s, %s, %s, true)
+                    RETURNING id
+                """, (
+                    body_data.get('title'),
+                    body_data.get('description'),
+                    body_data.get('price'),
+                    body_data.get('resolution', 'Full HD'),
+                    json.dumps(specs),
+                    body_data.get('image_url')
+                ))
+                
+                new_id = cursor.fetchone()[0]
+                cursor.close()
+                conn.close()
+                
+                return {
+                    'statusCode': 200,
+                    'headers': {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    'isBase64Encoded': False,
+                    'body': json.dumps({'id': new_id, 'message': 'Created successfully'})
+                }
+            
+            elif action == 'update':
+                item_id = query_params.get('id')
+                body_data = json.loads(event.get('body', '{}'))
+                specs = body_data.get('specs', {})
+                
+                cursor.execute("""
+                    UPDATE catalog 
+                    SET title = %s, description = %s, price = %s, resolution = %s,
+                        specs = %s, image_url = %s
+                    WHERE id = %s
+                """, (
+                    body_data.get('title'),
+                    body_data.get('description'),
+                    body_data.get('price'),
+                    body_data.get('resolution'),
+                    json.dumps(specs),
+                    body_data.get('image_url'),
+                    item_id
+                ))
+                
+                cursor.close()
+                conn.close()
+                
+                return {
+                    'statusCode': 200,
+                    'headers': {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    'isBase64Encoded': False,
+                    'body': json.dumps({'message': 'Updated successfully'})
+                }
+            
+            elif action == 'delete':
+                item_id = query_params.get('id')
+                
+                cursor.execute("UPDATE catalog SET is_active = false WHERE id = %s", (item_id,))
+                
+                cursor.close()
+                conn.close()
+                
+                return {
+                    'statusCode': 200,
+                    'headers': {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    'isBase64Encoded': False,
+                    'body': json.dumps({'message': 'Deleted successfully'})
+                }
+        except Exception as e:
+            cursor.close()
+            conn.close()
+            return {
+                'statusCode': 400,
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                'isBase64Encoded': False,
+                'body': json.dumps({'error': str(e)})
+            }
+    
     if method == 'POST' and data_type == 'portfolio':
         try:
             if action == 'create':

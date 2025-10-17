@@ -36,14 +36,33 @@ interface PortfolioItem {
   is_active: boolean;
 }
 
+interface CatalogItem {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  resolution: string;
+  specs: {
+    cpu: string;
+    gpu: string;
+    ram: string;
+    storage: string;
+  };
+  image_url: string;
+  is_active: boolean;
+}
+
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [orders, setOrders] = useState<Order[]>([]);
   const [portfolio, setPortfolio] = useState<PortfolioItem[]>([]);
+  const [catalog, setCatalog] = useState<CatalogItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [portfolioDialog, setPortfolioDialog] = useState(false);
+  const [catalogDialog, setCatalogDialog] = useState(false);
   const [editingItem, setEditingItem] = useState<PortfolioItem | null>(null);
+  const [editingCatalogItem, setEditingCatalogItem] = useState<CatalogItem | null>(null);
   const [stats, setStats] = useState({
     totalOrders: 0,
     newOrders: 0,
@@ -61,6 +80,18 @@ const AdminDashboard = () => {
     completion_date: ''
   });
 
+  const [catalogFormData, setCatalogFormData] = useState({
+    title: '',
+    description: '',
+    price: 0,
+    resolution: 'Full HD',
+    cpu: '',
+    gpu: '',
+    ram: '',
+    storage: '',
+    image_url: ''
+  });
+
   const [uploadingImage, setUploadingImage] = useState(false);
   const [imagePreview, setImagePreview] = useState<string>('');
 
@@ -68,6 +99,7 @@ const AdminDashboard = () => {
     checkAuth();
     fetchOrders();
     fetchPortfolio();
+    fetchCatalog();
   }, []);
 
   const checkAuth = () => {
@@ -109,6 +141,16 @@ const AdminDashboard = () => {
       setPortfolio(data);
     } catch (error) {
       console.error('Ошибка загрузки портфолио:', error);
+    }
+  };
+
+  const fetchCatalog = async () => {
+    try {
+      const response = await fetch(`${funcUrls.api}?type=catalog`);
+      const data = await response.json();
+      setCatalog(data);
+    } catch (error) {
+      console.error('Ошибка загрузки каталога:', error);
     }
   };
 
@@ -271,6 +313,149 @@ const AdminDashboard = () => {
     return labels[status] || status;
   };
 
+  const openAddCatalogDialog = () => {
+    setEditingCatalogItem(null);
+    setCatalogFormData({
+      title: '',
+      description: '',
+      price: 0,
+      resolution: 'Full HD',
+      cpu: '',
+      gpu: '',
+      ram: '',
+      storage: '',
+      image_url: ''
+    });
+    setImagePreview('');
+    setCatalogDialog(true);
+  };
+
+  const openEditCatalogDialog = (item: CatalogItem) => {
+    setEditingCatalogItem(item);
+    setCatalogFormData({
+      title: item.title,
+      description: item.description,
+      price: item.price,
+      resolution: item.resolution,
+      cpu: item.specs.cpu,
+      gpu: item.specs.gpu,
+      ram: item.specs.ram,
+      storage: item.specs.storage,
+      image_url: item.image_url
+    });
+    setImagePreview(item.image_url);
+    setCatalogDialog(true);
+  };
+
+  const handleSaveCatalog = async () => {
+    try {
+      const specs = {
+        cpu: catalogFormData.cpu,
+        gpu: catalogFormData.gpu,
+        ram: catalogFormData.ram,
+        storage: catalogFormData.storage
+      };
+
+      const url = editingCatalogItem 
+        ? `${funcUrls.api}?type=catalog&action=update&id=${editingCatalogItem.id}`
+        : `${funcUrls.api}?type=catalog&action=create`;
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: catalogFormData.title,
+          description: catalogFormData.description,
+          price: catalogFormData.price,
+          resolution: catalogFormData.resolution,
+          specs: specs,
+          image_url: catalogFormData.image_url
+        })
+      });
+
+      if (response.ok) {
+        toast({
+          title: 'Успешно',
+          description: editingCatalogItem ? 'Товар обновлен' : 'Товар добавлен'
+        });
+        setCatalogDialog(false);
+        fetchCatalog();
+      }
+    } catch (error) {
+      toast({
+        title: 'Ошибка',
+        description: 'Не удалось сохранить',
+        variant: 'destructive'
+      });
+    }
+  };
+
+  const handleDeleteCatalog = async (id: number) => {
+    if (!confirm('Удалить товар из каталога?')) return;
+
+    try {
+      const response = await fetch(`${funcUrls.api}?type=catalog&action=delete&id=${id}`, {
+        method: 'POST'
+      });
+
+      if (response.ok) {
+        toast({
+          title: 'Успешно',
+          description: 'Товар удален'
+        });
+        fetchCatalog();
+      }
+    } catch (error) {
+      toast({
+        title: 'Ошибка',
+        description: 'Не удалось удалить',
+        variant: 'destructive'
+      });
+    }
+  };
+
+  const handleCatalogImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: 'Ошибка',
+        description: 'Размер файла не должен превышать 5 МБ',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    setUploadingImage(true);
+
+    try {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const dataUrl = event.target?.result as string;
+        setImagePreview(dataUrl);
+        setCatalogFormData({...catalogFormData, image_url: dataUrl});
+        setUploadingImage(false);
+      };
+      reader.onerror = () => {
+        toast({
+          title: 'Ошибка',
+          description: 'Не удалось загрузить изображение',
+          variant: 'destructive'
+        });
+        setUploadingImage(false);
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      toast({
+        title: 'Ошибка',
+        description: 'Не удалось обработать файл',
+        variant: 'destructive'
+      });
+      setUploadingImage(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b bg-card">
@@ -292,7 +477,7 @@ const AdminDashboard = () => {
       </header>
 
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
           <Card className="p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -332,21 +517,37 @@ const AdminDashboard = () => {
           <Card className="p-6">
             <div className="flex items-center justify-between">
               <div>
+                <p className="text-sm text-muted-foreground">Каталог</p>
+                <p className="text-3xl font-bold mt-2">{catalog.length}</p>
+              </div>
+              <div className="h-12 w-12 bg-purple-500/10 rounded-full flex items-center justify-center">
+                <Icon name="Package" size={24} className="text-purple-500" />
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
                 <p className="text-sm text-muted-foreground">Портфолио</p>
                 <p className="text-3xl font-bold mt-2">{portfolio.length}</p>
               </div>
-              <div className="h-12 w-12 bg-purple-500/10 rounded-full flex items-center justify-center">
-                <Icon name="Briefcase" size={24} className="text-purple-500" />
+              <div className="h-12 w-12 bg-orange-500/10 rounded-full flex items-center justify-center">
+                <Icon name="Briefcase" size={24} className="text-orange-500" />
               </div>
             </div>
           </Card>
         </div>
 
         <Tabs defaultValue="orders" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="orders">
               <Icon name="ShoppingCart" size={16} className="mr-2" />
               Заказы
+            </TabsTrigger>
+            <TabsTrigger value="catalog">
+              <Icon name="Package" size={16} className="mr-2" />
+              Каталог
             </TabsTrigger>
             <TabsTrigger value="portfolio">
               <Icon name="Briefcase" size={16} className="mr-2" />
@@ -415,6 +616,76 @@ const AdminDashboard = () => {
                                 {order.message}
                               </p>
                             )}
+                          </div>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="catalog">
+            <Card>
+              <div className="p-6 border-b flex justify-between items-center">
+                <div>
+                  <h2 className="text-xl font-bold">Каталог товаров</h2>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Управляйте товарами в каталоге
+                  </p>
+                </div>
+                <Button onClick={openAddCatalogDialog}>
+                  <Icon name="Plus" size={18} className="mr-2" />
+                  Добавить товар
+                </Button>
+              </div>
+              <div className="p-6">
+                {catalog.length === 0 ? (
+                  <div className="text-center py-12">
+                    <Icon name="Package" size={48} className="mx-auto text-muted-foreground mb-4" />
+                    <p className="text-muted-foreground">Каталог пуст</p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {catalog.map((item) => (
+                      <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                        <img 
+                          src={item.image_url} 
+                          alt={item.title}
+                          className="w-full h-48 object-cover"
+                        />
+                        <div className="p-4">
+                          <div className="flex items-center justify-between mb-2">
+                            <Badge variant="secondary">{item.resolution}</Badge>
+                            <Badge className="bg-green-500">{item.price.toLocaleString('ru-RU')} ₽</Badge>
+                          </div>
+                          <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                          <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+                            {item.description}
+                          </p>
+                          <div className="space-y-1 mb-4 text-xs text-muted-foreground">
+                            <p>🖥️ {item.specs.cpu}</p>
+                            <p>🎮 {item.specs.gpu}</p>
+                            <p>💾 {item.specs.ram} • {item.specs.storage}</p>
+                          </div>
+                          <div className="flex gap-2">
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="flex-1"
+                              onClick={() => openEditCatalogDialog(item)}
+                            >
+                              <Icon name="Edit" size={14} className="mr-1" />
+                              Изменить
+                            </Button>
+                            <Button 
+                              size="sm" 
+                              variant="destructive"
+                              onClick={() => handleDeleteCatalog(item.id)}
+                            >
+                              <Icon name="Trash2" size={14} />
+                            </Button>
                           </div>
                         </div>
                       </Card>
@@ -642,6 +913,163 @@ const AdminDashboard = () => {
               Сохранить
             </Button>
             <Button variant="outline" onClick={() => setPortfolioDialog(false)}>
+              Отмена
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={catalogDialog} onOpenChange={setCatalogDialog}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>
+              {editingCatalogItem ? 'Редактировать товар' : 'Добавить товар'}
+            </DialogTitle>
+            <DialogDescription>
+              Заполните информацию о товаре в каталоге
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div>
+              <Label htmlFor="catalog_title">Название товара *</Label>
+              <Input
+                id="catalog_title"
+                value={catalogFormData.title}
+                onChange={(e) => setCatalogFormData({...catalogFormData, title: e.target.value})}
+                placeholder="Игровой ПК RTX 4090"
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="price">Цена *</Label>
+                <Input
+                  id="price"
+                  type="number"
+                  value={catalogFormData.price}
+                  onChange={(e) => setCatalogFormData({...catalogFormData, price: parseInt(e.target.value) || 0})}
+                  placeholder="150000"
+                />
+              </div>
+              <div>
+                <Label htmlFor="resolution">Разрешение *</Label>
+                <select
+                  id="resolution"
+                  className="w-full px-3 py-2 border rounded-md"
+                  value={catalogFormData.resolution}
+                  onChange={(e) => setCatalogFormData({...catalogFormData, resolution: e.target.value})}
+                >
+                  <option value="Full HD">Full HD</option>
+                  <option value="2K">2K</option>
+                  <option value="4K">4K</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <Label htmlFor="catalog_description">Описание *</Label>
+              <Textarea
+                id="catalog_description"
+                value={catalogFormData.description}
+                onChange={(e) => setCatalogFormData({...catalogFormData, description: e.target.value})}
+                placeholder="Мощный игровой компьютер..."
+                rows={3}
+              />
+            </div>
+
+            <div className="space-y-3">
+              <Label>Изображение *</Label>
+              
+              {imagePreview && (
+                <div className="relative w-full h-48 rounded-lg overflow-hidden border">
+                  <img 
+                    src={imagePreview} 
+                    alt="Preview" 
+                    className="w-full h-full object-cover"
+                  />
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    className="absolute top-2 right-2"
+                    onClick={() => {
+                      setImagePreview('');
+                      setCatalogFormData({...catalogFormData, image_url: ''});
+                    }}
+                  >
+                    <Icon name="X" size={16} />
+                  </Button>
+                </div>
+              )}
+
+              <div className="flex gap-2">
+                <div className="flex-1">
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleCatalogImageUpload}
+                    disabled={uploadingImage}
+                    className="cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <div className="flex-1 h-px bg-border"></div>
+                <span className="text-xs text-muted-foreground">или</span>
+                <div className="flex-1 h-px bg-border"></div>
+              </div>
+
+              <Input
+                value={catalogFormData.image_url.startsWith('data:') ? '' : catalogFormData.image_url}
+                onChange={(e) => {
+                  setCatalogFormData({...catalogFormData, image_url: e.target.value});
+                  setImagePreview(e.target.value);
+                }}
+                placeholder="Вставьте URL изображения"
+              />
+            </div>
+
+            <div className="space-y-3">
+              <Label>Характеристики *</Label>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <Input
+                    placeholder="Процессор (CPU)"
+                    value={catalogFormData.cpu}
+                    onChange={(e) => setCatalogFormData({...catalogFormData, cpu: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <Input
+                    placeholder="Видеокарта (GPU)"
+                    value={catalogFormData.gpu}
+                    onChange={(e) => setCatalogFormData({...catalogFormData, gpu: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <Input
+                    placeholder="Оперативная память (RAM)"
+                    value={catalogFormData.ram}
+                    onChange={(e) => setCatalogFormData({...catalogFormData, ram: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <Input
+                    placeholder="Накопитель (Storage)"
+                    value={catalogFormData.storage}
+                    onChange={(e) => setCatalogFormData({...catalogFormData, storage: e.target.value})}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex gap-3">
+            <Button onClick={handleSaveCatalog} className="flex-1">
+              <Icon name="Save" size={18} className="mr-2" />
+              Сохранить
+            </Button>
+            <Button variant="outline" onClick={() => setCatalogDialog(false)}>
               Отмена
             </Button>
           </div>
