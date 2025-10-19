@@ -6,6 +6,7 @@ interface SEOProps {
   description?: string;
   keywords?: string;
   ogImage?: string;
+  schema?: any;
 }
 
 const defaultSEO = {
@@ -13,6 +14,167 @@ const defaultSEO = {
   description: 'Профессиональная сборка игровых и офисных компьютеров в Волжском. Ремонт ПК и ноутбуков с гарантией. Только новые комплектующие. Бесплатная доставка от 50 000₽. ☎️ +7 (995) 027-27-07',
   keywords: 'сборка компьютеров волжский, ремонт компьютеров волжский, игровой пк волжский, компьютерная лаборатория, ремонт пк волжский, сборка пк на заказ, купить компьютер волжский',
   ogImage: 'https://cdn.poehali.dev/files/1258a3ce-944b-46de-88b7-5a629a1775c1.png'
+};
+
+const pageSchemas: Record<string, any> = {
+  '/services': {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Компьютерные услуги",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Компьютерная Лаборатория",
+      "telephone": "+79950272707",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Волжский",
+        "addressRegion": "Волгоградская область",
+        "addressCountry": "RU"
+      }
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Волжский"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Компьютерные услуги",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Сборка компьютеров на заказ",
+            "description": "Профессиональная сборка игровых и офисных компьютеров под ключ"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Ремонт компьютеров и ноутбуков",
+            "description": "Диагностика и ремонт ПК любой сложности с гарантией"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Чистка компьютера от пыли",
+            "description": "Профессиональная чистка системного блока и замена термопасты"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Модернизация и апгрейд ПК",
+            "description": "Улучшение характеристик компьютера, замена комплектующих"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Установка Windows и программ",
+            "description": "Установка операционной системы и необходимого ПО"
+          }
+        }
+      ]
+    }
+  },
+  '/catalog': {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Каталог готовых компьютеров",
+    "description": "Готовые сборки игровых и офисных компьютеров",
+    "itemListElement": [
+      {
+        "@type": "Product",
+        "name": "Игровой компьютер",
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "RUB",
+          "lowPrice": "50000",
+          "highPrice": "150000"
+        }
+      },
+      {
+        "@type": "Product",
+        "name": "Офисный компьютер",
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "RUB",
+          "lowPrice": "30000",
+          "highPrice": "60000"
+        }
+      }
+    ]
+  },
+  '/reviews': {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Компьютерная Лаборатория",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "50",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  },
+  '/contact': {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "mainEntity": {
+      "@type": "LocalBusiness",
+      "name": "Компьютерная Лаборатория",
+      "telephone": "+79950272707",
+      "email": "complab34@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Волжский",
+        "addressRegion": "Волгоградская область",
+        "addressCountry": "RU"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    }
+  },
+  '/blog': {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Блог о компьютерах и комплектующих",
+    "description": "Полезные статьи о выборе, сборке и обслуживании компьютеров",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Компьютерная Лаборатория"
+    }
+  },
+  '/warranty': {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Гарантия на сборку и ремонт",
+    "description": "Условия гарантийного обслуживания",
+    "mainEntity": {
+      "@type": "WarrantyPromise",
+      "durationOfWarranty": {
+        "@type": "QuantitativeValue",
+        "value": "12",
+        "unitCode": "MON"
+      }
+    }
+  },
+  '/delivery': {
+    "@context": "https://schema.org",
+    "@type": "DeliveryMethod",
+    "name": "Доставка компьютеров по Волжскому",
+    "description": "Бесплатная доставка при заказе от 50 000₽"
+  }
 };
 
 const pageSEO: Record<string, SEOProps> = {
@@ -74,6 +236,7 @@ const SEO = () => {
   useEffect(() => {
     const currentPath = location.pathname;
     const seo = pageSEO[currentPath] || defaultSEO;
+    const schema = pageSchemas[currentPath];
 
     document.title = seo.title || defaultSEO.title;
     
@@ -115,6 +278,19 @@ const SEO = () => {
     const twitterDescription = document.querySelector('meta[name="twitter:description"]');
     if (twitterDescription) {
       twitterDescription.setAttribute('content', seo.description || defaultSEO.description);
+    }
+
+    let schemaScript = document.getElementById('page-schema');
+    if (schemaScript) {
+      schemaScript.remove();
+    }
+
+    if (schema) {
+      schemaScript = document.createElement('script');
+      schemaScript.id = 'page-schema';
+      schemaScript.type = 'application/ld+json';
+      schemaScript.textContent = JSON.stringify(schema);
+      document.head.appendChild(schemaScript);
     }
   }, [location]);
 
