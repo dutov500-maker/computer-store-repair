@@ -1,45 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Главная страница -->
   <url>
     <loc>https://computer-store-repair.poehali.dev/</loc>
-    <lastmod>2025-10-17</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  <!-- Каталог компьютеров -->
   <url>
     <loc>https://computer-store-repair.poehali.dev/catalog</loc>
-    <lastmod>2025-10-17</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
+  
+  <!-- Услуги ремонта -->
   <url>
     <loc>https://computer-store-repair.poehali.dev/services</loc>
-    <lastmod>2025-10-17</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+  
+  <!-- Подбор компьютера -->
   <url>
     <loc>https://computer-store-repair.poehali.dev/pc-selection</loc>
-    <lastmod>2025-10-17</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+  <!-- Портфолио работ -->
   <url>
     <loc>https://computer-store-repair.poehali.dev/portfolio</loc>
-    <lastmod>2025-10-17</lastmod>
+    <lastmod>2025-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+  <!-- Отзывы -->
   <url>
     <loc>https://computer-store-repair.poehali.dev/reviews</loc>
-    <lastmod>2025-10-17</lastmod>
+    <lastmod>2025-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  
+  <!-- Блог -->
   <url>
     <loc>https://computer-store-repair.poehali.dev/blog</loc>
-    <lastmod>2025-10-17</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.7</priority>
+  </url>
+  
+  <!-- Контакты -->
+  <url>
+    <loc>https://computer-store-repair.poehali.dev/contact</loc>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Гарантия -->
+  <url>
+    <loc>https://computer-store-repair.poehali.dev/warranty</loc>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Доставка -->
+  <url>
+    <loc>https://computer-store-repair.poehali.dev/delivery</loc>
+    <lastmod>2025-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

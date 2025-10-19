@@ -1,17 +1,25 @@
+# Правила для всех поисковых роботов
 User-agent: *
 Allow: /
+Crawl-delay: 0
 
+# Разрешаем Яндексу всё
 User-agent: Yandex
 Allow: /
+Crawl-delay: 0
+Host: computer-store-repair.poehali.dev
 
+# Разрешаем Google всё
 User-agent: Googlebot
 Allow: /
 
+# Разрешаем Bing всё
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://computer-store-repair.poehali.dev/sitemap.xml
-
-# Запрет индексации админки
+# Запрещаем индексацию админки и служебных страниц
 Disallow: /admin/
 Disallow: /admin/login
+
+# Карта сайта для быстрой индексации
+Sitemap: https://computer-store-repair.poehali.dev/sitemap.xml
