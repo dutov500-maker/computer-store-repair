@@ -10,8 +10,6 @@ import { FAQSection } from '@/components/HomePage/FAQSection';
 import { StatsSection } from '@/components/HomePage/StatsSection';
 import { ConsultationFormSection } from '@/components/HomePage/ConsultationFormSection';
 import { initializeStorage, getServices } from '@/lib/localStorage';
-import PC3DViewer from '@/components/PC3DViewer';
-import RecentlyViewed from '@/components/RecentlyViewed';
 
 const Index = () => {
   const [services, setServices] = useState<any[]>([]);
@@ -55,13 +53,7 @@ const Index = () => {
       <Header />
       <HeroSection />
       <StatsSection />
-      <div className="container mx-auto px-4 py-12">
-        <RecentlyViewed />
-      </div>
       <ConsultationSection />
-      <div className="container mx-auto px-4 py-12">
-        <PC3DViewer />
-      </div>
       <CatalogSection />
       <ServicesSection services={services} advantages={advantages} />
       <FAQSection />

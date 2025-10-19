@@ -272,12 +272,6 @@ const Catalog = () => {
                       <div className="text-sm text-muted-foreground">От</div>
                       <div className="text-2xl font-heading font-bold">{pc.price.toLocaleString()} ₽</div>
                     </div>
-                    <Link to={`/product/${pc.id}`}>
-                      <Button className="bg-primary hover:bg-primary/90">
-                        Подробнее
-                        <Icon name="ArrowRight" size={18} />
-                      </Button>
-                    </Link>
                   </div>
                 </div>
               </Card>
