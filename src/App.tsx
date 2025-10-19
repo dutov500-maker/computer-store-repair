@@ -8,6 +8,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import SEO from "./components/SEO";
 import Breadcrumbs from "./components/Breadcrumbs";
 import CallbackForm from "./components/CallbackForm";
+import LiveChat from "./components/LiveChat";
+import PCCalculator from "./components/PCCalculator";
 import Index from "./pages/Index";
 import Catalog from "./pages/Catalog";
 import Portfolio from "./pages/Portfolio";
@@ -37,6 +39,8 @@ const App = () => (
         <SEO />
         <Breadcrumbs />
         <CallbackForm />
+        <LiveChat />
+        <PCCalculator />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/catalog" element={<Catalog />} />
