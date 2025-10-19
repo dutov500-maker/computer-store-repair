@@ -11,6 +11,7 @@ import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
 import { addRequest } from '@/lib/localStorage';
 import funcUrls from '../../backend/func2url.json';
+import { addToRecentlyViewed } from '@/components/RecentlyViewed';
 
 interface CatalogItem {
   id: number;
@@ -50,6 +51,17 @@ const ProductDetail = () => {
       
       const data = await response.json();
       setProduct(data);
+      
+      if (data) {
+        addToRecentlyViewed({
+          id: data.id.toString(),
+          title: data.title,
+          price: data.price,
+          image: data.image_url,
+          category: data.resolution || 'ПК',
+          url: `/product/${data.id}`
+        });
+      }
     } catch (err) {
       console.error('Ошибка загрузки товара:', err);
       setProduct(null);
