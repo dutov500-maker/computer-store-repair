@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import SEO from "./components/SEO";
 import Breadcrumbs from "./components/Breadcrumbs";
+import CallbackForm from "./components/CallbackForm";
 import Index from "./pages/Index";
 import Catalog from "./pages/Catalog";
 import Portfolio from "./pages/Portfolio";
@@ -35,6 +36,7 @@ const App = () => (
         <ScrollToTop />
         <SEO />
         <Breadcrumbs />
+        <CallbackForm />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/catalog" element={<Catalog />} />
