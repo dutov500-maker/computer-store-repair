@@ -150,7 +150,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-medium">Остановка "Александрова"</p>
-                    <p className="text-sm text-muted-foreground">Автобусы: 2, 5, 12, 28</p>
+                    <p className="text-sm text-muted-foreground">Автобусы: 16, 123</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
