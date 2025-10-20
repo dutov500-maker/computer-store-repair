@@ -20,7 +20,7 @@ const Contact = () => {
     {
       icon: 'Mail',
       title: 'Email',
-      content: 'info@pclab.ru',
+      content: 'dutov.off@yandex.ru',
       subtitle: 'Ответим в течение часа'
     },
     {
@@ -114,11 +114,11 @@ const Contact = () => {
                 Написать в Telegram
               </a>
               <a
-                href="mailto:info@pclab.ru"
+                href="mailto:dutov.off@yandex.ru"
                 className="w-full px-6 py-4 bg-secondary text-foreground border border-border rounded-lg font-bold hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2"
               >
                 <Icon name="Mail" size={22} />
-                Email: info@pclab.ru
+                Email: dutov.off@yandex.ru
               </a>
             </div>
             <p className="text-center text-sm text-muted-foreground mt-6">
