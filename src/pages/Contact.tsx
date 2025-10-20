@@ -80,49 +80,51 @@ const Contact = () => {
             ))}
           </div>
 
-          <Card className="p-6 animate-fade-in" style={{ animationDelay: '400ms' }}>
-            <h3 className="font-heading font-bold text-2xl mb-4">
-              Отправьте сообщение
+          <Card className="p-6 animate-fade-in bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20" style={{ animationDelay: '400ms' }}>
+            <h3 className="font-heading font-bold text-2xl mb-4 text-center">
+              Свяжитесь с нами
             </h3>
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Ваше имя
-                </label>
-                <input
-                  type="text"
-                  placeholder="Иван Иванов"
-                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Телефон
-                </label>
-                <input
-                  type="tel"
-                  placeholder="+7 (900) 123-45-67"
-                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Сообщение
-                </label>
-                <textarea
-                  rows={4}
-                  placeholder="Расскажите, чем мы можем помочь..."
-                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors resize-none"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-lg font-bold hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2"
+            <p className="text-muted-foreground text-center mb-6">
+              Выберите удобный способ связи — мы всегда на связи!
+            </p>
+            <div className="space-y-3">
+              <a
+                href="tel:+79950272707"
+                className="w-full px-6 py-4 bg-primary text-primary-foreground rounded-lg font-bold hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2"
               >
-                Отправить сообщение
-                <Icon name="Send" size={18} />
-              </button>
-            </form>
+                <Icon name="Phone" size={22} />
+                Позвонить: +7 995 027 27 07
+              </a>
+              <a
+                href="https://wa.me/79950272707"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full px-6 py-4 bg-[#25D366] text-white rounded-lg font-bold hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2"
+              >
+                <Icon name="MessageCircle" size={22} />
+                Написать в WhatsApp
+              </a>
+              <a
+                href="https://t.me/+79950272707"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full px-6 py-4 bg-[#0088cc] text-white rounded-lg font-bold hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2"
+              >
+                <Icon name="Send" size={22} />
+                Написать в Telegram
+              </a>
+              <a
+                href="mailto:info@pclab.ru"
+                className="w-full px-6 py-4 bg-secondary text-foreground border border-border rounded-lg font-bold hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2"
+              >
+                <Icon name="Mail" size={22} />
+                Email: info@pclab.ru
+              </a>
+            </div>
+            <p className="text-center text-sm text-muted-foreground mt-6">
+              <Icon name="Clock" size={14} className="inline mr-1" />
+              Пн-Пт: 11:00-18:00, Сб: 11:00-16:00
+            </p>
           </Card>
         </div>
 

@@ -1,148 +1,75 @@
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
-import { useToast } from '@/hooks/use-toast';
-import { addRequest } from '@/lib/localStorage';
 
 interface ServiceRequestFormProps {
   trigger?: React.ReactNode;
 }
 
 const ServiceRequestForm = ({ trigger }: ServiceRequestFormProps) => {
-  const [open, setOpen] = useState(false);
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [serviceType, setServiceType] = useState('');
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);
-  const { toast } = useToast();
-
-  const services = [
-    'Диагностика компьютера',
-    'Замена комплектующих',
-    'Чистка от пыли',
-    'Замена термопасты',
-    'Ремонт ноутбуков',
-    'Установка ПО',
-    'Сборка компьютера',
-    'Другое'
-  ];
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      addRequest({
-        name,
-        phone,
-        email,
-        service_type: serviceType,
-        message
-      });
-
-      toast({
-        title: 'Заявка отправлена!',
-        description: 'Мы свяжемся с вами в ближайшее время.',
-      });
-
-      setName('');
-      setPhone('');
-      setEmail('');
-      setServiceType('');
-      setMessage('');
-      setOpen(false);
-    } catch (error) {
-      toast({
-        title: 'Ошибка',
-        description: 'Не удалось отправить заявку',
-        variant: 'destructive'
-      });
-    } finally {
-      setLoading(false);
-    }
+  const handlePhoneClick = () => {
+    window.location.href = 'tel:+79950272707';
   };
 
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        {trigger || (
-          <Button size="lg" className="bg-primary hover:bg-primary/90">
-            <Icon name="FileText" size={20} />
-            Заказать услугу
-          </Button>
-        )}
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-heading">Заказать услугу</DialogTitle>
-        </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          <div>
-            <Input
-              placeholder="Ваше имя *"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <Input
-              type="tel"
-              placeholder="Телефон *"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <Input
-              type="email"
-              placeholder="Email (необязательно)"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <Select value={serviceType} onValueChange={setServiceType}>
-              <SelectTrigger>
-                <SelectValue placeholder="Выберите услугу" />
-              </SelectTrigger>
-              <SelectContent>
-                {services.map((service) => (
-                  <SelectItem key={service} value={service}>
-                    {service}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div>
-            <Textarea
-              placeholder="Опишите проблему или ваши требования"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              rows={4}
-            />
-          </div>
+  const handleWhatsAppClick = () => {
+    window.open('https://wa.me/79950272707', '_blank');
+  };
+
+  const handleTelegramClick = () => {
+    window.open('https://t.me/+79950272707', '_blank');
+  };
+
+  if (trigger) {
+    return (
+      <Card className="p-6 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+        <h3 className="font-heading font-bold text-xl mb-4 text-center">
+          Свяжитесь с нами удобным способом
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <Button 
-            type="submit" 
-            className="w-full bg-primary hover:bg-primary/90" 
-            disabled={loading}
+            size="lg" 
+            className="bg-primary hover:bg-primary/90 w-full"
+            onClick={handlePhoneClick}
           >
-            {loading ? 'Отправка...' : 'Отправить заявку'}
+            <Icon name="Phone" size={20} />
+            Позвонить
           </Button>
-          <p className="text-xs text-muted-foreground text-center">
-            * Обязательные поля
-          </p>
-        </form>
-      </DialogContent>
-    </Dialog>
+          <Button 
+            size="lg" 
+            variant="outline"
+            className="w-full border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white"
+            onClick={handleWhatsAppClick}
+          >
+            <Icon name="MessageCircle" size={20} />
+            WhatsApp
+          </Button>
+          <Button 
+            size="lg" 
+            variant="outline"
+            className="w-full border-[#0088cc] text-[#0088cc] hover:bg-[#0088cc] hover:text-white"
+            onClick={handleTelegramClick}
+          >
+            <Icon name="Send" size={20} />
+            Telegram
+          </Button>
+        </div>
+        <p className="text-center text-sm text-muted-foreground mt-4">
+          <Icon name="Clock" size={14} className="inline mr-1" />
+          Пн-Пт: 11:00-18:00, Сб: 11:00-16:00
+        </p>
+      </Card>
+    );
+  }
+
+  return (
+    <Button 
+      size="lg" 
+      className="bg-primary hover:bg-primary/90"
+      onClick={handlePhoneClick}
+    >
+      <Icon name="Phone" size={20} />
+      Позвонить
+    </Button>
   );
 };
 

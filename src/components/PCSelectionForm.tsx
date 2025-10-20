@@ -1,229 +1,89 @@
-import { useState } from 'react';
 import { Card } from '@/components/ui/card';
-import { useToast } from '@/hooks/use-toast';
-import { addRequest } from '@/lib/localStorage';
-import { StepIndicator } from './PCSelectionForm/StepIndicator';
-import { Step1Purpose } from './PCSelectionForm/Step1Purpose';
-import { Step2Budget } from './PCSelectionForm/Step2Budget';
-import { Step3Details } from './PCSelectionForm/Step3Details';
-import { Step4Contacts } from './PCSelectionForm/Step4Contacts';
+import { Button } from '@/components/ui/button';
+import Icon from '@/components/ui/icon';
 
 const PCSelectionForm = () => {
-  const { toast } = useToast();
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    budget: '',
-    purpose: [] as string[],
-    resolution: '',
-    games: [] as string[],
-    programs: '',
-    hasMonitor: '',
-    timing: '',
-    additionalInfo: ''
-  });
-  const [submitting, setSubmitting] = useState(false);
-
-  const purposes = [
-    { id: 'gaming-casual', label: 'Нетребовательные игры: Minecraft, Dota 2, Genshin...', category: 'gaming' },
-    { id: 'gaming-mid', label: 'Требовательные игры: CyberPunk 2077, Alan Wake...', category: 'gaming' },
-    { id: 'gaming-esports', label: 'Киберспортивные игры: CS 2, PUBG, Fortnite...', category: 'gaming' },
-    { id: 'design-graphics', label: 'Графический дизайн: Photoshop, Illustrator, Lightroom...', category: 'work' },
-    { id: 'design-cad', label: 'Для работы в САПР: AutoCAD, Revit, ArchiCAD...', category: 'work' },
-    { id: 'design-3d', label: 'Для 3D моделирования: 3Ds MAX, Blender, Sketchup...', category: 'work' },
-    { id: 'video', label: 'Для видеомонтажа: Vegas Pro, DaVinci, Premiere Pro...', category: 'work' },
-    { id: 'streaming', label: 'Для стриминга', category: 'work' },
-    { id: 'office', label: 'Для спокойной работы: Word, Excel, интернет-сёрфинг...', category: 'work' },
-    { id: 'other', label: 'Другое', category: 'other' }
-  ];
-
-  const budgetRanges = [
-    { 
-      value: '70000-100000', 
-      label: '70-100 тыс.', 
-      image: 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=300&h=300&fit=crop',
-      color: 'from-blue-500 to-blue-600'
-    },
-    { 
-      value: '100000-150000', 
-      label: '100-150 тыс.', 
-      image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=300&h=300&fit=crop',
-      color: 'from-gray-400 to-gray-600'
-    },
-    { 
-      value: '150000-200000', 
-      label: '150-200 тыс.', 
-      image: 'https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=300&h=300&fit=crop',
-      color: 'from-red-500 to-red-700'
-    },
-    { 
-      value: '200000+', 
-      label: 'Более 200 тыс.', 
-      image: 'https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?w=300&h=300&fit=crop',
-      color: 'from-purple-400 to-white'
-    }
-  ];
-
-  const resolutions = [
-    { value: 'FHD', label: 'FHD' },
-    { value: 'QHD', label: 'QHD (2K)' },
-    { value: 'UHD', label: 'UHD (4K)' }
-  ];
-
-  const handlePurposeToggle = (purposeId: string) => {
-    setFormData(prev => ({
-      ...prev,
-      purpose: prev.purpose.includes(purposeId)
-        ? prev.purpose.filter(p => p !== purposeId)
-        : [...prev.purpose, purposeId]
-    }));
+  const handlePhoneClick = () => {
+    window.location.href = 'tel:+79950272707';
   };
 
-  const handleSubmit = () => {
-    if (!formData.name || !formData.phone) {
-      toast({
-        title: 'Ошибка',
-        description: 'Заполните имя и телефон',
-        variant: 'destructive'
-      });
-      return;
-    }
-
-    setSubmitting(true);
-
-    const message = `
-ПОДБОР КОМПЬЮТЕРА
-
-Контакты:
-Имя: ${formData.name}
-Телефон: ${formData.phone}
-Email: ${formData.email || 'не указан'}
-
-Бюджет: ${formData.budget}
-
-Назначение: ${formData.purpose.map(p => purposes.find(pur => pur.id === p)?.label).join(', ')}
-
-Разрешение монитора: ${formData.resolution || 'не указано'}
-
-Есть монитор: ${formData.hasMonitor === 'yes' ? 'Да' : formData.hasMonitor === 'no' ? 'Нет' : 'не указано'}
-
-Когда планируете покупку: ${formData.timing || 'не указано'}
-
-${formData.additionalInfo ? `Дополнительно: ${formData.additionalInfo}` : ''}
-    `.trim();
-
-    try {
-      addRequest({
-        name: formData.name,
-        phone: formData.phone,
-        email: formData.email,
-        service_type: 'Подбор компьютера',
-        message
-      });
-
-      toast({
-        title: 'Заявка отправлена!',
-        description: 'Мы свяжемся с вами в ближайшее время'
-      });
-      
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        budget: '',
-        purpose: [],
-        resolution: '',
-        games: [],
-        programs: '',
-        hasMonitor: '',
-        timing: '',
-        additionalInfo: ''
-      });
-      setStep(1);
-    } catch (error) {
-      toast({
-        title: 'Ошибка',
-        description: 'Не удалось отправить заявку',
-        variant: 'destructive'
-      });
-    } finally {
-      setSubmitting(false);
-    }
+  const handleWhatsAppClick = () => {
+    window.open('https://wa.me/79950272707?text=Здравствуйте!%20Хочу%20подобрать%20компьютер', '_blank');
   };
 
-  const nextStep = () => {
-    if (step === 1 && formData.purpose.length === 0) {
-      toast({
-        title: 'Выберите назначение',
-        description: 'Укажите для чего нужен компьютер',
-        variant: 'destructive'
-      });
-      return;
-    }
-    if (step === 2 && !formData.budget) {
-      toast({
-        title: 'Укажите бюджет',
-        variant: 'destructive'
-      });
-      return;
-    }
-    setStep(step + 1);
+  const handleTelegramClick = () => {
+    window.open('https://t.me/+79950272707', '_blank');
   };
 
   return (
-    <Card className="p-6 md:p-8 max-w-5xl mx-auto">
-      <StepIndicator currentStep={step} totalSteps={4} />
+    <Card className="p-8 md:p-12 max-w-4xl mx-auto text-center">
+      <div className="mb-8">
+        <div className="inline-flex p-4 bg-primary/10 rounded-full mb-6">
+          <Icon name="Cpu" size={48} className="text-primary" />
+        </div>
+        <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+          Поможем подобрать идеальный компьютер
+        </h2>
+        <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-6">
+          Позвоните или напишите нам — расскажем о лучших конфигурациях под ваш бюджет и задачи
+        </p>
+      </div>
 
-      {step === 1 && (
-        <Step1Purpose
-          purposes={purposes}
-          selectedPurposes={formData.purpose}
-          onPurposeToggle={handlePurposeToggle}
-          onNext={nextStep}
-        />
-      )}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <Button 
+          size="lg" 
+          className="bg-primary hover:bg-primary/90 text-lg h-14"
+          onClick={handlePhoneClick}
+        >
+          <Icon name="Phone" size={24} />
+          Позвонить
+        </Button>
+        <Button 
+          size="lg" 
+          variant="outline"
+          className="border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white text-lg h-14"
+          onClick={handleWhatsAppClick}
+        >
+          <Icon name="MessageCircle" size={24} />
+          WhatsApp
+        </Button>
+        <Button 
+          size="lg" 
+          variant="outline"
+          className="border-[#0088cc] text-[#0088cc] hover:bg-[#0088cc] hover:text-white text-lg h-14"
+          onClick={handleTelegramClick}
+        >
+          <Icon name="Send" size={24} />
+          Telegram
+        </Button>
+      </div>
 
-      {step === 2 && (
-        <Step2Budget
-          budgetRanges={budgetRanges}
-          selectedBudget={formData.budget}
-          onBudgetSelect={(budget) => setFormData(prev => ({ ...prev, budget }))}
-          onNext={nextStep}
-          onBack={() => setStep(step - 1)}
-        />
-      )}
+      <div className="bg-secondary/50 rounded-lg p-6">
+        <h3 className="font-bold text-lg mb-4">Что мы обсудим:</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-left">
+          <div className="flex items-start gap-2">
+            <Icon name="Check" size={20} className="text-primary mt-1 flex-shrink-0" />
+            <span>Ваш бюджет и задачи</span>
+          </div>
+          <div className="flex items-start gap-2">
+            <Icon name="Check" size={20} className="text-primary mt-1 flex-shrink-0" />
+            <span>Лучшие комплектующие</span>
+          </div>
+          <div className="flex items-start gap-2">
+            <Icon name="Check" size={20} className="text-primary mt-1 flex-shrink-0" />
+            <span>Игры и программы</span>
+          </div>
+          <div className="flex items-start gap-2">
+            <Icon name="Check" size={20} className="text-primary mt-1 flex-shrink-0" />
+            <span>Стоимость и сроки</span>
+          </div>
+        </div>
+      </div>
 
-      {step === 3 && (
-        <Step3Details
-          resolutions={resolutions}
-          selectedResolution={formData.resolution}
-          hasMonitor={formData.hasMonitor}
-          timing={formData.timing}
-          additionalInfo={formData.additionalInfo}
-          onResolutionSelect={(resolution) => setFormData(prev => ({ ...prev, resolution }))}
-          onMonitorSelect={(hasMonitor) => setFormData(prev => ({ ...prev, hasMonitor }))}
-          onTimingChange={(timing) => setFormData(prev => ({ ...prev, timing }))}
-          onAdditionalInfoChange={(info) => setFormData(prev => ({ ...prev, additionalInfo: info }))}
-          onNext={nextStep}
-          onBack={() => setStep(step - 1)}
-        />
-      )}
-
-      {step === 4 && (
-        <Step4Contacts
-          name={formData.name}
-          phone={formData.phone}
-          email={formData.email}
-          onNameChange={(name) => setFormData(prev => ({ ...prev, name }))}
-          onPhoneChange={(phone) => setFormData(prev => ({ ...prev, phone }))}
-          onEmailChange={(email) => setFormData(prev => ({ ...prev, email }))}
-          onSubmit={handleSubmit}
-          onBack={() => setStep(step - 1)}
-          submitting={submitting}
-        />
-      )}
+      <p className="text-sm text-muted-foreground mt-6">
+        <Icon name="Clock" size={16} className="inline mr-1" />
+        Работаем: Пн-Пт 11:00-18:00, Сб 11:00-16:00
+      </p>
     </Card>
   );
 };
