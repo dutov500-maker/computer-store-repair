@@ -34,7 +34,7 @@ export const HeroSection = () => {
               <span className="text-sm font-semibold text-primary">🎮 Игровые ПК от 50 000 ₽</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
-              Создадим компьютер{' '}
+              Соберем компьютер{' '}
               <span className="text-gradient inline-block animate-pulse">вашей мечты</span>
             </h1>
             <p className="text-xl text-muted-foreground">
