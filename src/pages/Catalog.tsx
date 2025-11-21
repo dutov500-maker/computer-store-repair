@@ -247,9 +247,22 @@ const Catalog = () => {
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [activeFilter, setActiveFilter] = useState<string>('ALL');
   
   const loading = false;
   const error = null;
+
+  const filters = [
+    { id: 'ALL', label: 'Все', icon: 'LayoutGrid', count: catalog.length },
+    { id: 'ECO', label: 'ECO', icon: 'Leaf', count: catalog.filter(pc => pc.category === 'ECO').length, description: '45-65К' },
+    { id: 'SPECIAL', label: 'Special', icon: 'Star', count: catalog.filter(pc => pc.category === 'SPECIAL').length, description: '75-91К' },
+    { id: 'PREMIUM', label: 'Premium', icon: 'Crown', count: catalog.filter(pc => pc.category === 'PREMIUM').length, description: '135-169К' },
+    { id: 'ULTRA', label: 'Ultra', icon: 'Zap', count: catalog.filter(pc => pc.category === 'ULTRA').length, description: '205-450К' }
+  ];
+
+  const filteredCatalog = activeFilter === 'ALL' 
+    ? catalog 
+    : catalog.filter(pc => pc.category === activeFilter);
 
   const handlePCClick = (pc: any) => {
     setSelectedPC(pc);
@@ -314,9 +327,72 @@ const Catalog = () => {
           <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
             Каталог <span className="text-gradient">игровых ПК</span>
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
             Выберите готовую конфигурацию или создайте индивидуальную сборку
           </p>
+
+          <div className="flex flex-wrap gap-3 justify-center max-w-4xl mx-auto mb-8">
+            {filters.map((filter, index) => (
+              <button
+                key={filter.id}
+                onClick={() => setActiveFilter(filter.id)}
+                className={`group relative px-6 py-3 rounded-xl border-2 transition-all duration-300 animate-fade-in hover:scale-105 ${
+                  activeFilter === filter.id
+                    ? 'bg-gradient-to-br from-primary to-primary/80 border-primary text-white shadow-lg shadow-primary/30'
+                    : 'bg-card border-border hover:border-primary/50'
+                }`}
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="flex items-center gap-2">
+                  <Icon 
+                    name={filter.icon as any} 
+                    size={20} 
+                    className={activeFilter === filter.id ? 'text-white' : 'text-primary'}
+                  />
+                  <div className="text-left">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold">{filter.label}</span>
+                      <span className={`text-xs px-2 py-0.5 rounded-full ${
+                        activeFilter === filter.id 
+                          ? 'bg-white/20' 
+                          : 'bg-primary/10'
+                      }`}>
+                        {filter.count}
+                      </span>
+                    </div>
+                    {filter.description && (
+                      <span className={`text-xs ${
+                        activeFilter === filter.id 
+                          ? 'text-white/70' 
+                          : 'text-muted-foreground'
+                      }`}>
+                        {filter.description}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                {activeFilter === filter.id && (
+                  <div className="absolute -bottom-1 left-0 right-0 h-1 bg-white rounded-full animate-slide-in-left"></div>
+                )}
+              </button>
+            ))}
+          </div>
+
+          {activeFilter !== 'ALL' && (
+            <div className="max-w-2xl mx-auto mb-8 animate-fade-in">
+              <Card className="p-4 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                <div className="flex items-center justify-center gap-4 text-sm">
+                  <Icon name="Info" size={18} className="text-primary" />
+                  <p className="text-muted-foreground">
+                    {activeFilter === 'ECO' && 'Бюджетные сборки для Full HD игр'}
+                    {activeFilter === 'SPECIAL' && 'Оптимальные сборки для игр на ультра настройках'}
+                    {activeFilter === 'PREMIUM' && 'Мощные сборки для QHD гейминга'}
+                    {activeFilter === 'ULTRA' && 'Топовые сборки для 4K игр без компромиссов'}
+                  </p>
+                </div>
+              </Card>
+            </div>
+          )}
         </div>
 
         {loading && (
@@ -332,8 +408,16 @@ const Catalog = () => {
         )}
 
         {!loading && !error && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {catalog.map((pc, index) => (
+          <>
+            {filteredCatalog.length > 0 ? (
+              <>
+                <div className="mb-6 animate-fade-in">
+                  <p className="text-center text-muted-foreground">
+                    Найдено компьютеров: <span className="font-bold text-primary">{filteredCatalog.length}</span>
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {filteredCatalog.map((pc, index) => (
               <Card 
                 key={pc.id}
                 onClick={() => handlePCClick(pc)}
@@ -404,8 +488,17 @@ const Catalog = () => {
 
                 <div className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
               </Card>
-            ))}
-          </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="text-center py-12 animate-fade-in">
+                <Icon name="Search" size={64} className="mx-auto text-muted-foreground mb-4" />
+                <p className="text-xl font-bold mb-2">Ничего не найдено</p>
+                <p className="text-muted-foreground">Попробуйте выбрать другую категорию</p>
+              </div>
+            )}
+          </>
         )}
       </section>
 
