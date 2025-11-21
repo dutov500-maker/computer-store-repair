@@ -487,11 +487,12 @@ const Catalog = () => {
               <Card 
                 key={pc.id}
                 onClick={() => handlePCClick(pc)}
-                className={`group relative overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-500 animate-fade-in hover:-translate-y-3 border-2 bg-gradient-to-br ${getCategoryColor(pc.category)}`}
+                className={`group relative overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 animate-fade-in hover:-translate-y-3 hover:scale-[1.02] border-2 bg-gradient-to-br ${getCategoryColor(pc.category)}`}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-150"></div>
+                <div className="absolute -top-10 -left-10 w-20 h-20 bg-primary/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
                 
                 <div className="relative aspect-square overflow-hidden">
                   <div className="absolute top-3 left-3 z-10">

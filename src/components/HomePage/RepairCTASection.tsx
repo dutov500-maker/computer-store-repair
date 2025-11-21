@@ -77,9 +77,10 @@ export const RepairCTASection = () => {
 
   return (
     <>
-      <section className="py-20 bg-gradient-to-br from-primary/10 via-background to-primary/5 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(var(--primary)/0.15),transparent_50%)]"></div>
-        <div className="absolute top-10 right-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+      <section className="py-20 bg-gradient-to-br from-red-500/10 via-background to-primary/10 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(var(--primary)/0.15),transparent_50%)] animate-pulse"></div>
+        <div className="absolute top-10 right-10 w-64 h-64 bg-red-500/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
         
         <div className="container mx-auto px-4 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -134,14 +135,14 @@ export const RepairCTASection = () => {
                 {urgentServices.map((service, index) => (
                   <Card 
                     key={index}
-                    className="p-4 hover:border-primary transition-all duration-300 hover:scale-105 group cursor-pointer"
+                    className="p-4 hover:border-primary hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-105 hover:-translate-y-1 group cursor-pointer bg-card/50 backdrop-blur"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary group-hover:scale-110 transition-all">
+                      <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary group-hover:scale-110 group-hover:rotate-6 transition-all">
                         <Icon name={service.icon as any} size={20} className="text-primary group-hover:text-white transition-colors" />
                       </div>
-                      <p className="text-sm font-medium">{service.text}</p>
+                      <p className="text-sm font-medium group-hover:text-primary transition-colors">{service.text}</p>
                     </div>
                   </Card>
                 ))}

@@ -6,23 +6,23 @@
 
 @layer base {
   :root {
-    --background: 230 35% 12%;
+    --background: 230 35% 10%;
     --foreground: 0 0% 100%;
 
-    --card: 230 30% 16%;
+    --card: 230 30% 14%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 230 30% 16%;
+    --popover: 230 30% 14%;
     --popover-foreground: 0 0% 100%;
 
     --primary: 17 100% 61%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 230 30% 20%;
+    --secondary: 230 30% 18%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 230 25% 25%;
-    --muted-foreground: 0 0% 70%;
+    --muted: 230 25% 22%;
+    --muted-foreground: 0 0% 75%;
 
     --accent: 17 100% 61%;
     --accent-foreground: 0 0% 100%;
@@ -30,8 +30,8 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 230 20% 30%;
-    --input: 230 20% 30%;
+    --border: 230 20% 25%;
+    --input: 230 20% 25%;
     --ring: 17 100% 61%;
 
     --radius: 0.5rem;
@@ -115,24 +115,25 @@
     background-image:
       radial-gradient(
         at 0% 0%,
-        hsl(var(--primary) / 0.03) 0px,
+        hsl(var(--primary) / 0.08) 0px,
         transparent 50%
       ),
       radial-gradient(
         at 100% 0%,
-        hsl(var(--primary) / 0.03) 0px,
+        hsl(var(--primary) / 0.06) 0px,
         transparent 50%
       ),
       radial-gradient(
         at 100% 100%,
-        hsl(var(--primary) / 0.03) 0px,
+        hsl(var(--primary) / 0.08) 0px,
         transparent 50%
       ),
       radial-gradient(
         at 0% 100%,
-        hsl(var(--primary) / 0.03) 0px,
+        hsl(var(--primary) / 0.06) 0px,
         transparent 50%
       );
+    background-attachment: fixed;
   }
 
   h1,
@@ -201,14 +202,23 @@
     animation: glowPulse 3s ease-in-out infinite;
   }
 
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-zoom-in {
+    animation: zoomIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
   .perspective-1000 {
     perspective: 1000px;
   }
 
   .glass-effect {
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
   }
 
   .hover-lift {
@@ -393,6 +403,28 @@
     }
     50% {
       filter: drop-shadow(0 0 20px rgba(255, 119, 51, 0.9));
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
     }
   }
 
