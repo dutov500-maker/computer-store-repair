@@ -64,7 +64,7 @@ const STATIC_CATALOG = [
     price: 75000,
     resolution: "Full HD",
     category: "SPECIAL",
-    image_url: "https://cdn.poehali.dev/files/1a84e611-89ea-4feb-9364-5ab4c578d6fe.jpg",
+    image_url: "https://cdn.poehali.dev/files/f24b5ff3-a292-4460-8b3b-20d8638d70eb.jpg",
     specs: {
       cpu: "AMD Ryzen 5 5600",
       gpu: "Palit RTX 5060 Dual 8GB",
