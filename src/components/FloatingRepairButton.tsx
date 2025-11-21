@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import {
@@ -14,6 +15,12 @@ import { toast } from 'sonner';
 import funcUrls from '../../backend/func2url.json';
 
 export const FloatingRepairButton = () => {
+  const location = useLocation();
+  const allowedRoutes = ['/', '/services'];
+  
+  if (!allowedRoutes.includes(location.pathname)) {
+    return null;
+  }
   const [dialogOpen, setDialogOpen] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
