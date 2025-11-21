@@ -38,11 +38,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     body_data = json.loads(event.get('body', '{}'))
     
-    name = body_data.get('name', '').strip()
-    phone = body_data.get('phone', '').strip()
-    email = body_data.get('email', '').strip()
-    service_type = body_data.get('service_type', '').strip()
-    message = body_data.get('message', '').strip()
+    name = (body_data.get('name') or '').strip()
+    phone = (body_data.get('phone') or '').strip()
+    email = (body_data.get('email') or '').strip()
+    service_type = (body_data.get('service_type') or '').strip()
+    message = (body_data.get('message') or '').strip()
     
     if not name or not phone:
         return {
