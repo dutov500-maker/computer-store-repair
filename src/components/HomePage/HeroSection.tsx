@@ -3,8 +3,27 @@ import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+const SLIDER_IMAGES = [
+  {
+    url: 'https://cdn.poehali.dev/files/044e99ed-96c0-4b15-a20f-d24bc03dd8bf.jpg',
+    title: 'Ultra 1',
+    category: 'ULTRA'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/8a8ed9ab-26a2-498e-a7bd-4132aeb73c1a.jpg',
+    title: 'Premium 4',
+    category: 'PREMIUM'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/58fe0b06-c3a8-4533-a82d-2057abfb5d7c.jpg',
+    title: 'Elite 1',
+    category: 'ELITE'
+  }
+];
+
 export const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -12,6 +31,13 @@ export const HeroSection = () => {
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % SLIDER_IMAGES.length);
+    }, 4000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -79,13 +105,44 @@ export const HeroSection = () => {
           <div className="relative animate-scale-in">
             <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 via-primary/10 to-transparent rounded-3xl blur-3xl animate-pulse"></div>
             <div className="relative group perspective-1000">
-              <div className="relative transform-gpu transition-transform duration-500 group-hover:rotateY-5">
+              <div className="relative transform-gpu transition-transform duration-500 group-hover:rotateY-5 overflow-hidden rounded-2xl">
+                {SLIDER_IMAGES.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-all duration-700 ${
+                      index === currentSlide
+                        ? 'opacity-100 scale-100'
+                        : 'opacity-0 scale-95 pointer-events-none'
+                    }`}
+                  >
+                    <img 
+                      src={image.url}
+                      alt={image.title}
+                      className="relative rounded-2xl shadow-2xl w-full h-full object-cover border border-primary/20"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
                 <img 
-                  src="https://cdn.poehali.dev/files/044e99ed-96c0-4b15-a20f-d24bc03dd8bf.jpg"
-                  alt="Gaming PC"
-                  className="relative rounded-2xl shadow-2xl w-full border border-primary/20"
+                  src={SLIDER_IMAGES[0].url}
+                  alt="Placeholder"
+                  className="relative rounded-2xl shadow-2xl w-full border border-primary/20 invisible"
                 />
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+              </div>
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+                {SLIDER_IMAGES.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === currentSlide
+                        ? 'bg-primary w-8'
+                        : 'bg-white/50 hover:bg-white/70'
+                    }`}
+                    aria-label={`Слайд ${index + 1}`}
+                  />
+                ))}
               </div>
               <div className="absolute -bottom-6 -right-6 bg-gradient-to-br from-primary to-primary/80 text-white px-6 py-4 rounded-2xl shadow-xl animate-bounce-slow">
                 <p className="text-sm font-semibold">Гарантия</p>
