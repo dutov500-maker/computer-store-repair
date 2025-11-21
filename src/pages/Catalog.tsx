@@ -18,6 +18,7 @@ const STATIC_CATALOG = [
     description: "Бюджетный игровой системный блок за 45.000 руб под Full HD Gaming",
     price: 45000,
     resolution: "Full HD",
+    category: "ECO",
     image_url: "https://cdn.poehali.dev/files/c34a83da-49a6-4f23-be6f-9170e632efa2.jpg",
     specs: {
       cpu: "AMD Ryzen 5 5500",
@@ -32,6 +33,7 @@ const STATIC_CATALOG = [
     description: "Бюджетный игровой системный блок за 50.000 руб под Full HD Gaming",
     price: 50000,
     resolution: "Full HD",
+    category: "ECO",
     image_url: "https://cdn.poehali.dev/files/56cb3b09-3249-4909-977d-b29d88f7b9a3.jpg",
     specs: {
       cpu: "Intel Core i3-12100F",
@@ -46,6 +48,7 @@ const STATIC_CATALOG = [
     description: "Бюджетный игровой системный блок за 60.000 руб под Full HD Gaming",
     price: 65000,
     resolution: "Full HD",
+    category: "ECO",
     image_url: "https://cdn.poehali.dev/files/8a36ec5e-21fd-46cb-8e25-bc66341b14c9.jpg",
     specs: {
       cpu: "AMD Ryzen 5 5600",
@@ -60,6 +63,7 @@ const STATIC_CATALOG = [
     description: "Готовое решение для сборки за 75 тысяч рублей под Full-HD Gaming на Ультра настройках графики",
     price: 75000,
     resolution: "Full HD",
+    category: "SPECIAL",
     image_url: "https://cdn.poehali.dev/files/1a84e611-89ea-4feb-9364-5ab4c578d6fe.jpg",
     specs: {
       cpu: "AMD Ryzen 5 5600",
@@ -74,6 +78,7 @@ const STATIC_CATALOG = [
     description: "Готовое решение для сборки за 89 тысяч рублей под Full-HD Gaming на Ультра настройках графики",
     price: 89000,
     resolution: "Full HD",
+    category: "SPECIAL",
     image_url: "https://cdn.poehali.dev/files/25848486-d127-48bf-bfdc-36a0c277e5c8.jpg",
     specs: {
       cpu: "Intel Core i5-12400F",
@@ -88,6 +93,7 @@ const STATIC_CATALOG = [
     description: "Готовое решение для сборки за 91 тысяч рублей под Full-HD Gaming на Ультра настройках графики",
     price: 91000,
     resolution: "Full HD",
+    category: "SPECIAL",
     image_url: "https://cdn.poehali.dev/files/e2cab568-abdf-41af-9a9f-740013842310.jpg",
     specs: {
       cpu: "AMD Ryzen 5 8400F",
@@ -102,6 +108,7 @@ const STATIC_CATALOG = [
     description: "Игровой компьютер за 135 тысяч рублей под QHD Gaming на Ультра настройках графики",
     price: 135000,
     resolution: "QHD",
+    category: "PREMIUM",
     image_url: "https://cdn.poehali.dev/files/b7be6eda-2639-4f88-86a8-48abdbd07051.jpg",
     specs: {
       cpu: "AMD Ryzen 7 7700",
@@ -116,6 +123,7 @@ const STATIC_CATALOG = [
     description: "Игровой компьютер за 145 тысяч рублей под QHD Gaming на Ультра настройках графики",
     price: 145000,
     resolution: "QHD",
+    category: "PREMIUM",
     image_url: "https://cdn.poehali.dev/files/ae489047-44a3-4dde-932f-ed6a5199e352.jpg",
     specs: {
       cpu: "Intel Core i5-14400F",
@@ -130,6 +138,7 @@ const STATIC_CATALOG = [
     description: "Игровой компьютер за 169 тысяч рублей под QHD Gaming на Ультра настройках графики",
     price: 169000,
     resolution: "QHD",
+    category: "PREMIUM",
     image_url: "https://cdn.poehali.dev/files/022b9002-704a-432c-8640-8b6877016612.jpg",
     specs: {
       cpu: "Intel Core i7-14700F",
@@ -144,6 +153,7 @@ const STATIC_CATALOG = [
     description: "Топовый игровой компьютер за 205 тысяч рублей под 4K Gaming",
     price: 205000,
     resolution: "4K",
+    category: "ULTRA",
     image_url: "https://cdn.poehali.dev/files/cd49eac6-95f0-48e5-a2e2-3987a99a7e44.jpg",
     specs: {
       cpu: "AMD Ryzen 7 9700X",
@@ -158,6 +168,7 @@ const STATIC_CATALOG = [
     description: "Топовый игровой компьютер за 215 тысяч рублей под 4K Gaming",
     price: 215000,
     resolution: "4K",
+    category: "ULTRA",
     image_url: "https://cdn.poehali.dev/files/7ab77389-609a-4e35-8e36-e100031e6bae.jpg",
     specs: {
       cpu: "Intel Core i7-14700F",
@@ -172,6 +183,7 @@ const STATIC_CATALOG = [
     description: "Максимальная производительность для 4K Gaming без компромиссов",
     price: 350000,
     resolution: "4K",
+    category: "ULTRA",
     image_url: "https://cdn.poehali.dev/files/8f7c4b94-c6cc-4755-acd9-b8a2a84bd597.jpg",
     specs: {
       cpu: "Intel Core i9-14900F",
@@ -186,6 +198,7 @@ const STATIC_CATALOG = [
     description: "Абсолютный топ для профессионального гейминга и стриминга в 4K",
     price: 450000,
     resolution: "4K",
+    category: "ULTRA",
     image_url: "https://cdn.poehali.dev/files/47a9814a-0246-4ac6-aa93-a35c472f606f.jpg",
     specs: {
       cpu: "Intel Core i9-14900KS",
@@ -195,6 +208,36 @@ const STATIC_CATALOG = [
     }
   }
 ];
+
+const getCategoryColor = (category: string) => {
+  switch (category) {
+    case 'ECO':
+      return 'from-green-500/20 to-green-600/10 border-green-500/30';
+    case 'SPECIAL':
+      return 'from-blue-500/20 to-blue-600/10 border-blue-500/30';
+    case 'PREMIUM':
+      return 'from-purple-500/20 to-purple-600/10 border-purple-500/30';
+    case 'ULTRA':
+      return 'from-orange-500/20 to-orange-600/10 border-orange-500/30';
+    default:
+      return 'from-primary/20 to-primary/10 border-primary/30';
+  }
+};
+
+const getCategoryBadgeColor = (category: string) => {
+  switch (category) {
+    case 'ECO':
+      return 'bg-green-500/10 text-green-500 border-green-500/30';
+    case 'SPECIAL':
+      return 'bg-blue-500/10 text-blue-500 border-blue-500/30';
+    case 'PREMIUM':
+      return 'bg-purple-500/10 text-purple-500 border-purple-500/30';
+    case 'ULTRA':
+      return 'bg-orange-500/10 text-orange-500 border-orange-500/30';
+    default:
+      return 'bg-primary/10 text-primary border-primary/30';
+  }
+};
 
 const Catalog = () => {
   const [catalog] = useState<any[]>(STATIC_CATALOG);
@@ -265,190 +308,208 @@ const Catalog = () => {
       
       <section className="py-16 container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-in">
+          <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
+            <span className="text-sm font-semibold text-primary">🎮 ГОТОВЫЕ СБОРКИ</span>
+          </div>
           <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-            Каталог компьютеров
+            Каталог <span className="text-gradient">игровых ПК</span>
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Выберите готовую сборку под ваши задачи или создайте уникальную конфигурацию
+            Выберите готовую конфигурацию или создайте индивидуальную сборку
           </p>
         </div>
 
-        <div className="mb-12">
-          <h2 className="text-3xl font-heading font-bold mb-8">Игровые компьютеры</h2>
-          {loading ? (
-            <div className="text-center py-12">
-              <Icon name="Loader2" className="animate-spin mx-auto mb-4" size={48} />
-              <p className="text-muted-foreground">Загрузка...</p>
-            </div>
-          ) : error ? (
-            <div className="text-center py-12">
-              <Icon name="AlertCircle" className="mx-auto mb-4 text-destructive" size={64} />
-              <p className="text-muted-foreground mb-4">{error}</p>
-            </div>
-          ) : catalog.length === 0 ? (
-            <div className="text-center py-12">
-              <Icon name="Package" className="mx-auto mb-4 text-muted-foreground" size={64} />
-              <p className="text-muted-foreground">Товары временно отсутствуют</p>
-            </div>
-          ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {loading && (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">Загрузка каталога...</p>
+          </div>
+        )}
+
+        {error && (
+          <div className="text-center py-12">
+            <p className="text-destructive">Ошибка загрузки: {error}</p>
+          </div>
+        )}
+
+        {!loading && !error && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {catalog.map((pc, index) => (
               <Card 
-                key={pc.id} 
-                className="overflow-hidden bg-card hover:border-primary transition-all duration-300 hover:scale-105 animate-fade-in cursor-pointer"
-                style={{ animationDelay: `${index * 100}ms` }}
+                key={pc.id}
                 onClick={() => handlePCClick(pc)}
+                className={`group relative overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-500 animate-fade-in hover:-translate-y-3 border-2 bg-gradient-to-br ${getCategoryColor(pc.category)}`}
+                style={{ animationDelay: `${index * 50}ms` }}
               >
-                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-secondary to-background">
-                  {pc.image_url ? (
-                    <img 
-                      src={pc.image_url} 
-                      alt={pc.title}
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <Icon name="Monitor" size={64} className="text-muted-foreground" />
-                    </div>
-                  )}
-                  <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-bold">
-                    {pc.resolution}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                
+                <div className="relative aspect-square overflow-hidden">
+                  <div className="absolute top-3 left-3 z-10">
+                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold border ${getCategoryBadgeColor(pc.category)}`}>
+                      {pc.category}
+                    </span>
                   </div>
+                  <div className="absolute top-3 right-3 z-10">
+                    <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-primary/90 text-white border border-primary">
+                      {pc.resolution}
+                    </span>
+                  </div>
+                  <img 
+                    src={pc.image_url} 
+                    alt={pc.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-heading font-bold mb-4">{pc.title}</h3>
-                  {pc.description && (
-                    <p className="text-muted-foreground mb-4 text-sm">{pc.description}</p>
-                  )}
-                  {pc.specs && (
-                    <ul className="space-y-2 mb-6">
-                      {Object.entries(pc.specs).map(([key, value], i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Icon name="Check" size={16} className="text-primary" />
-                          <span className="capitalize">{key}:</span> {value as string}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  <div className="flex items-center justify-between">
+
+                <div className="p-5 relative">
+                  <h3 className="font-heading font-bold text-lg mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                    {pc.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                    {pc.description}
+                  </p>
+
+                  <div className="space-y-2 mb-4 text-xs">
+                    <div className="flex items-center gap-2">
+                      <Icon name="Cpu" size={14} className="text-primary" />
+                      <span className="text-muted-foreground">{pc.specs.cpu}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Icon name="Monitor" size={14} className="text-primary" />
+                      <span className="text-muted-foreground">{pc.specs.gpu}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Icon name="MemoryStick" size={14} className="text-primary" />
+                      <span className="text-muted-foreground">{pc.specs.ram} • {pc.specs.storage}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-4 border-t border-border/50">
                     <div>
-                      <div className="text-sm text-muted-foreground">От</div>
-                      <div className="text-2xl font-heading font-bold">{pc.price.toLocaleString()} ₽</div>
+                      <p className="text-xs text-muted-foreground">Цена</p>
+                      <p className="text-2xl font-bold text-gradient">
+                        {pc.price.toLocaleString()} ₽
+                      </p>
                     </div>
+                    <Button 
+                      size="sm" 
+                      className="gradient-animated opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                    >
+                      <Icon name="ShoppingCart" size={16} className="mr-1" />
+                      Заказать
+                    </Button>
                   </div>
                 </div>
+
+                <div className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
               </Card>
             ))}
           </div>
-          )}
-        </div>
-
-        <div className="bg-card rounded-2xl p-8 md:p-12 text-center">
-          <h2 className="text-3xl font-heading font-bold mb-4">
-            Не нашли подходящую конфигурацию?
-          </h2>
-          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Мы подберем комплектующие специально под ваши задачи и бюджет
-          </p>
-          <a href="/#pc-selection">
-            <Button size="lg" className="bg-primary hover:bg-primary/90">
-              <Icon name="Settings" size={20} />
-              Собрать свой компьютер
-            </Button>
-          </a>
-        </div>
+        )}
       </section>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-2xl">
+            <DialogTitle className="text-2xl font-heading">
               {selectedPC?.title}
             </DialogTitle>
           </DialogHeader>
-          
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="bg-secondary/50 p-4 rounded-lg">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-muted-foreground">Цена:</span>
-                <span className="text-2xl font-bold">{selectedPC?.price.toLocaleString()} ₽</span>
+          <div className="space-y-6">
+            <div className="relative aspect-video overflow-hidden rounded-xl">
+              <img 
+                src={selectedPC?.image_url} 
+                alt={selectedPC?.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <Icon name="Cpu" className="text-primary" size={20} />
+                  <p className="text-xs text-muted-foreground">Процессор</p>
+                </div>
+                <p className="font-semibold">{selectedPC?.specs.cpu}</p>
               </div>
-              {selectedPC?.specs && (
-                <ul className="space-y-1 mt-4">
-                  {Object.entries(selectedPC.specs).map(([key, value], i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm">
-                      <Icon name="Check" size={14} className="text-primary" />
-                      <span className="capitalize text-muted-foreground">{key}:</span> {value as string}
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <Icon name="Monitor" className="text-primary" size={20} />
+                  <p className="text-xs text-muted-foreground">Видеокарта</p>
+                </div>
+                <p className="font-semibold">{selectedPC?.specs.gpu}</p>
+              </div>
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <Icon name="MemoryStick" className="text-primary" size={20} />
+                  <p className="text-xs text-muted-foreground">Оперативная память</p>
+                </div>
+                <p className="font-semibold">{selectedPC?.specs.ram}</p>
+              </div>
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <Icon name="HardDrive" className="text-primary" size={20} />
+                  <p className="text-xs text-muted-foreground">Накопитель</p>
+                </div>
+                <p className="font-semibold">{selectedPC?.specs.storage}</p>
+              </div>
             </div>
 
-            <div>
-              <Label htmlFor="order-name" className="text-base mb-2 block">
-                Ваше имя <span className="text-destructive">*</span>
-              </Label>
-              <Input
-                id="order-name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Как к вам обращаться?"
-                className="h-12"
-                required
-              />
+            <div className="p-6 bg-primary/5 rounded-xl border border-primary/20">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <p className="text-sm text-muted-foreground">Стоимость сборки</p>
+                  <p className="text-4xl font-bold text-gradient">{selectedPC?.price.toLocaleString()} ₽</p>
+                </div>
+                <div className="text-right">
+                  <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold border ${getCategoryBadgeColor(selectedPC?.category)}`}>
+                    {selectedPC?.category}
+                  </span>
+                  <p className="text-sm text-muted-foreground mt-2">{selectedPC?.resolution} Gaming</p>
+                </div>
+              </div>
             </div>
 
-            <div>
-              <Label htmlFor="order-phone" className="text-base mb-2 block">
-                Телефон <span className="text-destructive">*</span>
-              </Label>
-              <Input
-                id="order-phone"
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="+7 (___) ___-__-__"
-                className="h-12"
-                required
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="order-message" className="text-base mb-2 block">
-                Комментарий (опционально)
-              </Label>
-              <Textarea
-                id="order-message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Дополнительные пожелания, вопросы..."
-                className="min-h-[100px]"
-              />
-            </div>
-
-            <Button 
-              type="submit" 
-              size="lg" 
-              className="w-full text-lg h-14"
-              disabled={submitting}
-            >
-              {submitting ? (
-                <>
-                  <Icon name="Loader2" className="animate-spin" size={20} />
-                  Отправка...
-                </>
-              ) : (
-                <>
-                  <Icon name="Send" size={20} />
-                  Отправить заявку
-                </>
-              )}
-            </Button>
-          </form>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <Label htmlFor="name">Ваше имя *</Label>
+                <Input
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Иван Иванов"
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="phone">Телефон *</Label>
+                <Input
+                  id="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="+7 999 123 45 67"
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="message">Дополнительные пожелания</Label>
+                <Textarea
+                  id="message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Например: нужен монитор, хочу RGB подсветку..."
+                  rows={4}
+                />
+              </div>
+              <Button type="submit" className="w-full gradient-animated text-lg" size="lg" disabled={submitting}>
+                {submitting ? 'Отправка...' : 'Заказать эту сборку'}
+              </Button>
+            </form>
+          </div>
         </DialogContent>
       </Dialog>
-
+      
       <Footer />
     </div>
   );
