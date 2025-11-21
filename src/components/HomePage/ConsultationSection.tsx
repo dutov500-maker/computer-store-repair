@@ -25,7 +25,7 @@ export const ConsultationSection = () => {
               <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 via-primary/20 to-transparent rounded-3xl blur-3xl animate-pulse"></div>
               <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-primary/20 aspect-[3/4]">
                 <img 
-                  src="https://cdn.poehali.dev/files/8a8ed9ab-26a2-498e-a7bd-4132aeb73c1a.jpg"
+                  src="https://cdn.poehali.dev/files/fbdd3de3-893f-486b-9828-2e385f6b9f93.jpg"
                   alt="Gaming PC Components"
                   className="w-full h-full object-cover"
                   loading="lazy"
