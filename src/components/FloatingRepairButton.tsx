@@ -68,12 +68,12 @@ export const FloatingRepairButton = () => {
     <>
       <button
         onClick={() => setDialogOpen(true)}
-        className="fixed bottom-6 right-6 z-50 group"
+        className="fixed bottom-24 right-6 z-40 group"
         aria-label="Срочный ремонт"
       >
-        <div className="relative">
+        <div className="relative animate-bounce-slow">
           <div className="absolute inset-0 bg-red-500 rounded-full blur-xl opacity-60 animate-pulse"></div>
-          <div className="relative bg-gradient-to-br from-red-500 to-red-600 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 flex items-center gap-3 pr-6">
+          <div className="relative bg-gradient-to-br from-red-500 to-red-600 text-white p-4 rounded-full shadow-2xl hover:scale-125 transition-all duration-300 flex items-center gap-3 pr-6 animate-pulse-glow">
             <div className="relative">
               <span className="absolute -top-1 -right-1 flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
