@@ -81,7 +81,7 @@ export const HeroSection = () => {
             <div className="relative group perspective-1000">
               <div className="relative transform-gpu transition-transform duration-500 group-hover:rotateY-5">
                 <img 
-                  src="https://cdn.xn--80ajgbliqddk.xn--p1ai/files/abecf990-0148-4af7-ace4-2c4056d6be5b.jpg"
+                  src="https://cdn.poehali.dev/files/abecf990-0148-4af7-ace4-2c4056d6be5b.jpg"
                   alt="Gaming PC"
                   className="relative rounded-2xl shadow-2xl w-full border border-primary/20"
                 />
