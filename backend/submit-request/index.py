@@ -61,7 +61,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     cur = conn.cursor()
     
     query = """
-        INSERT INTO service_requests (name, phone, email, service_type, message, status)
+        INSERT INTO t_p43942577_computer_store_repai.service_requests (name, phone, email, service_type, message, status)
         VALUES (%s, %s, %s, %s, %s, 'new')
         RETURNING id
     """

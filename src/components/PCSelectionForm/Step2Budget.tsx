@@ -1,24 +1,23 @@
 import { Button } from '@/components/ui/button';
-
-interface BudgetRange {
-  value: string;
-  label: string;
-  image: string;
-  color: string;
-}
+import Icon from '@/components/ui/icon';
 
 interface Step2BudgetProps {
-  budgetRanges: BudgetRange[];
-  selectedBudget: string;
-  onBudgetSelect: (budget: string) => void;
+  budget: string;
+  onBudgetChange: (budget: string) => void;
   onNext: () => void;
   onBack: () => void;
 }
 
+const budgetRanges = [
+  { id: '50-70k', label: '50-70 тыс. ₽', icon: 'DollarSign', description: 'Базовый уровень' },
+  { id: '70-100k', label: '70-100 тыс. ₽', icon: 'DollarSign', description: 'Средний уровень' },
+  { id: '100-150k', label: '100-150 тыс. ₽', icon: 'DollarSign', description: 'Высокий уровень' },
+  { id: '150k+', label: 'От 150 тыс. ₽', icon: 'Crown', description: 'Премиум сегмент' }
+];
+
 export const Step2Budget = ({ 
-  budgetRanges, 
-  selectedBudget, 
-  onBudgetSelect, 
+  budget, 
+  onBudgetChange, 
   onNext, 
   onBack 
 }: Step2BudgetProps) => {
@@ -31,28 +30,24 @@ export const Step2Budget = ({
         <p className="text-muted-foreground">Выберите подходящий диапазон</p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {budgetRanges.map((range) => (
           <div
-            key={range.value}
-            className={`cursor-pointer rounded-xl overflow-hidden border-4 transition-all ${
-              selectedBudget === range.value
-                ? 'border-primary scale-105 shadow-xl'
-                : 'border-transparent hover:border-primary/30 hover:scale-102'
+            key={range.id}
+            className={`p-6 rounded-lg border-2 cursor-pointer transition-all hover:scale-105 ${
+              budget === range.id
+                ? 'border-primary bg-primary/5 shadow-lg'
+                : 'border-muted hover:border-primary/50'
             }`}
-            onClick={() => onBudgetSelect(range.value)}
+            onClick={() => onBudgetChange(range.id)}
           >
-            <div className="relative aspect-square">
-              <img
-                src={range.image}
-                alt={range.label}
-                className="w-full h-full object-cover"
-              />
-              <div className={`absolute inset-0 bg-gradient-to-br ${range.color} opacity-60`} />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-white font-bold text-lg md:text-xl text-center px-2 drop-shadow-lg">
-                  {range.label}
-                </span>
+            <div className="flex flex-col items-center text-center space-y-3">
+              <div className={`p-3 rounded-full ${budget === range.id ? 'bg-primary/20' : 'bg-secondary'}`}>
+                <Icon name={range.icon} size={32} className={budget === range.id ? 'text-primary' : 'text-muted-foreground'} />
+              </div>
+              <div>
+                <h4 className="font-bold text-lg">{range.label}</h4>
+                <p className="text-sm text-muted-foreground">{range.description}</p>
               </div>
             </div>
           </div>
@@ -63,7 +58,7 @@ export const Step2Budget = ({
         <Button variant="outline" size="lg" onClick={onBack}>
           Назад
         </Button>
-        <Button size="lg" onClick={onNext}>
+        <Button size="lg" onClick={onNext} disabled={!budget}>
           Далее
         </Button>
       </div>

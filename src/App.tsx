@@ -2,6 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from 'sonner';
 import ScrollToTop from "./components/ScrollToTop";
 import SEO from "./components/SEO";
 import Breadcrumbs from "./components/Breadcrumbs";
@@ -28,6 +29,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
+      <Toaster position="top-center" richColors />
       <ScrollToTop />
       <SEO />
       <Breadcrumbs />

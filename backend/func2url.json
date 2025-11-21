@@ -1,4 +1,6 @@
 {
   "api": "https://functions.poehali.dev/1231998a-30d0-49e4-ba66-a47b26c0ceb1",
+  "admin-catalog": "https://functions.poehali.dev/93fc0cfe-a2f1-46f2-b37d-05d50004ba58",
+  "admin-requests": "https://functions.poehali.dev/7e2e325a-8609-4daf-b054-a52bf0b1040c",
   "submit-request": "https://functions.poehali.dev/25621ff4-c4e5-4302-9356-43afeac8b2c5"
 }
