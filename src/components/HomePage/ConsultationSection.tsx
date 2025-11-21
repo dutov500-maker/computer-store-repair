@@ -1,6 +1,5 @@
 import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import Icon from '@/components/ui/icon';
+import ConsultationForm from '@/components/ConsultationForm';
 
 export const ConsultationSection = () => {
   return (
@@ -20,30 +19,7 @@ export const ConsultationSection = () => {
               <p className="text-muted-foreground mb-6 text-lg">
                 Мы создаём сбалансированные сборки, где каждый компонент идеально дополняет другой
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a 
-                  href="https://t.me/+79950272707" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex-1"
-                >
-                  <Button size="lg" className="w-full bg-[#0088cc] hover:bg-[#0088cc]/90 text-white shadow-lg hover:shadow-xl transition-all">
-                    <Icon name="Send" className="mr-2" size={20} />
-                    Написать в Telegram
-                  </Button>
-                </a>
-                <a 
-                  href="https://wa.me/79950272707" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex-1"
-                >
-                  <Button size="lg" className="w-full bg-[#25D366] hover:bg-[#25D366]/90 text-white shadow-lg hover:shadow-xl transition-all">
-                    <Icon name="MessageCircle" className="mr-2" size={20} />
-                    Написать в WhatsApp
-                  </Button>
-                </a>
-              </div>
+              <ConsultationForm />
             </div>
             <div className="relative hidden md:block max-w-md ml-auto">
               <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 via-primary/20 to-transparent rounded-3xl blur-3xl animate-pulse"></div>

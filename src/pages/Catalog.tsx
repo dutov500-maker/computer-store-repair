@@ -3,8 +3,13 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
-import { Link } from 'react-router-dom';
+import { toast } from 'sonner';
+import funcUrls from '../../backend/func2url.json';
 
 const STATIC_CATALOG = [
   {
@@ -193,8 +198,66 @@ const STATIC_CATALOG = [
 
 const Catalog = () => {
   const [catalog] = useState<any[]>(STATIC_CATALOG);
+  const [selectedPC, setSelectedPC] = useState<any>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [message, setMessage] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  
   const loading = false;
   const error = null;
+
+  const handlePCClick = (pc: any) => {
+    setSelectedPC(pc);
+    setDialogOpen(true);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!name.trim() || !phone.trim()) {
+      toast.error('Пожалуйста, заполните имя и телефон');
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      const pcMessage = `Интересует: ${selectedPC.title}\nЦена: ${selectedPC.price.toLocaleString()} ₽\n\nДополнительно: ${message.trim() || 'Не указано'}`;
+      
+      const response = await fetch(funcUrls['submit-request'], {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          phone: phone.trim(),
+          email: null,
+          service_type: 'Заказ ПК',
+          message: pcMessage
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        toast.success('Заявка отправлена! Мы свяжемся с вами в ближайшее время');
+        setName('');
+        setPhone('');
+        setMessage('');
+        setDialogOpen(false);
+      } else {
+        toast.error(data.error || 'Ошибка при отправке заявки');
+      }
+    } catch (error) {
+      console.error('Error submitting request:', error);
+      toast.error('Ошибка при отправке заявки. Попробуйте позвонить нам: +7 995 027 27 07');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen page-transition">
@@ -221,7 +284,6 @@ const Catalog = () => {
             <div className="text-center py-12">
               <Icon name="AlertCircle" className="mx-auto mb-4 text-destructive" size={64} />
               <p className="text-muted-foreground mb-4">{error}</p>
-              <Button onClick={fetchCatalog}>Повторить</Button>
             </div>
           ) : catalog.length === 0 ? (
             <div className="text-center py-12">
@@ -233,8 +295,9 @@ const Catalog = () => {
             {catalog.map((pc, index) => (
               <Card 
                 key={pc.id} 
-                className="overflow-hidden bg-card hover:border-primary transition-all duration-300 hover:scale-105 animate-fade-in"
+                className="overflow-hidden bg-card hover:border-primary transition-all duration-300 hover:scale-105 animate-fade-in cursor-pointer"
                 style={{ animationDelay: `${index * 100}ms` }}
+                onClick={() => handlePCClick(pc)}
               >
                 <div className="relative h-64 overflow-hidden bg-gradient-to-br from-secondary to-background">
                   {pc.image_url ? (
@@ -295,6 +358,97 @@ const Catalog = () => {
           </a>
         </div>
       </section>
+
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="text-2xl">
+              {selectedPC?.title}
+            </DialogTitle>
+          </DialogHeader>
+          
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="bg-secondary/50 p-4 rounded-lg">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm text-muted-foreground">Цена:</span>
+                <span className="text-2xl font-bold">{selectedPC?.price.toLocaleString()} ₽</span>
+              </div>
+              {selectedPC?.specs && (
+                <ul className="space-y-1 mt-4">
+                  {Object.entries(selectedPC.specs).map(([key, value], i) => (
+                    <li key={i} className="flex items-center gap-2 text-sm">
+                      <Icon name="Check" size={14} className="text-primary" />
+                      <span className="capitalize text-muted-foreground">{key}:</span> {value as string}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div>
+              <Label htmlFor="order-name" className="text-base mb-2 block">
+                Ваше имя <span className="text-destructive">*</span>
+              </Label>
+              <Input
+                id="order-name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Как к вам обращаться?"
+                className="h-12"
+                required
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="order-phone" className="text-base mb-2 block">
+                Телефон <span className="text-destructive">*</span>
+              </Label>
+              <Input
+                id="order-phone"
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="+7 (___) ___-__-__"
+                className="h-12"
+                required
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="order-message" className="text-base mb-2 block">
+                Комментарий (опционально)
+              </Label>
+              <Textarea
+                id="order-message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Дополнительные пожелания, вопросы..."
+                className="min-h-[100px]"
+              />
+            </div>
+
+            <Button 
+              type="submit" 
+              size="lg" 
+              className="w-full text-lg h-14"
+              disabled={submitting}
+            >
+              {submitting ? (
+                <>
+                  <Icon name="Loader2" className="animate-spin" size={20} />
+                  Отправка...
+                </>
+              ) : (
+                <>
+                  <Icon name="Send" size={20} />
+                  Отправить заявку
+                </>
+              )}
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
+
       <Footer />
     </div>
   );
