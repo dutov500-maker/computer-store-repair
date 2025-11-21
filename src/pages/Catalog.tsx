@@ -19,7 +19,7 @@ const STATIC_CATALOG = [
     price: 45000,
     resolution: "HD",
     category: "ECO",
-    image_url: "https://cdn.poehali.dev/files/8ec1ff13-4711-42e0-8bcb-7f1cf7cb9f20.jpg",
+    image_url: "https://cdn.poehali.dev/files/206fb641-30d1-4d87-b3ec-322e0f76a02e.jpg",
     specs: {
       cpu: "AMD Ryzen 5 5500",
       gpu: "RTX 1660 Super",
@@ -34,7 +34,7 @@ const STATIC_CATALOG = [
     price: 49500,
     resolution: "Full HD",
     category: "ECO",
-    image_url: "https://cdn.poehali.dev/files/ced6f3ae-e4b3-4151-b382-55a8cacbb94b.jpg",
+    image_url: "https://cdn.poehali.dev/files/89621141-3188-48fd-a9eb-52b97c276daf.jpg",
     specs: {
       cpu: "Intel Core i3-12100F",
       gpu: "RTX 2060 Super",
@@ -49,7 +49,7 @@ const STATIC_CATALOG = [
     price: 53000,
     resolution: "Full HD",
     category: "ECO",
-    image_url: "https://cdn.poehali.dev/files/69ddab2d-0341-4c86-8654-3bd4efd797ed.jpg",
+    image_url: "https://cdn.poehali.dev/files/d05492af-a3fa-47dc-b463-ec2a235f82d0.jpg",
     specs: {
       cpu: "Intel Core i3-12100F",
       gpu: "RTX 3050",
@@ -64,7 +64,7 @@ const STATIC_CATALOG = [
     price: 56000,
     resolution: "Full HD",
     category: "ECO",
-    image_url: "https://cdn.poehali.dev/files/74f4e31e-fdaf-4b7f-8ac7-ece047dca740.jpg",
+    image_url: "https://cdn.poehali.dev/files/685646fc-d51b-477b-b294-12b6a80a82ea.jpg",
     specs: {
       cpu: "Intel Core i3-12100F",
       gpu: "RX 6600",
@@ -79,7 +79,7 @@ const STATIC_CATALOG = [
     price: 60000,
     resolution: "Full HD",
     category: "ECO",
-    image_url: "https://cdn.poehali.dev/files/f7a17fcc-1409-4948-ac49-efc7169bcb54.jpg",
+    image_url: "https://cdn.poehali.dev/files/d241ade4-22ce-4900-a491-b83941c30138.jpg",
     specs: {
       cpu: "Intel Core i5-12400F",
       gpu: "RTX 3060",
@@ -486,13 +486,14 @@ const Catalog = () => {
                   {filteredCatalog.map((pc, index) => (
               <Card 
                 key={pc.id}
-                className={`group relative overflow-hidden hover:shadow-2xl transition-all duration-500 animate-fade-in hover:-translate-y-3 border-2 bg-gradient-to-br ${getCategoryColor(pc.category)}`}
+                onClick={() => handlePCClick(pc)}
+                className={`group relative overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-500 animate-fade-in hover:-translate-y-3 border-2 bg-gradient-to-br ${getCategoryColor(pc.category)}`}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 
-                <div className="relative aspect-square overflow-hidden cursor-pointer" onClick={() => handlePCClick(pc)}>
+                <div className="relative aspect-square overflow-hidden">
                   <div className="absolute top-3 left-3 z-10">
                     <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold border ${getCategoryBadgeColor(pc.category)}`}>
                       {pc.category}
@@ -534,35 +535,19 @@ const Catalog = () => {
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-border/50 space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-xs text-muted-foreground">Цена</p>
-                        <p className="text-2xl font-bold text-gradient">
-                          {pc.price.toLocaleString()} ₽
-                        </p>
-                      </div>
-                      <Button 
-                        size="sm" 
-                        variant="outline"
-                        onClick={() => handlePCClick(pc)}
-                        className="text-xs hover:border-primary hover:bg-primary/10"
-                      >
-                        <Icon name="Info" size={14} className="mr-1" />
-                        Подробнее
-                      </Button>
+                  <div className="flex items-center justify-between pt-4 border-t border-border/50">
+                    <div>
+                      <p className="text-xs text-muted-foreground">Цена</p>
+                      <p className="text-2xl font-bold text-gradient">
+                        {pc.price.toLocaleString()} ₽
+                      </p>
                     </div>
                     <Button 
                       size="sm" 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSelectedPC(pc);
-                        setDialogOpen(true);
-                      }}
-                      className="w-full gradient-animated shadow-lg group/btn"
+                      className="gradient-animated opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
                     >
-                      <Icon name="ShoppingCart" size={16} className="mr-2 group-hover/btn:scale-110 transition-transform" />
-                      Быстрый заказ
+                      <Icon name="ShoppingCart" size={16} className="mr-1" />
+                      Заказать
                     </Button>
                   </div>
                 </div>
