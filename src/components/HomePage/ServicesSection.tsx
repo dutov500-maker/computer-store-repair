@@ -1,6 +1,19 @@
+import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 import ServiceRequestForm from '@/components/ServiceRequestForm';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { toast } from 'sonner';
+import funcUrls from '../../../backend/func2url.json';
 
 interface Service {
   id?: number;
@@ -25,6 +38,64 @@ interface ServicesSectionProps {
 }
 
 export const ServicesSection = ({ services, advantages, fullPage = false }: ServicesSectionProps) => {
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [message, setMessage] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleServiceClick = (service: Service) => {
+    setSelectedService(service);
+    setDialogOpen(true);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!name.trim() || !phone.trim()) {
+      toast.error('Заполните имя и телефон');
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      const serviceMessage = `Услуга: ${selectedService?.title}\nЦена: ${selectedService?.price}\n\nДополнительно: ${message.trim() || 'Не указано'}`;
+
+      const response = await fetch(funcUrls['submit-request'], {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          phone: phone.trim(),
+          email: null,
+          service_type: selectedService?.title,
+          message: serviceMessage
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        toast.success('Заявка отправлена! Мы свяжемся с вами в ближайшее время');
+        setName('');
+        setPhone('');
+        setMessage('');
+        setDialogOpen(false);
+      } else {
+        toast.error('Ошибка при отправке заявки');
+      }
+    } catch (error) {
+      console.error('Error submitting request:', error);
+      toast.error('Ошибка при отправке. Позвоните нам: +7 995 027 27 07');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <section id="services" className={`py-20 bg-gradient-to-b from-background to-primary/5 ${fullPage ? 'min-h-screen' : ''}`}>
       <div className="container mx-auto px-4">
@@ -44,8 +115,9 @@ export const ServicesSection = ({ services, advantages, fullPage = false }: Serv
           {services.length > 0 ? services.map((service, index) => (
             <Card 
               key={service.id || index}
-              className="group relative overflow-hidden p-6 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 animate-slide-up hover:-translate-y-3 border-primary/10 hover:border-primary/30"
+              className="group relative overflow-hidden p-6 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 animate-slide-up hover:-translate-y-3 border-primary/10 hover:border-primary/30 cursor-pointer"
               style={{ animationDelay: `${index * 100}ms` }}
+              onClick={() => handleServiceClick(service)}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -107,6 +179,65 @@ export const ServicesSection = ({ services, advantages, fullPage = false }: Serv
           ))}
         </div>
       </div>
+
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-heading">
+              Заказать: {selectedService?.title}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  <Icon name={selectedService?.icon || 'Wrench'} size={24} className="text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">{selectedService?.description}</p>
+                  <p className="text-xl font-bold text-primary mt-1">{selectedService?.price}</p>
+                </div>
+              </div>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <Label htmlFor="name">Ваше имя *</Label>
+                <Input
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Иван Иванов"
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="phone">Телефон *</Label>
+                <Input
+                  id="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="+7 999 123 45 67"
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="message">Дополнительная информация</Label>
+                <Textarea
+                  id="message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Опишите проблему или уточните детали..."
+                  rows={4}
+                />
+              </div>
+              <Button type="submit" className="w-full" disabled={submitting}>
+                {submitting ? 'Отправка...' : 'Отправить заявку'}
+              </Button>
+            </form>
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };

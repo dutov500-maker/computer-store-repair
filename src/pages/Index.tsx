@@ -9,6 +9,7 @@ import { ServicesSection } from '@/components/HomePage/ServicesSection';
 import { FAQSection } from '@/components/HomePage/FAQSection';
 import { StatsSection } from '@/components/HomePage/StatsSection';
 import { ConsultationFormSection } from '@/components/HomePage/ConsultationFormSection';
+import { RepairCTASection } from '@/components/HomePage/RepairCTASection';
 import { initializeStorage, getServices } from '@/lib/localStorage';
 
 const Index = () => {
@@ -26,24 +27,24 @@ const Index = () => {
 
   const advantages = [
     {
-      icon: 'Package',
-      title: 'Только новые комплектующие',
-      description: 'Работаем только с официальными поставщиками'
-    },
-    {
-      icon: 'Truck',
-      title: 'Бесплатная доставка',
-      description: 'По Волжскому при заказе от 50 000 ₽'
+      icon: 'Clock',
+      title: 'Быстрый ремонт',
+      description: 'Большинство работ за 1-2 дня'
     },
     {
       icon: 'Shield',
-      title: 'Гарантия качества',
-      description: 'До 3 лет на все комплектующие'
+      title: 'Гарантия на ремонт',
+      description: 'До 6 месяцев на все виды работ'
     },
     {
       icon: 'Wrench',
-      title: 'Бесплатный ремонт',
-      description: 'В течение гарантийного срока'
+      title: 'Опытные мастера',
+      description: 'Более 10 лет в ремонте ПК'
+    },
+    {
+      icon: 'BadgeCheck',
+      title: 'Оригинальные запчасти',
+      description: 'Только качественные комплектующие'
     }
   ];
 
@@ -53,8 +54,9 @@ const Index = () => {
       <Header />
       <HeroSection />
       <StatsSection />
-      <CatalogSection />
+      <RepairCTASection />
       <ServicesSection services={services} advantages={advantages} />
+      <CatalogSection />
       <ConsultationSection />
       <FAQSection />
       <ConsultationFormSection />
