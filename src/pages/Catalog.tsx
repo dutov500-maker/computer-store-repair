@@ -507,7 +507,7 @@ const Catalog = () => {
                   <img 
                     src={pc.image_url} 
                     alt={pc.title}
-                    className="w-full h-full pc-image-crop group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
                 </div>
@@ -580,7 +580,7 @@ const Catalog = () => {
               <img 
                 src={selectedPC?.image_url} 
                 alt={selectedPC?.title}
-                className="w-full h-full pc-image-crop"
+                className="w-full h-full object-cover"
               />
             </div>
 

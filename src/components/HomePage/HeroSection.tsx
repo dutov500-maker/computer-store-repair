@@ -118,7 +118,7 @@ export const HeroSection = () => {
                     <img 
                       src={image.url}
                       alt={image.title}
-                      className="relative rounded-2xl shadow-2xl w-full h-full pc-image-crop border border-primary/20"
+                      className="relative rounded-2xl shadow-2xl w-full h-full object-cover border border-primary/20"
                       loading="lazy"
                     />
                   </div>
@@ -126,7 +126,7 @@ export const HeroSection = () => {
                 <img 
                   src={SLIDER_IMAGES[0].url}
                   alt="Placeholder"
-                  className="relative rounded-2xl shadow-2xl w-full pc-image-crop border border-primary/20 invisible"
+                  className="relative rounded-2xl shadow-2xl w-full border border-primary/20 invisible"
                 />
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
               </div>

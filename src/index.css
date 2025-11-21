@@ -447,11 +447,6 @@
     }
   }
 
-  .pc-image-crop {
-    object-fit: cover;
-    object-position: center 25%;
-  }
-
   @keyframes pageEnter {
     from {
       opacity: 0;
