@@ -8,8 +8,11 @@ import {
 
 export const FAQSection = () => {
   return (
-    <section id="faq" className="py-20 bg-gradient-to-b from-primary/5 to-background">
-      <div className="container mx-auto px-4">
+    <section id="faq" className="py-20 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,hsl(var(--primary)/0.12),transparent_70%)]"></div>
+      <div className="absolute top-10 right-10 w-72 h-72 bg-primary/8 rounded-full blur-3xl animate-float"></div>
+      <div className="absolute bottom-10 left-10 w-72 h-72 bg-primary/8 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }}></div>
+      <div className="container mx-auto px-4 relative">
         <div className="text-center mb-16 animate-slide-up">
           <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
             <span className="text-sm font-semibold text-primary">❓ FAQ</span>

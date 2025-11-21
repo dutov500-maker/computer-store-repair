@@ -3,8 +3,7 @@ import ConsultationForm from '@/components/ConsultationForm';
 
 export const ConsultationSection = () => {
   return (
-    <section className="py-16 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background"></div>
+    <section className="py-0 relative">
       <div className="container mx-auto px-4 relative">
         <Card className="p-8 md:p-12 gradient-card border-primary/20 shadow-xl overflow-hidden relative">
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>

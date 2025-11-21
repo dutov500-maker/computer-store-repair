@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom';
 export const CatalogSection = () => {
   return (
     <section id="selection" className="py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(var(--primary)/0.08),transparent_70%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(var(--primary)/0.12),transparent_70%)]"></div>
+      <div className="absolute top-10 left-10 w-64 h-64 bg-primary/8 rounded-full blur-3xl animate-float"></div>
+      <div className="absolute bottom-10 right-10 w-64 h-64 bg-primary/8 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
       <div className="container mx-auto px-4 relative">
         <div className="text-center mb-16 animate-slide-up">
           <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">

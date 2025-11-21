@@ -77,10 +77,10 @@ export const RepairCTASection = () => {
 
   return (
     <>
-      <section className="py-20 bg-gradient-to-br from-red-500/10 via-background to-primary/10 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(var(--primary)/0.15),transparent_50%)] animate-pulse"></div>
-        <div className="absolute top-10 right-10 w-64 h-64 bg-red-500/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-10 left-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
+        <div className="absolute top-10 right-10 w-64 h-64 bg-red-500/8 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-primary/8 rounded-full blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
         
         <div className="container mx-auto px-4 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
