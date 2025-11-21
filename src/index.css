@@ -449,7 +449,7 @@
 
   .pc-image-crop {
     object-fit: cover;
-    object-position: center 45%;
+    object-position: center 35%;
   }
 
   @keyframes pageEnter {
