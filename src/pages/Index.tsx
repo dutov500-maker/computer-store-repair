@@ -50,12 +50,14 @@ const Index = () => {
     <div className="min-h-screen relative page-transition">
       <ParticlesBackground />
       <Header />
-      <HeroSection />
-      <RepairCTASection />
-      <CatalogSection />
-      <ConsultationSection />
-      <FAQSection />
-      <StatsSection />
+      <div className="space-y-0">
+        <HeroSection />
+        <RepairCTASection />
+        <CatalogSection />
+        <ConsultationSection />
+        <FAQSection />
+        <StatsSection />
+      </div>
       <Footer />
     </div>
   );

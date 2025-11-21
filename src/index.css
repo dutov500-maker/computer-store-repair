@@ -6,23 +6,23 @@
 
 @layer base {
   :root {
-    --background: 240 15% 8%;
+    --background: 240 20% 6%;
     --foreground: 0 0% 100%;
 
-    --card: 240 12% 12%;
+    --card: 240 18% 8%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 240 12% 12%;
+    --popover: 240 18% 8%;
     --popover-foreground: 0 0% 100%;
 
     --primary: 17 100% 61%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 10% 15%;
+    --secondary: 240 15% 10%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 8% 20%;
-    --muted-foreground: 0 0% 70%;
+    --muted: 240 12% 15%;
+    --muted-foreground: 0 0% 65%;
 
     --accent: 17 100% 61%;
     --accent-foreground: 0 0% 100%;
@@ -30,8 +30,8 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 8% 18%;
-    --input: 240 8% 18%;
+    --border: 240 10% 12%;
+    --input: 240 10% 12%;
     --ring: 17 100% 61%;
 
     --radius: 0.5rem;
@@ -112,36 +112,16 @@
   body {
     @apply bg-background text-foreground;
     font-family: "Roboto", sans-serif;
-    background-image:
-      url("https://cdn.poehali.dev/files/1002b71d-b44c-41c0-a988-4e26167a3489.png"),
-      radial-gradient(
-        at 0% 0%,
-        hsl(var(--primary) / 0.12) 0px,
-        transparent 50%
+    background:
+      linear-gradient(
+        180deg,
+        rgba(15, 10, 25, 0.97) 0%,
+        rgba(10, 8, 20, 0.99) 100%
       ),
-      radial-gradient(
-        at 100% 0%,
-        hsl(var(--primary) / 0.08) 0px,
-        transparent 50%
-      ),
-      radial-gradient(
-        at 100% 100%,
-        hsl(var(--primary) / 0.12) 0px,
-        transparent 50%
-      ),
-      radial-gradient(
-        at 0% 100%,
-        hsl(var(--primary) / 0.08) 0px,
-        transparent 50%
-      );
-    background-size: cover, auto, auto, auto, auto;
-    background-position:
-      center,
-      0% 0%,
-      100% 0%,
-      100% 100%,
-      0% 100%;
-    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+      url("https://cdn.poehali.dev/files/1002b71d-b44c-41c0-a988-4e26167a3489.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     background-attachment: fixed;
   }
 

@@ -8,10 +8,7 @@ import {
 
 export const FAQSection = () => {
   return (
-    <section id="faq" className="py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,hsl(var(--primary)/0.12),transparent_70%)]"></div>
-      <div className="absolute top-10 right-10 w-72 h-72 bg-primary/8 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute bottom-10 left-10 w-72 h-72 bg-primary/8 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }}></div>
+    <section id="faq" className="py-20 relative overflow-hidden bg-transparent">
       <div className="container mx-auto px-4 relative">
         <div className="text-center mb-16 animate-slide-up">
           <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
@@ -26,7 +23,7 @@ export const FAQSection = () => {
         </div>
 
         <div className="max-w-3xl mx-auto">
-          <Card className="p-6 md:p-8 gradient-card border-primary/20 shadow-xl">
+          <Card className="p-6 md:p-8 bg-card/30 backdrop-blur-sm border-primary/20 shadow-xl">
             <Accordion type="single" collapsible className="w-full space-y-4">
               <AccordionItem value="item-1" className="border-border">
                 <AccordionTrigger className="text-left text-lg font-semibold hover:text-primary">

@@ -3,9 +3,9 @@ import ConsultationForm from '@/components/ConsultationForm';
 
 export const ConsultationSection = () => {
   return (
-    <section className="py-0 relative">
+    <section className="py-20 relative bg-transparent">
       <div className="container mx-auto px-4 relative">
-        <Card className="p-8 md:p-12 gradient-card border-primary/20 shadow-xl overflow-hidden relative">
+        <Card className="p-8 md:p-12 bg-card/30 backdrop-blur-sm border-primary/20 shadow-xl overflow-hidden relative">
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
           <div className="grid md:grid-cols-2 gap-8 items-center relative">
             <div>
