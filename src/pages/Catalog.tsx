@@ -13,6 +13,81 @@ import funcUrls from '../../backend/func2url.json';
 
 const STATIC_CATALOG = [
   {
+    id: 1,
+    title: "Eco 1 (Ryzen 5 5500 + RTX 1660 Super)",
+    description: "Бюджетная сборка для комфортной игры в популярные игры на средних настройках",
+    price: 45000,
+    resolution: "HD",
+    category: "ECO",
+    image_url: "https://cdn.poehali.dev/files/8ec1ff13-4711-42e0-8bcb-7f1cf7cb9f20.jpg",
+    specs: {
+      cpu: "AMD Ryzen 5 5500",
+      gpu: "RTX 1660 Super",
+      ram: "16GB DDR4",
+      storage: "512GB SSD"
+    }
+  },
+  {
+    id: 2,
+    title: "Eco 2 (Intel Core i3 12100F + RTX 2060 Super)",
+    description: "Доступная сборка для Full HD гейминга в современных играх",
+    price: 49500,
+    resolution: "Full HD",
+    category: "ECO",
+    image_url: "https://cdn.poehali.dev/files/ced6f3ae-e4b3-4151-b382-55a8cacbb94b.jpg",
+    specs: {
+      cpu: "Intel Core i3-12100F",
+      gpu: "RTX 2060 Super",
+      ram: "16GB DDR4",
+      storage: "512GB SSD"
+    }
+  },
+  {
+    id: 3,
+    title: "Eco 3 (Intel Core i3 12100F + RTX 3050)",
+    description: "Экономичная сборка с поддержкой современных технологий для Full HD",
+    price: 53000,
+    resolution: "Full HD",
+    category: "ECO",
+    image_url: "https://cdn.poehali.dev/files/69ddab2d-0341-4c86-8654-3bd4efd797ed.jpg",
+    specs: {
+      cpu: "Intel Core i3-12100F",
+      gpu: "RTX 3050",
+      ram: "16GB DDR4",
+      storage: "512GB SSD"
+    }
+  },
+  {
+    id: 4,
+    title: "Eco 4 (Intel Core i3 12100F + RX 6600)",
+    description: "Оптимальный выбор для Full HD гейминга по доступной цене",
+    price: 56000,
+    resolution: "Full HD",
+    category: "ECO",
+    image_url: "https://cdn.poehali.dev/files/74f4e31e-fdaf-4b7f-8ac7-ece047dca740.jpg",
+    specs: {
+      cpu: "Intel Core i3-12100F",
+      gpu: "RX 6600",
+      ram: "16GB DDR4",
+      storage: "512GB SSD"
+    }
+  },
+  {
+    id: 5,
+    title: "Eco 5 (Intel Core i5 12400F + RTX 3060)",
+    description: "Продвинутая бюджетная сборка для стабильных 60+ FPS в Full HD",
+    price: 60000,
+    resolution: "Full HD",
+    category: "ECO",
+    image_url: "https://cdn.poehali.dev/files/f7a17fcc-1409-4948-ac49-efc7169bcb54.jpg",
+    specs: {
+      cpu: "Intel Core i5-12400F",
+      gpu: "RTX 3060",
+      ram: "16GB DDR4",
+      storage: "512GB SSD"
+    }
+  },
+  {
     id: 18,
     title: "Special 1 (Ryzen 5 5600 + RTX 5060)",
     description: "Готовое решение для сборки под Full-HD Gaming на Ультра настройках графики",
@@ -243,6 +318,7 @@ const Catalog = () => {
 
   const filters = [
     { id: 'ALL', label: 'Все', icon: 'LayoutGrid', count: catalog.length },
+    { id: 'ECO', label: 'Eco', icon: 'DollarSign', count: catalog.filter(pc => pc.category === 'ECO').length, description: '45-60К' },
     { id: 'SPECIAL', label: 'Special', icon: 'Star', count: catalog.filter(pc => pc.category === 'SPECIAL').length, description: '79-113К' },
     { id: 'PREMIUM', label: 'Premium', icon: 'Crown', count: catalog.filter(pc => pc.category === 'PREMIUM').length, description: '115-205К' },
     { id: 'ULTRA', label: 'Ultra', icon: 'Zap', count: catalog.filter(pc => pc.category === 'ULTRA').length, description: '235-270К' },
@@ -373,6 +449,7 @@ const Catalog = () => {
                 <div className="flex items-center justify-center gap-4 text-sm">
                   <Icon name="Info" size={18} className="text-primary" />
                   <p className="text-muted-foreground">
+                    {activeFilter === 'ECO' && 'Бюджетные сборки для комфортной игры в популярные игры'}
                     {activeFilter === 'SPECIAL' && 'Оптимальные сборки для игр на ультра настройках в Full HD'}
                     {activeFilter === 'PREMIUM' && 'Мощные сборки для QHD гейминга на максимальных настройках'}
                     {activeFilter === 'ULTRA' && 'Топовые сборки для 4K игр без компромиссов'}
