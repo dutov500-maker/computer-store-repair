@@ -145,9 +145,9 @@ export const HeroSection = () => {
                   />
                 ))}
               </div>
-              <div className="absolute -bottom-6 -right-6 bg-gradient-to-br from-primary to-primary/80 text-white px-6 py-4 rounded-2xl shadow-xl animate-bounce-slow">
-                <p className="text-sm font-semibold">Гарантия</p>
-                <p className="text-2xl font-bold">до 3 лет</p>
+              <div className="absolute -bottom-4 -right-4 bg-gradient-to-br from-primary to-primary/80 text-white px-4 py-2.5 rounded-xl shadow-xl animate-bounce-slow">
+                <p className="text-xs font-semibold">Гарантия</p>
+                <p className="text-lg font-bold">до 3 лет</p>
               </div>
               <div className="absolute -top-4 -left-4 bg-gradient-to-br from-green-500 to-green-600 text-white px-4 py-2 rounded-xl shadow-lg flex items-center gap-2 animate-pulse">
                 <span className="relative flex h-3 w-3">
