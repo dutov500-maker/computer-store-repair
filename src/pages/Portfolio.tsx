@@ -8,7 +8,7 @@ const STATIC_PORTFOLIO = [
     id: 1,
     title: "Игровой системный блок для 4K гейминга",
     description: "Мощная сборка для 4K-гейминга с RTX 4080",
-    image_url: "https://cdn.poehali.dev/files/47a9814a-0246-4ac6-aa93-a35c472f606f.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/47a9814a-0246-4ac6-aa93-a35c472f606f.jpg",
     category: "Игровой ПК",
     specs: "Процессор AMD Ryzen 7 7800X3D • Видеокарта RTX 4080"
   },
@@ -16,7 +16,7 @@ const STATIC_PORTFOLIO = [
     id: 2,
     title: "Компактный игровой компьютер",
     description: "Тихая и производительная сборка для игр и работы",
-    image_url: "https://cdn.poehali.dev/files/1a84e611-89ea-4feb-9364-5ab4c578d6fe.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/1a84e611-89ea-4feb-9364-5ab4c578d6fe.jpg",
     category: "Игровой ПК",
     specs: "Процессор AMD Ryzen 5 5600X • Видеокарта KFA2 GeForce RTX 5070 ROCK(X) OC White"
   },
@@ -24,7 +24,7 @@ const STATIC_PORTFOLIO = [
     id: 3,
     title: "Игровой монстр для любых игр на ближайшие 5 лет 💪",
     description: "Топовая сборка с мощной видеокартой",
-    image_url: "https://cdn.poehali.dev/files/022b9002-704a-432c-8640-8b6877016612.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/022b9002-704a-432c-8640-8b6877016612.jpg",
     category: "Игровой ПК",
     specs: "Процессор AMD Ryzen 7 7800X3D • Видеокарта MSI GeForce RTX 5070 Ti GAMING TRIO OC"
   },
@@ -32,7 +32,7 @@ const STATIC_PORTFOLIO = [
     id: 4,
     title: "Белоснежный компик ❄️",
     description: "Стильная белая сборка с RGB подсветкой",
-    image_url: "https://cdn.poehali.dev/files/e2cab568-abdf-41af-9a9f-740013842310.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/e2cab568-abdf-41af-9a9f-740013842310.jpg",
     category: "Игровой ПК",
     specs: "Процессор AMD Ryzen 5 9600X • Видеокарта KFA2 GeForce RTX 5070 ROCK(X) OC White"
   },
@@ -40,7 +40,7 @@ const STATIC_PORTFOLIO = [
     id: 5,
     title: "Заказ для киберспортсмена",
     description: "Высокопроизводительная система для соревнований",
-    image_url: "https://cdn.poehali.dev/files/b7be6eda-2639-4f88-86a8-48abdbd07051.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/b7be6eda-2639-4f88-86a8-48abdbd07051.jpg",
     category: "Профессиональный",
     specs: "Процессор AMD Ryzen 7 9800X3D • Видеокарта Palit GeForce RTX 5070 GamingPro OC"
   },
@@ -48,7 +48,7 @@ const STATIC_PORTFOLIO = [
     id: 6,
     title: "Топовое решение в корпусе от Lian Li",
     description: "Премиальная сборка в легендарном корпусе",
-    image_url: "https://cdn.poehali.dev/files/7ab77389-609a-4e35-8e36-e100031e6bae.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/7ab77389-609a-4e35-8e36-e100031e6bae.jpg",
     category: "Премиум",
     specs: "Процессор AMD Ryzen 7 7800X3D • Видеокарта Palit GeForce RTX 5070 Ti GameRock"
   },
@@ -56,7 +56,7 @@ const STATIC_PORTFOLIO = [
     id: 7,
     title: "Бюджетный игровой ПК для Full HD",
     description: "Оптимальное решение для игр в Full HD",
-    image_url: "https://cdn.poehali.dev/files/ae489047-44a3-4dde-932f-ed6a5199e352.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/ae489047-44a3-4dde-932f-ed6a5199e352.jpg",
     category: "Игровой ПК",
     specs: "Процессор Intel Core i5-12400F • Видеокарта RTX 3060"
   },
@@ -64,7 +64,7 @@ const STATIC_PORTFOLIO = [
     id: 8,
     title: "Стримерская станция",
     description: "Мощный ПК для стриминга и контент-создания",
-    image_url: "https://cdn.poehali.dev/files/56cb3b09-3249-4909-977d-b29d88f7b9a3.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/56cb3b09-3249-4909-977d-b29d88f7b9a3.jpg",
     category: "Профессиональный",
     specs: "Процессор AMD Ryzen 9 7950X • Видеокарта RTX 4070 Ti"
   },
@@ -72,7 +72,7 @@ const STATIC_PORTFOLIO = [
     id: 9,
     title: "Рабочая станция для 3D моделирования",
     description: "Профессиональная сборка для работы с 3D графикой",
-    image_url: "https://cdn.poehali.dev/files/8a36ec5e-21fd-46cb-8e25-bc66341b14c9.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/8a36ec5e-21fd-46cb-8e25-bc66341b14c9.jpg",
     category: "Профессиональный",
     specs: "Процессор AMD Threadripper 3970X • Видеокарта RTX A5000"
   },
@@ -80,7 +80,7 @@ const STATIC_PORTFOLIO = [
     id: 10,
     title: "Минималистичная сборка для офиса",
     description: "Тихий и энергоэффективный компьютер для работы",
-    image_url: "https://cdn.poehali.dev/files/c34a83da-49a6-4f23-be6f-9170e632efa2.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/c34a83da-49a6-4f23-be6f-9170e632efa2.jpg",
     category: "Офисный",
     specs: "Процессор Intel Core i3-13100 • Встроенная графика"
   },
@@ -88,7 +88,7 @@ const STATIC_PORTFOLIO = [
     id: 12,
     title: "Компактная сборка Mini-ITX",
     description: "Мощный компьютер в компактном корпусе",
-    image_url: "https://cdn.poehali.dev/files/cd49eac6-95f0-48e5-a2e2-3987a99a7e44.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/cd49eac6-95f0-48e5-a2e2-3987a99a7e44.jpg",
     category: "Игровой ПК",
     specs: "Процессор AMD Ryzen 7 5800X3D • Видеокарта RTX 4060 Ti"
   },
@@ -96,7 +96,7 @@ const STATIC_PORTFOLIO = [
     id: 14,
     title: "Сборка для монтажа видео",
     description: "Оптимизированная система для Adobe Premiere Pro",
-    image_url: "https://cdn.poehali.dev/files/8f7c4b94-c6cc-4755-acd9-b8a2a84bd597.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/8f7c4b94-c6cc-4755-acd9-b8a2a84bd597.jpg",
     category: "Профессиональный",
     specs: "Процессор AMD Ryzen 9 5950X • Видеокарта RTX 4060"
   }

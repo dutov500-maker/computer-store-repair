@@ -19,7 +19,7 @@ const STATIC_CATALOG = [
     price: 45000,
     resolution: "HD",
     category: "ECO",
-    image_url: "https://cdn.poehali.dev/files/206fb641-30d1-4d87-b3ec-322e0f76a02e.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/206fb641-30d1-4d87-b3ec-322e0f76a02e.jpg",
     specs: {
       cpu: "AMD Ryzen 5 5500",
       gpu: "RTX 1660 Super",
@@ -34,7 +34,7 @@ const STATIC_CATALOG = [
     price: 49500,
     resolution: "Full HD",
     category: "ECO",
-    image_url: "https://cdn.poehali.dev/files/89621141-3188-48fd-a9eb-52b97c276daf.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/89621141-3188-48fd-a9eb-52b97c276daf.jpg",
     specs: {
       cpu: "Intel Core i3-12100F",
       gpu: "RTX 2060 Super",
@@ -49,7 +49,7 @@ const STATIC_CATALOG = [
     price: 53000,
     resolution: "Full HD",
     category: "ECO",
-    image_url: "https://cdn.poehali.dev/files/d05492af-a3fa-47dc-b463-ec2a235f82d0.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/d05492af-a3fa-47dc-b463-ec2a235f82d0.jpg",
     specs: {
       cpu: "Intel Core i3-12100F",
       gpu: "RTX 3050",
@@ -64,7 +64,7 @@ const STATIC_CATALOG = [
     price: 56000,
     resolution: "Full HD",
     category: "ECO",
-    image_url: "https://cdn.poehali.dev/files/685646fc-d51b-477b-b294-12b6a80a82ea.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/685646fc-d51b-477b-b294-12b6a80a82ea.jpg",
     specs: {
       cpu: "Intel Core i3-12100F",
       gpu: "RX 6600",
@@ -79,7 +79,7 @@ const STATIC_CATALOG = [
     price: 60000,
     resolution: "Full HD",
     category: "ECO",
-    image_url: "https://cdn.poehali.dev/files/d241ade4-22ce-4900-a491-b83941c30138.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/d241ade4-22ce-4900-a491-b83941c30138.jpg",
     specs: {
       cpu: "Intel Core i5-12400F",
       gpu: "RTX 3060",
@@ -94,7 +94,7 @@ const STATIC_CATALOG = [
     price: 79000,
     resolution: "Full HD",
     category: "SPECIAL",
-    image_url: "https://cdn.poehali.dev/files/b0057820-1125-4d2f-954d-082634cd44a6.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/b0057820-1125-4d2f-954d-082634cd44a6.jpg",
     specs: {
       cpu: "AMD Ryzen 5 5600",
       gpu: "RTX 5060",
@@ -109,7 +109,7 @@ const STATIC_CATALOG = [
     price: 92500,
     resolution: "Full HD",
     category: "SPECIAL",
-    image_url: "https://cdn.poehali.dev/files/6d7728a0-edb7-4641-a890-db926f449fda.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/6d7728a0-edb7-4641-a890-db926f449fda.jpg",
     specs: {
       cpu: "Intel Core i5-12400F",
       gpu: "RTX 5060",
@@ -124,7 +124,7 @@ const STATIC_CATALOG = [
     price: 99000,
     resolution: "Full HD",
     category: "SPECIAL",
-    image_url: "https://cdn.poehali.dev/files/e64f5e62-80bd-4d33-89e6-6d2a1eb1a3ea.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/e64f5e62-80bd-4d33-89e6-6d2a1eb1a3ea.jpg",
     specs: {
       cpu: "AMD Ryzen 5 7500F",
       gpu: "RTX 5060",
@@ -139,7 +139,7 @@ const STATIC_CATALOG = [
     price: 113500,
     resolution: "Full HD",
     category: "SPECIAL",
-    image_url: "https://cdn.poehali.dev/files/ec9759c8-f83f-4e38-b820-e4ecc88e0393.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/ec9759c8-f83f-4e38-b820-e4ecc88e0393.jpg",
     specs: {
       cpu: "AMD Ryzen 5 7500F",
       gpu: "RTX 5060 Ti",
@@ -154,7 +154,7 @@ const STATIC_CATALOG = [
     price: 115000,
     resolution: "QHD",
     category: "PREMIUM",
-    image_url: "https://cdn.poehali.dev/files/79caa51e-f352-4071-8947-6d87c6de8754.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/79caa51e-f352-4071-8947-6d87c6de8754.jpg",
     specs: {
       cpu: "AMD Ryzen 7 8700F",
       gpu: "RTX 5060 Ti",
@@ -169,7 +169,7 @@ const STATIC_CATALOG = [
     price: 139000,
     resolution: "QHD",
     category: "PREMIUM",
-    image_url: "https://cdn.poehali.dev/files/5bfaffcf-fb2c-4f1c-a3d1-28750297e406.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/5bfaffcf-fb2c-4f1c-a3d1-28750297e406.jpg",
     specs: {
       cpu: "AMD Ryzen 7 8700F",
       gpu: "RTX 5070",
@@ -184,7 +184,7 @@ const STATIC_CATALOG = [
     price: 175000,
     resolution: "QHD",
     category: "PREMIUM",
-    image_url: "https://cdn.poehali.dev/files/34e17fa0-2c72-4493-97cc-8f7ace0a91df.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/34e17fa0-2c72-4493-97cc-8f7ace0a91df.jpg",
     specs: {
       cpu: "AMD Ryzen 7 7800X3D",
       gpu: "RTX 5070",
@@ -199,7 +199,7 @@ const STATIC_CATALOG = [
     price: 205000,
     resolution: "QHD",
     category: "PREMIUM",
-    image_url: "https://cdn.poehali.dev/files/8a8ed9ab-26a2-498e-a7bd-4132aeb73c1a.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/8a8ed9ab-26a2-498e-a7bd-4132aeb73c1a.jpg",
     specs: {
       cpu: "AMD Ryzen 7 7800X3D",
       gpu: "RTX 5070 Ti",
@@ -214,7 +214,7 @@ const STATIC_CATALOG = [
     price: 235000,
     resolution: "4K",
     category: "ULTRA",
-    image_url: "https://cdn.poehali.dev/files/044e99ed-96c0-4b15-a20f-d24bc03dd8bf.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/044e99ed-96c0-4b15-a20f-d24bc03dd8bf.jpg",
     specs: {
       cpu: "AMD Ryzen 7 7800X3D",
       gpu: "RTX 5070 Ti",
@@ -229,7 +229,7 @@ const STATIC_CATALOG = [
     price: 255000,
     resolution: "4K",
     category: "ULTRA",
-    image_url: "https://cdn.poehali.dev/files/726026af-4bf4-490a-bc38-49f556de2d58.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/726026af-4bf4-490a-bc38-49f556de2d58.jpg",
     specs: {
       cpu: "AMD Ryzen 7 7800X3D",
       gpu: "RTX 5080",
@@ -244,7 +244,7 @@ const STATIC_CATALOG = [
     price: 270000,
     resolution: "4K",
     category: "ULTRA",
-    image_url: "https://cdn.poehali.dev/files/e0b8df0c-9ab8-460e-b09a-73ca20860665.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/e0b8df0c-9ab8-460e-b09a-73ca20860665.jpg",
     specs: {
       cpu: "AMD Ryzen 7 7800X3D",
       gpu: "RTX 5080",
@@ -259,7 +259,7 @@ const STATIC_CATALOG = [
     price: 530000,
     resolution: "4K",
     category: "ELITE",
-    image_url: "https://cdn.poehali.dev/files/58fe0b06-c3a8-4533-a82d-2057abfb5d7c.jpg",
+    image_url: "https://cdn.xn--80ajgbliqddk.xn--p1ai/files/58fe0b06-c3a8-4533-a82d-2057abfb5d7c.jpg",
     specs: {
       cpu: "AMD Ryzen 9 9950X3D",
       gpu: "RTX 5090",
