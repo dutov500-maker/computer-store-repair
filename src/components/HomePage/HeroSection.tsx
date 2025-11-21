@@ -5,18 +5,23 @@ import { useEffect, useState } from 'react';
 
 const SLIDER_IMAGES = [
   {
-    url: 'https://cdn.poehali.dev/files/044e99ed-96c0-4b15-a20f-d24bc03dd8bf.jpg',
-    title: 'Ultra 1',
+    url: 'https://cdn.poehali.dev/files/377a5ae9-ac93-4292-a9aa-71d3fcf60eda.jpg',
+    title: 'Ultra 1 - 235К',
     category: 'ULTRA'
   },
   {
-    url: 'https://cdn.poehali.dev/files/8a8ed9ab-26a2-498e-a7bd-4132aeb73c1a.jpg',
-    title: 'Premium 4',
-    category: 'PREMIUM'
+    url: 'https://cdn.poehali.dev/files/fbdd3de3-893f-486b-9828-2e385f6b9f93.jpg',
+    title: 'Ultra 2 - 255К',
+    category: 'ULTRA'
   },
   {
-    url: 'https://cdn.poehali.dev/files/58fe0b06-c3a8-4533-a82d-2057abfb5d7c.jpg',
-    title: 'Elite 1',
+    url: 'https://cdn.poehali.dev/files/5c352159-58db-4d02-9d1d-c950fcee59f6.jpg',
+    title: 'Ultra 3 - 270К',
+    category: 'ULTRA'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/da504f58-a4d2-4c37-aea2-222c5de703ac.jpg',
+    title: 'Elite 1 - 530К',
     category: 'ELITE'
   }
 ];
