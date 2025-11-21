@@ -27,7 +27,7 @@ export const ConsultationSection = () => {
                 <img 
                   src="https://cdn.poehali.dev/files/8a8ed9ab-26a2-498e-a7bd-4132aeb73c1a.jpg"
                   alt="Gaming PC Components"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full pc-image-crop"
                   loading="lazy"
                 />
               </div>
