@@ -409,14 +409,13 @@ const Catalog = () => {
                   {filteredCatalog.map((pc, index) => (
               <Card 
                 key={pc.id}
-                onClick={() => handlePCClick(pc)}
-                className={`group relative overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-500 animate-fade-in hover:-translate-y-3 border-2 bg-gradient-to-br ${getCategoryColor(pc.category)}`}
+                className={`group relative overflow-hidden hover:shadow-2xl transition-all duration-500 animate-fade-in hover:-translate-y-3 border-2 bg-gradient-to-br ${getCategoryColor(pc.category)}`}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 
-                <div className="relative aspect-square overflow-hidden">
+                <div className="relative aspect-square overflow-hidden cursor-pointer" onClick={() => handlePCClick(pc)}>
                   <div className="absolute top-3 left-3 z-10">
                     <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold border ${getCategoryBadgeColor(pc.category)}`}>
                       {pc.category}
@@ -458,19 +457,35 @@ const Catalog = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-border/50">
-                    <div>
-                      <p className="text-xs text-muted-foreground">Цена</p>
-                      <p className="text-2xl font-bold text-gradient">
-                        {pc.price.toLocaleString()} ₽
-                      </p>
+                  <div className="pt-4 border-t border-border/50 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-xs text-muted-foreground">Цена</p>
+                        <p className="text-2xl font-bold text-gradient">
+                          {pc.price.toLocaleString()} ₽
+                        </p>
+                      </div>
+                      <Button 
+                        size="sm" 
+                        variant="outline"
+                        onClick={() => handlePCClick(pc)}
+                        className="text-xs hover:border-primary hover:bg-primary/10"
+                      >
+                        <Icon name="Info" size={14} className="mr-1" />
+                        Подробнее
+                      </Button>
                     </div>
                     <Button 
                       size="sm" 
-                      className="gradient-animated opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedPC(pc);
+                        setDialogOpen(true);
+                      }}
+                      className="w-full gradient-animated shadow-lg group/btn"
                     >
-                      <Icon name="ShoppingCart" size={16} className="mr-1" />
-                      Заказать
+                      <Icon name="ShoppingCart" size={16} className="mr-2 group-hover/btn:scale-110 transition-transform" />
+                      Быстрый заказ
                     </Button>
                   </div>
                 </div>
