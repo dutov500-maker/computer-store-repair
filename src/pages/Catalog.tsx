@@ -482,26 +482,25 @@ const Catalog = () => {
                     Найдено компьютеров: <span className="font-bold text-primary">{filteredCatalog.length}</span>
                   </p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {filteredCatalog.map((pc, index) => (
               <Card 
                 key={pc.id}
                 onClick={() => handlePCClick(pc)}
-                className={`group relative overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 animate-fade-in hover:-translate-y-3 hover:scale-[1.02] border-2 bg-gradient-to-br ${getCategoryColor(pc.category)}`}
+                className={`group relative overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 animate-fade-in hover:-translate-y-2 border-2 bg-card/50 backdrop-blur-sm`}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-150"></div>
-                <div className="absolute -top-10 -left-10 w-20 h-20 bg-primary/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
                 
-                <div className="relative aspect-square overflow-hidden">
-                  <div className="absolute top-3 left-3 z-10">
-                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold border ${getCategoryBadgeColor(pc.category)}`}>
+                <div className="relative aspect-[4/3] overflow-hidden rounded-t-xl">
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className={`inline-block px-3 py-1.5 rounded-lg text-xs font-bold backdrop-blur-sm border-2 ${getCategoryBadgeColor(pc.category)} shadow-lg`}>
                       {pc.category}
                     </span>
                   </div>
-                  <div className="absolute top-3 right-3 z-10">
-                    <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-primary/90 text-white border border-primary">
+                  <div className="absolute top-4 right-4 z-10">
+                    <span className="inline-block px-3 py-1.5 rounded-lg text-xs font-bold bg-primary/90 backdrop-blur-sm text-white border-2 border-primary shadow-lg">
                       {pc.resolution}
                     </span>
                   </div>
@@ -510,50 +509,50 @@ const Catalog = () => {
                     alt={pc.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-70 group-hover:opacity-90 transition-opacity"></div>
                 </div>
 
-                <div className="p-5 relative">
-                  <h3 className="font-heading font-bold text-lg mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                <div className="p-6 relative">
+                  <h3 className="font-heading font-bold text-xl mb-3 group-hover:text-primary transition-colors line-clamp-2">
                     {pc.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                  <p className="text-base text-muted-foreground mb-5 line-clamp-2">
                     {pc.description}
                   </p>
 
-                  <div className="space-y-2 mb-4 text-xs">
-                    <div className="flex items-center gap-2">
-                      <Icon name="Cpu" size={14} className="text-primary" />
+                  <div className="space-y-2.5 mb-5 text-sm">
+                    <div className="flex items-center gap-2.5">
+                      <Icon name="Cpu" size={16} className="text-primary" />
                       <span className="text-muted-foreground">{pc.specs.cpu}</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Icon name="Monitor" size={14} className="text-primary" />
+                    <div className="flex items-center gap-2.5">
+                      <Icon name="Monitor" size={16} className="text-primary" />
                       <span className="text-muted-foreground">{pc.specs.gpu}</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Icon name="MemoryStick" size={14} className="text-primary" />
+                    <div className="flex items-center gap-2.5">
+                      <Icon name="MemoryStick" size={16} className="text-primary" />
                       <span className="text-muted-foreground">{pc.specs.ram} • {pc.specs.storage}</span>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-border/50">
+                  <div className="flex items-center justify-between pt-5 border-t border-border/50">
                     <div>
-                      <p className="text-xs text-muted-foreground">Цена</p>
-                      <p className="text-2xl font-bold text-gradient">
+                      <p className="text-sm text-muted-foreground mb-1">Цена</p>
+                      <p className="text-3xl font-bold text-gradient">
                         {pc.price.toLocaleString()} ₽
                       </p>
                     </div>
                     <Button 
-                      size="sm" 
-                      className="gradient-animated opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                      size="default" 
+                      className="gradient-animated opacity-0 group-hover:opacity-100 transition-opacity shadow-lg px-6"
                     >
-                      <Icon name="ShoppingCart" size={16} className="mr-1" />
+                      <Icon name="ShoppingCart" size={18} className="mr-2" />
                       Заказать
                     </Button>
                   </div>
                 </div>
 
-                <div className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                <div className="absolute -bottom-1 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-orange-500 to-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-xl"></div>
               </Card>
                   ))}
                 </div>
