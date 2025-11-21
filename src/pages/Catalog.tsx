@@ -74,7 +74,7 @@ const STATIC_CATALOG = [
     description: "Готовое решение для сборки за 89 тысяч рублей под Full-HD Gaming на Ультра настройках графики",
     price: 89000,
     resolution: "Full HD",
-    image_url: "https://cdn.poehali.dev/files/022b9002-704a-432c-8640-8b6877016612.jpg",
+    image_url: "https://cdn.poehali.dev/files/25848486-d127-48bf-bfdc-36a0c277e5c8.jpg",
     specs: {
       cpu: "Intel Core i5-12400F",
       gpu: "RTX 5060",
@@ -130,7 +130,7 @@ const STATIC_CATALOG = [
     description: "Игровой компьютер за 169 тысяч рублей под QHD Gaming на Ультра настройках графики",
     price: 169000,
     resolution: "QHD",
-    image_url: "https://cdn.poehali.dev/files/25848486-d127-48bf-bfdc-36a0c277e5c8.jpg",
+    image_url: "https://cdn.poehali.dev/files/022b9002-704a-432c-8640-8b6877016612.jpg",
     specs: {
       cpu: "Intel Core i7-14700F",
       gpu: "RTX 4070 Super",
