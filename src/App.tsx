@@ -23,6 +23,7 @@ import DeliveryPage from "./pages/DeliveryPage";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
+import { FloatingRepairButton } from "./components/FloatingRepairButton";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
       <ScrollToTop />
       <SEO />
       <Breadcrumbs />
+      <FloatingRepairButton />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/catalog" element={<Catalog />} />

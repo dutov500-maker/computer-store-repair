@@ -5,10 +5,8 @@ import ParticlesBackground from '@/components/ParticlesBackground';
 import { HeroSection } from '@/components/HomePage/HeroSection';
 import { ConsultationSection } from '@/components/HomePage/ConsultationSection';
 import { CatalogSection } from '@/components/HomePage/CatalogSection';
-import { ServicesSection } from '@/components/HomePage/ServicesSection';
 import { FAQSection } from '@/components/HomePage/FAQSection';
 import { StatsSection } from '@/components/HomePage/StatsSection';
-import { ConsultationFormSection } from '@/components/HomePage/ConsultationFormSection';
 import { RepairCTASection } from '@/components/HomePage/RepairCTASection';
 import { initializeStorage, getServices } from '@/lib/localStorage';
 
@@ -53,13 +51,11 @@ const Index = () => {
       <ParticlesBackground />
       <Header />
       <HeroSection />
-      <StatsSection />
       <RepairCTASection />
-      <ServicesSection services={services} advantages={advantages} />
       <CatalogSection />
       <ConsultationSection />
       <FAQSection />
-      <ConsultationFormSection />
+      <StatsSection />
       <Footer />
     </div>
   );
