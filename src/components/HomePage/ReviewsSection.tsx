@@ -26,8 +26,9 @@ export const ReviewsSection = ({ fullPage = false }: ReviewsSectionProps) => {
           <Card className="p-6 gradient-card border-primary/20 shadow-xl animate-slide-in-left hover-lift">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-3 bg-red-500/20 rounded-xl">
-                <svg className="w-8 h-8 text-red-500" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+                  <path fill="#FC3F1D" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22C6.486 22 2 17.514 2 12S6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/>
+                  <path fill="#FC3F1D" d="M7 9h2v2H7zm8 0h2v2h-2zM12 17c-2.757 0-5-2.243-5-5h2c0 1.654 1.346 3 3 3s3-1.346 3-3h2c0 2.757-2.243 5-5 5z"/>
                 </svg>
               </div>
               <div>
@@ -79,8 +80,9 @@ export const ReviewsSection = ({ fullPage = false }: ReviewsSectionProps) => {
           <Card className="p-6 gradient-card border-primary/20 shadow-xl animate-slide-in-right hover-lift">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-3 bg-blue-500/20 rounded-xl">
-                <svg className="w-8 h-8 text-blue-500" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                <svg className="w-8 h-8" viewBox="0 0 32 32" fill="currentColor">
+                  <path fill="#0AF" d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0z"/>
+                  <path fill="#FFF" d="M21.5 11.5h-11c-.825 0-1.5.675-1.5 1.5v6c0 .825.675 1.5 1.5 1.5h11c.825 0 1.5-.675 1.5-1.5v-6c0-.825-.675-1.5-1.5-1.5zm-9 7.5h-1v-6h1v6zm3 0h-1v-6h1v6zm3 0h-1v-6h1v6zm3 0h-1v-6h1v6z"/>
                 </svg>
               </div>
               <div>

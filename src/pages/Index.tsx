@@ -8,6 +8,7 @@ import { CatalogSection } from '@/components/HomePage/CatalogSection';
 import { FAQSection } from '@/components/HomePage/FAQSection';
 import { StatsSection } from '@/components/HomePage/StatsSection';
 import { RepairCTASection } from '@/components/HomePage/RepairCTASection';
+import { ReviewsSection } from '@/components/HomePage/ReviewsSection';
 import { initializeStorage, getServices } from '@/lib/localStorage';
 
 const Index = () => {
@@ -54,6 +55,7 @@ const Index = () => {
         <HeroSection />
         <RepairCTASection />
         <CatalogSection />
+        <ReviewsSection />
         <ConsultationSection />
         <FAQSection />
         <StatsSection />
