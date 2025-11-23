@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
@@ -196,6 +197,14 @@ const Services = () => {
 
   return (
     <div className="min-h-screen page-transition">
+      <Helmet>
+        <title>Ремонт компьютеров и ноутбуков в Волжском - Компьютерная Лаборатория</title>
+        <meta name="description" content="Профессиональный ремонт компьютеров и ноутбуков в Волжском. Диагностика бесплатно, замена комплектующих, чистка от пыли, установка ПО. Гарантия до 6 месяцев. ☎️ +7 (995) 027-27-07" />
+        <meta name="keywords" content="ремонт компьютеров волжский, ремонт ноутбуков волжский, компьютерный мастер волжский, чистка компьютера волжский, замена термопасты волжский, установка windows волжский, диагностика пк волжский, ремонт видеокарты волжский, замена блока питания волжский" />
+        <meta property="og:title" content="Ремонт компьютеров и ноутбуков в Волжском" />
+        <meta property="og:description" content="Профессиональный ремонт ПК с гарантией. Диагностика бесплатно. ☎️ +7 (995) 027-27-07" />
+        <link rel="canonical" href="https://комплаб.рф/services" />
+      </Helmet>
       <Header />
       
       <section className="py-16 container mx-auto px-4">

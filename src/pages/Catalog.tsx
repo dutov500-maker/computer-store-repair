@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
@@ -312,6 +313,9 @@ const Catalog = () => {
   const [message, setMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string>('ALL');
+
+  const seoTitle = "Купить компьютер в Волжском - Готовые игровые ПК | Компьютерная Лаборатория";
+  const seoDescription = "Купить готовый игровой компьютер в Волжском. Сборки от 45 000₽. Новые комплектующие, гарантия до 3 лет. Бесплатная доставка от 50 000₽. ☎️ +7 (995) 027-27-07";
   
   const loading = false;
   const error = null;
@@ -382,6 +386,14 @@ const Catalog = () => {
 
   return (
     <div className="min-h-screen page-transition">
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <meta name="keywords" content="купить компьютер волжский, игровой компьютер волжский, игровой пк волжский, купить пк волжский, готовые сборки пк волжский, компьютер для игр волжский, мощный компьютер волжский, купить игровой компьютер волжский" />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        <link rel="canonical" href="https://комплаб.рф/catalog" />
+      </Helmet>
       <Header />
       
       <section className="py-16 container mx-auto px-4">
