@@ -1,9 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const ParticlesBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -22,7 +28,7 @@ const ParticlesBackground = () => {
       opacity: number;
     }> = [];
 
-    const particleCount = 50;
+    const particleCount = 30;
     const primaryColor = 'rgba(255, 119, 51, ';
 
     for (let i = 0; i < particleCount; i++) {
@@ -83,7 +89,9 @@ const ParticlesBackground = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <canvas

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Snowflake {
   x: number;
@@ -13,6 +13,11 @@ interface Snowflake {
 
 const SnowEffect = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -25,7 +30,7 @@ const SnowEffect = () => {
     canvas.height = window.innerHeight;
 
     const snowflakes: Snowflake[] = [];
-    const snowflakeCount = 80;
+    const snowflakeCount = isMobile ? 40 : 80;
 
     for (let i = 0; i < snowflakeCount; i++) {
       snowflakes.push({
@@ -103,7 +108,7 @@ const SnowEffect = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <canvas

@@ -62,15 +62,15 @@ export const HeroSection = () => {
               <span className="text-sm font-semibold text-red-400">🎄 Новогодние скидки до 15%</span>
             </div>
             <div className="relative inline-block">
-              <div className="absolute -top-4 -left-4 w-3 h-3 rounded-full bg-red-500 animate-pulse shadow-lg shadow-red-500/50"></div>
-              <div className="absolute -top-2 left-8 w-2.5 h-2.5 rounded-full bg-yellow-400 animate-pulse shadow-lg shadow-yellow-400/50" style={{ animationDelay: '0.2s' }}></div>
-              <div className="absolute -top-3 left-20 w-3 h-3 rounded-full bg-green-500 animate-pulse shadow-lg shadow-green-500/50" style={{ animationDelay: '0.4s' }}></div>
-              <div className="absolute -top-4 right-32 w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse shadow-lg shadow-blue-500/50" style={{ animationDelay: '0.6s' }}></div>
-              <div className="absolute -top-2 right-16 w-3 h-3 rounded-full bg-purple-500 animate-pulse shadow-lg shadow-purple-500/50" style={{ animationDelay: '0.8s' }}></div>
-              <div className="absolute -top-3 right-4 w-2.5 h-2.5 rounded-full bg-pink-500 animate-pulse shadow-lg shadow-pink-500/50" style={{ animationDelay: '1s' }}></div>
-              <div className="absolute -top-4 right-0 w-3 h-3 rounded-full bg-orange-500 animate-pulse shadow-lg shadow-orange-500/50" style={{ animationDelay: '1.2s' }}></div>
+              <div className="hidden md:block absolute -top-4 -left-4 w-3 h-3 rounded-full bg-red-500 animate-pulse shadow-lg shadow-red-500/50"></div>
+              <div className="hidden md:block absolute -top-2 left-8 w-2.5 h-2.5 rounded-full bg-yellow-400 animate-pulse shadow-lg shadow-yellow-400/50" style={{ animationDelay: '0.2s' }}></div>
+              <div className="hidden md:block absolute -top-3 left-20 w-3 h-3 rounded-full bg-green-500 animate-pulse shadow-lg shadow-green-500/50" style={{ animationDelay: '0.4s' }}></div>
+              <div className="hidden lg:block absolute -top-4 right-32 w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse shadow-lg shadow-blue-500/50" style={{ animationDelay: '0.6s' }}></div>
+              <div className="hidden lg:block absolute -top-2 right-16 w-3 h-3 rounded-full bg-purple-500 animate-pulse shadow-lg shadow-purple-500/50" style={{ animationDelay: '0.8s' }}></div>
+              <div className="hidden md:block absolute -top-3 right-4 w-2.5 h-2.5 rounded-full bg-pink-500 animate-pulse shadow-lg shadow-pink-500/50" style={{ animationDelay: '1s' }}></div>
+              <div className="hidden md:block absolute -top-4 right-0 w-3 h-3 rounded-full bg-orange-500 animate-pulse shadow-lg shadow-orange-500/50" style={{ animationDelay: '1.2s' }}></div>
               
-              <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading font-bold leading-tight">
                 Соберем компьютер{' '}
                 <span className="text-gradient inline-block animate-pulse">вашей мечты</span>
                 <span className="inline-block ml-3 align-middle relative">
@@ -114,18 +114,18 @@ export const HeroSection = () => {
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-              <div className="flex items-center gap-3 p-4 glass-effect rounded-xl border border-primary/20 hover:border-primary/40 transition-all hover:scale-105 group">
-                <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary group-hover:scale-110 transition-all">
-                  <Icon name="Package" className="text-primary group-hover:text-white transition-colors" size={24} />
+              <div className="flex items-center gap-3 p-4 glass-effect rounded-xl border border-primary/20 md:hover:border-primary/40 transition-all md:hover:scale-105 group">
+                <div className="p-2 bg-primary/20 rounded-lg md:group-hover:bg-primary md:group-hover:scale-110 transition-all">
+                  <Icon name="Package" className="text-primary md:group-hover:text-white transition-colors" size={24} />
                 </div>
                 <div>
                   <p className="font-semibold text-sm">Новые комплектующие</p>
                   <p className="text-xs text-muted-foreground">Официальные поставщики</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 glass-effect rounded-xl border border-primary/20 hover:border-primary/40 transition-all hover:scale-105 group">
-                <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary group-hover:scale-110 transition-all">
-                  <Icon name="Truck" className="text-primary group-hover:text-white transition-colors" size={24} />
+              <div className="flex items-center gap-3 p-4 glass-effect rounded-xl border border-primary/20 md:hover:border-primary/40 transition-all md:hover:scale-105 group">
+                <div className="p-2 bg-primary/20 rounded-lg md:group-hover:bg-primary md:group-hover:scale-110 transition-all">
+                  <Icon name="Truck" className="text-primary md:group-hover:text-white transition-colors" size={24} />
                 </div>
                 <div>
                   <p className="font-semibold text-sm">Бесплатная доставка</p>
@@ -135,9 +135,9 @@ export const HeroSection = () => {
             </div>
           </div>
           <div className="relative animate-scale-in">
-            <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 via-primary/10 to-transparent rounded-3xl blur-3xl animate-pulse"></div>
+            <div className="hidden md:block absolute -inset-4 bg-gradient-to-br from-primary/30 via-primary/10 to-transparent rounded-3xl blur-3xl animate-pulse"></div>
             <div className="relative group perspective-1000">
-              <div className="relative transform-gpu transition-transform duration-500 group-hover:rotateY-5 overflow-hidden rounded-2xl">
+              <div className="relative transform-gpu transition-transform duration-500 md:group-hover:rotateY-5 overflow-hidden rounded-2xl">
                 {SLIDER_IMAGES.map((image, index) => (
                   <div
                     key={index}
