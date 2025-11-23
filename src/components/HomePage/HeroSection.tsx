@@ -64,8 +64,24 @@ export const HeroSection = () => {
             <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
               Соберем компьютер{' '}
               <span className="text-gradient inline-block animate-pulse">вашей мечты</span>
-              <span className="inline-block ml-3 align-middle">
-                <img src="https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/2a66b0b6-8db1-4784-94ce-b899b27c3ee1.jpg" alt="gift" className="w-20 h-20 inline-block animate-bounce-slow object-contain" />
+              <span className="inline-block ml-3 align-middle relative">
+                <span className="absolute inset-0 blur-xl bg-red-500/40 animate-pulse"></span>
+                <svg className="w-16 h-16 md:w-20 md:h-20 inline-block animate-bounce-slow relative z-10" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="12" y="20" width="40" height="36" rx="2" fill="#DC2626"/>
+                  <rect x="12" y="20" width="40" height="36" rx="2" fill="url(#gift-gradient)"/>
+                  <rect x="28" y="20" width="8" height="36" fill="#FCD34D"/>
+                  <rect x="12" y="32" width="40" height="8" fill="#FCD34D"/>
+                  <path d="M32 8 C28 8, 26 10, 26 13 C26 13, 26 16, 28 18 L32 20 L36 18 C38 16, 38 13, 38 13 C38 10, 36 8, 32 8Z" fill="#FCD34D"/>
+                  <ellipse cx="28" cy="12" rx="3" ry="4" fill="#FCD34D"/>
+                  <ellipse cx="36" cy="12" rx="3" ry="4" fill="#FCD34D"/>
+                  <rect x="30" y="12" width="4" height="8" fill="#FCD34D"/>
+                  <defs>
+                    <linearGradient id="gift-gradient" x1="12" y1="20" x2="52" y2="56" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stopColor="#EF4444"/>
+                      <stop offset="100%" stopColor="#DC2626"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
               </span>
             </h1>
             <p className="text-xl text-muted-foreground">
