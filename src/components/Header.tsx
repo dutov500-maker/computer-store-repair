@@ -69,6 +69,7 @@ const Header = () => {
     { to: '/pc-selection', label: 'Подбор ПК' },
     { to: '/services', label: 'Ремонт и Услуги' },
     { to: '/portfolio', label: 'Портфолио' },
+    { to: '/repair-gallery', label: 'Галерея работ' },
     { to: '/reviews', label: 'Отзывы' },
     { to: '/contact', label: 'Контакты' }
   ];
@@ -122,17 +123,11 @@ const Header = () => {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all"></span>
             </Link>
             <Link 
-              to="/#about-old" 
-              className="text-sm font-medium hover:text-primary transition-colors hidden"
-              onClick={(e) => {
-                const element = document.getElementById('portfolio');
-                if (element) {
-                  e.preventDefault();
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
+              to="/repair-gallery" 
+              className="text-sm font-medium hover:text-primary transition-all relative group"
             >
-              Работы
+              <span className="relative z-10">Галерея работ</span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all"></span>
             </Link>
             <Link 
               to="/reviews" 
