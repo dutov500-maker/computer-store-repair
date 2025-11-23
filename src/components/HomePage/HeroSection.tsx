@@ -30,6 +30,7 @@ const SLIDER_IMAGES = [
 export const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set([0]));
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -41,7 +42,11 @@ export const HeroSection = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % SLIDER_IMAGES.length);
+      setCurrentSlide((prev) => {
+        const next = (prev + 1) % SLIDER_IMAGES.length;
+        setLoadedImages(prev => new Set([...prev, next]));
+        return next;
+      });
     }, 4000);
     return () => clearInterval(interval);
   }, []);
@@ -147,20 +152,24 @@ export const HeroSection = () => {
                         : 'opacity-0 scale-95 pointer-events-none'
                     }`}
                   >
-                    <img 
-                      src={image.url}
-                      alt={image.title}
-                      className="relative rounded-2xl shadow-2xl w-full h-full object-cover border border-primary/20"
-                      loading="lazy"
-                    />
+                    {loadedImages.has(index) && (
+                      <img 
+                        src={image.url}
+                        alt={image.title}
+                        className="relative rounded-2xl shadow-2xl w-full h-full object-cover border border-primary/20"
+                        loading={index === 0 ? "eager" : "lazy"}
+                        decoding="async"
+                      />
+                    )}
                   </div>
                 ))}
                 <img 
                   src={SLIDER_IMAGES[0].url}
                   alt="Placeholder"
                   className="relative rounded-2xl shadow-2xl w-full border border-primary/20 invisible"
+                  loading="eager"
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent opacity-0 md:group-hover:opacity-100 transition-opacity rounded-2xl"></div>
               </div>
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
                 {SLIDER_IMAGES.map((_, index) => (
