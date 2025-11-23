@@ -45,7 +45,7 @@ const Breadcrumbs = () => {
       "@type": "ListItem",
       "position": index + 1,
       "name": crumb.label,
-      "item": `https://computer-store-repair.poehali.dev${crumb.path}`
+      "item": `https://комплаб.рф${crumb.path}`
     }));
 
     return {

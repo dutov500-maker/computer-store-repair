@@ -18,6 +18,7 @@ import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import funcUrls from '../../backend/func2url.json';
 import { repairImages } from '@/data/repairImages';
+import { FAQSchema, commonFAQs } from '@/components/FAQSchema';
 import {
   Carousel,
   CarouselContent,
@@ -221,6 +222,73 @@ const Services = () => {
   const [message, setMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
+  const generateServiceSchema = () => {
+    const serviceOffers = services.map((service) => {
+      const priceMatch = service.price.match(/\d+/);
+      const price = priceMatch ? priceMatch[0] : '0';
+      const isFree = service.price.toLowerCase().includes('бесплатно');
+      
+      return {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": service.title,
+          "description": service.description
+        },
+        "price": isFree ? '0' : price,
+        "priceCurrency": "RUB",
+        "availability": "https://schema.org/InStock",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": isFree ? '0' : price,
+          "priceCurrency": "RUB",
+          "valueAddedTaxIncluded": true
+        }
+      };
+    });
+
+    return {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://комплаб.рф",
+      "name": "Компьютерная Лаборатория",
+      "description": "Профессиональный ремонт компьютеров, ноутбуков, планшетов и телефонов в Волжском",
+      "url": "https://комплаб.рф/services",
+      "telephone": "+79950272707",
+      "email": "complab34@gmail.com",
+      "priceRange": "₽₽",
+      "image": "https://cdn.poehali.dev/files/1258a3ce-944b-46de-88b7-5a629a1775c1.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Волжский",
+        "addressRegion": "Волгоградская область",
+        "addressCountry": "RU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "48.7894",
+        "longitude": "44.7742"
+      },
+      "openingHours": "Mo-Fr 09:00-18:00",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "50",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Услуги ремонта",
+        "itemListElement": serviceOffers
+      },
+      "sameAs": [
+        "https://vk.com/labkomp",
+        "https://wa.me/79950272707"
+      ]
+    };
+  };
+
   const handleServiceClick = (service: any) => {
     setSelectedService(service);
     setDialogOpen(true);
@@ -284,6 +352,14 @@ const Services = () => {
         <meta property="og:url" content="https://комплаб.рф/services" />
         <link rel="canonical" href="https://комплаб.рф/services" />
       </Helmet>
+      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(generateServiceSchema()) }}
+      />
+      
+      <FAQSchema faqs={commonFAQs} />
+      
       <Header />
       
       <section className="py-16 container mx-auto px-4">

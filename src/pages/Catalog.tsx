@@ -320,6 +320,36 @@ const Catalog = () => {
   const loading = false;
   const error = null;
 
+  const generateProductSchema = () => {
+    return catalog.map((pc) => ({
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": pc.title,
+      "description": pc.description,
+      "image": pc.image_url,
+      "brand": {
+        "@type": "Brand",
+        "name": "Компьютерная Лаборатория"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": `https://комплаб.рф/catalog#${pc.id}`,
+        "priceCurrency": "RUB",
+        "price": pc.price,
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Компьютерная Лаборатория"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "50"
+      }
+    }));
+  };
+
   const filters = [
     { id: 'ALL', label: 'Все', icon: 'LayoutGrid', count: catalog.length },
     { id: 'ECO', label: 'Eco', icon: 'DollarSign', count: catalog.filter(pc => pc.category === 'ECO').length, description: '45-60К' },
@@ -394,6 +424,15 @@ const Catalog = () => {
         <meta property="og:description" content={seoDescription} />
         <link rel="canonical" href="https://комплаб.рф/catalog" />
       </Helmet>
+      
+      {generateProductSchema().map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+      
       <Header />
       
       <section className="py-16 container mx-auto px-4">
