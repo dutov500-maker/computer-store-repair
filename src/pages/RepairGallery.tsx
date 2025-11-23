@@ -59,6 +59,86 @@ const repairImages: RepairImage[] = [
     url: 'https://cdn.poehali.dev/files/d6867179-91d1-47ed-923a-b7cfcd4886c5.jpg',
     title: 'Готовый ноутбук Lenovo Legion',
     description: 'После полного обслуживания и апгрейда'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/7ee56c73-98a8-4957-ae0c-232e8ea3033f.jpg',
+    title: 'Чистка системного блока',
+    description: 'Глубокая очистка корпуса и вентиляторов от пыли'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/8c257930-0a3c-47d1-bb92-a00fc2d6f6cb.jpg',
+    title: 'Чистка радиатора ПК',
+    description: 'Удаление пылевых отложений с алюминиевого радиатора'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/3fcef4d5-badb-4152-97ea-990a8af07a76.jpg',
+    title: 'Тестирование GeForce RTX',
+    description: 'Видеокарта с RGB-подсветкой Gaming Pro после ремонта'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/1b692aa3-4bb7-44c7-a931-b67944d81e34.jpg',
+    title: 'Ремонт видеокарты RTX',
+    description: 'Замена термопасты на GPU и настройка системы питания'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/d2c5d8c6-63b6-4d1f-899b-09b1751a907d.jpg',
+    title: 'Чистка после залития',
+    description: 'Загрязненный корпус ноутбука MSI перед чисткой'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/79274275-a300-401f-865c-2c8d387e9e5b.jpg',
+    title: 'Восстановление платы после залития',
+    description: 'Следы окисления и коррозии на материнской плате'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/60cf56be-bdb5-4de8-b515-06d9bbbc5986.jpg',
+    title: 'Разборка видеокарты RTX 3080',
+    description: 'Демонтаж системы охлаждения для замены термопасты'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/072471be-037f-4d96-b38f-ff2850c01902.jpg',
+    title: 'Тестирование GeForce RTX',
+    description: 'Проверка работы видеокарты после ремонта системы охлаждения'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/af8eb999-348f-4a08-a0e2-8301b6ac0ffe.jpg',
+    title: 'Разборка RTX 3080 Palit',
+    description: 'Снятие кожуха видеокарты для обслуживания'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/ddd4b92e-f02c-41dd-8924-b0c7cfc36c5e.jpg',
+    title: 'Полная разборка RTX 3080',
+    description: 'Все компоненты видеокарты для глубокой чистки'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/56f6922f-c2d3-4e62-a339-40b3a72d4a7d.jpg',
+    title: 'Плата RTX 3080 без системы охлаждения',
+    description: 'GPU и память GDDR6X готовы к замене термопасты'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/77c63464-6653-4d1a-b7b6-1fa42ee59dd0.jpg',
+    title: 'Система охлаждения RTX 3080',
+    description: 'Медные радиаторы видеокарты высокого класса'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/c63db1e5-0a37-4420-8b83-17f2a5dcf0bf.jpg',
+    title: 'Ремонт видеокарты ASUS',
+    description: 'Работа с платой GeForce GTX высокого уровня'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/2312fee9-5978-49df-be7e-da650884333f.jpg',
+    title: 'Разборка RTX с кулером',
+    description: 'Система охлаждения Palit с тепловыми трубками'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/63a42906-eed2-4915-866c-76dc53055a7f.jpg',
+    title: 'Тест RTX после обслуживания',
+    description: 'Видеокарта Colorful с белым дизайном работает исправно'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/ffad20ec-f37c-4130-ad0e-5fa1664af903.jpg',
+    title: 'Диагностика ноутбука Lenovo',
+    description: 'Тестирование после ремонта и чистки системы'
   }
 ];
 
