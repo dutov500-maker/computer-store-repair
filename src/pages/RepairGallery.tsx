@@ -2,14 +2,10 @@ import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { repairImages, RepairImage } from '@/data/repairImages';
 
-interface RepairImage {
-  url: string;
-  title: string;
-  description: string;
-}
-
-const repairImages: RepairImage[] = [
+const allRepairImages: RepairImage[] = [
+  ...repairImages,
   {
     url: 'https://cdn.poehali.dev/files/53556925-539f-4d42-8bee-635edf6c7fe1.png',
     title: 'Разборка MacBook Pro',
@@ -249,7 +245,7 @@ export default function RepairGallery() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {repairImages.map((image, index) => (
+          {allRepairImages.map((image, index) => (
             <div
               key={index}
               className="group relative overflow-hidden rounded-2xl bg-zinc-900/50 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:bg-zinc-900"
