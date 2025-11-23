@@ -317,8 +317,11 @@ export default function RepairGallery() {
     <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950">
       <div className="container mx-auto px-4 py-16">
         <div className="mb-12 text-center">
+          <div className="inline-block px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full mb-4">
+            <span className="text-sm font-semibold text-red-400">🎄 НОВОГОДНИЕ СКИДКИ ДО 15%</span>
+          </div>
           <h1 className="mb-4 text-5xl font-bold text-white">
-            Галерея работ
+            Галерея работ 🎁
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-zinc-400">
             Профессиональный ремонт компьютерной техники и сборка игровых ПК. 

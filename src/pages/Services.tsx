@@ -364,8 +364,11 @@ const Services = () => {
       
       <section className="py-16 container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-in">
+          <div className="inline-block px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full mb-4">
+            <span className="text-sm font-semibold text-red-400">🎄 НОВОГОДНИЕ СКИДКИ ДО 15%</span>
+          </div>
           <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-            Услуги по <span className="text-primary">ремонту</span>
+            Услуги по <span className="text-primary">ремонту</span> 🎁
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Профессиональный ремонт компьютеров, ноутбуков, планшетов и телефонов в Волжском
