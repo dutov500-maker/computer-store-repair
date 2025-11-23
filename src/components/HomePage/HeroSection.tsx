@@ -57,12 +57,12 @@ export const HeroSection = () => {
       <div className="container mx-auto px-4 relative">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-in space-y-8">
-            <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
-              <span className="text-sm font-semibold text-primary">🔧 Сборка и ремонт ПК</span>
+            <div className="inline-block px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full mb-4">
+              <span className="text-sm font-semibold text-red-400">🎄 Новогодние скидки до 15%</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
               Соберем компьютер{' '}
-              <span className="text-gradient inline-block animate-pulse">вашей мечты</span>
+              <span className="text-gradient inline-block animate-pulse">вашей мечты 🎁</span>
             </h1>
             <p className="text-xl text-muted-foreground">
               Сборка ПК под любые задачи и профессиональный ремонт с гарантией

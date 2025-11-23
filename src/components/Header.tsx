@@ -81,14 +81,15 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-3 group">
             <div className="relative">
-              <div className="absolute inset-0 rounded-full bg-primary/30 blur-md group-hover:blur-xl group-hover:bg-primary/50 transition-all duration-300"></div>
+              <div className="absolute inset-0 rounded-full bg-red-500/30 blur-md group-hover:blur-xl group-hover:bg-red-500/50 transition-all duration-300"></div>
               <img 
                 src="https://cdn.poehali.dev/files/1258a3ce-944b-46de-88b7-5a629a1775c1.png" 
                 alt="КЛАБ"
                 className="h-10 w-10 rounded-full object-cover relative group-hover:scale-110 group-hover:rotate-6 transition-all duration-300"
               />
+              <div className="absolute -top-1 -right-1 text-xl">🎄</div>
             </div>
-            <span className="text-xl font-heading font-bold group-hover:text-primary transition-all duration-300">{settings?.company_name || 'Компьютерная Лаборатория'}</span>
+            <span className="text-xl font-heading font-bold group-hover:text-red-500 transition-all duration-300">{settings?.company_name || 'Компьютерная Лаборатория'}</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">

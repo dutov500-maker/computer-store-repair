@@ -115,8 +115,8 @@
     background:
       linear-gradient(
         180deg,
-        rgba(15, 10, 25, 0.97) 0%,
-        rgba(10, 8, 20, 0.99) 100%
+        rgba(10, 15, 30, 0.97) 0%,
+        rgba(5, 10, 25, 0.99) 100%
       ),
       url("https://cdn.poehali.dev/files/1002b71d-b44c-41c0-a988-4e26167a3489.png");
     background-size: cover;
