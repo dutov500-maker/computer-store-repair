@@ -7,6 +7,66 @@ import { repairImages, RepairImage } from '@/data/repairImages';
 const allRepairImages: RepairImage[] = [
   ...repairImages,
   {
+    url: 'https://cdn.poehali.dev/files/47a9814a-0246-4ac6-aa93-a35c472f606f.jpg',
+    title: 'Игровой системный блок для 4K гейминга',
+    description: 'Мощная сборка с AMD Ryzen 7 7800X3D и RTX 4080'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/1a84e611-89ea-4feb-9364-5ab4c578d6fe.jpg',
+    title: 'Компактный игровой компьютер',
+    description: 'Тихая сборка с AMD Ryzen 5 5600X и RTX 5070'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/022b9002-704a-432c-8640-8b6877016612.jpg',
+    title: 'Игровой монстр для любых игр 💪',
+    description: 'Топовая сборка с AMD Ryzen 7 7800X3D и RTX 5070 Ti'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/e2cab568-abdf-41af-9a9f-740013842310.jpg',
+    title: 'Белоснежный компик ❄️',
+    description: 'Стильная белая сборка с AMD Ryzen 5 9600X и RTX 5070'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/b7be6eda-2639-4f88-86a8-48abdbd07051.jpg',
+    title: 'Заказ для киберспортсмена',
+    description: 'Высокопроизводительная система с Ryzen 7 9800X3D и RTX 5070'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/7ab77389-609a-4e35-8e36-e100031e6bae.jpg',
+    title: 'Топовое решение в корпусе Lian Li',
+    description: 'Премиальная сборка с Ryzen 7 7800X3D и RTX 5070 Ti'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/ae489047-44a3-4dde-932f-ed6a5199e352.jpg',
+    title: 'Бюджетный игровой ПК для Full HD',
+    description: 'Оптимальное решение с Intel Core i5-12400F и RTX 3060'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/56cb3b09-3249-4909-977d-b29d88f7b9a3.jpg',
+    title: 'Стримерская станция',
+    description: 'Мощный ПК с AMD Ryzen 9 7950X и RTX 4070 Ti для стриминга'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/8a36ec5e-21fd-46cb-8e25-bc66341b14c9.jpg',
+    title: 'Рабочая станция для 3D моделирования',
+    description: 'Профессиональная сборка с Threadripper 3970X и RTX A5000'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/c34a83da-49a6-4f23-be6f-9170e632efa2.jpg',
+    title: 'Минималистичная сборка для офиса',
+    description: 'Тихий и энергоэффективный компьютер с Intel Core i3'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/cd49eac6-95f0-48e5-a2e2-3987a99a7e44.jpg',
+    title: 'Компактная сборка Mini-ITX',
+    description: 'Мощный компьютер с Ryzen 7 5800X3D и RTX 4060 Ti в мини-корпусе'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/8f7c4b94-c6cc-4755-acd9-b8a2a84bd597.jpg',
+    title: 'Сборка для монтажа видео',
+    description: 'Оптимизированная для Adobe Premiere с Ryzen 9 5950X и RTX 4060'
+  },
+  {
     url: 'https://cdn.poehali.dev/files/53556925-539f-4d42-8bee-635edf6c7fe1.png',
     title: 'Разборка MacBook Pro',
     description: 'Демонтаж материнской платы с модулем памяти Samsung'
@@ -239,7 +299,7 @@ export default function RepairGallery() {
             Галерея работ
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-zinc-400">
-            Профессиональный ремонт и обслуживание компьютерной техники. 
+            Профессиональный ремонт компьютерной техники и сборка игровых ПК. 
             Качество работы на каждом этапе.
           </p>
         </div>

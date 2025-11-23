@@ -9,7 +9,7 @@ import Breadcrumbs from "./components/Breadcrumbs";
 
 import Index from "./pages/Index";
 import Catalog from "./pages/Catalog";
-import Portfolio from "./pages/Portfolio";
+
 import Reviews from "./pages/Reviews";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
@@ -39,7 +39,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/catalog" element={<Catalog />} />
-          <Route path="/portfolio" element={<Portfolio />} />
+
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
