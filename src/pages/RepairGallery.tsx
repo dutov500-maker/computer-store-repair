@@ -139,6 +139,96 @@ const repairImages: RepairImage[] = [
     url: 'https://cdn.poehali.dev/files/ffad20ec-f37c-4130-ad0e-5fa1664af903.jpg',
     title: 'Диагностика ноутбука Lenovo',
     description: 'Тестирование после ремонта и чистки системы'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/f29b12d8-2f7a-46d6-af0b-e9cd1f67b361.png',
+    title: 'Диагностика BSOD ошибки',
+    description: 'Синий экран смерти на ноутбуке Lenovo - поиск причины'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/d58d7116-949f-4576-846d-930f88a1bd44.png',
+    title: 'Тестирование блока питания',
+    description: 'Проверка напряжений питания с помощью тестера'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/0f93a99d-8125-433a-96ae-5f85c708a849.png',
+    title: 'Замена батареи ноутбука',
+    description: 'Установка нового аккумулятора на ноутбук'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/40010b80-7f41-4c08-bd85-0fecb8c0e747.png',
+    title: 'Разборка MacBook Pro',
+    description: 'Доступ к материнской плате для диагностики'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/840081c4-ddfe-4483-9e62-e1c36e573d9f.png',
+    title: 'Восстановление платы после залития',
+    description: 'Чистка материнской платы от следов окисления'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/23a22c7d-12d5-4803-abbd-f47452bcf9fe.png',
+    title: 'Внутренности MacBook Pro',
+    description: 'Материнская плата с аккумуляторной батареей'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/3cf94858-d44c-4d2d-ad2d-37160e897755.png',
+    title: 'Сборка игрового ПК',
+    description: 'Белый корпус с RGB-подсветкой и жидкостным охлаждением'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/0c3be981-59fb-430a-81c5-8de7c1b004b5.jpg',
+    title: 'Тестирование видеокарты',
+    description: 'Colorful GeForce RTX после замены системы охлаждения'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/fd9599d3-1484-4b8e-9861-39a9ef069b1f.jpg',
+    title: 'Видеокарта Colorful RTX 3060',
+    description: 'Обратная сторона карты с логотипом и маркировкой'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/065b6886-4193-41c7-96b0-a92b0fb10050.jpg',
+    title: 'Разборка системы охлаждения',
+    description: 'Демонтаж кулеров и радиаторов видеокарты'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/3bd6a1f6-a558-48e6-aa81-6c7ced716372.jpg',
+    title: 'Плата RTX 3060 Colorful',
+    description: 'Открытая печатная плата видеокарты без охлаждения'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/80e1078f-b116-4c38-812b-b3e647acd145.jpg',
+    title: 'Система охлаждения видеокарты',
+    description: 'Медные радиаторы с тепловыми трубками'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/0cc6d2e1-c310-447d-9e7b-ed94f3b3a47e.jpg',
+    title: 'Разобранная видеокарта RTX',
+    description: 'Все компоненты системы охлаждения отдельно'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/6d1e3643-51e7-4b1f-ba09-93e02c478c1f.jpg',
+    title: 'Видеокарта Colorful Battle-AX',
+    description: 'Двухвентиляторная система охлаждения с красным акцентом'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/265f9614-9bf1-417d-8034-9c13447f6bd2.jpg',
+    title: 'Тестирование FurMark',
+    description: 'Стресс-тест видеокарты с мониторингом температур'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/c8f49d2a-52c1-4074-8cce-1fb2990bc944.jpg',
+    title: 'Обратная сторона видеокарты',
+    description: 'Задняя панель платы RTX без системы охлаждения'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/fe65b76d-f2bf-43c0-8ecb-0967801fb7c6.jpg',
+    title: 'Бэкплейт видеокарты',
+    description: 'Металлическая задняя крышка с вентиляционными отверстиями'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/aa70b8d9-58a8-4310-84bf-93cea2ce3f17.jpg',
+    title: 'Разборка HP Omen',
+    description: 'Замена системы охлаждения игрового ноутбука'
   }
 ];
 
