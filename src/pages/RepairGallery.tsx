@@ -3,6 +3,7 @@ import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { repairImages, RepairImage } from '@/data/repairImages';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const allRepairImages: RepairImage[] = [
   ...repairImages,
@@ -290,6 +291,27 @@ const allRepairImages: RepairImage[] = [
 
 export default function RepairGallery() {
   const [selectedImage, setSelectedImage] = useState<RepairImage | null>(null);
+  const [filter, setFilter] = useState<'all' | 'builds' | 'repairs'>('all');
+
+  const buildsKeywords = ['сборка', 'игровой', 'пк', 'системный блок', 'компьютер', 'станция', 'компик', 'mini-itx'];
+  const repairsKeywords = ['ремонт', 'разборка', 'восстановление', 'диагностика', 'чистка', 'замена', 'тестирование', 'видеокарта', 'материнская плата', 'охлаждение', 'залитие'];
+
+  const categorizeImage = (image: RepairImage): 'build' | 'repair' => {
+    const text = `${image.title} ${image.description}`.toLowerCase();
+    const hasRepairKeyword = repairsKeywords.some(kw => text.includes(kw.toLowerCase()));
+    const hasBuildKeyword = buildsKeywords.some(kw => text.includes(kw.toLowerCase()));
+    
+    if (hasRepairKeyword && !hasBuildKeyword) return 'repair';
+    if (hasBuildKeyword && !hasRepairKeyword) return 'build';
+    if (text.includes('сборка') || text.includes('игровой пк') || text.includes('системный блок')) return 'build';
+    return 'repair';
+  };
+
+  const filteredImages = allRepairImages.filter(image => {
+    if (filter === 'all') return true;
+    const category = categorizeImage(image);
+    return filter === 'builds' ? category === 'build' : category === 'repair';
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950">
@@ -302,10 +324,29 @@ export default function RepairGallery() {
             Профессиональный ремонт компьютерной техники и сборка игровых ПК. 
             Качество работы на каждом этапе.
           </p>
+          
+          <div className="mt-8 flex justify-center">
+            <Tabs value={filter} onValueChange={(v) => setFilter(v as any)} className="w-auto">
+              <TabsList className="bg-zinc-900 border border-zinc-800">
+                <TabsTrigger value="all" className="data-[state=active]:bg-primary">
+                  <Icon name="Grid3x3" size={18} className="mr-2" />
+                  Все работы
+                </TabsTrigger>
+                <TabsTrigger value="builds" className="data-[state=active]:bg-primary">
+                  <Icon name="Cpu" size={18} className="mr-2" />
+                  Сборки ПК
+                </TabsTrigger>
+                <TabsTrigger value="repairs" className="data-[state=active]:bg-primary">
+                  <Icon name="Wrench" size={18} className="mr-2" />
+                  Ремонты
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {allRepairImages.map((image, index) => (
+          {filteredImages.map((image, index) => (
             <div
               key={index}
               className="group relative overflow-hidden rounded-2xl bg-zinc-900/50 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:bg-zinc-900"

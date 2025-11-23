@@ -103,10 +103,10 @@ export const ReviewsSection = ({ fullPage = false }: ReviewsSectionProps) => {
                       <Icon key={i} name="Star" size={14} className="fill-current" />
                     ))}
                   </div>
-                  <span className="text-sm font-semibold">Отличный продавец!</span>
+                  <span className="text-sm font-semibold">Игорь</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-2">
-                  Всё быстро, качественно, профессионально. Компьютер собран отлично, работает без нареканий. Рекомендую!
+                  Собрали игровой компьютер, все работает отлично! Профессионалы своего дела, подсказали оптимальную конфигурацию. Рекомендую!
                 </p>
                 <span className="text-xs text-muted-foreground">Покупатель с Авито</span>
               </div>
@@ -118,10 +118,10 @@ export const ReviewsSection = ({ fullPage = false }: ReviewsSectionProps) => {
                       <Icon key={i} name="Star" size={14} className="fill-current" />
                     ))}
                   </div>
-                  <span className="text-sm font-semibold">Супер!</span>
+                  <span className="text-sm font-semibold">Александр</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-2">
-                  Компьютер собрали под мои задачи, всё работает отлично. Цены адекватные, консультация на высоте. Спасибо!
+                  Отличный сервис! Быстро починили ноутбук, поменяли термопасту и почистили от пыли. Теперь работает как новый. Спасибо!
                 </p>
                 <span className="text-xs text-muted-foreground">Покупатель с Авито</span>
               </div>
@@ -133,10 +133,10 @@ export const ReviewsSection = ({ fullPage = false }: ReviewsSectionProps) => {
                       <Icon key={i} name="Star" size={14} className="fill-current" />
                     ))}
                   </div>
-                  <span className="text-sm font-semibold">Рекомендую</span>
+                  <span className="text-sm font-semibold">Дмитрий</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-2">
-                  Быстрая сборка, качественные комплектующие. Ребята знают своё дело, помогли с выбором конфигурации.
+                  Сделали апгрейд моего ПК - поставили новую видеокарту и добавили памяти. Ребята знают свое дело, все сделали аккуратно и быстро.
                 </p>
                 <span className="text-xs text-muted-foreground">Покупатель с Авито</span>
               </div>
@@ -148,10 +148,10 @@ export const ReviewsSection = ({ fullPage = false }: ReviewsSectionProps) => {
                       <Icon key={i} name="Star" size={14} className="fill-current" />
                     ))}
                   </div>
-                  <span className="text-sm font-semibold">Очень доволен</span>
+                  <span className="text-sm font-semibold">Андрей</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-2">
-                  Заказывал игровой ПК. Собрали быстро, всё работает идеально. Игры летают на максимальных настройках!
+                  Взял у них готовый игровой компьютер. Очень доволен! Все игры летают на максимальных настройках. Качество сборки на высоте!
                 </p>
                 <span className="text-xs text-muted-foreground">Покупатель с Авито</span>
               </div>
@@ -163,10 +163,55 @@ export const ReviewsSection = ({ fullPage = false }: ReviewsSectionProps) => {
                       <Icon key={i} name="Star" size={14} className="fill-current" />
                     ))}
                   </div>
-                  <span className="text-sm font-semibold">Отличная работа!</span>
+                  <span className="text-sm font-semibold">Сергей</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-2">
-                  Профессиональный подход, адекватные цены, быстрая доставка. Всё на высшем уровне. Буду обращаться ещё!
+                  Принес ноутбук после залития. Думал, что уже не восстановить, но ребята смогли его починить! Теперь работает без проблем. Большое спасибо!
+                </p>
+                <span className="text-xs text-muted-foreground">Покупатель с Авито</span>
+              </div>
+
+              <div className="p-4 bg-background/50 rounded-lg border border-primary/10">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="flex text-yellow-500">
+                    {[...Array(5)].map((_, i) => (
+                      <Icon key={i} name="Star" size={14} className="fill-current" />
+                    ))}
+                  </div>
+                  <span className="text-sm font-semibold">Михаил</span>
+                </div>
+                <p className="text-sm text-muted-foreground mb-2">
+                  Заказал сборку компьютера для работы в 3D. Подобрали оптимальные комплектующие, собрали быстро. Мощности хватает с запасом!
+                </p>
+                <span className="text-xs text-muted-foreground">Покупатель с Авито</span>
+              </div>
+
+              <div className="p-4 bg-background/50 rounded-lg border border-primary/10">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="flex text-yellow-500">
+                    {[...Array(5)].map((_, i) => (
+                      <Icon key={i} name="Star" size={14} className="fill-current" />
+                    ))}
+                  </div>
+                  <span className="text-sm font-semibold">Вадим</span>
+                </div>
+                <p className="text-sm text-muted-foreground mb-2">
+                  Отличная работа! Быстро починили видеокарту, заменили термопасту и прочистили от пыли. Тепературы снизились на 20 градусов. Рекомендую!
+                </p>
+                <span className="text-xs text-muted-foreground">Покупатель с Авито</span>
+              </div>
+
+              <div className="p-4 bg-background/50 rounded-lg border border-primary/10">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="flex text-yellow-500">
+                    {[...Array(5)].map((_, i) => (
+                      <Icon key={i} name="Star" size={14} className="fill-current" />
+                    ))}
+                  </div>
+                  <span className="text-sm font-semibold">Олег</span>
+                </div>
+                <p className="text-sm text-muted-foreground mb-2">
+                  Заказывал сборку с белым корпусом и RGB-подсветкой. Получилось очень красиво и мощно! И цена адекватная. Спасибо!
                 </p>
                 <span className="text-xs text-muted-foreground">Покупатель с Авито</span>
               </div>
