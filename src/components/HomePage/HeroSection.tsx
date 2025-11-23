@@ -61,29 +61,39 @@ export const HeroSection = () => {
             <div className="inline-block px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full mb-4">
               <span className="text-sm font-semibold text-red-400">🎄 Новогодние скидки до 15%</span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
-              Соберем компьютер{' '}
-              <span className="text-gradient inline-block animate-pulse">вашей мечты</span>
-              <span className="inline-block ml-3 align-middle relative">
-                <span className="absolute inset-0 blur-xl bg-red-500/40 animate-pulse"></span>
-                <svg className="w-16 h-16 md:w-20 md:h-20 inline-block animate-bounce-slow relative z-10" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="12" y="20" width="40" height="36" rx="2" fill="#DC2626"/>
-                  <rect x="12" y="20" width="40" height="36" rx="2" fill="url(#gift-gradient)"/>
-                  <rect x="28" y="20" width="8" height="36" fill="#FCD34D"/>
-                  <rect x="12" y="32" width="40" height="8" fill="#FCD34D"/>
-                  <path d="M32 8 C28 8, 26 10, 26 13 C26 13, 26 16, 28 18 L32 20 L36 18 C38 16, 38 13, 38 13 C38 10, 36 8, 32 8Z" fill="#FCD34D"/>
-                  <ellipse cx="28" cy="12" rx="3" ry="4" fill="#FCD34D"/>
-                  <ellipse cx="36" cy="12" rx="3" ry="4" fill="#FCD34D"/>
-                  <rect x="30" y="12" width="4" height="8" fill="#FCD34D"/>
-                  <defs>
-                    <linearGradient id="gift-gradient" x1="12" y1="20" x2="52" y2="56" gradientUnits="userSpaceOnUse">
-                      <stop offset="0%" stopColor="#EF4444"/>
-                      <stop offset="100%" stopColor="#DC2626"/>
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </span>
-            </h1>
+            <div className="relative inline-block">
+              <div className="absolute -top-4 -left-4 w-3 h-3 rounded-full bg-red-500 animate-pulse shadow-lg shadow-red-500/50"></div>
+              <div className="absolute -top-2 left-8 w-2.5 h-2.5 rounded-full bg-yellow-400 animate-pulse shadow-lg shadow-yellow-400/50" style={{ animationDelay: '0.2s' }}></div>
+              <div className="absolute -top-3 left-20 w-3 h-3 rounded-full bg-green-500 animate-pulse shadow-lg shadow-green-500/50" style={{ animationDelay: '0.4s' }}></div>
+              <div className="absolute -top-4 right-32 w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse shadow-lg shadow-blue-500/50" style={{ animationDelay: '0.6s' }}></div>
+              <div className="absolute -top-2 right-16 w-3 h-3 rounded-full bg-purple-500 animate-pulse shadow-lg shadow-purple-500/50" style={{ animationDelay: '0.8s' }}></div>
+              <div className="absolute -top-3 right-4 w-2.5 h-2.5 rounded-full bg-pink-500 animate-pulse shadow-lg shadow-pink-500/50" style={{ animationDelay: '1s' }}></div>
+              <div className="absolute -top-4 right-0 w-3 h-3 rounded-full bg-orange-500 animate-pulse shadow-lg shadow-orange-500/50" style={{ animationDelay: '1.2s' }}></div>
+              
+              <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
+                Соберем компьютер{' '}
+                <span className="text-gradient inline-block animate-pulse">вашей мечты</span>
+                <span className="inline-block ml-3 align-middle relative">
+                  <span className="absolute inset-0 blur-xl bg-red-500/40 animate-pulse"></span>
+                  <svg className="w-16 h-16 md:w-20 md:h-20 inline-block animate-bounce-slow relative z-10" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="12" y="20" width="40" height="36" rx="2" fill="#DC2626"/>
+                    <rect x="12" y="20" width="40" height="36" rx="2" fill="url(#gift-gradient)"/>
+                    <rect x="28" y="20" width="8" height="36" fill="#FCD34D"/>
+                    <rect x="12" y="32" width="40" height="8" fill="#FCD34D"/>
+                    <path d="M32 8 C28 8, 26 10, 26 13 C26 13, 26 16, 28 18 L32 20 L36 18 C38 16, 38 13, 38 13 C38 10, 36 8, 32 8Z" fill="#FCD34D"/>
+                    <ellipse cx="28" cy="12" rx="3" ry="4" fill="#FCD34D"/>
+                    <ellipse cx="36" cy="12" rx="3" ry="4" fill="#FCD34D"/>
+                    <rect x="30" y="12" width="4" height="8" fill="#FCD34D"/>
+                    <defs>
+                      <linearGradient id="gift-gradient" x1="12" y1="20" x2="52" y2="56" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stopColor="#EF4444"/>
+                        <stop offset="100%" stopColor="#DC2626"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+              </h1>
+            </div>
             <p className="text-xl text-muted-foreground">
               Сборка ПК под любые задачи и профессиональный ремонт с гарантией
             </p>
