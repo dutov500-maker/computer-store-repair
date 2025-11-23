@@ -3,7 +3,7 @@
   <!-- Главная страница -->
   <url>
     <loc>https://комплаб.рф/</loc>
-    <lastmod>2025-01-23</lastmod>
+    <lastmod>2025-11-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,7 +11,7 @@
   <!-- Каталог компьютеров -->
   <url>
     <loc>https://комплаб.рф/catalog</loc>
-    <lastmod>2025-01-23</lastmod>
+    <lastmod>2025-11-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -19,7 +19,7 @@
   <!-- Услуги ремонта -->
   <url>
     <loc>https://комплаб.рф/services</loc>
-    <lastmod>2025-01-23</lastmod>
+    <lastmod>2025-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -27,7 +27,7 @@
   <!-- Подбор компьютера -->
   <url>
     <loc>https://комплаб.рф/pc-selection</loc>
-    <lastmod>2025-01-23</lastmod>
+    <lastmod>2025-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -35,7 +35,7 @@
   <!-- Галерея работ по ремонту -->
   <url>
     <loc>https://комплаб.рф/repair-gallery</loc>
-    <lastmod>2025-01-23</lastmod>
+    <lastmod>2025-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -43,7 +43,7 @@
   <!-- Отзывы -->
   <url>
     <loc>https://комплаб.рф/reviews</loc>
-    <lastmod>2025-01-23</lastmod>
+    <lastmod>2025-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -51,7 +51,7 @@
   <!-- Блог -->
   <url>
     <loc>https://комплаб.рф/blog</loc>
-    <lastmod>2025-01-23</lastmod>
+    <lastmod>2025-11-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -59,7 +59,7 @@
   <!-- Контакты -->
   <url>
     <loc>https://комплаб.рф/contact</loc>
-    <lastmod>2025-01-23</lastmod>
+    <lastmod>2025-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
