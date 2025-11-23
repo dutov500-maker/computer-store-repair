@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { NewYearCountdown } from '@/components/NewYearCountdown';
 
 const SLIDER_IMAGES = [
   {
@@ -62,11 +63,15 @@ export const HeroSection = () => {
             </div>
             <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
               Соберем компьютер{' '}
-              <span className="text-gradient inline-block animate-pulse">вашей мечты 🎁</span>
+              <span className="text-gradient inline-block animate-pulse">вашей мечты</span>
+              <span className="inline-block ml-3">
+                <img src="https://cdn.poehali.dev/files/3e569eae-50ee-4c3c-9b61-b1391c118d1f.png" alt="gift" className="w-16 h-16 inline-block animate-bounce-slow" />
+              </span>
             </h1>
             <p className="text-xl text-muted-foreground">
               Сборка ПК под любые задачи и профессиональный ремонт с гарантией
             </p>
+            <NewYearCountdown />
             <div className="flex flex-wrap gap-4">
               <Link to="/pc-selection">
                 <Button size="lg" className="gradient-animated text-lg px-8 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all hover:scale-105 relative overflow-hidden group">
