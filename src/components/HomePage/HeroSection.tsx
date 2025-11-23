@@ -64,8 +64,8 @@ export const HeroSection = () => {
             <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight">
               Соберем компьютер{' '}
               <span className="text-gradient inline-block animate-pulse">вашей мечты</span>
-              <span className="inline-block ml-3">
-                <img src="https://cdn.poehali.dev/files/3e569eae-50ee-4c3c-9b61-b1391c118d1f.png" alt="gift" className="w-16 h-16 inline-block animate-bounce-slow" />
+              <span className="inline-block ml-3 align-middle">
+                <img src="https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/2a66b0b6-8db1-4784-94ce-b899b27c3ee1.jpg" alt="gift" className="w-20 h-20 inline-block animate-bounce-slow object-contain" />
               </span>
             </h1>
             <p className="text-xl text-muted-foreground">
