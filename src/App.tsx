@@ -22,6 +22,7 @@ import WarrantyPage from "./pages/WarrantyPage";
 import DeliveryPage from "./pages/DeliveryPage";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import RepairGallery from "./pages/RepairGallery";
 import NotFound from "./pages/NotFound";
 import { FloatingRepairButton } from "./components/FloatingRepairButton";
 
@@ -45,6 +46,7 @@ const App = () => (
           <Route path="/pc-selection" element={<PCSelection />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogPost />} />
+          <Route path="/repair-gallery" element={<RepairGallery />} />
 
           <Route path="/page/:slug" element={<AboutPage />} />
           <Route path="/warranty" element={<WarrantyPage />} />
