@@ -7,7 +7,7 @@ Crawl-delay: 0
 User-agent: Yandex
 Allow: /
 Crawl-delay: 0
-Host: computer-store-repair.poehali.dev
+Host: xn--80aalb1afcfc6au.xn--p1ai
 
 # Разрешаем Google всё
 User-agent: Googlebot
@@ -21,4 +21,5 @@ Allow: /
 Disallow: /admin/
 
 # Карта сайта для быстрой индексации
-Sitemap: https://computer-store-repair.poehali.dev/sitemap.xml
+Sitemap: https://xn--80aalb1afcfc6au.xn--p1ai/sitemap.xml
+Sitemap: https://комплаб.рф/sitemap.xml
