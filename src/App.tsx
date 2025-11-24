@@ -24,6 +24,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import RepairGallery from "./pages/RepairGallery";
 import NotFound from "./pages/NotFound";
+import Error404 from "./pages/Error404";
 import { FloatingRepairButton } from "./components/FloatingRepairButton";
 
 const queryClient = new QueryClient();
@@ -54,7 +55,7 @@ const App = () => (
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<Admin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </BrowserRouter>
   </QueryClientProvider>

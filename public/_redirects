@@ -1,10 +1,5 @@
+# Redirect old URLs first
+/portfolio   /repair-gallery   301
+
 # SPA fallback - all routes go to index.html with 200 status
 /*    /index.html   200
-
-# Handle 404s properly - this is important for Yandex
-/404.html   404
-
-# Redirect old URLs if any
-/portfolio   /repair-gallery   301
-/warranty    /services         301
-/delivery    /contact          301
