@@ -7,7 +7,7 @@ Crawl-delay: 0
 User-agent: Yandex
 Allow: /
 Crawl-delay: 0
-Host: xn--80ajbgbbkcr.xn--p1ai
+Host: xn--80aczeeli.xn--p1ai
 
 # Разрешаем Google всё
 User-agent: Googlebot
@@ -21,5 +21,5 @@ Allow: /
 Disallow: /admin/
 
 # Карта сайта для быстрой индексации
-Sitemap: https://xn--80ajbgbbkcr.xn--p1ai/sitemap.xml
+Sitemap: https://xn--80aczeeli.xn--p1ai/sitemap.xml
 Sitemap: https://комплаб.рф/sitemap.xml
