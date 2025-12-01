@@ -26,6 +26,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { ServiceCalculator } from '@/components/ServiceCalculator';
+import { DiagnosticTimer } from '@/components/DiagnosticTimer';
+import { CallMasterButton } from '@/components/CallMasterButton';
 
 
 const STATIC_SERVICES = [
@@ -34,21 +37,33 @@ const STATIC_SERVICES = [
     title: "Диагностика компьютера",
     description: "Полная проверка всех компонентов системы",
     icon: "Search",
-    price: "Бесплатно"
+    price: "Бесплатно",
+    beforeAfter: {
+      before: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400",
+      after: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=400"
+    }
   },
   {
     id: 2,
     title: "Чистка от пыли",
     description: "Профессиональная чистка системного блока",
     icon: "Wind",
-    price: "от 500 ₽"
+    price: "от 500 ₽",
+    beforeAfter: {
+      before: "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=400",
+      after: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=400"
+    }
   },
   {
     id: 3,
     title: "Замена термопасты",
     description: "Замена термопасты на процессоре и видеокарте",
     icon: "Droplet",
-    price: "от 800 ₽"
+    price: "от 800 ₽",
+    beforeAfter: {
+      before: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400",
+      after: "https://images.unsplash.com/photo-1587202372878-4b1d3b46a4f6?w=400"
+    }
   },
   {
     id: 4,
@@ -139,21 +154,33 @@ const STATIC_SERVICES = [
     title: "Ремонт ноутбука",
     description: "Диагностика и ремонт ноутбуков любых марок",
     icon: "Laptop",
-    price: "от 1000 ₽"
+    price: "от 1000 ₽",
+    beforeAfter: {
+      before: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400",
+      after: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400"
+    }
   },
   {
     id: 17,
     title: "Замена экрана ноутбука",
     description: "Замена матрицы на ноутбуке",
     icon: "Monitor",
-    price: "от 3000 ₽"
+    price: "от 3000 ₽",
+    beforeAfter: {
+      before: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=400",
+      after: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400"
+    }
   },
   {
     id: 18,
     title: "Чистка ноутбука от пыли",
     description: "Профессиональная чистка системы охлаждения",
     icon: "Wind",
-    price: "от 800 ₽"
+    price: "от 800 ₽",
+    beforeAfter: {
+      before: "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=400",
+      after: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=400"
+    }
   },
   {
     id: 19,
@@ -375,6 +402,15 @@ const Services = () => {
           </p>
         </div>
 
+        <div className="grid lg:grid-cols-2 gap-6 mb-12">
+          <ServiceCalculator />
+          <DiagnosticTimer />
+        </div>
+
+        <div className="text-center mb-8">
+          <CallMasterButton variant="outline" className="text-lg h-14 px-8" />
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <Card 
@@ -383,19 +419,75 @@ const Services = () => {
               style={{ animationDelay: `${index * 50}ms` }}
               onClick={() => handleServiceClick(service)}
             >
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <Icon name={service.icon} size={28} className="text-primary" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-heading font-bold mb-2">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm mb-3">
-                    {service.description}
-                  </p>
-                  <div className="text-primary font-bold">
-                    {service.price}
+              <div className="space-y-4">
+                {service.beforeAfter && (
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="relative group">
+                      <img 
+                        src={service.beforeAfter.before} 
+                        alt="До ремонта"
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                      <div className="absolute inset-0 bg-black/60 rounded-lg flex items-center justify-center">
+                        <span className="text-white font-bold text-sm">ДО</span>
+                      </div>
+                    </div>
+                    <div className="relative group">
+                      <img 
+                        src={service.beforeAfter.after} 
+                        alt="После ремонта"
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                      <div className="absolute inset-0 bg-black/60 rounded-lg flex items-center justify-center">
+                        <span className="text-white font-bold text-sm">ПОСЛЕ</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-primary/10 rounded-lg">
+                    <Icon name={service.icon} size={28} className="text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-heading font-bold mb-2">
+                      {service.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-3">
+                      {service.description}
+                    </p>
+                    <div className="text-primary font-bold mb-3">
+                      {service.price}
+                    </div>
+                    <div className="flex gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="flex-1"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleServiceClick(service);
+                        }}
+                      >
+                        <Icon name="Phone" size={16} className="mr-1" />
+                        Заказать
+                      </Button>
+                      <a
+                        href={`https://wa.me/79950272707?text=Здравствуйте!%20Хочу%20заказать:%20${encodeURIComponent(service.title)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex-1"
+                      >
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          className="w-full bg-[#25D366]/10 hover:bg-[#25D366]/20 border-[#25D366]"
+                        >
+                          <Icon name="MessageCircle" size={16} className="mr-1" />
+                          WhatsApp
+                        </Button>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -451,6 +543,36 @@ const Services = () => {
               </Link>
             </Button>
           </div>
+        </div>
+
+        <div className="mt-16 mb-12">
+          <Card className="p-6 bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-purple-500/10 border-2 border-blue-500/30">
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="p-4 bg-blue-500/20 rounded-2xl">
+                <Icon name="Shield" size={48} className="text-blue-500" />
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <h3 className="text-2xl font-bold mb-2">🛡️ Гарантия на все работы до 6 месяцев</h3>
+                <p className="text-muted-foreground mb-3">
+                  Даем официальную гарантию на выполненный ремонт. Если что-то пойдет не так — исправим бесплатно!
+                </p>
+                <div className="flex flex-wrap gap-4 justify-center md:justify-start text-sm">
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" size={18} className="text-green-500" />
+                    <span>Бесплатная повторная диагностика</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" size={18} className="text-green-500" />
+                    <span>Гарантийный ремонт без очередей</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Icon name="Check" size={18} className="text-green-500" />
+                    <span>Прозрачные условия</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
         </div>
 
         <div className="mt-16 bg-card rounded-2xl p-8 md:p-12">
