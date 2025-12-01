@@ -108,8 +108,25 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} {settings?.company_name || 'Компьютерная Лаборатория'}. Все права защищены.</p>
+        <div className="border-t border-border mt-8 pt-8">
+          <div className="text-center text-sm text-muted-foreground space-y-2">
+            <p className="font-medium">
+              Индивидуальный предприниматель Дутов Антоний Александрович
+            </p>
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
+              <span>ИНН 501817855432</span>
+              <span>ОГРНИП 325344300038542</span>
+            </div>
+            <p>
+              Фактический адрес: г. Волжский, ул. Александрова, д. 24а
+            </p>
+            <p>
+              Телефон: <a href="tel:+79950272707" className="hover:text-primary transition-colors">+7 995 027 27 07</a>
+            </p>
+            <p className="pt-2">
+              © {new Date().getFullYear()} {settings?.company_name || 'Компьютерная Лаборатория'}. Все права защищены.
+            </p>
+          </div>
         </div>
       </div>
     </footer>
