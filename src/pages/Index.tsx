@@ -11,7 +11,6 @@ import { StatsSection } from '@/components/HomePage/StatsSection';
 import { RepairCTASection } from '@/components/HomePage/RepairCTASection';
 import { ReviewsSection } from '@/components/HomePage/ReviewsSection';
 import { PCSelectionSection } from '@/components/HomePage/PCSelectionSection';
-import NewYearSaleTimer from '@/components/NewYearSaleTimer';
 import { initializeStorage, getServices } from '@/lib/localStorage';
 
 const Index = () => {
@@ -57,9 +56,6 @@ const Index = () => {
       <Header />
       <div className="space-y-0">
         <HeroSection />
-        <div className="container mx-auto px-4 py-8">
-          <NewYearSaleTimer />
-        </div>
         <PCSelectionSection />
         <RepairCTASection />
         <CatalogSection />
