@@ -140,15 +140,15 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-2 md:gap-4">
-            <a href="tel:+79950272707" className="hidden lg:flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
+            <a href="tel:+79950272707" className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-primary/10">
               <Icon name="Phone" size={18} />
-              +7 995 027 27 07
+              <span className="hidden sm:inline">+7 995 027 27 07</span>
             </a>
-            <a href="https://wa.me/79950272707" target="_blank" rel="noopener noreferrer" className="hidden md:block">
+            <a href="https://wa.me/79950272707" target="_blank" rel="noopener noreferrer" className="hidden sm:block">
               <Button size="sm" className="bg-[#25D366] hover:bg-[#25D366]/90 text-white shadow-md hover:shadow-xl hover:scale-105 transition-all relative overflow-hidden group">
                 <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
                 <Icon name="MessageCircle" size={18} className="mr-2 relative z-10" />
-                <span className="relative z-10">Написать</span>
+                <span className="relative z-10">WhatsApp</span>
               </Button>
             </a>
             
