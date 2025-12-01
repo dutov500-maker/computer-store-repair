@@ -11,6 +11,8 @@ import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
 import { toast } from 'sonner';
 import funcUrls from '../../backend/func2url.json';
+import NewYearSaleTimer from '@/components/NewYearSaleTimer';
+import StickyHelpButton from '@/components/StickyHelpButton';
 
 const STATIC_CATALOG = [
   {
@@ -21,6 +23,8 @@ const STATIC_CATALOG = [
     resolution: "HD",
     category: "ECO",
     image_url: "https://cdn.poehali.dev/files/206fb641-30d1-4d87-b3ec-322e0f76a02e.jpg",
+    badge: "💰 Лучшая цена",
+    fps: "Dota 2: 120 FPS | CS2: 90 FPS",
     specs: {
       cpu: "AMD Ryzen 5 5500",
       gpu: "RTX 1660 Super",
@@ -36,6 +40,8 @@ const STATIC_CATALOG = [
     resolution: "Full HD",
     category: "ECO",
     image_url: "https://cdn.poehali.dev/files/89621141-3188-48fd-a9eb-52b97c276daf.jpg",
+    badge: "🔥 Хит продаж",
+    fps: "GTA V: 110 FPS | Fortnite: 100 FPS",
     specs: {
       cpu: "Intel Core i3-12100F",
       gpu: "RTX 2060 Super",
@@ -434,6 +440,7 @@ const Catalog = () => {
       ))}
       
       <Header />
+      <StickyHelpButton />
       
       <section className="py-16 container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-in">
@@ -446,7 +453,11 @@ const Catalog = () => {
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
             Выберите готовую конфигурацию или создайте индивидуальную сборку
           </p>
+        </div>
 
+        <NewYearSaleTimer />
+
+        <div className="text-center mb-12">
           <div className="flex flex-wrap gap-3 justify-center max-w-4xl mx-auto mb-8">
             {filters.map((filter, index) => (
               <button
@@ -545,10 +556,17 @@ const Catalog = () => {
                 <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
                 
                 <div className="relative aspect-[4/3] overflow-hidden rounded-t-xl">
-                  <div className="absolute top-4 left-4 z-10">
+                  <div className="absolute top-4 left-4 z-10 space-y-2">
                     <span className={`inline-block px-3 py-1.5 rounded-lg text-xs font-bold backdrop-blur-sm border-2 ${getCategoryBadgeColor(pc.category)} shadow-lg`}>
                       {pc.category}
                     </span>
+                    {(pc as any).badge && (
+                      <div>
+                        <span className="inline-block px-3 py-1.5 rounded-lg text-xs font-bold bg-red-500/90 backdrop-blur-sm text-white border-2 border-red-500 shadow-lg animate-pulse">
+                          {(pc as any).badge}
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <div className="absolute top-4 right-4 z-10">
                     <span className="inline-block px-3 py-1.5 rounded-lg text-xs font-bold bg-primary/90 backdrop-blur-sm text-white border-2 border-primary shadow-lg">
@@ -584,22 +602,46 @@ const Catalog = () => {
                       <Icon name="MemoryStick" size={16} className="text-primary" />
                       <span className="text-muted-foreground">{pc.specs.ram} • {pc.specs.storage}</span>
                     </div>
+                    {(pc as any).fps && (
+                      <div className="flex items-center gap-2.5 pt-2 border-t border-border/50">
+                        <Icon name="Gamepad2" size={16} className="text-green-500" />
+                        <span className="text-muted-foreground text-xs">{(pc as any).fps}</span>
+                      </div>
+                    )}
                   </div>
 
-                  <div className="flex items-center justify-between pt-5 border-t border-border/50">
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-1">Цена</p>
-                      <p className="text-3xl font-bold text-gradient">
-                        {pc.price.toLocaleString()} ₽
-                      </p>
+                  <div className="space-y-3 pt-5 border-t border-border/50">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-muted-foreground mb-1">Цена</p>
+                        <p className="text-3xl font-bold text-gradient">
+                          {pc.price.toLocaleString()} ₽
+                        </p>
+                      </div>
+                      <Button 
+                        size="default" 
+                        className="gradient-animated opacity-0 group-hover:opacity-100 transition-opacity shadow-lg px-6"
+                      >
+                        <Icon name="ShoppingCart" size={18} className="mr-2" />
+                        Заказать
+                      </Button>
                     </div>
-                    <Button 
-                      size="default" 
-                      className="gradient-animated opacity-0 group-hover:opacity-100 transition-opacity shadow-lg px-6"
+                    <a
+                      href={`https://wa.me/79950272707?text=Здравствуйте!%20Хочу%20купить%20${encodeURIComponent(pc.title)}%20за%20${pc.price}₽`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="block w-full"
                     >
-                      <Icon name="ShoppingCart" size={18} className="mr-2" />
-                      Заказать
-                    </Button>
+                      <Button 
+                        size="default" 
+                        variant="outline"
+                        className="w-full bg-[#25D366]/10 hover:bg-[#25D366]/20 border-[#25D366] hover:border-[#25D366] text-[#25D366] hover:text-[#25D366] shadow-md hover:shadow-lg hover:scale-105 transition-all"
+                      >
+                        <Icon name="MessageCircle" size={18} className="mr-2" />
+                        Купить в 1 клик
+                      </Button>
+                    </a>
                   </div>
                 </div>
 
