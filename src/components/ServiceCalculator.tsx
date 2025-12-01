@@ -7,12 +7,12 @@ import Icon from '@/components/ui/icon';
 
 const SERVICES_PRICING = {
   'diagnostics': { base: 0, urgent: 0, name: 'Диагностика' },
-  'cleaning': { base: 500, urgent: 750, name: 'Чистка от пыли' },
-  'thermal-paste': { base: 800, urgent: 1200, name: 'Замена термопасты' },
-  'windows': { base: 1000, urgent: 1500, name: 'Установка Windows' },
+  'cleaning': { base: 1000, urgent: 1500, name: 'Чистка от пыли' },
+  'thermal-paste': { base: 900, urgent: 1350, name: 'Замена термопасты' },
+  'windows': { base: 2200, urgent: 3300, name: 'Установка Windows' },
   'motherboard': { base: 2000, urgent: 3000, name: 'Ремонт материнской платы' },
-  'psu': { base: 500, urgent: 750, name: 'Замена блока питания' },
-  'upgrade': { base: 1000, urgent: 1500, name: 'Апгрейд компьютера' },
+  'psu': { base: 700, urgent: 1050, name: 'Замена блока питания' },
+  'upgrade': { base: 2000, urgent: 3000, name: 'Апгрейд компьютера' },
   'data-recovery': { base: 3000, urgent: 4500, name: 'Восстановление данных' },
   'bios': { base: 800, urgent: 1200, name: 'Настройка BIOS' },
   'virus-removal': { base: 1500, urgent: 2250, name: 'Удаление вирусов' },
@@ -23,7 +23,7 @@ const SERVICES_PRICING = {
   'hdd': { base: 1200, urgent: 1800, name: 'Замена жесткого диска' },
   'laptop': { base: 1000, urgent: 1500, name: 'Ремонт ноутбука' },
   'laptop-screen': { base: 3000, urgent: 4500, name: 'Замена экрана ноутбука' },
-  'laptop-cleaning': { base: 800, urgent: 1200, name: 'Чистка ноутбука' },
+  'laptop-cleaning': { base: 2500, urgent: 3750, name: 'Чистка ноутбука' },
   'laptop-keyboard': { base: 1500, urgent: 2250, name: 'Замена клавиатуры' },
 };
 
