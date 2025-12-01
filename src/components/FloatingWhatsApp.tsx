@@ -17,7 +17,7 @@ const FloatingWhatsApp = () => {
       href="https://wa.me/79950272707?text=Здравствуйте!%20Хочу%20узнать%20подробнее%20о%20ваших%20услугах"
       target="_blank"
       rel="noopener noreferrer"
-      className={`fixed bottom-32 right-6 z-40 transition-all duration-500 ${
+      className={`fixed bottom-20 left-6 z-40 transition-all duration-500 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
       aria-label="Написать в WhatsApp"

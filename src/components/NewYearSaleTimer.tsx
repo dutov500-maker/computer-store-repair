@@ -10,7 +10,7 @@ const NewYearSaleTimer = () => {
   });
 
   useEffect(() => {
-    const targetDate = new Date('2025-01-14T23:59:59').getTime();
+    const targetDate = new Date('2026-01-14T23:59:59').getTime();
 
     const updateTimer = () => {
       const now = new Date().getTime();

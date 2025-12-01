@@ -75,7 +75,7 @@ export const FloatingRepairButton = () => {
     <>
       <button
         onClick={() => setDialogOpen(true)}
-        className="fixed bottom-24 right-6 z-40 group"
+        className="fixed bottom-6 right-6 z-40 group"
         aria-label="Срочный ремонт"
       >
         <div className="relative animate-bounce-slow">
