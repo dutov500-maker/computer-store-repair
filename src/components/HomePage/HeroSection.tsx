@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { NewYearCountdown } from '@/components/NewYearCountdown';
 
 const SLIDER_IMAGES = [
   {
@@ -102,7 +101,6 @@ export const HeroSection = () => {
             <p className="text-xl text-muted-foreground">
               Сборка ПК под любые задачи и профессиональный ремонт с гарантией
             </p>
-            <NewYearCountdown />
             <div className="flex flex-wrap gap-4">
               <Link to="/pc-selection">
                 <Button size="lg" className="gradient-animated text-lg px-8 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all hover:scale-105 relative overflow-hidden group">
