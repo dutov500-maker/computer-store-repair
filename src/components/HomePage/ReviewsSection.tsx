@@ -39,7 +39,7 @@ export const ReviewsSection = ({ fullPage = false }: ReviewsSectionProps) => {
                       <Icon key={i} name="Star" size={16} className="fill-current" />
                     ))}
                   </div>
-                  <span className="text-sm text-muted-foreground">4.9 из 5</span>
+                  <span className="text-sm text-muted-foreground">5.0 из 5</span>
                 </div>
               </div>
             </div>
