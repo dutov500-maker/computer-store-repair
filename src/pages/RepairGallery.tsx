@@ -318,7 +318,7 @@ export default function RepairGallery() {
       <div className="container mx-auto px-4 py-16">
         <div className="mb-12 text-center">
           <div className="inline-block px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full mb-4">
-            <span className="text-sm font-semibold text-red-400">🎄 НОВОГОДНИЕ СКИДКИ ДО 15%</span>
+            <span className="text-sm font-semibold text-red-400">🎄 СКИДКА ДО 10 000₽</span>
           </div>
           <h1 className="mb-4 text-5xl font-bold text-white">
             Галерея работ 🎁

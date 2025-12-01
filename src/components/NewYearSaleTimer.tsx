@@ -10,7 +10,7 @@ const NewYearSaleTimer = () => {
   });
 
   useEffect(() => {
-    const targetDate = new Date('2026-01-14T23:59:59').getTime();
+    const targetDate = new Date('2025-12-25T23:59:59').getTime();
 
     const updateTimer = () => {
       const now = new Date().getTime();
@@ -45,7 +45,7 @@ const NewYearSaleTimer = () => {
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="text-3xl animate-bounce">🎄</span>
             <h3 className="text-2xl md:text-3xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400">
-              Новогодняя акция -15%
+              Скидка до 10 000₽
             </h3>
             <span className="text-3xl animate-bounce" style={{ animationDelay: '0.2s' }}>🎁</span>
           </div>

@@ -12,7 +12,7 @@ export const ReviewsSection = ({ fullPage = false }: ReviewsSectionProps) => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-slide-up">
           <div className="inline-block px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full mb-4">
-            <span className="text-sm font-semibold text-red-400">🎄 НОВОГОДНИЕ СКИДКИ ДО 15%</span>
+            <span className="text-sm font-semibold text-red-400">🎄 СКИДКА ДО 10 000₽</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
             Что говорят <span className="text-gradient">наши клиенты</span> 🎁
