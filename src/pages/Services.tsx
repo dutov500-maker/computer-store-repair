@@ -39,8 +39,8 @@ const STATIC_SERVICES = [
     icon: "Search",
     price: "Бесплатно",
     beforeAfter: {
-      before: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400",
-      after: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=400"
+      before: "https://cdn.poehali.dev/files/666869b5-db24-43da-a089-c1096a8ef48b.jpg",
+      after: "https://cdn.poehali.dev/files/17feaa54-4b5e-493a-8136-d0660072d88c.jpg"
     }
   },
   {
@@ -50,8 +50,8 @@ const STATIC_SERVICES = [
     icon: "Wind",
     price: "от 500 ₽",
     beforeAfter: {
-      before: "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=400",
-      after: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=400"
+      before: "https://cdn.poehali.dev/files/f3a7f2de-c7ea-48c0-9ce0-f4e4dcbf3a41.jpg",
+      after: "https://cdn.poehali.dev/files/825b1707-b9f0-4e84-9daf-afc344e1ccd6.jpg"
     }
   },
   {
@@ -61,8 +61,8 @@ const STATIC_SERVICES = [
     icon: "Droplet",
     price: "от 800 ₽",
     beforeAfter: {
-      before: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400",
-      after: "https://images.unsplash.com/photo-1587202372878-4b1d3b46a4f6?w=400"
+      before: "https://cdn.poehali.dev/files/a1d24fe8-912a-4656-a306-cda4be218c26.jpg",
+      after: "https://cdn.poehali.dev/files/2edba5a9-3e60-422c-847d-7bfcb0bbc8c7.jpg"
     }
   },
   {
@@ -156,8 +156,8 @@ const STATIC_SERVICES = [
     icon: "Laptop",
     price: "от 1000 ₽",
     beforeAfter: {
-      before: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400",
-      after: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400"
+      before: "https://cdn.poehali.dev/files/dab42b79-6574-426d-a1fe-20c7b6fc43a9.jpg",
+      after: "https://cdn.poehali.dev/files/6d655b7e-af4d-4abd-95cc-bf58f1e2a9ab.jpg"
     }
   },
   {
@@ -167,8 +167,8 @@ const STATIC_SERVICES = [
     icon: "Monitor",
     price: "от 3000 ₽",
     beforeAfter: {
-      before: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=400",
-      after: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400"
+      before: "https://cdn.poehali.dev/files/e0cc5c19-0be6-44e0-a7cc-b157fb000e6a.jpg",
+      after: "https://cdn.poehali.dev/files/8bf6e606-8ea4-4df1-81b5-35aa6124fd85.jpg"
     }
   },
   {
@@ -178,8 +178,8 @@ const STATIC_SERVICES = [
     icon: "Wind",
     price: "от 800 ₽",
     beforeAfter: {
-      before: "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=400",
-      after: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=400"
+      before: "https://cdn.poehali.dev/files/5d4b2bd0-0073-4983-8f11-2a0b3902e1b3.jpg",
+      after: "https://cdn.poehali.dev/files/7ab00537-7397-4938-942d-08cb5c44e5b9.jpg"
     }
   },
   {
