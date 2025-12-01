@@ -248,6 +248,7 @@ const Services = () => {
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [formStep, setFormStep] = useState(1);
 
   const generateServiceSchema = () => {
     const serviceOffers = services.map((service) => {
@@ -319,6 +320,7 @@ const Services = () => {
   const handleServiceClick = (service: any) => {
     setSelectedService(service);
     setDialogOpen(true);
+    setFormStep(1);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -397,9 +399,13 @@ const Services = () => {
           <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
             Услуги по <span className="text-primary">ремонту</span> 🎁
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-4">
             Профессиональный ремонт компьютеров, ноутбуков, планшетов и телефонов в Волжском
           </p>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full animate-pulse">
+            <Icon name="Users" size={16} className="text-green-500" />
+            <span className="text-sm font-semibold text-green-500">🔥 Заказали 8 человек сегодня</span>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6 mb-12">
@@ -620,6 +626,19 @@ const Services = () => {
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">Шаг {formStep} из 3</span>
+                <span className="font-medium text-primary">{formStep === 1 ? 'Контакты' : formStep === 2 ? 'Детали' : 'Готово'}</span>
+              </div>
+              <div className="h-2 bg-muted rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-primary to-primary/80 transition-all duration-500 ease-out"
+                  style={{ width: `${(formStep / 3) * 100}%` }}
+                />
+              </div>
+            </div>
+
             <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 bg-primary/10 rounded-lg">
@@ -638,7 +657,10 @@ const Services = () => {
                 <Input
                   id="name"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    if (e.target.value && formStep === 1) setFormStep(2);
+                  }}
                   placeholder="Иван Иванов"
                   required
                 />
@@ -648,7 +670,10 @@ const Services = () => {
                 <Input
                   id="phone"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                    if (e.target.value && name && formStep === 2) setFormStep(3);
+                  }}
                   placeholder="+7 999 123 45 67"
                   required
                 />

@@ -102,6 +102,7 @@ const STATIC_CATALOG = [
     resolution: "Full HD",
     category: "SPECIAL",
     image_url: "https://cdn.poehali.dev/files/b0057820-1125-4d2f-954d-082634cd44a6.jpg",
+    badge: "🔥 Хит продаж",
     specs: {
       cpu: "AMD Ryzen 5 5600",
       gpu: "RTX 5060",
@@ -222,6 +223,7 @@ const STATIC_CATALOG = [
     resolution: "4K",
     category: "ULTRA",
     image_url: "https://cdn.poehali.dev/files/044e99ed-96c0-4b15-a20f-d24bc03dd8bf.jpg",
+    badge: "🔥 Хит продаж",
     specs: {
       cpu: "AMD Ryzen 7 7800X3D",
       gpu: "RTX 5070 Ti",
@@ -319,6 +321,7 @@ const Catalog = () => {
   const [message, setMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string>('ALL');
+  const [formStep, setFormStep] = useState(1);
 
   const seoTitle = "Купить компьютер в Волжском - Готовые игровые ПК | Компьютерная Лаборатория";
   const seoDescription = "Купить готовый игровой компьютер в Волжском. Сборки от 45 000₽. Новые комплектующие, гарантия до 3 лет. Бесплатная доставка от 50 000₽. ☎️ +7 (995) 027-27-07";
@@ -372,6 +375,7 @@ const Catalog = () => {
   const handlePCClick = (pc: any) => {
     setSelectedPC(pc);
     setDialogOpen(true);
+    setFormStep(1);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -450,9 +454,13 @@ const Catalog = () => {
           <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
             Каталог <span className="text-gradient">игровых ПК</span> 🎁
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-4">
             Выберите готовую конфигурацию или создайте индивидуальную сборку
           </p>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full animate-pulse">
+            <Icon name="Users" size={16} className="text-green-500" />
+            <span className="text-sm font-semibold text-green-500">🔥 Заказали 5 сборок сегодня</span>
+          </div>
         </div>
 
         <NewYearSaleTimer />
@@ -708,6 +716,19 @@ const Catalog = () => {
               </div>
             </div>
 
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">Шаг {formStep} из 3</span>
+                <span className="font-medium text-primary">{formStep === 1 ? 'Контакты' : formStep === 2 ? 'Детали' : 'Готово'}</span>
+              </div>
+              <div className="h-2 bg-muted rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-primary to-primary/80 transition-all duration-500 ease-out"
+                  style={{ width: `${(formStep / 3) * 100}%` }}
+                />
+              </div>
+            </div>
+
             <div className="p-6 bg-primary/5 rounded-xl border border-primary/20">
               <div className="flex items-center justify-between mb-4">
                 <div>
@@ -729,7 +750,10 @@ const Catalog = () => {
                 <Input
                   id="name"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    if (e.target.value && formStep === 1) setFormStep(2);
+                  }}
                   placeholder="Иван Иванов"
                   required
                 />
@@ -739,7 +763,10 @@ const Catalog = () => {
                 <Input
                   id="phone"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                    if (e.target.value && name && formStep === 2) setFormStep(3);
+                  }}
                   placeholder="+7 999 123 45 67"
                   required
                 />
