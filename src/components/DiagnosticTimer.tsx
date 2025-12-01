@@ -92,7 +92,7 @@ export const DiagnosticTimer = () => {
 
         <Button
           onClick={handleCall}
-          className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white h-12 text-base animate-pulse"
+          className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white h-12 text-base"
         >
           <Icon name="Phone" size={20} className="mr-2" />
           Позвонить сейчас: +7 995 027 27 07

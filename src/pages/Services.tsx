@@ -66,6 +66,39 @@ const STATIC_SERVICES = [
     }
   },
   {
+    id: 16,
+    title: "Ремонт ноутбука",
+    description: "Диагностика и ремонт ноутбуков любых марок",
+    icon: "Laptop",
+    price: "от 1000 ₽",
+    beforeAfter: {
+      before: "https://cdn.poehali.dev/files/dab42b79-6574-426d-a1fe-20c7b6fc43a9.jpg",
+      after: "https://cdn.poehali.dev/files/6d655b7e-af4d-4abd-95cc-bf58f1e2a9ab.jpg"
+    }
+  },
+  {
+    id: 17,
+    title: "Замена экрана ноутбука",
+    description: "Замена матрицы на ноутбуке",
+    icon: "Monitor",
+    price: "от 3000 ₽",
+    beforeAfter: {
+      before: "https://cdn.poehali.dev/files/e0cc5c19-0be6-44e0-a7cc-b157fb000e6a.jpg",
+      after: "https://cdn.poehali.dev/files/8bf6e606-8ea4-4df1-81b5-35aa6124fd85.jpg"
+    }
+  },
+  {
+    id: 18,
+    title: "Чистка ноутбука от пыли",
+    description: "Профессиональная чистка системы охлаждения",
+    icon: "Wind",
+    price: "от 800 ₽",
+    beforeAfter: {
+      before: "https://cdn.poehali.dev/files/5d4b2bd0-0073-4983-8f11-2a0b3902e1b3.jpg",
+      after: "https://cdn.poehali.dev/files/7ab00537-7397-4938-942d-08cb5c44e5b9.jpg"
+    }
+  },
+  {
     id: 4,
     title: "Установка Windows",
     description: "Установка и настройка операционной системы",
@@ -148,39 +181,6 @@ const STATIC_SERVICES = [
     description: "Установка HDD/SSD с переносом данных",
     icon: "HardDrive",
     price: "от 1200 ₽"
-  },
-  {
-    id: 16,
-    title: "Ремонт ноутбука",
-    description: "Диагностика и ремонт ноутбуков любых марок",
-    icon: "Laptop",
-    price: "от 1000 ₽",
-    beforeAfter: {
-      before: "https://cdn.poehali.dev/files/dab42b79-6574-426d-a1fe-20c7b6fc43a9.jpg",
-      after: "https://cdn.poehali.dev/files/6d655b7e-af4d-4abd-95cc-bf58f1e2a9ab.jpg"
-    }
-  },
-  {
-    id: 17,
-    title: "Замена экрана ноутбука",
-    description: "Замена матрицы на ноутбуке",
-    icon: "Monitor",
-    price: "от 3000 ₽",
-    beforeAfter: {
-      before: "https://cdn.poehali.dev/files/e0cc5c19-0be6-44e0-a7cc-b157fb000e6a.jpg",
-      after: "https://cdn.poehali.dev/files/8bf6e606-8ea4-4df1-81b5-35aa6124fd85.jpg"
-    }
-  },
-  {
-    id: 18,
-    title: "Чистка ноутбука от пыли",
-    description: "Профессиональная чистка системы охлаждения",
-    icon: "Wind",
-    price: "от 800 ₽",
-    beforeAfter: {
-      before: "https://cdn.poehali.dev/files/5d4b2bd0-0073-4983-8f11-2a0b3902e1b3.jpg",
-      after: "https://cdn.poehali.dev/files/7ab00537-7397-4938-942d-08cb5c44e5b9.jpg"
-    }
   },
   {
     id: 19,
