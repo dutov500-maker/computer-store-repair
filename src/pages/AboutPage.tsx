@@ -106,7 +106,7 @@ const AboutPage = () => {
                 <div class="text-sm">Собранных ПК</div>
               </div>
               <div class="p-6 bg-gradient-to-br from-orange-500/10 to-red-500/10 rounded-xl border border-orange-500/20">
-                <div class="text-4xl font-bold text-orange-500 mb-2">4.9</div>
+                <div class="text-4xl font-bold text-orange-500 mb-2">5.0</div>
                 <div class="text-sm">Средний рейтинг</div>
               </div>
               <div class="p-6 bg-gradient-to-br from-orange-500/10 to-red-500/10 rounded-xl border border-orange-500/20">
