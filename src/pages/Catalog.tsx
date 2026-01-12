@@ -11,7 +11,6 @@ import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
 import { toast } from 'sonner';
 import funcUrls from '../../backend/func2url.json';
-import NewYearSaleTimer from '@/components/NewYearSaleTimer';
 import StickyHelpButton from '@/components/StickyHelpButton';
 
 const STATIC_CATALOG = [
@@ -448,22 +447,13 @@ const Catalog = () => {
       
       <section className="py-16 container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-in">
-          <div className="inline-block px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full mb-4">
-            <span className="text-sm font-semibold text-red-400">🎄 СКИДКА ДО 10 000₽</span>
-          </div>
           <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-            Каталог <span className="text-gradient">игровых ПК</span> 🎁
+            Каталог <span className="text-gradient">игровых ПК</span>
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-4">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Выберите готовую конфигурацию или создайте индивидуальную сборку
           </p>
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full animate-pulse">
-            <Icon name="Users" size={16} className="text-green-500" />
-            <span className="text-sm font-semibold text-green-500">🔥 Заказали 5 сборок сегодня</span>
-          </div>
         </div>
-
-        <NewYearSaleTimer />
 
         <div className="text-center mb-12">
           <div className="flex flex-wrap gap-3 justify-center max-w-4xl mx-auto mb-8">
