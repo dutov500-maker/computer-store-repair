@@ -13,11 +13,45 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import funcUrls from '../../backend/func2url.json';
+import { CATALOG_DATA } from '@/data/catalog';
 
-const STATIC_CATALOG = [
-  {
-    id: 1,
-    title: "Eco 1 (Ryzen 5 5500 + RTX 1660 Super)",
+const STATIC_CATALOG = CATALOG_DATA;
+
+const getCategoryColor = (category: string) => {
+  switch (category) {
+    case 'ECO':
+      return 'from-green-500/20 to-green-600/10 border-green-500/30';
+    case 'SPECIAL':
+      return 'from-blue-500/20 to-blue-600/10 border-blue-500/30';
+    case 'PREMIUM':
+      return 'from-purple-500/20 to-purple-600/10 border-purple-500/30';
+    case 'ULTRA':
+      return 'from-orange-500/20 to-orange-600/10 border-orange-500/30';
+    case 'ELITE':
+      return 'from-red-500/20 to-red-600/10 border-red-500/30';
+    default:
+      return 'from-primary/20 to-primary/10 border-primary/30';
+  }
+};
+
+const getCategoryBadgeColor = (category: string) => {
+  switch (category) {
+    case 'ECO':
+      return 'bg-green-500/10 text-green-500 border-green-500/30';
+    case 'SPECIAL':
+      return 'bg-blue-500/10 text-blue-500 border-blue-500/30';
+    case 'PREMIUM':
+      return 'bg-purple-500/10 text-purple-500 border-purple-500/30';
+    case 'ULTRA':
+      return 'bg-orange-500/10 text-orange-500 border-orange-500/30';
+    case 'ELITE':
+      return 'bg-red-500/10 text-red-500 border-red-500/30';
+    default:
+      return 'bg-primary/10 text-primary border-primary/30';
+  }
+};
+
+export default function PCProduct() {
     description: "Бюджетная сборка для комфортной игры в популярные игры на средних настройках",
     price: 55000,
     resolution: "HD",
