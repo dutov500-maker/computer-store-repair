@@ -3,7 +3,7 @@
   <shop>
     <name>КомпМастер - Игровые ПК и Ремонт</name>
     <company>КомпМастер</company>
-    <url>https://your-domain.com</url>
+    <url>https://комплаб.рф</url>
     <currencies>
       <currency id="RUR" rate="1"/>
     </currencies>
@@ -17,7 +17,7 @@
     <offers>
       <offer id="1" available="true">
         <name>Eco 1 (Ryzen 5 5500 + RTX 1660 Super)</name>
-        <url>https://your-domain.com/catalog#pc-1</url>
+        <url>https://комплаб.рф/catalog#pc-1</url>
         <price>55000</price>
         <currencyId>RUR</currencyId>
         <categoryId>1</categoryId>
@@ -32,7 +32,7 @@
       </offer>
       <offer id="2" available="true">
         <name>Eco 2 (Intel Core i3 12100F + RTX 2060 Super)</name>
-        <url>https://your-domain.com/catalog#pc-2</url>
+        <url>https://комплаб.рф/catalog#pc-2</url>
         <price>59500</price>
         <currencyId>RUR</currencyId>
         <categoryId>1</categoryId>
@@ -47,7 +47,7 @@
       </offer>
       <offer id="3" available="true">
         <name>Eco 3 (Intel Core i3 12100F + RTX 3050)</name>
-        <url>https://your-domain.com/catalog#pc-3</url>
+        <url>https://комплаб.рф/catalog#pc-3</url>
         <price>63000</price>
         <currencyId>RUR</currencyId>
         <categoryId>1</categoryId>
@@ -62,7 +62,7 @@
       </offer>
       <offer id="4" available="true">
         <name>Eco 4 (Intel Core i3 12100F + RX 6600)</name>
-        <url>https://your-domain.com/catalog#pc-4</url>
+        <url>https://комплаб.рф/catalog#pc-4</url>
         <price>66000</price>
         <currencyId>RUR</currencyId>
         <categoryId>1</categoryId>
@@ -77,7 +77,7 @@
       </offer>
       <offer id="5" available="true">
         <name>Eco 5 (Intel Core i5 12400F + RTX 3060)</name>
-        <url>https://your-domain.com/catalog#pc-5</url>
+        <url>https://комплаб.рф/catalog#pc-5</url>
         <price>70000</price>
         <currencyId>RUR</currencyId>
         <categoryId>1</categoryId>
@@ -92,7 +92,7 @@
       </offer>
       <offer id="18" available="true">
         <name>Special 1 (Ryzen 5 5600 + RTX 5060)</name>
-        <url>https://your-domain.com/catalog#pc-18</url>
+        <url>https://комплаб.рф/catalog#pc-18</url>
         <price>95000</price>
         <currencyId>RUR</currencyId>
         <categoryId>2</categoryId>
@@ -107,7 +107,7 @@
       </offer>
       <offer id="19" available="true">
         <name>Special 2 (Intel Core i5 12400F + RTX 5060)</name>
-        <url>https://your-domain.com/catalog#pc-19</url>
+        <url>https://комплаб.рф/catalog#pc-19</url>
         <price>115000</price>
         <currencyId>RUR</currencyId>
         <categoryId>2</categoryId>
@@ -122,7 +122,7 @@
       </offer>
       <offer id="20" available="true">
         <name>Special 3 (Ryzen 5 7500F + RTX 5060)</name>
-        <url>https://your-domain.com/catalog#pc-20</url>
+        <url>https://комплаб.рф/catalog#pc-20</url>
         <price>130000</price>
         <currencyId>RUR</currencyId>
         <categoryId>2</categoryId>
@@ -137,7 +137,7 @@
       </offer>
       <offer id="21" available="true">
         <name>Special 4 (Ryzen 5 7500F + RTX 5060 Ti)</name>
-        <url>https://your-domain.com/catalog#pc-21</url>
+        <url>https://комплаб.рф/catalog#pc-21</url>
         <price>140000</price>
         <currencyId>RUR</currencyId>
         <categoryId>2</categoryId>
@@ -152,7 +152,7 @@
       </offer>
       <offer id="22" available="true">
         <name>Premium 1 (Ryzen 7 8700F + RTX 5060 Ti)</name>
-        <url>https://your-domain.com/catalog#pc-22</url>
+        <url>https://комплаб.рф/catalog#pc-22</url>
         <price>145000</price>
         <currencyId>RUR</currencyId>
         <categoryId>3</categoryId>
@@ -167,7 +167,7 @@
       </offer>
       <offer id="23" available="true">
         <name>Premium 2 (Ryzen 7 8700F + RTX 5070)</name>
-        <url>https://your-domain.com/catalog#pc-23</url>
+        <url>https://комплаб.рф/catalog#pc-23</url>
         <price>165000</price>
         <currencyId>RUR</currencyId>
         <categoryId>3</categoryId>
@@ -182,7 +182,7 @@
       </offer>
       <offer id="24" available="true">
         <name>Premium 3 (Ryzen 7 7800X3D + RTX 5070)</name>
-        <url>https://your-domain.com/catalog#pc-24</url>
+        <url>https://комплаб.рф/catalog#pc-24</url>
         <price>205000</price>
         <currencyId>RUR</currencyId>
         <categoryId>3</categoryId>
@@ -197,7 +197,7 @@
       </offer>
       <offer id="25" available="true">
         <name>Premium 4 (Ryzen 7 7800X3D + RTX 5070 Ti)</name>
-        <url>https://your-domain.com/catalog#pc-25</url>
+        <url>https://комплаб.рф/catalog#pc-25</url>
         <price>225000</price>
         <currencyId>RUR</currencyId>
         <categoryId>3</categoryId>
@@ -212,7 +212,7 @@
       </offer>
       <offer id="26" available="true">
         <name>Ultra 1 (Ryzen 7 7800X3D + RTX 5070 Ti)</name>
-        <url>https://your-domain.com/catalog#pc-26</url>
+        <url>https://комплаб.рф/catalog#pc-26</url>
         <price>265000</price>
         <currencyId>RUR</currencyId>
         <categoryId>4</categoryId>
@@ -227,7 +227,7 @@
       </offer>
       <offer id="27" available="true">
         <name>Ultra 2 (Ryzen 7 7800X3D + RTX 5080)</name>
-        <url>https://your-domain.com/catalog#pc-27</url>
+        <url>https://комплаб.рф/catalog#pc-27</url>
         <price>299000</price>
         <currencyId>RUR</currencyId>
         <categoryId>4</categoryId>
@@ -242,7 +242,7 @@
       </offer>
       <offer id="28" available="true">
         <name>Ultra 3 (Ryzen 7 7800X3D + RTX 5080)</name>
-        <url>https://your-domain.com/catalog#pc-28</url>
+        <url>https://комплаб.рф/catalog#pc-28</url>
         <price>309000</price>
         <currencyId>RUR</currencyId>
         <categoryId>4</categoryId>
@@ -257,7 +257,7 @@
       </offer>
       <offer id="29" available="true">
         <name>Elite 1 (Ryzen 9 9950X3D + RTX 5090)</name>
-        <url>https://your-domain.com/catalog#pc-29</url>
+        <url>https://комплаб.рф/catalog#pc-29</url>
         <price>560000</price>
         <currencyId>RUR</currencyId>
         <categoryId>5</categoryId>
