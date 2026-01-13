@@ -109,7 +109,7 @@ export default function PCProduct() {
   return (
     <>
       <Helmet>
-        <title>{product.title} - Купить в КомпМастер</title>
+        <title>{product.title} - Купить в КомпЛаб</title>
         <meta name="description" content={`${product.description}. ${product.specs.cpu}, ${product.specs.gpu}, ${product.specs.ram}, ${product.specs.storage}. Цена: ${product.price.toLocaleString('ru-RU')} ₽`} />
       </Helmet>
       <Header />
