@@ -4,51 +4,51 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    --background: 222 47% 4%;
+    --foreground: 180 100% 80%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 222 47% 6%;
+    --card-foreground: 180 100% 90%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 222 47% 5%;
+    --popover-foreground: 180 100% 90%;
 
-    --primary: 221 83% 53%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 222 47% 4%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 280 100% 60%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 222 47% 12%;
+    --muted-foreground: 180 20% 60%;
 
-    --accent: 210 40% 96%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 280 100% 60%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 100% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 221 83% 53%;
+    --border: 180 50% 20%;
+    --input: 222 47% 10%;
+    --ring: 180 100% 50%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 222 47% 5%;
 
-    --sidebar-foreground: 222 47% 11%;
+    --sidebar-foreground: 180 100% 80%;
 
-    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary: 180 100% 50%;
 
-    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-primary-foreground: 222 47% 4%;
 
-    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent: 222 47% 12%;
 
-    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-accent-foreground: 180 100% 80%;
 
-    --sidebar-border: 214 32% 91%;
+    --sidebar-border: 180 50% 20%;
 
-    --sidebar-ring: 221 83% 53%;
+    --sidebar-ring: 180 100% 50%;
   }
 
   .dark {
@@ -116,7 +116,19 @@
       "Segoe UI",
       sans-serif;
     font-display: swap;
-    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    background:
+      radial-gradient(
+        ellipse at top,
+        rgba(0, 255, 255, 0.15) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at bottom,
+        rgba(138, 43, 226, 0.15) 0%,
+        transparent 50%
+      ),
+      linear-gradient(180deg, #0a0e1a 0%, #050a14 100%);
+    background-attachment: fixed;
   }
 
   h1,
@@ -204,10 +216,12 @@
   }
 
   .glass-effect {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(226, 232, 240, 0.8);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+    background: rgba(10, 14, 26, 0.6);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    box-shadow:
+      0 8px 32px 0 rgba(0, 255, 255, 0.1),
+      inset 0 1px 0 0 rgba(0, 255, 255, 0.1);
   }
 
   .hover-lift {
@@ -218,7 +232,9 @@
 
   .hover-lift:hover {
     transform: translateY(-12px) scale(1.03);
-    box-shadow: 0 25px 50px rgba(59, 130, 246, 0.3);
+    box-shadow:
+      0 25px 50px rgba(0, 255, 255, 0.4),
+      0 0 100px rgba(138, 43, 226, 0.3);
   }
 
   .hover-glow {
@@ -226,7 +242,9 @@
   }
 
   .hover-glow:hover {
-    box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
+    box-shadow:
+      0 0 40px rgba(0, 255, 255, 0.6),
+      0 0 80px rgba(0, 255, 255, 0.3);
   }
 
   .parallax-bg {
@@ -310,10 +328,14 @@
   @keyframes pulseGlow {
     0%,
     100% {
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+      box-shadow:
+        0 0 20px rgba(0, 255, 255, 0.4),
+        0 0 40px rgba(138, 43, 226, 0.2);
     }
     50% {
-      box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+      box-shadow:
+        0 0 40px rgba(0, 255, 255, 0.8),
+        0 0 80px rgba(138, 43, 226, 0.4);
     }
   }
 
@@ -388,10 +410,10 @@
   @keyframes glowPulse {
     0%,
     100% {
-      filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.4));
+      filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.5));
     }
     50% {
-      filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.7));
+      filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.9));
     }
   }
 
