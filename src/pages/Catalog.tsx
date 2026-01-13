@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
@@ -544,9 +545,8 @@ const Catalog = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {filteredCatalog.map((pc, index) => (
+              <Link key={pc.id} to={`/pc/${pc.id}`}>
               <Card 
-                key={pc.id}
-                onClick={() => handlePCClick(pc)}
                 className={`group relative overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 animate-fade-in hover:-translate-y-2 border-2 bg-card/50 backdrop-blur-sm`}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
@@ -645,6 +645,7 @@ const Catalog = () => {
 
                 <div className="absolute -bottom-1 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-orange-500 to-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-xl"></div>
               </Card>
+              </Link>
                   ))}
                 </div>
               </>
