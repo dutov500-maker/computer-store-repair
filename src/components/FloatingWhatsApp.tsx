@@ -14,7 +14,7 @@ const FloatingWhatsApp = () => {
 
   return (
     <a
-      href="https://t.me/komplab_vlz"
+      href="https://t.me/komplabvlz"
       target="_blank"
       rel="noopener noreferrer"
       className={`fixed bottom-20 left-6 z-40 transition-all duration-500 ${

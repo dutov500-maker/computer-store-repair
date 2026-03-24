@@ -312,7 +312,7 @@ const Services = () => {
       },
       "sameAs": [
         "https://vk.com/labkomp",
-        "https://t.me/komplab_vlz"
+        "https://t.me/komplabvlz"
       ]
     };
   };
@@ -478,7 +478,7 @@ const Services = () => {
                         Заказать
                       </Button>
                       <a
-                        href={`https://t.me/komplab_vlz?text=${encodeURIComponent(`Здравствуйте! Хочу заказать: ${service.title}`)}`}
+                        href={`https://t.me/komplabvlz?text=${encodeURIComponent(`Здравствуйте! Хочу заказать: ${service.title}`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}

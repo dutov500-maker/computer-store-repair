@@ -32,7 +32,7 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    { icon: 'Send', name: 'Telegram', color: 'hover:text-[#0088cc]', url: 'https://t.me/komplab_vlz' },
+    { icon: 'Send', name: 'Telegram', color: 'hover:text-[#0088cc]', url: 'https://t.me/komplabvlz' },
     { icon: 'Phone', name: 'Звонок', color: 'hover:text-primary', url: 'tel:+79950272707' },
     { icon: 'Users', name: 'VK', color: 'hover:text-[#0077FF]', url: 'https://vk.com/labkomp' }
   ];
@@ -95,7 +95,7 @@ const Contact = () => {
                 Позвонить: +7 995 027 27 07
               </a>
               <a
-                href="https://t.me/komplab_vlz"
+                href="https://t.me/komplabvlz"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full px-6 py-4 bg-[#0088cc] text-white rounded-lg font-bold hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2"

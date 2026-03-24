@@ -41,7 +41,7 @@ const QuickPCCalculator = () => {
     const purposeLabel = purposes.find(p => p.value === formData.purpose)?.label || formData.purpose;
     const telegramMessage = `🖥 Запрос на подбор ПК\n\n👤 Имя: ${formData.name}\n📱 Телефон: ${formData.phone}\n🎯 Назначение: ${purposeLabel}\n💰 Бюджет: ${formData.budget}`;
     
-    window.open(`https://t.me/komplab_vlz?text=${encodeURIComponent(telegramMessage)}`, '_blank');
+    window.open(`https://t.me/komplabvlz?text=${encodeURIComponent(telegramMessage)}`, '_blank');
     
     toast.success('Запрос отправлен! Мы подберём идеальную конфигурацию для вас');
     

@@ -44,7 +44,7 @@ export const CallMasterButton = ({ service, variant = 'default', className = '' 
 ${service ? `🔧 Услуга: ${service}` : ''}
 ${problem ? `📝 Описание проблемы:\n${problem}` : ''}`;
 
-    const telegramUrl = `https://t.me/komplab_vlz?text=${encodeURIComponent(message)}`;
+    const telegramUrl = `https://t.me/komplabvlz?text=${encodeURIComponent(message)}`;
     window.open(telegramUrl, '_blank');
 
     toast.success('Перенаправляем в Telegram...');

@@ -44,7 +44,7 @@ export const ServiceCalculator = () => {
     if (!result) return;
     const urgentText = isUrgent ? ' (СРОЧНО - сегодня)' : '';
     const message = `Здравствуйте! Хочу заказать услугу: ${result.name}${urgentText}\nСтоимость: ${result.price === 0 ? 'Бесплатно' : result.price + ' ₽'}`;
-    window.open(`https://t.me/komplab_vlz?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://t.me/komplabvlz?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (

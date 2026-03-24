@@ -12,7 +12,7 @@ const ServiceRequestForm = ({ trigger }: ServiceRequestFormProps) => {
   };
 
   const handleWhatsAppClick = () => {
-    window.open('https://t.me/komplab_vlz', '_blank');
+    window.open('https://t.me/komplabvlz', '_blank');
   };
 
   const handleTelegramClick = () => {

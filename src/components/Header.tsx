@@ -144,7 +144,7 @@ const Header = () => {
               <Icon name="Phone" size={18} />
               <span className="hidden sm:inline">+7 995 027 27 07</span>
             </a>
-            <a href="https://t.me/komplab_vlz" target="_blank" rel="noopener noreferrer" className="hidden sm:block">
+            <a href="https://t.me/komplabvlz" target="_blank" rel="noopener noreferrer" className="hidden sm:block">
               <Button size="sm" className="bg-[#0088cc] hover:bg-[#0088cc]/90 text-white shadow-md hover:shadow-xl hover:scale-105 transition-all relative overflow-hidden group">
                 <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
                 <Icon name="Send" size={18} className="mr-2 relative z-10" />
