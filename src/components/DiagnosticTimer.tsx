@@ -47,7 +47,7 @@ export const DiagnosticTimer = () => {
           </div>
           <div className="flex-1">
             <h3 className="text-xl font-bold flex items-center gap-2">
-              🎁 Акция "Бесплатная диагностика"
+              Акция "Бесплатная диагностика"
             </h3>
             <p className="text-sm text-muted-foreground">Звоните прямо сейчас!</p>
           </div>

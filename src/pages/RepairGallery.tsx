@@ -24,7 +24,7 @@ const allRepairImages: RepairImage[] = [
   },
   {
     url: 'https://cdn.poehali.dev/files/e2cab568-abdf-41af-9a9f-740013842310.jpg',
-    title: 'Белоснежный компик ❄️',
+    title: 'Белоснежный компик',
     description: 'Стильная белая сборка с AMD Ryzen 5 9600X и RTX 5070'
   },
   {
