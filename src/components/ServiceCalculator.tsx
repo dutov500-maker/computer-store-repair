@@ -40,11 +40,11 @@ export const ServiceCalculator = () => {
 
   const result = calculatePrice();
 
-  const handleWhatsAppOrder = () => {
+  const handleTelegramOrder = () => {
     if (!result) return;
     const urgentText = isUrgent ? ' (СРОЧНО - сегодня)' : '';
     const message = `Здравствуйте! Хочу заказать услугу: ${result.name}${urgentText}\nСтоимость: ${result.price === 0 ? 'Бесплатно' : result.price + ' ₽'}`;
-    window.open(`https://wa.me/79950272707?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://t.me/komplab_vlz?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (
@@ -116,11 +116,11 @@ export const ServiceCalculator = () => {
             </div>
 
             <Button
-              onClick={handleWhatsAppOrder}
-              className="w-full bg-[#25D366] hover:bg-[#20BA5A] text-white h-12 text-base"
+              onClick={handleTelegramOrder}
+              className="w-full bg-[#0088cc] hover:bg-[#0077b5] text-white h-12 text-base"
             >
-              <Icon name="MessageCircle" size={20} className="mr-2" />
-              Заказать через WhatsApp
+              <Icon name="Send" size={20} className="mr-2" />
+              Узнать стоимость сборки
             </Button>
           </>
         )}

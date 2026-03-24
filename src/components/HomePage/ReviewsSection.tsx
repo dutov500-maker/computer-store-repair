@@ -11,11 +11,12 @@ export const ReviewsSection = ({ fullPage = false }: ReviewsSectionProps) => {
     <section id="reviews" className={`py-20 bg-gradient-to-b from-background to-primary/5 ${fullPage ? 'min-h-screen' : ''}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-slide-up">
-          <div className="inline-block px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full mb-4">
-            <span className="text-sm font-semibold text-red-400">🎄 СКИДКА ДО 10 000₽</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mb-4">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            <span className="text-sm font-semibold text-primary">Нам доверяют более 500 клиентов</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-            Что говорят <span className="text-gradient">наши клиенты</span> 🎁
+            Что говорят <span className="text-gradient">наши клиенты</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg mb-8">
             Реальные отзывы с Яндекс Карт и Авито

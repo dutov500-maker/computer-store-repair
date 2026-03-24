@@ -87,7 +87,7 @@ const Header = () => {
                 alt="КЛАБ"
                 className="h-10 w-10 rounded-full object-cover relative group-hover:scale-110 group-hover:rotate-6 transition-all duration-300"
               />
-              <div className="absolute -top-1 -right-1 text-xl">🎄</div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-orange-500 animate-pulse"></div>
             </div>
             <span className="text-xl font-heading font-bold group-hover:text-red-500 transition-all duration-300">{settings?.company_name || 'Компьютерная Лаборатория'}</span>
           </Link>
@@ -144,11 +144,11 @@ const Header = () => {
               <Icon name="Phone" size={18} />
               <span className="hidden sm:inline">+7 995 027 27 07</span>
             </a>
-            <a href="https://wa.me/79950272707" target="_blank" rel="noopener noreferrer" className="hidden sm:block">
-              <Button size="sm" className="bg-[#25D366] hover:bg-[#25D366]/90 text-white shadow-md hover:shadow-xl hover:scale-105 transition-all relative overflow-hidden group">
+            <a href="https://t.me/komplab_vlz" target="_blank" rel="noopener noreferrer" className="hidden sm:block">
+              <Button size="sm" className="bg-[#0088cc] hover:bg-[#0088cc]/90 text-white shadow-md hover:shadow-xl hover:scale-105 transition-all relative overflow-hidden group">
                 <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
-                <Icon name="MessageCircle" size={18} className="mr-2 relative z-10" />
-                <span className="relative z-10">WhatsApp</span>
+                <Icon name="Send" size={18} className="mr-2 relative z-10" />
+                <span className="relative z-10">Telegram</span>
               </Button>
             </a>
             

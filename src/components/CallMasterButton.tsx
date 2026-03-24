@@ -44,10 +44,10 @@ export const CallMasterButton = ({ service, variant = 'default', className = '' 
 ${service ? `🔧 Услуга: ${service}` : ''}
 ${problem ? `📝 Описание проблемы:\n${problem}` : ''}`;
 
-    const whatsappUrl = `https://wa.me/79950272707?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+    const telegramUrl = `https://t.me/komplab_vlz?text=${encodeURIComponent(message)}`;
+    window.open(telegramUrl, '_blank');
 
-    toast.success('Перенаправляем в WhatsApp...');
+    toast.success('Перенаправляем в Telegram...');
     
     setTimeout(() => {
       setSubmitting(false);
@@ -156,7 +156,7 @@ ${problem ? `📝 Описание проблемы:\n${problem}` : ''}`;
               </Button>
               <Button
                 type="submit"
-                className="flex-1 bg-[#25D366] hover:bg-[#20BA5A] text-white"
+                className="flex-1 bg-[#0088cc] hover:bg-[#0077b5] text-white"
                 disabled={submitting}
               >
                 {submitting ? (
@@ -166,8 +166,8 @@ ${problem ? `📝 Описание проблемы:\n${problem}` : ''}`;
                   </>
                 ) : (
                   <>
-                    <Icon name="MessageCircle" size={18} className="mr-2" />
-                    Отправить заявку
+                    <Icon name="Send" size={18} className="mr-2" />
+                    Узнать стоимость сборки
                   </>
                 )}
               </Button>

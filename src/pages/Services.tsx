@@ -312,7 +312,7 @@ const Services = () => {
       },
       "sameAs": [
         "https://vk.com/labkomp",
-        "https://wa.me/79950272707"
+        "https://t.me/komplab_vlz"
       ]
     };
   };
@@ -478,7 +478,7 @@ const Services = () => {
                         Заказать
                       </Button>
                       <a
-                        href={`https://wa.me/79950272707?text=Здравствуйте!%20Хочу%20заказать:%20${encodeURIComponent(service.title)}`}
+                        href={`https://t.me/komplab_vlz?text=${encodeURIComponent(`Здравствуйте! Хочу заказать: ${service.title}`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
@@ -487,10 +487,10 @@ const Services = () => {
                         <Button 
                           variant="outline" 
                           size="sm"
-                          className="w-full bg-[#25D366]/10 hover:bg-[#25D366]/20 border-[#25D366]"
+                          className="w-full bg-[#0088cc]/10 hover:bg-[#0088cc]/20 border-[#0088cc]"
                         >
-                          <Icon name="MessageCircle" size={16} className="mr-1" />
-                          WhatsApp
+                          <Icon name="Send" size={16} className="mr-1" />
+                          Telegram
                         </Button>
                       </a>
                     </div>

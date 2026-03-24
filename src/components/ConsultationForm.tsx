@@ -125,7 +125,7 @@ const ConsultationForm = () => {
           ) : (
             <>
               <Icon name="Send" size={20} />
-              Отправить заявку
+              Узнать стоимость сборки
             </>
           )}
         </Button>

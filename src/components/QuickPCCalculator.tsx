@@ -39,9 +39,9 @@ const QuickPCCalculator = () => {
     setIsSubmitting(true);
 
     const purposeLabel = purposes.find(p => p.value === formData.purpose)?.label || formData.purpose;
-    const whatsappMessage = `🖥 *Запрос на подбор ПК*%0A%0A👤 Имя: ${formData.name}%0A📱 Телефон: ${formData.phone}%0A🎯 Назначение: ${purposeLabel}%0A💰 Бюджет: ${formData.budget}`;
+    const telegramMessage = `🖥 Запрос на подбор ПК\n\n👤 Имя: ${formData.name}\n📱 Телефон: ${formData.phone}\n🎯 Назначение: ${purposeLabel}\n💰 Бюджет: ${formData.budget}`;
     
-    window.open(`https://wa.me/79950272707?text=${whatsappMessage}`, '_blank');
+    window.open(`https://t.me/komplab_vlz?text=${encodeURIComponent(telegramMessage)}`, '_blank');
     
     toast.success('Запрос отправлен! Мы подберём идеальную конфигурацию для вас');
     

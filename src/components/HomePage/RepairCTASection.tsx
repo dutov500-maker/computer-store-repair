@@ -92,7 +92,7 @@ export const RepairCTASection = () => {
               </h2>
               
               <p className="text-xl text-muted-foreground">
-                Профессиональная диагностика бесплатно. Большинство ремонтов выполняем за 1-2 дня
+                Диагностика — 0₽ при заказе любого ремонта. Большинство ремонтов выполняем за 1-2 дня
               </p>
 
               <div className="flex flex-wrap gap-4">
@@ -109,7 +109,7 @@ export const RepairCTASection = () => {
                   onClick={() => setDialogOpen(true)}
                 >
                   <Icon name="Phone" className="mr-2" size={20} />
-                  Заказать звонок
+                  Консультация мастера
                 </Button>
               </div>
 
@@ -166,7 +166,7 @@ export const RepairCTASection = () => {
           <DialogHeader>
             <DialogTitle className="text-2xl font-heading flex items-center gap-2">
               <Icon name="Phone" className="text-primary" size={28} />
-              Заказать обратный звонок
+              Консультация мастера
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">

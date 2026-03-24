@@ -94,7 +94,7 @@ export const Step4Contacts = ({
           Назад
         </Button>
         <Button size="lg" onClick={onSubmit} disabled={submitting}>
-          {submitting ? 'Отправка...' : 'Отправить заявку'}
+          {submitting ? 'Отправка...' : 'Узнать стоимость сборки'}
         </Button>
       </div>
     </div>

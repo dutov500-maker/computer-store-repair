@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import Icon from '@/components/ui/icon';
 
-const FloatingWhatsApp = () => {
+const FloatingTelegram = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 1000);
-
+    }, 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -17,15 +16,15 @@ const FloatingWhatsApp = () => {
       href="https://t.me/komplab_vlz"
       target="_blank"
       rel="noopener noreferrer"
-      className={`fixed bottom-20 left-6 z-40 transition-all duration-500 ${
+      className={`fixed bottom-6 right-6 z-50 transition-all duration-500 group ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
       aria-label="Написать в Telegram"
     >
-      <div className="relative group">
-        <div className="absolute inset-0 bg-[#0088cc] rounded-full blur-xl opacity-50 group-hover:opacity-75 animate-pulse"></div>
+      <div className="relative">
+        <div className="absolute inset-0 bg-[#0088cc] rounded-full blur-xl opacity-40 group-hover:opacity-70 animate-pulse"></div>
         <div className="relative bg-[#0088cc] hover:bg-[#0077b5] text-white p-4 rounded-full shadow-2xl hover:shadow-[#0088cc]/50 transition-all hover:scale-110 flex items-center justify-center">
-          <Icon name="Send" size={28} className="animate-bounce-slow" />
+          <Icon name="Send" size={26} />
         </div>
         <div className="absolute top-0 right-0 w-3 h-3 bg-orange-500 rounded-full animate-ping"></div>
         <div className="absolute top-0 right-0 w-3 h-3 bg-orange-500 rounded-full"></div>
@@ -38,4 +37,4 @@ const FloatingWhatsApp = () => {
   );
 };
 
-export default FloatingWhatsApp;
+export default FloatingTelegram;

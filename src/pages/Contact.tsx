@@ -32,9 +32,8 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    { icon: 'Send', name: 'Telegram', color: 'hover:text-[#0088cc]', url: 'https://t.me/+79950272707' },
+    { icon: 'Send', name: 'Telegram', color: 'hover:text-[#0088cc]', url: 'https://t.me/komplab_vlz' },
     { icon: 'Phone', name: 'Звонок', color: 'hover:text-primary', url: 'tel:+79950272707' },
-    { icon: 'MessageCircle', name: 'WhatsApp', color: 'hover:text-[#25D366]', url: 'https://wa.me/79950272707' },
     { icon: 'Users', name: 'VK', color: 'hover:text-[#0077FF]', url: 'https://vk.com/labkomp' }
   ];
 
@@ -44,11 +43,8 @@ const Contact = () => {
       
       <section className="py-16 container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-in">
-          <div className="inline-block px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full mb-4">
-            <span className="text-sm font-semibold text-red-400">🎄 СКИДКА ДО 10 000₽</span>
-          </div>
           <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-            Свяжитесь с <span className="text-primary">нами</span> 🎁
+            Свяжитесь с <span className="text-primary">нами</span>
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Мы всегда рады ответить на ваши вопросы и помочь с выбором
@@ -99,16 +95,7 @@ const Contact = () => {
                 Позвонить: +7 995 027 27 07
               </a>
               <a
-                href="https://wa.me/79950272707"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full px-6 py-4 bg-[#25D366] text-white rounded-lg font-bold hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2"
-              >
-                <Icon name="MessageCircle" size={22} />
-                Написать в WhatsApp
-              </a>
-              <a
-                href="https://t.me/+79950272707"
+                href="https://t.me/komplab_vlz"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full px-6 py-4 bg-[#0088cc] text-white rounded-lg font-bold hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2"

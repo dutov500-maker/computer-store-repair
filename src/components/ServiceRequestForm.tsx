@@ -12,7 +12,7 @@ const ServiceRequestForm = ({ trigger }: ServiceRequestFormProps) => {
   };
 
   const handleWhatsAppClick = () => {
-    window.open('https://wa.me/79950272707', '_blank');
+    window.open('https://t.me/komplab_vlz', '_blank');
   };
 
   const handleTelegramClick = () => {
@@ -37,11 +37,11 @@ const ServiceRequestForm = ({ trigger }: ServiceRequestFormProps) => {
           <Button 
             size="lg" 
             variant="outline"
-            className="w-full border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white"
+            className="w-full border-[#0088cc] text-[#0088cc] hover:bg-[#0088cc] hover:text-white"
             onClick={handleWhatsAppClick}
           >
-            <Icon name="MessageCircle" size={20} />
-            WhatsApp
+            <Icon name="Send" size={20} />
+            Telegram
           </Button>
           <Button 
             size="lg" 

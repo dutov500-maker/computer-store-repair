@@ -180,7 +180,7 @@ export default function WarrantyPage() {
                       <div>
                         <h3 className="font-semibold mb-1">Свяжитесь с нами</h3>
                         <p className="text-sm text-muted-foreground">
-                          Опишите проблему по телефону, в WhatsApp или Telegram
+                          Опишите проблему по телефону или в Telegram
                         </p>
                       </div>
                     </div>

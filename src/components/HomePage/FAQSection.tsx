@@ -66,7 +66,7 @@ export const FAQSection = () => {
                   Помогаете ли вы с выбором комплектующих?
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground leading-relaxed">
-                  Конечно! Наши специалисты бесплатно проконсультируют вас и подберут оптимальную конфигурацию под ваши задачи и бюджет. Просто напишите нам в Telegram или WhatsApp.
+                  Конечно! Наши специалисты бесплатно проконсультируют вас и подберут оптимальную конфигурацию под ваши задачи и бюджет. Просто напишите нам в Telegram или позвоните.
                 </AccordionContent>
               </AccordionItem>
 
