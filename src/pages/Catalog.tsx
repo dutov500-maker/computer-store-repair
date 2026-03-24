@@ -61,6 +61,27 @@ const Catalog = () => {
   const [submitting, setSubmitting] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string>('ALL');
   const [formStep, setFormStep] = useState(1);
+  const [downloadingPricelist, setDownloadingPricelist] = useState(false);
+
+  const handleDownloadPricelist = async () => {
+    setDownloadingPricelist(true);
+    try {
+      const res = await fetch(funcUrls['generate-pricelist']);
+      const data = await res.json();
+      if (data.url) {
+        const a = document.createElement('a');
+        a.href = data.url;
+        a.download = 'komplab-pricelist.xlsx';
+        a.click();
+      } else {
+        toast.error('Не удалось сформировать прайс-лист');
+      }
+    } catch {
+      toast.error('Ошибка при загрузке прайс-листа');
+    } finally {
+      setDownloadingPricelist(false);
+    }
+  };
 
   const seoTitle = "Купить компьютер в Волжском - Готовые игровые ПК | Компьютерная Лаборатория";
   const seoDescription = "Купить готовый игровой компьютер в Волжском. Сборки от 45 000₽. Новые комплектующие, гарантия до 3 лет. Бесплатная доставка от 50 000₽. ☎️ +7 (995) 027-27-07";
@@ -190,9 +211,18 @@ const Catalog = () => {
           <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
             Каталог <span className="text-gradient">игровых ПК</span>
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-6">
             Выберите готовую конфигурацию или создайте индивидуальную сборку
           </p>
+          <Button
+            variant="outline"
+            onClick={handleDownloadPricelist}
+            disabled={downloadingPricelist}
+            className="gap-2"
+          >
+            <Icon name={downloadingPricelist ? "Loader2" : "FileSpreadsheet"} size={18} className={downloadingPricelist ? "animate-spin" : ""} />
+            {downloadingPricelist ? "Формируем прайс-лист..." : "Скачать прайс-лист XLS"}
+          </Button>
         </div>
 
         <div className="text-center mb-12">
