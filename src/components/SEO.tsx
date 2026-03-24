@@ -418,12 +418,12 @@ const SEO = () => {
 
     const ogUrl = document.querySelector('meta[property="og:url"]');
     if (ogUrl) {
-      ogUrl.setAttribute('content', `https://computer-store-repair.poehali.dev${currentPath}`);
+      ogUrl.setAttribute('content', `https://комплаб.рф${currentPath}`);
     }
 
     const canonical = document.querySelector('link[rel="canonical"]');
     if (canonical) {
-      canonical.setAttribute('href', `https://computer-store-repair.poehali.dev${currentPath}`);
+      canonical.setAttribute('href', `https://комплаб.рф${currentPath}`);
     }
 
     const twitterTitle = document.querySelector('meta[name="twitter:title"]');
