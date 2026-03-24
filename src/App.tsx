@@ -26,7 +26,6 @@ import RepairGallery from "./pages/RepairGallery";
 import NotFound from "./pages/NotFound";
 import Error404 from "./pages/Error404";
 import { FloatingRepairButton } from "./components/FloatingRepairButton";
-import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import FloatingTelegram from "./components/FloatingTelegram";
 
 const queryClient = new QueryClient();
@@ -39,7 +38,6 @@ const App = () => (
       <SEO />
       <Breadcrumbs />
       <FloatingRepairButton />
-      <FloatingWhatsApp />
       <FloatingTelegram />
         <Routes>
           <Route path="/" element={<Index />} />

@@ -16,7 +16,7 @@ const FloatingTelegram = () => {
       href="https://t.me/komplabvlz"
       target="_blank"
       rel="noopener noreferrer"
-      className={`fixed bottom-6 right-6 z-50 transition-all duration-500 group ${
+      className={`fixed bottom-24 right-6 z-50 transition-all duration-500 group ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
       aria-label="Написать в Telegram"
