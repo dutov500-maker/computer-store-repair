@@ -73,7 +73,7 @@ export const HeroSection = () => {
                 с гарантией до 3 лет
               </h1>
             </div>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-foreground/80">
               Бесплатная диагностика, сборка за 1-2 дня и доставка по городу
             </p>
             <div className="flex flex-wrap gap-4">
