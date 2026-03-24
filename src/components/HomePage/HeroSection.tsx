@@ -67,7 +67,7 @@ export const HeroSection = () => {
               <span className="text-sm font-semibold text-orange-400">Акция месяца: Скидка 10% на первую сборку или чистку ПК</span>
             </div>
             <div className="relative inline-block">
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading font-bold leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold leading-tight">
                 Профессиональная сборка игровых и рабочих{' '}
                 <span className="text-gradient inline-block">ПК в Волжском</span>{' '}
                 с гарантией до 3 лет
