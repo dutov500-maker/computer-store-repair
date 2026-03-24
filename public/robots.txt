@@ -19,7 +19,7 @@ Allow: /
 
 # Запрещаем индексацию админки
 Disallow: /admin/
+Disallow: /admin/login
 
 # Карта сайта для быстрой индексации
 Sitemap: https://xn--80aczeeli.xn--p1ai/sitemap.xml
-Sitemap: https://комплаб.рф/sitemap.xml
