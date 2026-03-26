@@ -11,11 +11,12 @@ import { RepairCTASection } from '@/components/HomePage/RepairCTASection';
 import { ReviewsSection } from '@/components/HomePage/ReviewsSection';
 import { PCSelectionSection } from '@/components/HomePage/PCSelectionSection';
 import { TrustBadgesSection } from '@/components/HomePage/TrustBadgesSection';
+import { RepairUpgradeSection } from '@/components/HomePage/RepairUpgradeSection';
 
 import { initializeStorage, getServices } from '@/lib/localStorage';
 
 const Index = () => {
-  const [services, setServices] = useState<any[]>([]);
+  const [services, setServices] = useState<{ id: number; is_active: boolean }[]>([]);
 
   useEffect(() => {
     initializeStorage();
@@ -23,8 +24,8 @@ const Index = () => {
   }, []);
 
   const fetchData = () => {
-    const servicesData = getServices();
-    setServices(servicesData.filter((s: any) => s.is_active));
+    const servicesData = getServices() as { id: number; is_active: boolean }[];
+    setServices(servicesData.filter(s => s.is_active));
   };
 
   const advantages = [
@@ -57,6 +58,7 @@ const Index = () => {
       <div className="space-y-0">
         <HeroSection />
         <TrustBadgesSection />
+        <RepairUpgradeSection />
         <ReviewsSection />
         <PCSelectionSection />
         <RepairCTASection />

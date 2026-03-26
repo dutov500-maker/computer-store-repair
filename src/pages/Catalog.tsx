@@ -441,6 +441,24 @@ const Catalog = () => {
                               </Button>
                             </a>
 
+                            {/* Trade-in */}
+                            <a
+                              href={`https://wa.me/79950272707?text=Хочу%20узнать%20про%20Trade-in%20на%20${encodeURIComponent(pc.title)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="block w-full"
+                            >
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                className="w-full text-orange-400 hover:text-orange-300 hover:bg-orange-500/10 border border-orange-500/20 hover:border-orange-400/40 text-xs font-medium"
+                              >
+                                <Icon name="ArrowLeftRight" size={13} className="mr-1.5" />
+                                Trade-in — зачтём старый ПК в скидку
+                              </Button>
+                            </a>
+
                             {/* Trust Badges */}
                             <div className="flex items-center justify-between pt-1">
                               {TRUST_BADGES.map((badge) => (

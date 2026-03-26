@@ -6,7 +6,7 @@ export const CATALOG_DATA = [
     price: 55000,
     resolution: "HD",
     category: "ECO",
-    image_url: "https://cdn.poehali.dev/files/206fb641-30d1-4d87-b3ec-322e0f76a02e.jpg",
+    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/63ce233b-9cad-4660-9685-8d1e2765555b.jpg",
     badge: "💰 Лучшая цена",
     fps: "Dota 2: 120 FPS | CS2: 90 FPS",
     specs: {
@@ -23,7 +23,7 @@ export const CATALOG_DATA = [
     price: 59500,
     resolution: "Full HD",
     category: "ECO",
-    image_url: "https://cdn.poehali.dev/files/89621141-3188-48fd-a9eb-52b97c276daf.jpg",
+    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/370138ad-a02a-46fb-864c-c7b31028cb45.jpg",
     badge: "🔥 Хит продаж",
     fps: "GTA V: 110 FPS | Fortnite: 100 FPS",
     specs: {
@@ -72,7 +72,7 @@ export const CATALOG_DATA = [
     price: 70000,
     resolution: "Full HD",
     category: "ECO",
-    image_url: "https://cdn.poehali.dev/files/d241ade4-22ce-4900-a491-b83941c30138.jpg",
+    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/7277556d-c164-4d39-8e76-ce7214ed1296.jpg",
     fps: "Valorant: 200 FPS | Elden Ring: 65 FPS",
     specs: {
       cpu: "Intel Core i5-12400F",
