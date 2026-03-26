@@ -18,6 +18,16 @@ const SLIDER_IMAGES = [
     url: 'https://cdn.poehali.dev/files/ef30776e-bc42-4a3c-9226-66f03dacf007.jpg',
     title: 'Premium 1 - 145К',
     category: 'PREMIUM'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/5d2552b2-ef60-4635-a318-97fb773b7e5b.jpg',
+    title: 'Premium 4 - 225К',
+    category: 'PREMIUM'
+  },
+  {
+    url: 'https://cdn.poehali.dev/files/7596f8cc-1e94-4d3f-b548-2459676f4d29.jpg',
+    title: 'Eco 5 - 70К',
+    category: 'ECO'
   }
 ];
 
