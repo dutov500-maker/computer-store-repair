@@ -268,6 +268,7 @@ export const CATALOG_DATA = [
     price: 560000,
     resolution: "4K",
     category: "ELITE",
+    hidden: true,
     image_url: "https://cdn.poehali.dev/files/58fe0b06-c3a8-4533-a82d-2057abfb5d7c.jpg",
     fps: "Cyberpunk 2077: 120 FPS | Path Tracing: 90 FPS",
     specs: {
