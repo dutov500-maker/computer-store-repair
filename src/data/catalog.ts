@@ -56,6 +56,7 @@ export const CATALOG_DATA = [
     price: 66000,
     resolution: "Full HD",
     category: "ECO",
+    hidden: true,
     image_url: "https://cdn.poehali.dev/files/685646fc-d51b-477b-b294-12b6a80a82ea.jpg",
     fps: "Cyberpunk 2077: 55 FPS | RDR2: 60 FPS",
     specs: {
@@ -250,6 +251,7 @@ export const CATALOG_DATA = [
     price: 309000,
     resolution: "4K",
     category: "ULTRA",
+    hidden: true,
     image_url: "https://cdn.poehali.dev/files/e0b8df0c-9ab8-460e-b09a-73ca20860665.jpg",
     fps: "RDR2: 85 FPS | Flight Simulator: 70 FPS",
     specs: {

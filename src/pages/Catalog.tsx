@@ -28,7 +28,7 @@ interface CatalogItem {
   specs: { cpu: string; gpu: string; ram: string; storage: string };
 }
 
-const STATIC_CATALOG = CATALOG_DATA as CatalogItem[];
+const STATIC_CATALOG = (CATALOG_DATA as (CatalogItem & { hidden?: boolean })[]).filter(item => !item.hidden);
 
 const getCategoryColor = (category: string) => {
   switch (category) {
