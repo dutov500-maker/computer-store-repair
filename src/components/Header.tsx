@@ -211,15 +211,15 @@ const Header = () => {
                   <span className="font-semibold text-gray-900 dark:text-white">+7 995 027 27 07</span>
                 </a>
                 <a
-                  href="https://wa.me/79950272707"
+                  href="https://t.me/komplabvlz"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-4 rounded-xl bg-[#25D366] text-white shadow-lg hover:bg-[#20BA5A] transition-all"
+                  className="flex items-center gap-3 px-4 py-4 rounded-xl bg-[#0088cc] text-white shadow-lg hover:bg-[#0077b5] transition-all"
                 >
                   <div className="p-2 bg-white/20 rounded-lg">
-                    <Icon name="MessageCircle" size={20} />
+                    <Icon name="Send" size={20} />
                   </div>
-                  <span className="font-semibold">Написать в WhatsApp</span>
+                  <span className="font-semibold">Написать в Telegram</span>
                 </a>
               </div>
             </nav>

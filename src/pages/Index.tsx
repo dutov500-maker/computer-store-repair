@@ -12,6 +12,7 @@ import { ReviewsSection } from '@/components/HomePage/ReviewsSection';
 import { PCSelectionSection } from '@/components/HomePage/PCSelectionSection';
 import { TrustBadgesSection } from '@/components/HomePage/TrustBadgesSection';
 import { RepairUpgradeSection } from '@/components/HomePage/RepairUpgradeSection';
+import { StandardsSection } from '@/components/HomePage/StandardsSection';
 
 import { initializeStorage, getServices } from '@/lib/localStorage';
 
@@ -58,6 +59,7 @@ const Index = () => {
       <div className="space-y-0">
         <HeroSection />
         <TrustBadgesSection />
+        <StandardsSection />
         <RepairUpgradeSection />
         <ReviewsSection />
         <PCSelectionSection />
