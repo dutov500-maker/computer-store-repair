@@ -90,7 +90,7 @@ export const HeroSection = () => {
                 </Button>
               </Link>
               <Link to="/catalog">
-                <Button size="lg" variant="outline" className="text-lg px-8 border-2 border-white/40 text-white hover:border-primary hover:scale-105 transition-all hover:bg-primary/20">
+                <Button size="lg" variant="outline" className="text-lg px-8 border-2 border-white/40 text-white bg-transparent hover:border-primary hover:scale-105 transition-all hover:bg-primary/20 hover:text-white">
                   Каталог готовых сборок
                   <Icon name="ArrowRight" className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
                 </Button>
