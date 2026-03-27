@@ -341,6 +341,12 @@ const Catalog = () => {
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-70 group-hover:opacity-90 transition-opacity"></div>
+                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                            <span className="flex items-center gap-2 bg-primary text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg shadow-primary/40 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                              <Icon name="Zap" size={14} />
+                              Узнать FPS
+                            </span>
+                          </div>
                         </div>
 
                         <div className="p-5 relative flex flex-col flex-1">

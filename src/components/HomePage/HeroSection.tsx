@@ -56,11 +56,11 @@ export const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden py-20 md:py-32 bg-transparent">
+    <section className="relative overflow-hidden py-20 md:py-32 bg-[#1a1a1a]">
       <div 
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-30"
         style={{
-          background: `radial-gradient(circle 200px at ${mousePosition.x}px ${mousePosition.y}px, hsl(var(--primary)/0.2), transparent)`
+          background: `radial-gradient(circle 300px at ${mousePosition.x}px ${mousePosition.y}px, hsl(var(--primary)/0.15), transparent)`
         }}
       />
       
@@ -72,13 +72,13 @@ export const HeroSection = () => {
               <span className="text-sm font-semibold text-orange-400">Акция месяца: Скидка 10% на первую сборку или чистку ПК</span>
             </div>
             <div className="relative inline-block">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold leading-tight text-white">
                 Профессиональная сборка игровых и рабочих{' '}
                 <span className="text-gradient inline-block">ПК в Волжском</span>{' '}
                 с гарантией до 3 лет
               </h1>
             </div>
-            <p className="text-xl text-foreground/80">
+            <p className="text-xl text-white/75">
               Бесплатная диагностика, сборка за 1-2 дня и доставка по городу
             </p>
             <div className="flex flex-wrap gap-4">
@@ -90,29 +90,29 @@ export const HeroSection = () => {
                 </Button>
               </Link>
               <Link to="/catalog">
-                <Button size="lg" variant="outline" className="text-lg px-8 border-2 hover:border-primary hover:scale-105 transition-all hover:bg-primary/10">
+                <Button size="lg" variant="outline" className="text-lg px-8 border-2 border-white/40 text-white hover:border-primary hover:scale-105 transition-all hover:bg-primary/20">
                   Каталог готовых сборок
                   <Icon name="ArrowRight" className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
                 </Button>
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-              <div className="flex items-center gap-3 p-4 glass-effect rounded-xl border border-primary/20 md:hover:border-primary/40 transition-all md:hover:scale-105 group">
+              <div className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/15 md:hover:border-primary/60 transition-all md:hover:scale-105 group">
                 <div className="p-2 bg-primary/20 rounded-lg md:group-hover:bg-primary md:group-hover:scale-110 transition-all">
                   <Icon name="Package" className="text-primary md:group-hover:text-white transition-colors" size={24} />
                 </div>
                 <div>
-                  <p className="font-semibold text-sm">Новые комплектующие</p>
-                  <p className="text-xs text-muted-foreground">Официальные поставщики</p>
+                  <p className="font-semibold text-sm text-white">Новые комплектующие</p>
+                  <p className="text-xs text-white/50">Официальные поставщики</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 glass-effect rounded-xl border border-primary/20 md:hover:border-primary/40 transition-all md:hover:scale-105 group">
+              <div className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/15 md:hover:border-primary/60 transition-all md:hover:scale-105 group">
                 <div className="p-2 bg-primary/20 rounded-lg md:group-hover:bg-primary md:group-hover:scale-110 transition-all">
                   <Icon name="Truck" className="text-primary md:group-hover:text-white transition-colors" size={24} />
                 </div>
                 <div>
-                  <p className="font-semibold text-sm">Бесплатная доставка</p>
-                  <p className="text-xs text-muted-foreground">По Волжскому от 50к</p>
+                  <p className="font-semibold text-sm text-white">Бесплатная доставка</p>
+                  <p className="text-xs text-white/50">По Волжскому от 50к</p>
                 </div>
               </div>
             </div>
