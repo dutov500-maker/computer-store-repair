@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import ParticlesBackground from '@/components/ParticlesBackground';
 import { HeroSection } from '@/components/HomePage/HeroSection';
 import { ConsultationSection } from '@/components/HomePage/ConsultationSection';
 import { CatalogSection } from '@/components/HomePage/CatalogSection';
@@ -54,7 +53,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative page-transition">
-      <ParticlesBackground />
       <Header />
       <div className="space-y-0">
         <HeroSection />
