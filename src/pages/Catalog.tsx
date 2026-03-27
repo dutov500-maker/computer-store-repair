@@ -401,6 +401,9 @@ const Catalog = () => {
                                 <p className="text-xs text-orange-500 font-medium mt-0.5">
                                   С Trade-in: от {(pc.price - 30000).toLocaleString()} ₽
                                 </p>
+                                <p className="text-[10px] text-muted-foreground/60 mt-0.5 leading-tight">
+                                  *итоговая стоимость зависит от комплектации вашего устройства
+                                </p>
                               </div>
                             </div>
 
