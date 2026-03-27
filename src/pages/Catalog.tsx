@@ -74,6 +74,7 @@ const Catalog = () => {
   const [submitting, setSubmitting] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string>('ALL');
   const [formStep, setFormStep] = useState(1);
+  const [creditDialogOpen, setCreditDialogOpen] = useState(false);
 
   const seoTitle = "Купить компьютер в Волжском - Готовые игровые ПК | Компьютерная Лаборатория";
   const seoDescription = "Купить готовый игровой компьютер в Волжском. Сборки от 45 000₽. Новые комплектующие, гарантия до 3 лет. Бесплатная доставка от 50 000₽. ☎️ +7 (995) 027-27-07";
@@ -357,16 +358,16 @@ const Catalog = () => {
 
                           {/* Feature Tags — GPU, CPU, RAM */}
                           <div className="flex flex-wrap gap-1.5 mb-3">
-                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted border border-border text-xs text-foreground/70 font-medium">
-                              <Icon name="Monitor" size={11} />
+                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted border border-border text-xs text-muted-foreground font-medium">
+                              <Icon name="Monitor" size={11} className="text-muted-foreground" />
                               {pc.specs.gpu.split(' ').slice(-2).join(' ')}
                             </span>
-                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted border border-border text-xs text-foreground/70 font-medium">
-                              <Icon name="Cpu" size={11} />
+                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted border border-border text-xs text-muted-foreground font-medium">
+                              <Icon name="Cpu" size={11} className="text-muted-foreground" />
                               {pc.specs.cpu.split(' ').slice(-2).join(' ')}
                             </span>
-                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted border border-border text-xs text-foreground/70 font-medium">
-                              <Icon name="MemoryStick" size={11} />
+                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted border border-border text-xs text-muted-foreground font-medium">
+                              <Icon name="MemoryStick" size={11} className="text-muted-foreground" />
                               {pc.specs.ram}
                             </span>
                           </div>
@@ -402,12 +403,12 @@ const Catalog = () => {
                                 <p className="text-3xl font-bold text-gradient">
                                   {pc.price.toLocaleString()} ₽
                                 </p>
-                                <p className="text-xs text-orange-500 font-medium mt-0.5">
-                                  С Trade-in: от {(pc.price - 30000).toLocaleString()} ₽
-                                </p>
-                                <p className="text-[10px] text-muted-foreground/60 mt-0.5 leading-tight">
-                                  *итоговая стоимость зависит от комплектации вашего устройства
-                                </p>
+                                <div className="flex items-center gap-1.5 mt-1.5">
+                                  <span className="text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded font-mono font-bold">МИР</span>
+                                  <span className="text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded font-mono font-bold">VISA</span>
+                                  <span className="text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded font-mono font-bold">MC</span>
+                                  <span className="text-[10px] text-muted-foreground">· Рассрочка · Кредит</span>
+                                </div>
                               </div>
                             </div>
 
@@ -450,23 +451,16 @@ const Catalog = () => {
                               </Button>
                             </a>
 
-                            {/* Trade-in */}
-                            <a
-                              href={`https://t.me/komplabvlz?text=${encodeURIComponent(`Привет! Хочу обсудить сборку ${pc.title} + Trade-in`)}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              className="block w-full"
+                            {/* Кредит */}
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              className="w-full text-orange-500 hover:bg-orange-500/10 border border-orange-500/30 text-xs font-medium"
+                              onClick={(e) => { e.stopPropagation(); e.preventDefault(); setCreditDialogOpen(true); }}
                             >
-                              <Button
-                                size="sm"
-                                variant="ghost"
-                                className="w-full text-orange-500 hover:bg-orange-500/10 border border-orange-500/30 text-xs font-medium"
-                              >
-                                <Icon name="ArrowLeftRight" size={13} className="mr-1.5" />
-                                Trade-in — зачтём старый ПК в скидку
-                              </Button>
-                            </a>
+                              <Icon name="CreditCard" size={13} className="mr-1.5" />
+                              Оформить в кредит
+                            </Button>
 
                             {/* Trust Badges */}
                             <div className="flex items-center justify-between pt-1">
@@ -628,6 +622,48 @@ const Catalog = () => {
                 {submitting ? 'Отправка...' : 'Забронировать'}
               </Button>
             </form>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Credit Dialog */}
+      <Dialog open={creditDialogOpen} onOpenChange={setCreditDialogOpen}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-heading flex items-center gap-2">
+              <Icon name="CreditCard" size={22} className="text-primary" />
+              Кредит и рассрочка
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Мы работаем с <strong className="text-foreground">Т-Банком</strong> и <strong className="text-foreground">Сбербанком</strong>. Напишите нам в Telegram — пришлём ссылку на анкету, которую можно заполнить за 5 минут прямо с телефона.
+            </p>
+            <div className="bg-muted rounded-xl p-4 space-y-2">
+              <div className="flex items-center gap-2 text-sm">
+                <Icon name="CheckCircle" size={15} className="text-green-500 shrink-0" />
+                <span>Одобрение за 1-2 минуты</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Icon name="CheckCircle" size={15} className="text-green-500 shrink-0" />
+                <span>Рассрочка 0% до 12 месяцев</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Icon name="CheckCircle" size={15} className="text-green-500 shrink-0" />
+                <span>Кредит от 0,1% в день</span>
+              </div>
+            </div>
+            <a
+              href="https://t.me/komplabvlz?text=Привет!%20Хочу%20оформить%20покупку%20ПК%20в%20кредит%2Fрассрочку"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <Button className="w-full bg-[#0088cc] hover:bg-[#0077bb] text-white font-bold" size="lg">
+                <Icon name="Send" size={16} className="mr-2" />
+                Написать в Telegram
+              </Button>
+            </a>
           </div>
         </DialogContent>
       </Dialog>

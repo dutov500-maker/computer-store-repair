@@ -1,49 +1,56 @@
-import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
 
 const StickyHelpButton = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 800) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const { pathname } = useLocation();
+  const isRepairPage = pathname === '/services' || pathname === '/repair';
 
   return (
-    <div
-      className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-40 transition-all duration-500 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
-      }`}
-    >
-      <div className="relative group">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary via-orange-500 to-primary rounded-full blur-xl opacity-50 group-hover:opacity-75 animate-pulse"></div>
-        <Link to="/pc-selection">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 p-3 bg-background/95 backdrop-blur-md border-t border-border/60 shadow-2xl">
+      {isRepairPage ? (
+        <a
+          href="https://t.me/komplabvlz?text=Привет!%20Хочу%20записаться%20на%20ремонт"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Button
             size="lg"
-            className="relative gradient-animated text-white px-8 py-6 text-lg shadow-2xl hover:shadow-3xl hover:scale-105 transition-all border-2 border-white/20"
+            className="w-full gradient-animated text-white font-bold text-base shadow-lg"
           >
-            <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-            <div className="relative flex items-center gap-3">
-              <Icon name="Sparkles" size={24} className="animate-pulse" />
-              <div className="text-left">
-                <div className="font-bold">Не можете выбрать?</div>
-                <div className="text-xs opacity-90">Подберём бесплатно за 5 минут</div>
-              </div>
-              <Icon name="ArrowRight" size={20} className="animate-bounce-horizontal" />
-            </div>
+            <Icon name="Wrench" size={20} className="mr-2" />
+            Записаться на ремонт
           </Button>
-        </Link>
-      </div>
+        </a>
+      ) : (
+        <div className="flex gap-2">
+          <Link to="/pc-selection" className="flex-1">
+            <Button
+              size="lg"
+              className="w-full gradient-animated text-white font-bold text-sm shadow-lg"
+            >
+              <Icon name="Gamepad2" size={18} className="mr-1.5" />
+              Подобрать ПК
+            </Button>
+          </Link>
+          <a
+            href="https://t.me/komplabvlz?text=Привет!%20Нужна%20консультация"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1"
+          >
+            <Button
+              size="lg"
+              variant="outline"
+              className="w-full border-[#0088cc] text-[#0088cc] hover:bg-[#0088cc]/10 text-sm font-bold"
+            >
+              <Icon name="Send" size={18} className="mr-1.5" />
+              Консультация
+            </Button>
+          </a>
+        </div>
+      )}
     </div>
   );
 };

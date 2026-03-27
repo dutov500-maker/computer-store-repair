@@ -64,6 +64,7 @@ export default function PCProduct() {
   const { id } = useParams();
   const [orderDialogOpen, setOrderDialogOpen] = useState(false);
   const [discountDialogOpen, setDiscountDialogOpen] = useState(false);
+  const [creditDialogOpen, setCreditDialogOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', phone: '', comment: '' });
   const [discountForm, setDiscountForm] = useState({ name: '', phone: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -191,16 +192,16 @@ export default function PCProduct() {
 
               {/* Feature Tags */}
               <div className="flex flex-wrap gap-2 mb-5">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/10 border border-primary/20 text-sm text-primary font-medium">
-                  <Icon name="Monitor" size={14} />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted border border-border text-sm text-muted-foreground font-medium">
+                  <Icon name="Monitor" size={14} className="text-muted-foreground" />
                   {product.specs.gpu}
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-sm text-blue-400 font-medium">
-                  <Icon name="Cpu" size={14} />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted border border-border text-sm text-muted-foreground font-medium">
+                  <Icon name="Cpu" size={14} className="text-muted-foreground" />
                   {product.specs.cpu}
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-500/10 border border-green-500/20 text-sm text-green-400 font-medium">
-                  <Icon name="MemoryStick" size={14} />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted border border-border text-sm text-muted-foreground font-medium">
+                  <Icon name="MemoryStick" size={14} className="text-muted-foreground" />
                   {product.specs.ram}
                 </span>
               </div>
@@ -211,8 +212,16 @@ export default function PCProduct() {
               {/* Design note */}
               <DesignNote />
 
-              <div className="text-4xl font-bold text-gradient mb-4">
-                {product.price.toLocaleString('ru-RU')} ₽
+              <div className="mb-4">
+                <div className="text-4xl font-bold text-gradient mb-2">
+                  {product.price.toLocaleString('ru-RU')} ₽
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[11px] text-muted-foreground bg-muted px-2 py-0.5 rounded font-mono font-bold">МИР</span>
+                  <span className="text-[11px] text-muted-foreground bg-muted px-2 py-0.5 rounded font-mono font-bold">VISA</span>
+                  <span className="text-[11px] text-muted-foreground bg-muted px-2 py-0.5 rounded font-mono font-bold">MC</span>
+                  <span className="text-[11px] text-muted-foreground">· Рассрочка · Кредит</span>
+                </div>
               </div>
 
               {product.fps && (
@@ -255,18 +264,16 @@ export default function PCProduct() {
                 </Button>
               </a>
 
-              {/* Trade-in */}
-              <a
-                href={`https://t.me/komplabvlz?text=${encodeURIComponent(`Привет! Хочу обсудить сборку ${product.title} + Trade-in`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block mb-5"
+              {/* Кредит */}
+              <Button
+                variant="ghost"
+                size="sm"
+                className="w-full mb-5 text-orange-500 hover:text-orange-600 hover:bg-orange-500/10 border border-orange-500/30"
+                onClick={() => setCreditDialogOpen(true)}
               >
-                <Button variant="ghost" size="sm" className="w-full text-orange-500 hover:text-orange-600 hover:bg-orange-500/10 border border-orange-500/30">
-                  <Icon name="ArrowLeftRight" size={14} className="mr-2" />
-                  Trade-in — зачтём старый ПК в скидку
-                </Button>
-              </a>
+                <Icon name="CreditCard" size={14} className="mr-2" />
+                Оформить в кредит / рассрочку
+              </Button>
 
               {/* Trust Badges */}
               <div className="flex items-center justify-around p-4 bg-card/50 rounded-xl border border-border/50">
@@ -401,6 +408,48 @@ export default function PCProduct() {
                 Нет, спасибо
               </button>
             </form>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Credit Dialog */}
+      <Dialog open={creditDialogOpen} onOpenChange={setCreditDialogOpen}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-heading flex items-center gap-2">
+              <Icon name="CreditCard" size={22} className="text-primary" />
+              Кредит и рассрочка
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Мы работаем с <strong className="text-foreground">Т-Банком</strong> и <strong className="text-foreground">Сбербанком</strong>. Напишите нам в Telegram — пришлём ссылку на анкету, которую можно заполнить за 5 минут прямо с телефона.
+            </p>
+            <div className="bg-muted rounded-xl p-4 space-y-2">
+              <div className="flex items-center gap-2 text-sm">
+                <Icon name="CheckCircle" size={15} className="text-green-500 shrink-0" />
+                <span>Одобрение за 1-2 минуты</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Icon name="CheckCircle" size={15} className="text-green-500 shrink-0" />
+                <span>Рассрочка 0% до 12 месяцев</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Icon name="CheckCircle" size={15} className="text-green-500 shrink-0" />
+                <span>Кредит от 0,1% в день</span>
+              </div>
+            </div>
+            <a
+              href="https://t.me/komplabvlz?text=Привет!%20Хочу%20оформить%20покупку%20ПК%20в%20кредит%2Fрассрочку"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <Button className="w-full bg-[#0088cc] hover:bg-[#0077bb] text-white font-bold" size="lg">
+                <Icon name="Send" size={16} className="mr-2" />
+                Написать в Telegram
+              </Button>
+            </a>
           </div>
         </DialogContent>
       </Dialog>
