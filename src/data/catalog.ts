@@ -8,7 +8,6 @@ export const CATALOG_DATA = [
     category: "ECO",
     image_url: "https://cdn.poehali.dev/files/ddbd087e-cc29-42bb-91f0-8109f3d04775.jpg",
     badge: "💰 Лучшая цена",
-    fps: "Dota 2: 120 FPS | CS2: 90 FPS",
     specs: {
       cpu: "AMD Ryzen 5 5500",
       gpu: "RTX 1660 Super",
@@ -25,7 +24,6 @@ export const CATALOG_DATA = [
     category: "ECO",
     image_url: "https://cdn.poehali.dev/files/fa592932-5b28-45cc-b159-b8395ab399a3.jpg",
     badge: "🔥 Хит продаж",
-    fps: "GTA V: 110 FPS | Fortnite: 100 FPS",
     specs: {
       cpu: "Intel Core i3-12100F",
       gpu: "RTX 2060 Super",
@@ -41,7 +39,6 @@ export const CATALOG_DATA = [
     resolution: "Full HD",
     category: "ECO",
     image_url: "https://cdn.poehali.dev/files/f29c5757-db7e-4ba8-83a1-d9760b79758f.jpg",
-    fps: "Warzone: 70 FPS | Apex Legends: 80 FPS",
     specs: {
       cpu: "Intel Core i3-12100F",
       gpu: "RTX 3050",
@@ -58,7 +55,7 @@ export const CATALOG_DATA = [
     category: "ECO",
     hidden: true,
     image_url: "https://cdn.poehali.dev/files/685646fc-d51b-477b-b294-12b6a80a82ea.jpg",
-    fps: "Cyberpunk 2077: 55 FPS | RDR2: 60 FPS",
+
     specs: {
       cpu: "Intel Core i3-12100F",
       gpu: "RX 6600",
@@ -74,7 +71,7 @@ export const CATALOG_DATA = [
     resolution: "Full HD",
     category: "ECO",
     image_url: "https://cdn.poehali.dev/files/7596f8cc-1e94-4d3f-b548-2459676f4d29.jpg",
-    fps: "Valorant: 200 FPS | Elden Ring: 65 FPS",
+
     specs: {
       cpu: "Intel Core i5-12400F",
       gpu: "RTX 3060",
@@ -91,7 +88,7 @@ export const CATALOG_DATA = [
     category: "SPECIAL",
     image_url: "https://cdn.poehali.dev/files/d7b49e71-994b-4188-87a7-190d98acf6fc.jpg",
     badge: "🔥 Хит продаж",
-    fps: "Cyberpunk 2077: 80 FPS | GTA VI: 75 FPS",
+
     specs: {
       cpu: "AMD Ryzen 5 5600",
       gpu: "RTX 5060",
@@ -107,7 +104,7 @@ export const CATALOG_DATA = [
     resolution: "Full HD",
     category: "SPECIAL",
     image_url: "https://cdn.poehali.dev/files/40ccfa93-c0af-4787-bca2-9df6520b6c93.jpg",
-    fps: "RDR2: 80 FPS | Hogwarts Legacy: 75 FPS",
+
     specs: {
       cpu: "Intel Core i5-12400F",
       gpu: "RTX 5060",
@@ -123,7 +120,7 @@ export const CATALOG_DATA = [
     resolution: "Full HD",
     category: "SPECIAL",
     image_url: "https://cdn.poehali.dev/files/f128b899-fa2b-4827-8416-c0bc5b80d438.jpg",
-    fps: "Spider-Man: 85 FPS | Starfield: 70 FPS",
+
     specs: {
       cpu: "AMD Ryzen 5 7500F",
       gpu: "RTX 5060",
@@ -139,7 +136,7 @@ export const CATALOG_DATA = [
     resolution: "Full HD",
     category: "SPECIAL",
     image_url: "https://cdn.poehali.dev/files/b4de2550-f1f9-4e45-86b5-bd7582ad5c9f.jpg",
-    fps: "Battlefield 2042: 90 FPS | Dying Light 2: 85 FPS",
+
     specs: {
       cpu: "AMD Ryzen 5 7500F",
       gpu: "RTX 5060 Ti",
@@ -155,7 +152,7 @@ export const CATALOG_DATA = [
     resolution: "QHD",
     category: "PREMIUM",
     image_url: "https://cdn.poehali.dev/files/ef30776e-bc42-4a3c-9226-66f03dacf007.jpg",
-    fps: "Cyberpunk 2077: 65 FPS | Forza Horizon 5: 90 FPS",
+
     specs: {
       cpu: "AMD Ryzen 7 8700F",
       gpu: "RTX 5060 Ti",
@@ -171,7 +168,7 @@ export const CATALOG_DATA = [
     resolution: "QHD",
     category: "PREMIUM",
     image_url: "https://cdn.poehali.dev/files/c2e89173-e95e-4143-8090-a100f334c4cb.jpg",
-    fps: "Alan Wake 2: 75 FPS | Assassin's Creed: 80 FPS",
+
     specs: {
       cpu: "AMD Ryzen 7 8700F",
       gpu: "RTX 5070",
@@ -187,7 +184,7 @@ export const CATALOG_DATA = [
     resolution: "QHD",
     category: "PREMIUM",
     image_url: "https://cdn.poehali.dev/files/b04e6316-cea4-45d9-99b4-3532342440aa.jpg",
-    fps: "Warzone: 110 FPS | Escape from Tarkov: 90 FPS",
+
     specs: {
       cpu: "AMD Ryzen 7 7800X3D",
       gpu: "RTX 5070",
@@ -203,7 +200,7 @@ export const CATALOG_DATA = [
     resolution: "QHD",
     category: "PREMIUM",
     image_url: "https://cdn.poehali.dev/files/5d2552b2-ef60-4635-a318-97fb773b7e5b.jpg",
-    fps: "Cyberpunk 2077: 85 FPS | RDR2: 95 FPS",
+
     specs: {
       cpu: "AMD Ryzen 7 7800X3D",
       gpu: "RTX 5070 Ti",
@@ -220,7 +217,7 @@ export const CATALOG_DATA = [
     category: "ULTRA",
     image_url: "https://cdn.poehali.dev/files/ea9cf683-2a7b-4b39-978e-3b97077b4cf6.jpg",
     badge: "🔥 Хит продаж",
-    fps: "Cyberpunk 2077: 60 FPS | Hogwarts Legacy: 65 FPS",
+
     specs: {
       cpu: "AMD Ryzen 7 7800X3D",
       gpu: "RTX 5070 Ti",
@@ -236,7 +233,7 @@ export const CATALOG_DATA = [
     resolution: "4K",
     category: "ULTRA",
     image_url: "https://cdn.poehali.dev/files/f96e93e5-2304-476f-a06d-598cde35d145.jpg",
-    fps: "Cyberpunk 2077: 75 FPS | Starfield: 80 FPS",
+
     specs: {
       cpu: "AMD Ryzen 7 7800X3D",
       gpu: "RTX 5080",
@@ -253,7 +250,7 @@ export const CATALOG_DATA = [
     category: "ULTRA",
     hidden: true,
     image_url: "https://cdn.poehali.dev/files/e0b8df0c-9ab8-460e-b09a-73ca20860665.jpg",
-    fps: "RDR2: 85 FPS | Flight Simulator: 70 FPS",
+
     specs: {
       cpu: "AMD Ryzen 7 7800X3D",
       gpu: "RTX 5080",
@@ -270,7 +267,7 @@ export const CATALOG_DATA = [
     category: "ELITE",
     hidden: true,
     image_url: "https://cdn.poehali.dev/files/58fe0b06-c3a8-4533-a82d-2057abfb5d7c.jpg",
-    fps: "Cyberpunk 2077: 120 FPS | Path Tracing: 90 FPS",
+
     specs: {
       cpu: "AMD Ryzen 9 9950X3D",
       gpu: "RTX 5090",

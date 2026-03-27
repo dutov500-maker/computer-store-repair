@@ -15,6 +15,7 @@ import funcUrls from '../../backend/func2url.json';
 import StickyHelpButton from '@/components/StickyHelpButton';
 import { CATALOG_DATA } from '@/data/catalog';
 import CatalogPopup from '@/components/CatalogPopup';
+import { FpsBlock, DesignNote } from '@/components/PCCardDetails';
 
 interface CatalogItem {
   id: number;
@@ -364,9 +365,11 @@ const Catalog = () => {
                             </span>
                           </div>
 
-                          <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                            {pc.description}
-                          </p>
+                          {/* FPS block */}
+                          <FpsBlock price={pc.price} compact />
+
+                          {/* Design note */}
+                          <DesignNote compact />
 
                           {/* Specs */}
                           <div className="space-y-2 mb-4 text-sm">
@@ -382,12 +385,7 @@ const Catalog = () => {
                               <Icon name="MemoryStick" size={14} className="text-primary shrink-0" />
                               <span className="text-muted-foreground truncate">{pc.specs.ram} • {pc.specs.storage}</span>
                             </div>
-                            {pc.fps && (
-                              <div className="flex items-center gap-2 pt-1.5 border-t border-border/50">
-                                <Icon name="Gamepad2" size={14} className="text-green-500 shrink-0" />
-                                <span className="text-muted-foreground text-xs">{pc.fps}</span>
-                              </div>
-                            )}
+
                           </div>
 
                           {/* Price + CTA */}

@@ -14,7 +14,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import funcUrls from '../../backend/func2url.json';
 import { CATALOG_DATA } from '@/data/catalog';
-import ExitIntentPopup from '@/components/ExitIntentPopup';
+import { FpsBlock, DesignNote } from '@/components/PCCardDetails';
+
 
 interface CatalogItem {
   id: number;
@@ -203,6 +204,12 @@ export default function PCProduct() {
                   {product.specs.ram}
                 </span>
               </div>
+
+              {/* FPS block */}
+              <FpsBlock price={product.price} />
+
+              {/* Design note */}
+              <DesignNote />
 
               <div className="text-4xl font-bold text-gradient mb-4">
                 {product.price.toLocaleString('ru-RU')} ₽
@@ -399,7 +406,6 @@ export default function PCProduct() {
       </Dialog>
 
       <Footer />
-      <ExitIntentPopup productTitle={product.title} />
     </>
   );
 }

@@ -41,17 +41,19 @@ export const RepairUpgradeSection = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
           {SERVICES.map((s) => (
             <div
               key={s.title}
-              className="p-5 rounded-2xl border border-border bg-card hover:border-primary/40 hover:shadow-md transition-all duration-200"
+              className="p-6 rounded-2xl border border-border bg-card hover:border-primary/40 hover:shadow-md transition-all duration-200 flex flex-col gap-4"
             >
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                <Icon name={s.icon} size={20} className="text-primary" />
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                <Icon name={s.icon} size={22} className="text-primary" />
               </div>
-              <h3 className="font-heading font-bold mb-1 text-sm">{s.title}</h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">{s.desc}</p>
+              <div>
+                <h3 className="font-heading font-bold mb-2">{s.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+              </div>
             </div>
           ))}
         </div>
