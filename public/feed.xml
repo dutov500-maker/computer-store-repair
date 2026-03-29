@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<yml_catalog date="2026-03-29">
+  <shop>
+    <name>КомпЛаб</name>
+    <company>КомпЛаб</company>
+    <url>https://xn--e1afmkfd.xn--p1af</url>
+    <currencies>
+      <currency id="RUB" rate="1"/>
+    </currencies>
+    <categories>
+      <category id="1">Игровые системные блоки</category>
+      <category id="2">Full HD</category>
+      <category id="3">QHD</category>
+      <category id="4">4K</category>
+    </categories>
+    <offers>
+
+      <offer id="15" available="true">
+        <price>45000</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <categoryId>2</categoryId>
+        <name>ECO 1 ( Ryzen 5 5500 + GTX 1080 )</name>
+        <description>Бюджетный игровой системный блок под Full HD Gaming. Процессор: AMD Ryzen 5 5500, Видеокарта: GTX 1080, ОЗУ: 16GB, Накопитель: 512GB SSD</description>
+        <param name="Процессор">AMD Ryzen 5 5500</param>
+        <param name="Видеокарта">GTX 1080</param>
+        <picture>https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=800</picture>
+      </offer>
+
+      <offer id="16" available="true">
+        <price>50000</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <categoryId>2</categoryId>
+        <name>Eco 2 (Intel Core i3-12100F + RTX 3050)</name>
+        <description>Бюджетный игровой системный блок под Full HD Gaming. Процессор: Intel Core i3-12100F, Видеокарта: RTX 3050, ОЗУ: 16GB, Накопитель: 512GB SSD</description>
+        <param name="Процессор">Intel Core i3-12100F</param>
+        <param name="Видеокарта">RTX 3050</param>
+        <picture>https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800</picture>
+      </offer>
+
+      <offer id="17" available="true">
+        <price>65000</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <categoryId>2</categoryId>
+        <name>ECO 3 ( Ryzen 5 5600 + RTX 3060Ti )</name>
+        <description>Бюджетный игровой системный блок под Full HD Gaming. Процессор: AMD Ryzen 5 5600, Видеокарта: RTX 3060Ti, ОЗУ: 16GB, Накопитель: 512GB SSD</description>
+        <param name="Процессор">AMD Ryzen 5 5600</param>
+        <param name="Видеокарта">RTX 3060Ti</param>
+        <picture>https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=800</picture>
+      </offer>
+
+      <offer id="18" available="true">
+        <price>75000</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <categoryId>2</categoryId>
+        <name>Special 1 ( Ryzen 5 5600 + RTX 5060 )</name>
+        <description>Игровой системный блок под Full HD Gaming на Ультра настройках. Процессор: AMD Ryzen 5 5600, Видеокарта: Palit RTX 5060 Dual 8GB, ОЗУ: 16GB, Накопитель: 1TB SSD</description>
+        <param name="Процессор">AMD Ryzen 5 5600</param>
+        <param name="Видеокарта">Palit RTX 5060 Dual 8GB</param>
+        <picture>https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=800</picture>
+      </offer>
+
+      <offer id="19" available="true">
+        <price>89000</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <categoryId>2</categoryId>
+        <name>Special 2 (i5-12400F + RTX 5060)</name>
+        <description>Игровой системный блок под Full HD Gaming на Ультра настройках. Процессор: Intel Core i5-12400F, Видеокарта: RTX 5060, ОЗУ: 16GB DDR4, Накопитель: 1TB NVMe SSD</description>
+        <param name="Процессор">Intel Core i5-12400F</param>
+        <param name="Видеокарта">RTX 5060</param>
+        <picture>https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=800</picture>
+      </offer>
+
+      <offer id="20" available="true">
+        <price>92000</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <categoryId>2</categoryId>
+        <name>Special 3 (Ryzen 5 8400F + RTX 5060)</name>
+        <description>Игровой системный блок под Full HD Gaming на Ультра настройках. Процессор: AMD Ryzen 5 8400F, Видеокарта: RTX 5060, ОЗУ: 16GB DDR5, Накопитель: 1TB SSD NVMe</description>
+        <param name="Процессор">AMD Ryzen 5 8400F</param>
+        <param name="Видеокарта">RTX 5060</param>
+        <picture>https://images.unsplash.com/photo-1625225233840-695456021cde?w=800</picture>
+      </offer>
+
+      <offer id="21" available="true">
+        <price>110000</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <categoryId>3</categoryId>
+        <name>Special 4 (Ryzen 5 7500F + RTX 5060 Ti)</name>
+        <description>Игровой системный блок под QHD Gaming на Ультра настройках. Процессор: AMD Ryzen 5 7500F, Видеокарта: RTX 5060 Ti, ОЗУ: 16GB, Накопитель: 1TB SSD NVMe</description>
+        <param name="Процессор">AMD Ryzen 5 7500F</param>
+        <param name="Видеокарта">RTX 5060 Ti</param>
+        <picture>https://images.unsplash.com/photo-1618935443786-ee7622480b60?w=800</picture>
+      </offer>
+
+      <offer id="22" available="true">
+        <price>125000</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <categoryId>3</categoryId>
+        <name>Special 5 White (Ryzen 5 7500F + RTX 5060 Ti)</name>
+        <description>Игровой системный блок в белом корпусе под QHD Gaming на Ультра настройках. Процессор: AMD Ryzen 5 7500F, Видеокарта: RTX 5060 Ti, ОЗУ: 16GB, Накопитель: 1TB SSD NVMe</description>
+        <param name="Процессор">AMD Ryzen 5 7500F</param>
+        <param name="Видеокарта">RTX 5060 Ti</param>
+        <picture>https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?w=800</picture>
+      </offer>
+
+      <offer id="23" available="true">
+        <price>135000</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <categoryId>3</categoryId>
+        <name>Special 6 (Ryzen 5 7500F + RTX 5070)</name>
+        <description>Игровой системный блок под QHD Gaming на Ультра настройках. Процессор: AMD Ryzen 5 7500F, Видеокарта: RTX 5070, ОЗУ: 16GB, Накопитель: 1TB SSD NVMe</description>
+        <param name="Процессор">AMD Ryzen 5 7500F</param>
+        <param name="Видеокарта">RTX 5070</param>
+        <picture>https://images.unsplash.com/photo-1623968950562-221f85933ee9?w=800</picture>
+      </offer>
+
+      <offer id="24" available="true">
+        <price>150000</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <categoryId>3</categoryId>
+        <name>Special 7 (Ryzen 7 7700 + RTX 5070)</name>
+        <description>Игровой системный блок под QHD Gaming на Ультра настройках. Процессор: AMD Ryzen 7 7700, Видеокарта: RTX 5070, ОЗУ: 16GB, Накопитель: 1TB SSD NVMe</description>
+        <param name="Процессор">AMD Ryzen 7 7700</param>
+        <param name="Видеокарта">RTX 5070</param>
+        <picture>https://images.unsplash.com/photo-1624705002806-5d72df19c6ad?w=800</picture>
+      </offer>
+
+      <offer id="25" available="true">
+        <price>195000</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <categoryId>4</categoryId>
+        <name>Special 8 (Ryzen 7 7700 + RTX 5070 Ti)</name>
+        <description>Игровой системный блок под 4K Gaming на Ультра настройках. Процессор: AMD Ryzen 7 7700, Видеокарта: RTX 5070 Ti, ОЗУ: 16GB, Накопитель: 1TB SSD NVMe</description>
+        <param name="Процессор">AMD Ryzen 7 7700</param>
+        <param name="Видеокарта">RTX 5070 Ti</param>
+        <picture>https://images.unsplash.com/photo-1625225233840-695456021cde?w=800</picture>
+      </offer>
+
+      <offer id="26" available="true">
+        <price>205000</price>
+        <currencyId>RUB</currencyId>
+        <categoryId>1</categoryId>
+        <categoryId>4</categoryId>
+        <name>Special 9 (Ryzen 7 7700 + RTX 5070 Ti)</name>
+        <description>Игровой системный блок под 4K Gaming на Ультра настройках. Процессор: AMD Ryzen 7 7700, Видеокарта: RTX 5070 Ti, ОЗУ: 16GB, Накопитель: 1TB SSD NVMe</description>
+        <param name="Процессор">AMD Ryzen 7 7700</param>
+        <param name="Видеокарта">RTX 5070 Ti</param>
+        <picture>https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=800</picture>
+      </offer>
+
+    </offers>
+  </shop>
+</yml_catalog>
