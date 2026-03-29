@@ -4,7 +4,7 @@
   <shop>
     <name>КомпЛаб</name>
     <company>КомпЛаб</company>
-    <url>https://komplabvlz.ru</url>
+    <url>https://комплаб.рф</url>
     <currencies>
       <currency id="RUR" rate="1"/>
     </currencies>
@@ -17,7 +17,7 @@
     <offers>
 
       <offer id="15" available="true">
-        <url>https://komplabvlz.ru/pc/15</url>
+        <url>https://комплаб.рф/pc/15</url>
         <name>ECO 1 ( Ryzen 5 5500 + GTX 1080 )</name>
         <description>Бюджетный игровой системный блок под Full HD Gaming. Процессор: AMD Ryzen 5 5500, Видеокарта: GTX 1080, ОЗУ: 16GB, Накопитель: 512GB SSD</description>
         <price>45000</price>
@@ -30,7 +30,7 @@
       </offer>
 
       <offer id="16" available="true">
-        <url>https://komplabvlz.ru/pc/16</url>
+        <url>https://комплаб.рф/pc/16</url>
         <name>Eco 2 (Intel Core i3-12100F + RTX 3050)</name>
         <description>Бюджетный игровой системный блок под Full HD Gaming. Процессор: Intel Core i3-12100F, Видеокарта: RTX 3050, ОЗУ: 16GB, Накопитель: 512GB SSD</description>
         <price>50000</price>
@@ -43,7 +43,7 @@
       </offer>
 
       <offer id="17" available="true">
-        <url>https://komplabvlz.ru/pc/17</url>
+        <url>https://комплаб.рф/pc/17</url>
         <name>ECO 3 ( Ryzen 5 5600 + RTX 3060Ti )</name>
         <description>Бюджетный игровой системный блок под Full HD Gaming. Процессор: AMD Ryzen 5 5600, Видеокарта: RTX 3060Ti, ОЗУ: 16GB, Накопитель: 512GB SSD</description>
         <price>65000</price>
@@ -56,7 +56,7 @@
       </offer>
 
       <offer id="18" available="true">
-        <url>https://komplabvlz.ru/pc/18</url>
+        <url>https://комплаб.рф/pc/18</url>
         <name>Special 1 ( Ryzen 5 5600 + RTX 5060 )</name>
         <description>Игровой системный блок под Full HD Gaming на Ультра настройках. Процессор: AMD Ryzen 5 5600, Видеокарта: Palit RTX 5060 Dual 8GB, ОЗУ: 16GB, Накопитель: 1TB SSD</description>
         <price>75000</price>
@@ -69,7 +69,7 @@
       </offer>
 
       <offer id="19" available="true">
-        <url>https://komplabvlz.ru/pc/19</url>
+        <url>https://комплаб.рф/pc/19</url>
         <name>Special 2 (i5-12400F + RTX 5060)</name>
         <description>Игровой системный блок под Full HD Gaming на Ультра настройках. Процессор: Intel Core i5-12400F, Видеокарта: RTX 5060, ОЗУ: 16GB DDR4, Накопитель: 1TB NVMe SSD</description>
         <price>89000</price>
@@ -82,7 +82,7 @@
       </offer>
 
       <offer id="20" available="true">
-        <url>https://komplabvlz.ru/pc/20</url>
+        <url>https://комплаб.рф/pc/20</url>
         <name>Special 3 (Ryzen 5 8400F + RTX 5060)</name>
         <description>Игровой системный блок под Full HD Gaming на Ультра настройках. Процессор: AMD Ryzen 5 8400F, Видеокарта: RTX 5060, ОЗУ: 16GB DDR5, Накопитель: 1TB SSD NVMe</description>
         <price>92000</price>
@@ -95,7 +95,7 @@
       </offer>
 
       <offer id="21" available="true">
-        <url>https://komplabvlz.ru/pc/21</url>
+        <url>https://комплаб.рф/pc/21</url>
         <name>Special 4 (Ryzen 5 7500F + RTX 5060 Ti)</name>
         <description>Игровой системный блок под QHD Gaming на Ультра настройках. Процессор: AMD Ryzen 5 7500F, Видеокарта: RTX 5060 Ti, ОЗУ: 16GB, Накопитель: 1TB SSD NVMe</description>
         <price>110000</price>
@@ -108,7 +108,7 @@
       </offer>
 
       <offer id="22" available="true">
-        <url>https://komplabvlz.ru/pc/22</url>
+        <url>https://комплаб.рф/pc/22</url>
         <name>Special 5 White (Ryzen 5 7500F + RTX 5060 Ti)</name>
         <description>Игровой системный блок в белом корпусе под QHD Gaming на Ультра настройках. Процессор: AMD Ryzen 5 7500F, Видеокарта: RTX 5060 Ti, ОЗУ: 16GB, Накопитель: 1TB SSD NVMe</description>
         <price>125000</price>
@@ -121,7 +121,7 @@
       </offer>
 
       <offer id="23" available="true">
-        <url>https://komplabvlz.ru/pc/23</url>
+        <url>https://комплаб.рф/pc/23</url>
         <name>Special 6 (Ryzen 5 7500F + RTX 5070)</name>
         <description>Игровой системный блок под QHD Gaming на Ультра настройках. Процессор: AMD Ryzen 5 7500F, Видеокарта: RTX 5070, ОЗУ: 16GB, Накопитель: 1TB SSD NVMe</description>
         <price>135000</price>
@@ -134,7 +134,7 @@
       </offer>
 
       <offer id="24" available="true">
-        <url>https://komplabvlz.ru/pc/24</url>
+        <url>https://комплаб.рф/pc/24</url>
         <name>Special 7 (Ryzen 7 7700 + RTX 5070)</name>
         <description>Игровой системный блок под QHD Gaming на Ультра настройках. Процессор: AMD Ryzen 7 7700, Видеокарта: RTX 5070, ОЗУ: 16GB, Накопитель: 1TB SSD NVMe</description>
         <price>150000</price>
@@ -147,7 +147,7 @@
       </offer>
 
       <offer id="25" available="true">
-        <url>https://komplabvlz.ru/pc/25</url>
+        <url>https://комплаб.рф/pc/25</url>
         <name>Special 8 (Ryzen 7 7700 + RTX 5070 Ti)</name>
         <description>Игровой системный блок под 4K Gaming на Ультра настройках. Процессор: AMD Ryzen 7 7700, Видеокарта: RTX 5070 Ti, ОЗУ: 16GB, Накопитель: 1TB SSD NVMe</description>
         <price>195000</price>
@@ -160,7 +160,7 @@
       </offer>
 
       <offer id="26" available="true">
-        <url>https://komplabvlz.ru/pc/26</url>
+        <url>https://комплаб.рф/pc/26</url>
         <name>Special 9 (Ryzen 7 7700 + RTX 5070 Ti)</name>
         <description>Игровой системный блок под 4K Gaming на Ультра настройках. Процессор: AMD Ryzen 7 7700, Видеокарта: RTX 5070 Ti, ОЗУ: 16GB, Накопитель: 1TB SSD NVMe</description>
         <price>205000</price>
