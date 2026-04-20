@@ -1,369 +1,140 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import funcUrls from '../../backend/func2url.json';
-import { repairImages } from '@/data/repairImages';
-import { FAQSchema, commonFAQs } from '@/components/FAQSchema';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
-import { ServiceCalculator } from '@/components/ServiceCalculator';
-import { DiagnosticTimer } from '@/components/DiagnosticTimer';
-import { CallMasterButton } from '@/components/CallMasterButton';
 
-
-const STATIC_SERVICES = [
+const SERVICES = [
   {
     id: 1,
-    title: "Диагностика компьютера",
-    description: "Полная проверка всех компонентов системы",
-    icon: "Search",
-    price: "Бесплатно",
-    beforeAfter: {
-      before: "https://cdn.poehali.dev/files/666869b5-db24-43da-a089-c1096a8ef48b.jpg",
-      after: "https://cdn.poehali.dev/files/17feaa54-4b5e-493a-8136-d0660072d88c.jpg"
-    }
+    icon: 'Zap',
+    category: 'СРОЧНЫЙ РЕМОНТ',
+    title: 'Ремонт при вас',
+    desc: 'Диагностика 0 ₽. Большинство работ выполняем в вашем присутствии — уходите с рабочей техникой.',
+    price: 'от 500 ₽',
+    tags: ['Диагностика бесплатно', 'Быстро', 'Гарантия'],
+    accent: '#FF6B00',
   },
   {
     id: 2,
-    title: "Чистка от пыли",
-    description: "Профессиональная чистка системного блока",
-    icon: "Wind",
-    price: "от 500 ₽",
-    beforeAfter: {
-      before: "https://cdn.poehali.dev/files/f3a7f2de-c7ea-48c0-9ce0-f4e4dcbf3a41.jpg",
-      after: "https://cdn.poehali.dev/files/825b1707-b9f0-4e84-9daf-afc344e1ccd6.jpg"
-    }
+    icon: 'Thermometer',
+    category: 'ТЕХНИЧЕСКОЕ ОБС.',
+    title: 'Чистка и термопаста',
+    desc: 'Только Honeywell PTM7950 и Laird. Снижаем температуру CPU/GPU на 10-25°C или возвращаем деньги.',
+    price: 'от 1 500 ₽',
+    tags: ['PTM7950', 'Laird', 'Гарантия результата'],
+    accent: '#60a5fa',
   },
   {
     id: 3,
-    title: "Замена термопасты",
-    description: "Замена термопасты на процессоре и видеокарте",
-    icon: "Droplet",
-    price: "от 800 ₽",
-    beforeAfter: {
-      before: "https://cdn.poehali.dev/files/a1d24fe8-912a-4656-a306-cda4be218c26.jpg",
-      after: "https://cdn.poehali.dev/files/2edba5a9-3e60-422c-847d-7bfcb0bbc8c7.jpg"
-    }
-  },
-  {
-    id: 16,
-    title: "Ремонт ноутбука",
-    description: "Диагностика и ремонт ноутбуков любых марок",
-    icon: "Laptop",
-    price: "от 1000 ₽",
-    beforeAfter: {
-      before: "https://cdn.poehali.dev/files/dab42b79-6574-426d-a1fe-20c7b6fc43a9.jpg",
-      after: "https://cdn.poehali.dev/files/6d655b7e-af4d-4abd-95cc-bf58f1e2a9ab.jpg"
-    }
-  },
-  {
-    id: 17,
-    title: "Замена экрана ноутбука",
-    description: "Замена матрицы на ноутбуке",
-    icon: "Monitor",
-    price: "от 3000 ₽",
-    beforeAfter: {
-      before: "https://cdn.poehali.dev/files/e0cc5c19-0be6-44e0-a7cc-b157fb000e6a.jpg",
-      after: "https://cdn.poehali.dev/files/8bf6e606-8ea4-4df1-81b5-35aa6124fd85.jpg"
-    }
-  },
-  {
-    id: 18,
-    title: "Чистка ноутбука от пыли",
-    description: "Профессиональная чистка системы охлаждения",
-    icon: "Wind",
-    price: "от 800 ₽",
-    beforeAfter: {
-      before: "https://cdn.poehali.dev/files/5d4b2bd0-0073-4983-8f11-2a0b3902e1b3.jpg",
-      after: "https://cdn.poehali.dev/files/7ab00537-7397-4938-942d-08cb5c44e5b9.jpg"
-    }
+    icon: 'Cpu',
+    category: 'АПГРЕЙД И СБОРКА',
+    title: 'Модернизация ПК',
+    desc: 'Честный Trade-in на старое железо. Кабель-менеджмент по линейке. Стресс-тест 4 часа после сборки.',
+    price: 'от 2 000 ₽',
+    tags: ['Trade-in', 'Кабель-менеджмент', 'Стресс-тест'],
+    accent: '#c084fc',
   },
   {
     id: 4,
-    title: "Установка Windows",
-    description: "Установка и настройка операционной системы",
-    icon: "HardDrive",
-    price: "от 1000 ₽"
+    icon: 'HardDrive',
+    category: 'НОСИТЕЛИ ДАННЫХ',
+    title: 'Восстановление данных',
+    desc: 'Работаем с SSD, HDD, флешками. Оцениваем бесплатно — платите только за результат.',
+    price: 'от 2 000 ₽',
+    tags: ['SSD / HDD', 'Бесплатная оценка', 'Конфиденциально'],
+    accent: '#4ade80',
   },
   {
     id: 5,
-    title: "Ремонт материнской платы",
-    description: "Диагностика и ремонт неисправностей",
-    icon: "Cpu",
-    price: "от 2000 ₽"
+    icon: 'Monitor',
+    category: 'ПРОГРАММЫ И ОС',
+    title: 'Установка и настройка',
+    desc: 'Windows, драйверы, офисный пакет, антивирус. Настраиваем под задачи — ничего лишнего.',
+    price: 'от 800 ₽',
+    tags: ['Windows 11', 'Драйверы', 'Быстро'],
+    accent: '#fb923c',
   },
   {
     id: 6,
-    title: "Замена блока питания",
-    description: "Подбор и установка нового БП",
-    icon: "Zap",
-    price: "от 500 ₽"
+    icon: 'Wifi',
+    category: 'СЕТИ И РОУТЕРЫ',
+    title: 'Настройка Wi-Fi и LAN',
+    desc: 'Настройка роутеров, создание домашней сети, устранение проблем со связью.',
+    price: 'от 1 000 ₽',
+    tags: ['Любые роутеры', 'Выезд', 'Быстро'],
+    accent: '#34d399',
+  },
+];
+
+const REVIEWS = [
+  {
+    platform: 'Авито',
+    icon: 'Star',
+    rating: '5.0',
+    count: '200+',
+    color: '#00AEEF',
+    url: 'https://www.avito.ru/brands/i390049413',
+    border: 'border-[#00AEEF]/30',
+    bg: 'bg-[#00AEEF]/5',
+    desc: 'Рейтинг 5.0 — более 200 довольных клиентов',
   },
   {
-    id: 7,
-    title: "Апгрейд компьютера",
-    description: "Модернизация и улучшение характеристик",
-    icon: "TrendingUp",
-    price: "от 1000 ₽"
+    platform: 'Яндекс.Карты',
+    icon: 'MapPin',
+    rating: '4.9',
+    count: '50+',
+    color: '#FF6B00',
+    url: 'https://yandex.ru/maps/org/kompyuternaya_laboratoriya/105118454033/',
+    border: 'border-[#FF6B00]/30',
+    bg: 'bg-[#FF6B00]/5',
+    desc: 'Реальные отзывы и фото наших работ',
   },
-  {
-    id: 8,
-    title: "Восстановление данных",
-    description: "Восстановление файлов с HDD/SSD",
-    icon: "Database",
-    price: "от 3000 ₽"
-  },
-  {
-    id: 9,
-    title: "Настройка BIOS",
-    description: "Оптимизация параметров системы",
-    icon: "Settings",
-    price: "от 800 ₽"
-  },
-  {
-    id: 10,
-    title: "Удаление вирусов",
-    description: "Полная очистка от вредоносного ПО",
-    icon: "Shield",
-    price: "от 1500 ₽"
-  },
-  {
-    id: 11,
-    title: "Замена кулера",
-    description: "Установка нового охлаждения",
-    icon: "Fan",
-    price: "от 700 ₽"
-  },
-  {
-    id: 12,
-    title: "Ремонт видеокарты",
-    description: "Диагностика и устранение неисправностей GPU",
-    icon: "MonitorCheck",
-    price: "от 2500 ₽"
-  },
-  {
-    id: 13,
-    title: "Установка драйверов",
-    description: "Поиск и установка актуальных драйверов",
-    icon: "Download",
-    price: "от 500 ₽"
-  },
-  {
-    id: 14,
-    title: "Настройка сети",
-    description: "Подключение к интернету и локальной сети",
-    icon: "Wifi",
-    price: "от 800 ₽"
-  },
-  {
-    id: 15,
-    title: "Замена жесткого диска",
-    description: "Установка HDD/SSD с переносом данных",
-    icon: "HardDrive",
-    price: "от 1200 ₽"
-  },
-  {
-    id: 19,
-    title: "Замена клавиатуры ноутбука",
-    description: "Замена неисправной клавиатуры",
-    icon: "Keyboard",
-    price: "от 1500 ₽"
-  },
-  {
-    id: 20,
-    title: "Ремонт планшета",
-    description: "Диагностика и ремонт планшетов",
-    icon: "Tablet",
-    price: "от 1500 ₽"
-  },
-  {
-    id: 21,
-    title: "Замена экрана планшета",
-    description: "Замена дисплея на планшете",
-    icon: "TabletSmartphone",
-    price: "от 2500 ₽"
-  },
-  {
-    id: 22,
-    title: "Ремонт телефона",
-    description: "Диагностика и ремонт смартфонов",
-    icon: "Smartphone",
-    price: "от 1000 ₽"
-  },
-  {
-    id: 23,
-    title: "Замена экрана телефона",
-    description: "Замена дисплея iPhone, Samsung, Xiaomi и др.",
-    icon: "Smartphone",
-    price: "от 2000 ₽"
-  },
-  {
-    id: 24,
-    title: "Замена батареи телефона",
-    description: "Замена аккумулятора на смартфоне",
-    icon: "Battery",
-    price: "от 1200 ₽"
-  },
-  {
-    id: 25,
-    title: "Ремонт разъема зарядки",
-    description: "Замена или ремонт USB разъема",
-    icon: "Cable",
-    price: "от 1500 ₽"
-  },
-  {
-    id: 26,
-    title: "Замена камеры телефона",
-    description: "Замена основной или фронтальной камеры",
-    icon: "Camera",
-    price: "от 1800 ₽"
-  }
 ];
 
 const Services = () => {
-  const [services] = useState<any[]>(STATIC_SERVICES);
-  const [selectedService, setSelectedService] = useState<any>(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [callOpen, setCallOpen] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [message, setMessage] = useState('');
+  const [problem, setProblem] = useState('');
   const [submitting, setSubmitting] = useState(false);
-  const [formStep, setFormStep] = useState(1);
 
-  const generateServiceSchema = () => {
-    const serviceOffers = services.map((service) => {
-      const priceMatch = service.price.match(/\d+/);
-      const price = priceMatch ? priceMatch[0] : '0';
-      const isFree = service.price.toLowerCase().includes('бесплатно');
-      
-      return {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": service.title,
-          "description": service.description
-        },
-        "price": isFree ? '0' : price,
-        "priceCurrency": "RUB",
-        "availability": "https://schema.org/InStock",
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "price": isFree ? '0' : price,
-          "priceCurrency": "RUB",
-          "valueAddedTaxIncluded": true
-        }
-      };
-    });
-
-    return {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "@id": "https://комплаб.рф",
-      "name": "Компьютерная Лаборатория",
-      "description": "Профессиональный ремонт компьютеров, ноутбуков, планшетов и телефонов в Волжском",
-      "url": "https://комплаб.рф/services",
-      "telephone": "+79950272707",
-      "email": "complab34@gmail.com",
-      "priceRange": "₽₽",
-      "image": "https://cdn.poehali.dev/files/1258a3ce-944b-46de-88b7-5a629a1775c1.png",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Волжский",
-        "addressRegion": "Волгоградская область",
-        "addressCountry": "RU"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "48.7894",
-        "longitude": "44.7742"
-      },
-      "openingHours": "Mo-Fr 09:00-18:00",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "50",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Услуги ремонта",
-        "itemListElement": serviceOffers
-      },
-      "sameAs": [
-        "https://vk.com/labkomp",
-        "https://t.me/komplabvlz"
-      ]
-    };
-  };
-
-  const handleServiceClick = (service: any) => {
-    setSelectedService(service);
-    setDialogOpen(true);
-    setFormStep(1);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleCallSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!name.trim() || !phone.trim()) {
       toast.error('Заполните имя и телефон');
       return;
     }
-
     setSubmitting(true);
-
     try {
-      const serviceMessage = `Услуга: ${selectedService.title}\nЦена: ${selectedService.price}\n\nДополнительно: ${message.trim() || 'Не указано'}`;
-
       const response = await fetch(funcUrls['submit-request'], {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: name.trim(),
           phone: phone.trim(),
           email: null,
-          service_type: selectedService.title,
-          message: serviceMessage
-        })
+          service_type: 'Вызов мастера',
+          message: problem.trim() || 'Вызов мастера на дом',
+        }),
       });
-
       const data = await response.json();
-
       if (response.ok && data.success) {
-        toast.success('Заявка отправлена! Мы свяжемся с вами в ближайшее время');
-        setName('');
-        setPhone('');
-        setMessage('');
-        setDialogOpen(false);
+        toast.success('Заявка отправлена! Перезвоним в течение 15 минут');
+        setName(''); setPhone(''); setProblem('');
+        setCallOpen(false);
       } else {
-        toast.error('Ошибка при отправке заявки');
+        toast.error('Ошибка при отправке');
       }
-    } catch (error) {
-      console.error('Error submitting request:', error);
-      toast.error('Ошибка при отправке. Позвоните нам: +7 995 027 27 07');
+    } catch {
+      toast.error('Ошибка. Позвоните: +7 995 027 27 07');
     } finally {
       setSubmitting(false);
     }
@@ -372,330 +143,313 @@ const Services = () => {
   return (
     <div className="min-h-screen page-transition bg-[#0A0A0A] text-white">
       <Helmet>
-        <title>Ремонт компьютеров, ноутбуков, планшетов и телефонов в Волжском - Компьютерная Лаборатория</title>
-        <meta name="description" content="Профессиональный ремонт компьютеров, ноутбуков, планшетов и телефонов в Волжском. Диагностика бесплатно, замена комплектующих, чистка от пыли, ремонт материнских плат, замена экранов. Гарантия до 6 месяцев. ☎️ +7 (995) 027-27-07" />
-        <meta name="keywords" content="ремонт компьютеров волжский, ремонт ноутбуков волжский, ремонт планшетов волжский, ремонт телефонов волжский, ремонт смартфонов волжский, компьютерный мастер волжский, чистка компьютера волжский, замена термопасты волжский, установка windows волжский, диагностика пк волжский, ремонт видеокарты волжский, замена блока питания волжский, замена экрана телефона волжский, замена батареи телефона волжский, ремонт айфона волжский, ремонт samsung волжский" />
-        <meta property="og:title" content="Ремонт компьютеров, ноутбуков, планшетов и телефонов в Волжском" />
-        <meta property="og:description" content="Профессиональный ремонт компьютеров, ноутбуков, планшетов и смартфонов с гарантией. Диагностика бесплатно. ☎️ +7 (995) 027-27-07" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://комплаб.рф/services" />
-        <link rel="canonical" href="https://комплаб.рф/services" />
+        <title>Ремонт компьютеров в Волжском | K|LAB — Мастерская</title>
+        <meta name="description" content="Ремонт компьютеров, ноутбуков, планшетов в Волжском. Диагностика 0₽. Гарантия 1 год. Вызов мастера на дом. ☎️ +7 995 027-27-07" />
       </Helmet>
-      
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(generateServiceSchema()) }}
-      />
-      
-      <FAQSchema faqs={commonFAQs} />
-      
+
       <Header />
-      
-      <section className="py-16 container mx-auto px-4">
-        <div className="text-center mb-12 animate-fade-in">
-          <div className="inline-block px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full mb-4">
-            <span className="text-sm font-semibold text-red-400">🎄 СКИДКА ДО 10 000₽</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-            Услуги по <span className="text-primary">ремонту</span> 🎁
-          </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-4">
-            Профессиональный ремонт компьютеров, ноутбуков, планшетов и телефонов в Волжском
-          </p>
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full animate-pulse">
-            <Icon name="Users" size={16} className="text-green-500" />
-            <span className="text-sm font-semibold text-green-500">🔥 Заказали 8 человек сегодня</span>
-          </div>
-        </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 mb-12">
-          <ServiceCalculator />
-          <DiagnosticTimer />
-        </div>
-
-        <div className="text-center mb-8">
-          <CallMasterButton variant="outline" className="text-lg h-14 px-8" />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
-            <Card 
-              key={service.id}
-              className="p-6 hover:border-primary transition-all duration-300 hover:scale-105 animate-fade-in cursor-pointer"
-              style={{ animationDelay: `${index * 50}ms` }}
-              onClick={() => handleServiceClick(service)}
-            >
-              <div className="space-y-4">
-                {service.beforeAfter && (
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="relative group">
-                      <img 
-                        src={service.beforeAfter.before} 
-                        alt="До ремонта"
-                        className="w-full h-32 object-cover rounded-lg"
-                      />
-                      <div className="absolute inset-0 bg-black/60 rounded-lg flex items-center justify-center">
-                        <span className="text-white font-bold text-sm">ДО</span>
-                      </div>
-                    </div>
-                    <div className="relative group">
-                      <img 
-                        src={service.beforeAfter.after} 
-                        alt="После ремонта"
-                        className="w-full h-32 object-cover rounded-lg"
-                      />
-                      <div className="absolute inset-0 bg-black/60 rounded-lg flex items-center justify-center">
-                        <span className="text-white font-bold text-sm">ПОСЛЕ</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <Icon name={service.icon} size={28} className="text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-heading font-bold mb-2">
-                      {service.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm mb-3">
-                      {service.description}
-                    </p>
-                    <div className="text-primary font-bold mb-3">
-                      {service.price}
-                    </div>
-                    <div className="flex gap-2">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="flex-1"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleServiceClick(service);
-                        }}
-                      >
-                        <Icon name="Phone" size={16} className="mr-1" />
-                        Заказать
-                      </Button>
-                      <a
-                        href={`https://t.me/komplabvlz?text=${encodeURIComponent(`Здравствуйте! Хочу заказать: ${service.title}`)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex-1"
-                      >
-                        <Button 
-                          variant="outline" 
-                          size="sm"
-                          className="w-full bg-[#0088cc]/10 hover:bg-[#0088cc]/20 border-[#0088cc]"
-                        >
-                          <Icon name="Send" size={16} className="mr-1" />
-                          Telegram
-                        </Button>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-
-        <div className="mt-16 mb-16">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-heading font-bold mb-4">
-              Примеры наших работ
-            </h2>
-            <p className="text-muted-foreground">
-              Профессиональный ремонт компьютеров, ноутбуков, планшетов и телефонов
+      {/* Hero */}
+      <section className="relative py-24 md:py-32 overflow-hidden border-b border-white/5">
+        <div className="absolute inset-0 opacity-15"
+          style={{
+            backgroundImage: `url('https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/dc9369a4-8b65-4c6a-af45-d45456fefb80.jpg')`,
+            backgroundSize: 'cover', backgroundPosition: 'center',
+          }} />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] to-[#0A0A0A]/60" />
+        <div className="container relative z-10 mx-auto px-6">
+          <div className="max-w-3xl">
+            <div className="text-[#FF6B00] font-mono text-sm tracking-[0.3em] uppercase mb-4">
+              // Services
+            </div>
+            <h1 className="font-heading text-5xl md:text-7xl font-black uppercase leading-none">
+              Мастерская
+              <br />
+              <span className="text-[#FF6B00]">K|LAB</span>
+            </h1>
+            <p className="text-white/60 text-lg mt-6 max-w-xl">
+              Ремонт при вас. Диагностика бесплатно. Договор и гарантия 1 год на все работы.
             </p>
           </div>
-          
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {repairImages.map((image, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-                  <Card className="overflow-hidden group cursor-pointer h-full">
-                    <div className="aspect-[4/3] overflow-hidden">
-                      <img
-                        src={image.url}
-                        alt={image.title}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-semibold mb-1 line-clamp-1">{image.title}</h3>
-                      <p className="text-sm text-muted-foreground line-clamp-2">{image.description}</p>
-                    </div>
-                  </Card>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="hidden md:flex" />
-            <CarouselNext className="hidden md:flex" />
-          </Carousel>
+        </div>
+      </section>
 
-          <div className="text-center mt-8">
-            <Button asChild variant="outline" size="lg">
-              <Link to="/repair-gallery" className="gap-2">
-                Смотреть все работы
-                <Icon name="ArrowRight" size={18} />
-              </Link>
-            </Button>
+      {/* 2 пути */}
+      <section className="py-10 border-b border-white/5">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-4">
+            <button
+              onClick={() => setCallOpen(true)}
+              className="group relative border-2 border-[#FF6B00] bg-[#FF6B00]/5 hover:bg-[#FF6B00]/15 p-8 text-left transition-all"
+            >
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-[#FF6B00]" />
+              <div className="w-14 h-14 bg-[#FF6B00] flex items-center justify-center mb-5">
+                <Icon name="Home" size={26} className="text-black" />
+              </div>
+              <div className="font-heading text-2xl md:text-3xl font-black uppercase text-white mb-2">
+                Вызвать мастера на дом
+              </div>
+              <div className="text-white/60">Приедем, диагностируем и отремонтируем. Без очередей.</div>
+              <div className="flex items-center gap-2 mt-5 font-mono text-xs tracking-widest uppercase text-[#FF6B00]">
+                Оставить заявку
+                <Icon name="ArrowRight" size={14} className="group-hover:translate-x-1 transition-transform" />
+              </div>
+            </button>
+
+            <a
+              href="https://yandex.ru/maps/org/105118454033"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative border border-white/10 hover:border-[#FF6B00] bg-[#0D0D0D] p-8 text-left transition-all"
+            >
+              <div className="w-14 h-14 border border-[#FF6B00]/40 flex items-center justify-center mb-5 group-hover:bg-[#FF6B00] transition-all">
+                <Icon name="MapPin" size={26} className="text-[#FF6B00] group-hover:text-black transition-colors" />
+              </div>
+              <div className="font-heading text-2xl md:text-3xl font-black uppercase text-white mb-2">
+                Приехать в мастерскую
+              </div>
+              <div className="text-white/60 mb-2">Волжский, ул. Александрова, д. 24а</div>
+              <div className="font-mono text-xs text-white/40 tracking-wider">
+                Профессиональное оборудование · Стерильные условия
+              </div>
+              <div className="flex items-center gap-2 mt-5 font-mono text-xs tracking-widest uppercase text-[#FF6B00]">
+                Маршрут
+                <Icon name="ArrowUpRight" size={14} />
+              </div>
+            </a>
           </div>
         </div>
+      </section>
 
-        <div className="mt-16 mb-12">
-          <Card className="p-6 bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-purple-500/10 border-2 border-blue-500/30">
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <div className="p-4 bg-blue-500/20 rounded-2xl">
-                <Icon name="Shield" size={48} className="text-blue-500" />
+      {/* Связь с мастером MAX */}
+      <section className="py-8 border-b border-[#FF6B00]/20 bg-[#FF6B00]/5">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-wrap items-center gap-4 justify-between">
+            <div>
+              <div className="font-mono text-xs tracking-[0.3em] text-[#FF6B00] uppercase mb-1">
+                // Связь с мастером MAX
               </div>
-              <div className="flex-1 text-center md:text-left">
-                <h3 className="text-2xl font-bold mb-2">🛡️ Гарантия на все работы до 6 месяцев</h3>
-                <p className="text-muted-foreground mb-3">
-                  Даем официальную гарантию на выполненный ремонт. Если что-то пойдет не так — исправим бесплатно!
-                </p>
-                <div className="flex flex-wrap gap-4 justify-center md:justify-start text-sm">
-                  <div className="flex items-center gap-2">
-                    <Icon name="Check" size={18} className="text-green-500" />
-                    <span>Бесплатная повторная диагностика</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Icon name="Check" size={18} className="text-green-500" />
-                    <span>Гарантийный ремонт без очередей</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Icon name="Check" size={18} className="text-green-500" />
-                    <span>Прозрачные условия</span>
-                  </div>
-                </div>
+              <div className="font-heading text-xl font-black uppercase text-white">
+                Ответим в течение 15 минут
               </div>
             </div>
-          </Card>
-        </div>
-
-        <div className="mt-16 bg-card rounded-2xl p-8 md:p-12">
-          <h2 className="text-3xl font-heading font-bold mb-8 text-center">
-            Наши преимущества
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="inline-flex p-4 bg-primary/10 rounded-full mb-4">
-                <Icon name="Clock" size={32} className="text-primary" />
-              </div>
-              <h3 className="font-bold mb-2">Быстрый ремонт</h3>
-              <p className="text-sm text-muted-foreground">Большинство работ выполняем за 1-2 дня</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex p-4 bg-primary/10 rounded-full mb-4">
-                <Icon name="Shield" size={32} className="text-primary" />
-              </div>
-              <h3 className="font-bold mb-2">Гарантия</h3>
-              <p className="text-sm text-muted-foreground">На все виды работ до 6 месяцев</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex p-4 bg-primary/10 rounded-full mb-4">
-                <Icon name="Wrench" size={32} className="text-primary" />
-              </div>
-              <h3 className="font-bold mb-2">Опытные мастера</h3>
-              <p className="text-sm text-muted-foreground">Более 10 лет опыта в ремонте ПК</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex p-4 bg-primary/10 rounded-full mb-4">
-                <Icon name="BadgeCheck" size={32} className="text-primary" />
-              </div>
-              <h3 className="font-bold mb-2">Оригинальные запчасти</h3>
-              <p className="text-sm text-muted-foreground">Только качественные комплектующие</p>
+            <div className="flex flex-wrap gap-3">
+              <a href="tel:+79950272707"
+                className="flex items-center gap-2 bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold text-xs tracking-widest uppercase px-6 py-4 transition-all">
+                <Icon name="Phone" size={16} />
+                +7 995 027-27-07
+              </a>
+              <a href="https://t.me/komplabvlz" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-[#229ED9] hover:bg-[#1a8ab8] text-white font-bold text-xs tracking-widest uppercase px-6 py-4 transition-all">
+                <Icon name="Send" size={16} />
+                Telegram
+              </a>
+              <a href="https://wa.me/79950272707" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-[#25D366] hover:bg-[#1db354] text-white font-bold text-xs tracking-widest uppercase px-6 py-4 transition-all">
+                <Icon name="MessageCircle" size={16} />
+                WhatsApp
+              </a>
             </div>
           </div>
         </div>
       </section>
-      
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-lg">
+
+      {/* Услуги */}
+      <section className="py-20 container mx-auto px-6">
+        <div className="mb-12">
+          <div className="text-[#FF6B00] font-mono text-sm tracking-[0.3em] uppercase mb-4">// Услуги</div>
+          <h2 className="font-heading text-4xl md:text-6xl font-black uppercase text-white leading-none">
+            Что мы <span className="text-[#FF6B00]">делаем</span>
+          </h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 border border-white/5 mb-16">
+          {SERVICES.map((s) => (
+            <div key={s.id} className="group relative bg-[#0A0A0A] p-8 hover:bg-[#111] transition-all">
+              <div className="absolute top-0 left-0 w-0 h-[2px] group-hover:w-full transition-all duration-500"
+                style={{ backgroundColor: s.accent }} />
+              <div className="flex items-start justify-between mb-6">
+                <div className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase">{s.category}</div>
+                <div className="w-11 h-11 border flex items-center justify-center"
+                  style={{ borderColor: `${s.accent}40` }}>
+                  <Icon name={s.icon} size={20} style={{ color: s.accent }} />
+                </div>
+              </div>
+              <div className="font-mono text-lg font-bold text-white mb-1 uppercase tracking-wider">{s.price}</div>
+              <h3 className="font-heading text-2xl font-black uppercase text-white mb-3">{s.title}</h3>
+              <p className="text-white/60 text-sm leading-relaxed mb-5">{s.desc}</p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {s.tags.map((t) => (
+                  <span key={t} className="font-mono text-[10px] tracking-wider uppercase px-2.5 py-1 bg-white/5 border border-white/10 text-white/50">
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <button
+                onClick={() => setCallOpen(true)}
+                className="w-full flex items-center justify-center gap-2 border font-mono text-xs tracking-widest uppercase py-3.5 transition-all hover:bg-[#FF6B00] hover:border-[#FF6B00] hover:text-black"
+                style={{ borderColor: `${s.accent}60`, color: s.accent }}
+              >
+                <Icon name="Phone" size={12} />
+                Вызвать мастера
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* Юридический блок */}
+        <div className="border border-[#FF6B00]/30 bg-[#FF6B00]/5 p-8 md:p-12 mb-20">
+          <div className="flex items-start gap-5 flex-wrap">
+            <div className="w-14 h-14 bg-[#FF6B00] flex items-center justify-center shrink-0">
+              <Icon name="FileText" size={26} className="text-black" />
+            </div>
+            <div className="flex-1 min-w-[240px]">
+              <div className="font-mono text-xs tracking-[0.3em] text-[#FF6B00] uppercase mb-2">// Официально</div>
+              <h3 className="font-heading text-2xl md:text-3xl font-black uppercase text-white mb-3 leading-tight">
+                Работаем по договору. Никаких рисков.
+              </h3>
+              <p className="text-white/70 leading-relaxed">
+                Выдаём официальный договор на все виды работ, акт выполненных работ,
+                гарантийный талон на <strong className="text-white">1 год</strong> и полный пакет документов.
+                ИП Дутов Антоний Александрович, ИНН 501817855432, ОГРНИП 325344300038542.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Отзывы */}
+        <div className="mb-20">
+          <div className="text-[#FF6B00] font-mono text-sm tracking-[0.3em] uppercase mb-4">// Доверие</div>
+          <h2 className="font-heading text-3xl md:text-5xl font-black uppercase text-white mb-8">
+            Нам <span className="text-[#FF6B00]">доверяют</span>
+          </h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            {REVIEWS.map((r) => (
+              <a key={r.platform} href={r.url} target="_blank" rel="noopener noreferrer"
+                className={`group border ${r.border} ${r.bg} p-8 hover:border-[#FF6B00]/60 transition-all`}>
+                <div className="flex items-center gap-5 mb-4">
+                  <div className="w-14 h-14 border flex items-center justify-center shrink-0"
+                    style={{ borderColor: `${r.color}40`, backgroundColor: `${r.color}15` }}>
+                    <Icon name={r.icon} size={26} style={{ color: r.color }} />
+                  </div>
+                  <div>
+                    <div className="font-heading text-xl font-black uppercase text-white">{r.platform}</div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="font-mono font-bold" style={{ color: r.color }}>{r.rating} ★</span>
+                      <span className="text-white/50 text-sm">{r.count} отзывов</span>
+                    </div>
+                  </div>
+                  <Icon name="ArrowUpRight" size={20} className="ml-auto text-white/30 group-hover:text-[#FF6B00] transition-colors" />
+                </div>
+                <p className="text-white/60 text-sm">{r.desc}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Карта + адрес */}
+        <div>
+          <div className="text-[#FF6B00] font-mono text-sm tracking-[0.3em] uppercase mb-4">// Мастерская</div>
+          <h2 className="font-heading text-3xl md:text-4xl font-black uppercase text-white mb-8">
+            Волжский, ул. Александрова, <span className="text-[#FF6B00]">д. 24а</span>
+          </h2>
+          <div className="grid lg:grid-cols-2 border border-white/10">
+            <div className="p-10 bg-[#0D0D0D]">
+              <div className="space-y-5">
+                {[
+                  { icon: 'MapPin', title: 'Волжский, ул. Александрова, д. 24а', sub: 'Компьютерная Лаборатория K|LAB' },
+                  { icon: 'Clock', title: 'Пн-Пт 11:00 — 18:00', sub: 'Сб 11:00 — 16:00 · Вс выходной' },
+                  { icon: 'Phone', title: '+7 995 027-27-07', sub: 'Приём по предварительной записи' },
+                  { icon: 'Bus', title: 'Остановка «Александрова»', sub: 'Автобусы: 16, 123' },
+                ].map((item) => (
+                  <div key={item.title} className="flex items-start gap-4 border-l-2 border-[#FF6B00] pl-5">
+                    <Icon name={item.icon} size={18} className="text-[#FF6B00] mt-0.5" />
+                    <div>
+                      <div className="font-heading font-bold text-white uppercase text-sm">{item.title}</div>
+                      <div className="text-white/50 text-xs mt-0.5">{item.sub}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <button
+                onClick={() => setCallOpen(true)}
+                className="mt-8 w-full flex items-center justify-center gap-2 bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold text-xs tracking-widest uppercase py-5 transition-all"
+              >
+                <Icon name="Phone" size={14} />
+                Вызвать мастера на дом
+              </button>
+            </div>
+            <div className="relative min-h-[400px] bg-black">
+              <iframe
+                src="https://yandex.ru/map-widget/v1/?z=15&ol=biz&oid=105118454033"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                className="absolute inset-0 w-full h-full min-h-[400px] grayscale contrast-125"
+                title="K|LAB — Волжский"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Диалог вызова мастера */}
+      <Dialog open={callOpen} onOpenChange={setCallOpen}>
+        <DialogContent className="max-w-md bg-[#0A0A0A] border-2 border-[#FF6B00]/40 text-white rounded-none">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-heading">
-              Заказать: {selectedService?.title}
+            <div className="font-mono text-xs tracking-[0.3em] text-[#FF6B00] uppercase mb-2">// Вызов мастера</div>
+            <DialogTitle className="font-heading text-2xl font-black uppercase text-white">
+              Мастер на дом
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">Шаг {formStep} из 3</span>
-                <span className="font-medium text-primary">{formStep === 1 ? 'Контакты' : formStep === 2 ? 'Детали' : 'Готово'}</span>
-              </div>
-              <div className="h-2 bg-muted rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-gradient-to-r from-primary to-primary/80 transition-all duration-500 ease-out"
-                  style={{ width: `${(formStep / 3) * 100}%` }}
-                />
+            <div className="flex items-start gap-3 p-4 bg-[#FF6B00]/10 border border-[#FF6B00]/30">
+              <Icon name="Clock" size={18} className="text-[#FF6B00] mt-0.5" />
+              <div>
+                <div className="font-bold text-sm text-white uppercase tracking-wider">Перезвон за 15 минут</div>
+                <div className="text-xs text-white/60 mt-1">Диагностика и выезд по городу — бесплатно</div>
               </div>
             </div>
-
-            <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-primary/10 rounded-lg">
-                  <Icon name={selectedService?.icon || 'Wrench'} size={24} className="text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">{selectedService?.description}</p>
-                  <p className="text-xl font-bold text-primary mt-1">{selectedService?.price}</p>
-                </div>
-              </div>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleCallSubmit} className="space-y-4">
               <div>
-                <Label htmlFor="name">Ваше имя *</Label>
-                <Input
-                  id="name"
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                    if (e.target.value && formStep === 1) setFormStep(2);
-                  }}
-                  placeholder="Иван Иванов"
-                  required
-                />
+                <Label className="font-mono text-xs tracking-widest uppercase text-white/60">Имя *</Label>
+                <Input value={name} onChange={(e) => setName(e.target.value)}
+                  placeholder="Иван Иванов" required
+                  className="bg-[#0D0D0D] border-white/10 focus:border-[#FF6B00] rounded-none mt-2" />
               </div>
               <div>
-                <Label htmlFor="phone">Телефон *</Label>
-                <Input
-                  id="phone"
-                  value={phone}
-                  onChange={(e) => {
-                    setPhone(e.target.value);
-                    if (e.target.value && name && formStep === 2) setFormStep(3);
-                  }}
-                  placeholder="+7 999 123 45 67"
-                  required
-                />
+                <Label className="font-mono text-xs tracking-widest uppercase text-white/60">Телефон *</Label>
+                <Input value={phone} onChange={(e) => setPhone(e.target.value)}
+                  placeholder="+7 999 123 45 67" required
+                  className="bg-[#0D0D0D] border-white/10 focus:border-[#FF6B00] rounded-none mt-2" />
               </div>
               <div>
-                <Label htmlFor="message">Дополнительная информация</Label>
-                <Textarea
-                  id="message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Опишите проблему или уточните детали..."
-                  rows={4}
-                />
+                <Label className="font-mono text-xs tracking-widest uppercase text-white/60">Проблема</Label>
+                <Textarea value={problem} onChange={(e) => setProblem(e.target.value)}
+                  placeholder="Опишите проблему: не включается, греется, шумит..." rows={3}
+                  className="bg-[#0D0D0D] border-white/10 focus:border-[#FF6B00] rounded-none mt-2" />
               </div>
-              <Button type="submit" className="w-full" disabled={submitting}>
-                {submitting ? 'Отправка...' : 'Отправить заявку'}
+              <Button type="submit" disabled={submitting}
+                className="w-full bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold tracking-widest uppercase rounded-none py-6">
+                {submitting ? 'Отправка...' : 'Вызвать мастера'}
               </Button>
             </form>
+            <div className="pt-2 border-t border-white/10 flex flex-col gap-2">
+              <a href="tel:+79950272707"
+                className="flex items-center justify-center gap-2 border border-white/10 hover:border-[#FF6B00] py-3 text-white/70 hover:text-[#FF6B00] font-mono text-xs tracking-widest uppercase transition-all">
+                <Icon name="Phone" size={12} />
+                Позвонить напрямую
+              </a>
+              <a href="https://t.me/komplabvlz" target="_blank" rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 border border-white/10 hover:border-[#229ED9] py-3 text-white/70 hover:text-[#229ED9] font-mono text-xs tracking-widest uppercase transition-all">
+                <Icon name="Send" size={12} />
+                Написать в Telegram
+              </a>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
-      
+
       <Footer />
     </div>
   );

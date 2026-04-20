@@ -5,26 +5,26 @@ export const KLabEditions = () => {
   const editions = [
     {
       name: 'ORANGE EDITION',
-      tagline: 'Агрессия · Медь · Мощь',
-      image: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/469abf18-af93-4471-9e4d-98debe89aa53.jpg',
+      tagline: 'Агрессия · Огонь · Мощь',
+      image: 'https://cdn.poehali.dev/files/f96e93e5-2304-476f-a06d-598cde35d145.jpg',
       color: '#FF6B00',
       features: [
-        'Оранжевая подсветка и акценты',
-        'Медные теплотрубки премиум-класса',
+        'Оранжевая RGB-подсветка и акценты',
         'Тонированное закалённое стекло',
         'Агрессивный визуальный характер',
+        'Ryzen 7 7800X3D + RTX 5080',
       ],
     },
     {
       name: 'SNOW EDITION',
       tagline: 'Минимализм · Стерильность · Эстетика',
-      image: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/57f7141b-b5ec-4ab8-8fc7-2d4cd5613a40.jpg',
+      image: 'https://cdn.poehali.dev/files/ea9cf683-2a7b-4b39-978e-3b97077b4cf6.jpg',
       color: '#FFFFFF',
       features: [
         'Полностью белый корпус и компоненты',
         'Белые кабели с кастомной оплёткой',
         'Чистый скандинавский минимализм',
-        'Идеален для студии и офиса',
+        'Ryzen 7 7800X3D + RTX 5070 Ti',
       ],
     },
   ];
@@ -100,13 +100,13 @@ export const KLabEditions = () => {
             <div className="font-heading text-xl md:text-2xl font-black uppercase text-white">
               Всего 4 индивидуальных проекта в месяц
             </div>
-            <div className="text-white/60 mt-1">Качество важнее потока. Бронируйте слот заранее.</div>
+            <div className="text-white/60 mt-1">Качество важнее потока. Записывайтесь заранее.</div>
           </div>
           <Button
             className="bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold tracking-wider uppercase rounded-none px-8 py-6"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            Забронировать
+            Записаться
           </Button>
         </div>
       </div>

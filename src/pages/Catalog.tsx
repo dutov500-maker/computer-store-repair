@@ -3,19 +3,11 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
-import { toast } from 'sonner';
-import funcUrls from '../../backend/func2url.json';
 import StickyHelpButton from '@/components/StickyHelpButton';
 import { CATALOG_DATA } from '@/data/catalog';
-import CatalogPopup from '@/components/CatalogPopup';
-import { FpsBlock, DesignNote } from '@/components/PCCardDetails';
 
 interface CatalogItem {
   id: number;
@@ -32,644 +24,326 @@ interface CatalogItem {
 
 const STATIC_CATALOG = (CATALOG_DATA as (CatalogItem & { hidden?: boolean })[]).filter(item => !item.hidden);
 
-const getCategoryColor = (category: string) => {
-  switch (category) {
-    case 'ECO': return 'from-green-500/20 to-green-600/10 border-green-500/30';
-    case 'SPECIAL': return 'from-blue-500/20 to-blue-600/10 border-blue-500/30';
-    case 'PREMIUM': return 'from-purple-500/20 to-purple-600/10 border-purple-500/30';
-    case 'ULTRA': return 'from-orange-500/20 to-orange-600/10 border-orange-500/30';
-    case 'ELITE': return 'from-red-500/20 to-red-600/10 border-red-500/30';
-    default: return 'from-primary/20 to-primary/10 border-primary/30';
-  }
+const CATEGORY_META: Record<string, { label: string; accent: string; border: string; bg: string; price: string }> = {
+  ECO:     { label: 'ECO',     accent: '#4ade80', border: 'border-green-500/40',  bg: 'bg-green-500/10',  price: '45-60К' },
+  SPECIAL: { label: 'SPECIAL', accent: '#60a5fa', border: 'border-blue-500/40',   bg: 'bg-blue-500/10',   price: '79-113К' },
+  PREMIUM: { label: 'PREMIUM', accent: '#c084fc', border: 'border-purple-500/40', bg: 'bg-purple-500/10', price: '115-205К' },
+  ULTRA:   { label: 'ULTRA',   accent: '#FF6B00', border: 'border-[#FF6B00]/50',  bg: 'bg-[#FF6B00]/10',  price: '235-270К' },
+  ELITE:   { label: 'ELITE',   accent: '#f87171', border: 'border-red-500/40',    bg: 'bg-red-500/10',    price: '530К' },
 };
-
-const getCategoryBadgeColor = (category: string) => {
-  switch (category) {
-    case 'ECO': return 'bg-green-500/10 text-green-500 border-green-500/30';
-    case 'SPECIAL': return 'bg-blue-500/10 text-blue-500 border-blue-500/30';
-    case 'PREMIUM': return 'bg-purple-500/10 text-purple-500 border-purple-500/30';
-    case 'ULTRA': return 'bg-orange-500/10 text-orange-500 border-orange-500/30';
-    case 'ELITE': return 'bg-red-500/10 text-red-500 border-red-500/30';
-    default: return 'bg-primary/10 text-primary border-primary/30';
-  }
-};
-
-const TRUST_BADGES = [
-  { icon: 'Shield', label: 'Гарантия 1 год' },
-  { icon: 'Activity', label: 'Стресс-тест 4 ч.' },
-  { icon: 'Wrench', label: 'Обслуживание 1 год' },
-];
 
 const Catalog = () => {
   const [catalog] = useState<CatalogItem[]>(STATIC_CATALOG);
-  const [selectedPC, setSelectedPC] = useState<CatalogItem | null>(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [reserveDialogOpen, setReserveDialogOpen] = useState(false);
-  const [reservePC, setReservePC] = useState<CatalogItem | null>(null);
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [message, setMessage] = useState('');
-  const [reserveName, setReserveName] = useState('');
-  const [reservePhone, setReservePhone] = useState('');
-  const [submitting, setSubmitting] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string>('ALL');
-  const [formStep, setFormStep] = useState(1);
-  const [creditDialogOpen, setCreditDialogOpen] = useState(false);
+  const [consultPC, setConsultPC] = useState<CatalogItem | null>(null);
+  const [consultOpen, setConsultOpen] = useState(false);
 
-  const seoTitle = "Купить компьютер в Волжском - Готовые игровые ПК | Компьютерная Лаборатория";
-  const seoDescription = "Купить готовый игровой компьютер в Волжском. Сборки от 45 000₽. Новые комплектующие, гарантия до 3 лет. Бесплатная доставка от 50 000₽. ☎️ +7 (995) 027-27-07";
-
-  const loading = false;
-  const error = null;
-
-  const generateProductSchema = () => {
-    return catalog.map((pc) => ({
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": pc.title,
-      "description": pc.description,
-      "image": pc.image_url,
-      "brand": { "@type": "Brand", "name": "Компьютерная Лаборатория" },
-      "offers": {
-        "@type": "Offer",
-        "url": `https://комплаб.рф/catalog#${pc.id}`,
-        "priceCurrency": "RUB",
-        "price": pc.price,
-        "availability": "https://schema.org/InStock",
-        "seller": { "@type": "Organization", "name": "Компьютерная Лаборатория" }
-      },
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "50" }
-    }));
-  };
+  const seoTitle = 'Купить компьютер в Волжском — Готовые игровые ПК | K|LAB';
+  const seoDescription = 'Купить готовый игровой компьютер в Волжском. Сборки от 45 000₽. Новые комплектующие, гарантия до 3 лет. ☎️ +7 (995) 027-27-07';
 
   const filters = [
-    { id: 'ALL', label: 'Все', icon: 'LayoutGrid', count: catalog.length },
-    { id: 'ECO', label: 'Eco', icon: 'DollarSign', count: catalog.filter(pc => pc.category === 'ECO').length, description: '45-60К' },
-    { id: 'SPECIAL', label: 'Special', icon: 'Star', count: catalog.filter(pc => pc.category === 'SPECIAL').length, description: '79-113К' },
-    { id: 'PREMIUM', label: 'Premium', icon: 'Crown', count: catalog.filter(pc => pc.category === 'PREMIUM').length, description: '115-205К' },
-    { id: 'ULTRA', label: 'Ultra', icon: 'Zap', count: catalog.filter(pc => pc.category === 'ULTRA').length, description: '235-270К' },
-    { id: 'ELITE', label: 'Elite', icon: 'Flame', count: catalog.filter(pc => pc.category === 'ELITE').length, description: '530К' }
+    { id: 'ALL',     label: 'Все',     count: catalog.length },
+    { id: 'ECO',     label: 'Eco',     count: catalog.filter(pc => pc.category === 'ECO').length,     price: '45-60К' },
+    { id: 'SPECIAL', label: 'Special', count: catalog.filter(pc => pc.category === 'SPECIAL').length, price: '79-113К' },
+    { id: 'PREMIUM', label: 'Premium', count: catalog.filter(pc => pc.category === 'PREMIUM').length, price: '115-205К' },
+    { id: 'ULTRA',   label: 'Ultra',   count: catalog.filter(pc => pc.category === 'ULTRA').length,   price: '235-270К' },
+    { id: 'ELITE',   label: 'Elite',   count: catalog.filter(pc => pc.category === 'ELITE').length,   price: '530К' },
   ];
 
   const filteredCatalog = activeFilter === 'ALL'
     ? catalog
     : catalog.filter(pc => pc.category === activeFilter);
 
-  const handleOrderClick = (e: React.MouseEvent, pc: CatalogItem) => {
+  const openConsult = (e: React.MouseEvent, pc: CatalogItem) => {
     e.preventDefault();
     e.stopPropagation();
-    setSelectedPC(pc);
-    setDialogOpen(true);
-    setFormStep(1);
+    setConsultPC(pc);
+    setConsultOpen(true);
   };
 
-  const handleReserveClick = (e: React.MouseEvent, pc: CatalogItem) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setReservePC(pc);
-    setReserveDialogOpen(true);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim() || !phone.trim()) {
-      toast.error('Пожалуйста, заполните имя и телефон');
-      return;
-    }
-    setSubmitting(true);
-    try {
-      const pcMessage = `Интересует: ${selectedPC.title}\nЦена: ${selectedPC.price.toLocaleString()} ₽\n\nДополнительно: ${message.trim() || 'Не указано'}`;
-      const response = await fetch(funcUrls['submit-request'], {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim(), phone: phone.trim(), email: null, service_type: 'Заказ ПК', message: pcMessage })
-      });
-      const data = await response.json();
-      if (response.ok && data.success) {
-        toast.success('Заявка отправлена! Мы свяжемся с вами в ближайшее время');
-        setName(''); setPhone(''); setMessage(''); setDialogOpen(false);
-      } else {
-        toast.error(data.error || 'Ошибка при отправке заявки');
-      }
-    } catch {
-      toast.error('Ошибка при отправке заявки. Попробуйте позвонить нам: +7 995 027 27 07');
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const handleReserveSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!reserveName.trim() || !reservePhone.trim()) {
-      toast.error('Пожалуйста, заполните имя и телефон');
-      return;
-    }
-    setSubmitting(true);
-    try {
-      const pcMessage = `БРОНИРОВАНИЕ: ${reservePC.title}\nЦена: ${reservePC.price.toLocaleString()} ₽`;
-      const response = await fetch(funcUrls['submit-request'], {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: reserveName.trim(), phone: reservePhone.trim(), email: null, service_type: 'Бронирование сборки', message: pcMessage })
-      });
-      const data = await response.json();
-      if (response.ok && data.success) {
-        toast.success('Сборка забронирована! Перезвоним в течение 15 минут');
-        setReserveName(''); setReservePhone(''); setReserveDialogOpen(false);
-      } else {
-        toast.error(data.error || 'Ошибка при отправке');
-      }
-    } catch {
-      toast.error('Ошибка. Позвоните нам: +7 995 027 27 07');
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const isHighTicket = (price: number) => price > 40000;
+  const meta = (category: string) => CATEGORY_META[category] ?? CATEGORY_META['ULTRA'];
 
   return (
     <div className="min-h-screen page-transition bg-[#0A0A0A] text-white">
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
-        <meta name="keywords" content="купить компьютер волжский, игровой компьютер волжский, игровой пк волжский, купить пк волжский, готовые сборки пк волжский, компьютер для игр волжский, мощный компьютер волжский, купить игровой компьютер волжский" />
-        <meta property="og:title" content={seoTitle} />
-        <meta property="og:description" content={seoDescription} />
         <link rel="canonical" href="https://комплаб.рф/catalog" />
       </Helmet>
-
-      {generateProductSchema().map((schema, index) => (
-        <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      ))}
 
       <Header />
       <StickyHelpButton />
 
-      <section className="py-16 container mx-auto px-4">
-        <div className="text-center mb-10 animate-fade-in">
-          <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-            Каталог <span className="text-gradient">игровых ПК</span>
-          </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Выберите готовую конфигурацию или создайте индивидуальную сборку
-          </p>
+      {/* Hero */}
+      <section className="py-24 md:py-28 border-b border-white/5">
+        <div className="container mx-auto px-6">
+          <div className="max-w-3xl">
+            <div className="text-[#FF6B00] font-mono text-sm tracking-[0.3em] uppercase mb-4">
+              // Catalog
+            </div>
+            <h1 className="font-heading text-5xl md:text-7xl font-black uppercase leading-none">
+              Каталог
+              <br />
+              <span className="text-[#FF6B00]">сборок K|LAB</span>
+            </h1>
+            <p className="text-white/60 text-lg mt-6 max-w-xl">
+              Готовые конфигурации с гарантией 1 год и бесплатным ТО.
+              Каждая сборка прошла 4-часовой стресс-тест.
+            </p>
+          </div>
         </div>
+      </section>
+
+      <section className="py-12 container mx-auto px-6">
 
         {/* Trade-in баннер */}
-        <div className="max-w-4xl mx-auto mb-8 animate-fade-in">
-          <Card className="p-4 bg-gradient-to-r from-orange-500/15 via-orange-400/10 to-yellow-500/15 border-orange-500/40 border-2">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center shrink-0">
-                  <Icon name="ArrowLeftRight" size={20} className="text-orange-400" />
-                </div>
-                <div>
-                  <p className="font-bold text-orange-300 text-sm">Trade-in — сдай старое, получи скидку</p>
-                  <p className="text-xs text-muted-foreground">Обменяем твой старый ПК или комплектующие на скидку до 30 000 ₽</p>
-                </div>
-              </div>
-              <a
-                href="https://t.me/komplabvlz?text=Привет!%20Хочу%20узнать%20про%20Trade-in"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button size="sm" className="bg-orange-500 hover:bg-orange-600 text-white shrink-0">
-                  Узнать стоимость
-                </Button>
-              </a>
+        <div className="mb-10 border border-[#FF6B00]/30 bg-[#FF6B00]/5 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-[#FF6B00] flex items-center justify-center shrink-0">
+              <Icon name="ArrowLeftRight" size={22} className="text-black" />
             </div>
-          </Card>
+            <div>
+              <div className="font-heading font-black uppercase text-white">Trade-in — сдай старое, получи скидку</div>
+              <div className="text-white/60 text-sm">Обменяем твой старый ПК на скидку до 30 000 ₽</div>
+            </div>
+          </div>
+          <a
+            href="https://t.me/komplabvlz?text=Привет!%20Хочу%20узнать%20про%20Trade-in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold text-xs tracking-widest uppercase px-6 py-3 whitespace-nowrap shrink-0"
+          >
+            <Icon name="Send" size={14} />
+            Узнать стоимость
+          </a>
         </div>
 
         {/* Sticky filters */}
-        <div className="sticky top-0 z-30 bg-background/95 backdrop-blur-md pt-3 pb-3 -mx-4 px-4 border-b border-border/30 mb-8">
-          <div className="flex flex-wrap gap-2 justify-center max-w-4xl mx-auto">
-            {filters.map((filter, index) => (
+        <div className="sticky top-0 z-30 bg-[#0A0A0A]/95 backdrop-blur-md py-4 -mx-6 px-6 border-b border-white/5 mb-10">
+          <div className="flex flex-wrap gap-2">
+            {filters.map((f) => (
               <button
-                key={filter.id}
-                onClick={() => setActiveFilter(filter.id)}
-                className={`group relative px-4 py-2 rounded-xl border-2 transition-all duration-300 animate-fade-in hover:scale-105 ${
-                  activeFilter === filter.id
-                    ? 'bg-gradient-to-br from-primary to-primary/80 border-primary text-white shadow-lg shadow-primary/30'
-                    : 'bg-card border-border hover:border-primary/50'
+                key={f.id}
+                onClick={() => setActiveFilter(f.id)}
+                className={`flex items-center gap-2 px-4 py-2.5 border font-mono text-xs tracking-widest uppercase transition-all ${
+                  activeFilter === f.id
+                    ? 'bg-[#FF6B00] border-[#FF6B00] text-black font-bold'
+                    : 'border-white/10 text-white/60 hover:border-[#FF6B00]/60 hover:text-white'
                 }`}
-                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="flex items-center gap-1.5">
-                  <Icon
-                    name={filter.icon}
-                    size={16}
-                    className={activeFilter === filter.id ? 'text-white' : 'text-primary'}
-                  />
-                  <div className="text-left">
-                    <div className="flex items-center gap-1.5">
-                      <span className="font-bold text-sm">{filter.label}</span>
-                      <span className={`text-xs px-1.5 py-0.5 rounded-full ${activeFilter === filter.id ? 'bg-white/20' : 'bg-primary/10'}`}>
-                        {filter.count}
-                      </span>
-                    </div>
-                    {filter.description && (
-                      <span className={`text-xs ${activeFilter === filter.id ? 'text-white/70' : 'text-muted-foreground'}`}>
-                        {filter.description}
-                      </span>
-                    )}
-                  </div>
-                </div>
+                <span>{f.label}</span>
+                <span className={`text-[10px] px-1.5 py-0.5 ${activeFilter === f.id ? 'bg-black/20 text-black' : 'bg-white/10'}`}>
+                  {f.count}
+                </span>
+                {'price' in f && (
+                  <span className="hidden sm:inline opacity-60">{f.price}</span>
+                )}
               </button>
             ))}
           </div>
         </div>
 
-        {activeFilter !== 'ALL' && (
-          <div className="max-w-2xl mx-auto mb-8 animate-fade-in">
-            <Card className="p-4 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-              <div className="flex items-center justify-center gap-4 text-sm">
-                <Icon name="Info" size={18} className="text-primary" />
-                <p className="text-muted-foreground">
-                  {activeFilter === 'ECO' && 'Бюджетные сборки для комфортной игры в популярные игры'}
-                  {activeFilter === 'SPECIAL' && 'Оптимальные сборки для игр на ультра настройках в Full HD'}
-                  {activeFilter === 'PREMIUM' && 'Мощные сборки для QHD гейминга на максимальных настройках'}
-                  {activeFilter === 'ULTRA' && 'Топовые сборки для 4K игр без компромиссов'}
-                  {activeFilter === 'ELITE' && 'Абсолютная максимальная производительность для профессионалов'}
-                </p>
-              </div>
-            </Card>
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredCatalog.map((pc) => {
+            const cm = meta(pc.category);
+            return (
+              <Link key={pc.id} to={`/pc/${pc.id}`} className="block group">
+                <div className={`relative h-full flex flex-col bg-[#0D0D0D] border ${cm.border} hover:border-[#FF6B00] transition-all duration-500 overflow-hidden`}>
+
+                  {/* Top accent line */}
+                  <div className="absolute top-0 left-0 right-0 h-[2px] transition-all duration-500"
+                    style={{ background: `linear-gradient(90deg, transparent, ${cm.accent}, transparent)`, opacity: 0.6 }} />
+
+                  {/* Image */}
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <img
+                      src={pc.image_url}
+                      alt={pc.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent to-transparent" />
+
+                    {/* Badges */}
+                    <div className="absolute top-3 left-3 flex gap-2">
+                      <span className={`font-mono text-[10px] tracking-[0.2em] uppercase px-2.5 py-1 ${cm.bg} border ${cm.border}`}
+                        style={{ color: cm.accent }}>
+                        {pc.category}
+                      </span>
+                      {pc.badge && (
+                        <span className="font-mono text-[10px] tracking-[0.2em] uppercase px-2.5 py-1 bg-[#FF6B00] text-black">
+                          {pc.badge}
+                        </span>
+                      )}
+                    </div>
+                    <div className="absolute top-3 right-3">
+                      <span className="font-mono text-[10px] tracking-widest uppercase px-2.5 py-1 bg-black/60 backdrop-blur border border-white/20 text-white/80">
+                        {pc.resolution}
+                      </span>
+                    </div>
+
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20">
+                      <span className="flex items-center gap-2 bg-[#FF6B00] text-black text-xs font-bold tracking-widest uppercase px-5 py-3">
+                        <Icon name="ArrowRight" size={14} />
+                        Подробнее
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6 flex flex-col flex-1">
+                    <h3 className="font-heading font-black text-lg uppercase text-white mb-3 group-hover:text-[#FF6B00] transition-colors line-clamp-2">
+                      {pc.title}
+                    </h3>
+
+                    {/* Specs */}
+                    <div className="space-y-1.5 mb-5">
+                      {[
+                        { icon: 'Cpu', val: pc.specs.cpu },
+                        { icon: 'Monitor', val: pc.specs.gpu },
+                        { icon: 'MemoryStick', val: `${pc.specs.ram} · ${pc.specs.storage}` },
+                      ].map((s) => (
+                        <div key={s.icon} className="flex items-center gap-2 text-xs text-white/60">
+                          <Icon name={s.icon} size={12} className="text-[#FF6B00] shrink-0" />
+                          <span className="truncate">{s.val}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Trust row */}
+                    <div className="flex items-center gap-4 mb-5 pb-5 border-b border-white/10">
+                      {[
+                        { icon: 'Shield', text: 'Гарантия 1 год' },
+                        { icon: 'Activity', text: 'Стресс-тест' },
+                        { icon: 'Wrench', text: 'ТО в подарок' },
+                      ].map((b) => (
+                        <div key={b.text} className="flex items-center gap-1 flex-1">
+                          <Icon name={b.icon} size={11} className="text-[#FF6B00] shrink-0" />
+                          <span className="text-[10px] font-mono text-white/50 leading-tight">{b.text}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Price + CTA */}
+                    <div className="mt-auto">
+                      <div className="flex items-end justify-between mb-4">
+                        <div>
+                          <div className="font-mono text-[10px] tracking-widest text-white/40 uppercase mb-1">Цена</div>
+                          <div className="font-heading text-3xl font-black text-white">
+                            {pc.price.toLocaleString()} <span className="text-[#FF6B00]">₽</span>
+                          </div>
+                          <div className="text-[10px] font-mono text-white/40 mt-1">Рассрочка 0%</div>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col gap-2">
+                        <Link to={`/pc/${pc.id}`} className="w-full" onClick={(e) => e.stopPropagation()}>
+                          <button className="w-full flex items-center justify-center gap-2 bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold text-xs tracking-widest uppercase py-4 transition-all">
+                            <Icon name="ArrowRight" size={14} />
+                            Узнать больше
+                          </button>
+                        </Link>
+                        <button
+                          onClick={(e) => openConsult(e, pc)}
+                          className="w-full flex items-center justify-center gap-2 border border-white/10 hover:border-[#FF6B00] text-white/70 hover:text-[#FF6B00] font-mono text-[10px] tracking-widest uppercase py-3.5 transition-all"
+                        >
+                          <Icon name="MessageCircle" size={12} />
+                          Консультация
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+
+        {filteredCatalog.length === 0 && (
+          <div className="text-center py-20 border border-white/10">
+            <Icon name="Search" size={48} className="mx-auto text-white/30 mb-4" />
+            <p className="font-mono tracking-wider uppercase text-white/50">Нет сборок в этой категории</p>
           </div>
-        )}
-
-        {!loading && !error && (
-          <>
-            {filteredCatalog.length > 0 ? (
-              <>
-                <div className="mb-6 animate-fade-in">
-                  <p className="text-center text-muted-foreground">
-                    Найдено компьютеров: <span className="font-bold text-primary">{filteredCatalog.length}</span>
-                  </p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {filteredCatalog.map((pc, index) => (
-                    <Link key={pc.id} to={`/pc/${pc.id}`}>
-                      <Card
-                        className="group relative overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 animate-fade-in hover:-translate-y-2 border-2 bg-card/50 backdrop-blur-sm flex flex-col"
-                        style={{ animationDelay: `${index * 50}ms` }}
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-
-                        {/* Image */}
-                        <div className="relative aspect-[4/3] overflow-hidden rounded-t-xl">
-                          <div className="absolute top-4 left-4 z-10 space-y-2">
-                            <span className={`inline-block px-3 py-1.5 rounded-lg text-xs font-bold backdrop-blur-sm border-2 ${getCategoryBadgeColor(pc.category)} shadow-lg`}>
-                              {pc.category}
-                            </span>
-                            {pc.badge && (
-                              <div>
-                                <span className="inline-block px-3 py-1.5 rounded-lg text-xs font-bold bg-primary/90 backdrop-blur-sm text-white border-2 border-primary shadow-lg">
-                                  {pc.badge}
-                                </span>
-                              </div>
-                            )}
-                          </div>
-                          <div className="absolute top-4 right-4 z-10">
-                            <span className="inline-block px-3 py-1.5 rounded-lg text-xs font-bold bg-primary/90 backdrop-blur-sm text-white border-2 border-primary shadow-lg">
-                              {pc.resolution}
-                            </span>
-                          </div>
-                          <img
-                            src={pc.image_url}
-                            alt={pc.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-70 group-hover:opacity-90 transition-opacity"></div>
-                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                            <span className="flex items-center gap-2 bg-primary text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg shadow-primary/40 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                              <Icon name="Zap" size={14} />
-                              Узнать FPS
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="p-5 relative flex flex-col flex-1">
-                          {/* Title */}
-                          <h3 className="font-heading font-bold text-xl mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                            {pc.title}
-                          </h3>
-
-                          {/* Feature Tags — GPU, CPU, RAM */}
-                          <div className="flex flex-wrap gap-1.5 mb-3">
-                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted border border-border text-xs text-muted-foreground font-medium">
-                              <Icon name="Monitor" size={11} className="text-muted-foreground" />
-                              {pc.specs.gpu.split(' ').slice(-2).join(' ')}
-                            </span>
-                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted border border-border text-xs text-muted-foreground font-medium">
-                              <Icon name="Cpu" size={11} className="text-muted-foreground" />
-                              {pc.specs.cpu.split(' ').slice(-2).join(' ')}
-                            </span>
-                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted border border-border text-xs text-muted-foreground font-medium">
-                              <Icon name="MemoryStick" size={11} className="text-muted-foreground" />
-                              {pc.specs.ram}
-                            </span>
-                          </div>
-
-                          {/* FPS block */}
-                          <FpsBlock price={pc.price} compact />
-
-                          {/* Design note */}
-                          <DesignNote compact />
-
-                          {/* Specs */}
-                          <div className="space-y-2 mb-4 text-sm">
-                            <div className="flex items-center gap-2">
-                              <Icon name="Cpu" size={14} className="text-primary shrink-0" />
-                              <span className="text-muted-foreground truncate">{pc.specs.cpu}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Icon name="Monitor" size={14} className="text-primary shrink-0" />
-                              <span className="text-muted-foreground truncate">{pc.specs.gpu}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Icon name="MemoryStick" size={14} className="text-primary shrink-0" />
-                              <span className="text-muted-foreground truncate">{pc.specs.ram} • {pc.specs.storage}</span>
-                            </div>
-
-                          </div>
-
-                          {/* Price + CTA */}
-                          <div className="mt-auto space-y-3 pt-4 border-t border-border/50">
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p className="text-xs text-muted-foreground mb-0.5">Цена</p>
-                                <p className="text-3xl font-bold text-gradient">
-                                  {pc.price.toLocaleString()} ₽
-                                </p>
-                                <div className="flex items-center gap-1.5 mt-1.5">
-                                  <span className="text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded font-mono font-bold">МИР</span>
-                                  <span className="text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded font-mono font-bold">VISA</span>
-                                  <span className="text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded font-mono font-bold">MC</span>
-                                  <span className="text-[10px] text-muted-foreground">· Рассрочка · Кредит</span>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Primary CTA — always visible */}
-                            {isHighTicket(pc.price) ? (
-                              <Button
-                                size="default"
-                                className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold shadow-lg shadow-orange-500/30"
-                                onClick={(e) => handleReserveClick(e, pc)}
-                              >
-                                <Icon name="Lock" size={16} className="mr-2" />
-                                Забронировать сборку
-                              </Button>
-                            ) : (
-                              <Button
-                                size="default"
-                                className="w-full gradient-animated shadow-lg"
-                                onClick={(e) => handleOrderClick(e, pc)}
-                              >
-                                <Icon name="ShoppingCart" size={16} className="mr-2" />
-                                Заказать
-                              </Button>
-                            )}
-
-                            {/* Telegram */}
-                            <a
-                              href={`https://t.me/komplabvlz?text=${encodeURIComponent(`Привет! Хочу обсудить сборку ${pc.title}`)}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              className="block w-full"
-                            >
-                              <Button
-                                size="default"
-                                variant="outline"
-                                className="w-full bg-[#0088cc]/10 hover:bg-[#0088cc]/20 border-[#0088cc] text-[#0088cc] shadow-md transition-all"
-                              >
-                                <Icon name="Send" size={15} className="mr-2" />
-                                Консультация с мастером
-                              </Button>
-                            </a>
-
-                            {/* Кредит */}
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              className="w-full text-orange-500 hover:bg-orange-500/10 border border-orange-500/30 text-xs font-medium"
-                              onClick={(e) => { e.stopPropagation(); e.preventDefault(); setCreditDialogOpen(true); }}
-                            >
-                              <Icon name="CreditCard" size={13} className="mr-1.5" />
-                              Оформить в кредит
-                            </Button>
-
-                            {/* Trust Badges */}
-                            <div className="flex items-center justify-between pt-1">
-                              {TRUST_BADGES.map((badge) => (
-                                <div key={badge.label} className="flex flex-col items-center gap-1 text-center flex-1">
-                                  <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <Icon name={badge.icon} size={13} className="text-primary" />
-                                  </div>
-                                  <span className="text-[9px] text-muted-foreground leading-tight">{badge.label}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="absolute -bottom-1 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-orange-500 to-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-xl"></div>
-                      </Card>
-                    </Link>
-                  ))}
-                </div>
-              </>
-            ) : (
-              <div className="text-center py-12 animate-fade-in">
-                <Icon name="Search" size={64} className="mx-auto text-muted-foreground mb-4" />
-                <p className="text-xl font-bold mb-2">Ничего не найдено</p>
-                <p className="text-muted-foreground">Попробуйте выбрать другую категорию</p>
-              </div>
-            )}
-          </>
         )}
       </section>
 
-      {/* Order Dialog */}
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      {/* Consultation Dialog */}
+      <Dialog open={consultOpen} onOpenChange={setConsultOpen}>
+        <DialogContent className="max-w-sm bg-[#0A0A0A] border-2 border-[#FF6B00]/40 text-white rounded-none">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-heading">{selectedPC?.title}</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-6">
-            <div className="relative aspect-video overflow-hidden rounded-xl">
-              <img src={selectedPC?.image_url} alt={selectedPC?.title} className="w-full h-full object-cover" />
+            <div className="font-mono text-xs tracking-[0.3em] text-[#FF6B00] uppercase mb-2">
+              // Консультация
             </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 bg-card rounded-lg border border-border">
-                <div className="flex items-center gap-2 mb-2">
-                  <Icon name="Cpu" className="text-primary" size={20} />
-                  <p className="text-xs text-muted-foreground">Процессор</p>
-                </div>
-                <p className="font-semibold">{selectedPC?.specs.cpu}</p>
-              </div>
-              <div className="p-4 bg-card rounded-lg border border-border">
-                <div className="flex items-center gap-2 mb-2">
-                  <Icon name="Monitor" className="text-primary" size={20} />
-                  <p className="text-xs text-muted-foreground">Видеокарта</p>
-                </div>
-                <p className="font-semibold">{selectedPC?.specs.gpu}</p>
-              </div>
-              <div className="p-4 bg-card rounded-lg border border-border">
-                <div className="flex items-center gap-2 mb-2">
-                  <Icon name="MemoryStick" className="text-primary" size={20} />
-                  <p className="text-xs text-muted-foreground">Оперативная память</p>
-                </div>
-                <p className="font-semibold">{selectedPC?.specs.ram}</p>
-              </div>
-              <div className="p-4 bg-card rounded-lg border border-border">
-                <div className="flex items-center gap-2 mb-2">
-                  <Icon name="HardDrive" className="text-primary" size={20} />
-                  <p className="text-xs text-muted-foreground">Накопитель</p>
-                </div>
-                <p className="font-semibold">{selectedPC?.specs.storage}</p>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">Шаг {formStep} из 3</span>
-                <span className="font-medium text-primary">{formStep === 1 ? 'Контакты' : formStep === 2 ? 'Детали' : 'Готово'}</span>
-              </div>
-              <div className="h-2 bg-muted rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-primary to-primary/80 transition-all duration-500 ease-out" style={{ width: `${(formStep / 3) * 100}%` }} />
-              </div>
-            </div>
-
-            <div className="p-6 bg-primary/5 rounded-xl border border-primary/20">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Стоимость сборки</p>
-                  <p className="text-4xl font-bold text-gradient">{selectedPC?.price.toLocaleString()} ₽</p>
-                </div>
-                <div className="text-right">
-                  <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold border ${getCategoryBadgeColor(selectedPC?.category)}`}>
-                    {selectedPC?.category}
-                  </span>
-                  <p className="text-sm text-muted-foreground mt-2">{selectedPC?.resolution} Gaming</p>
-                </div>
-              </div>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <Label htmlFor="name">Ваше имя *</Label>
-                <Input id="name" value={name} onChange={(e) => { setName(e.target.value); if (e.target.value && formStep === 1) setFormStep(2); }} placeholder="Иван Иванов" required />
-              </div>
-              <div>
-                <Label htmlFor="phone">Телефон *</Label>
-                <Input id="phone" value={phone} onChange={(e) => { setPhone(e.target.value); if (e.target.value && name && formStep === 2) setFormStep(3); }} placeholder="+7 999 123 45 67" required />
-              </div>
-              <div>
-                <Label htmlFor="message">Дополнительные пожелания</Label>
-                <Textarea id="message" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Например: нужен монитор, хочу RGB подсветку..." rows={4} />
-              </div>
-              <Button type="submit" className="w-full gradient-animated text-lg" size="lg" disabled={submitting}>
-                {submitting ? 'Отправка...' : 'Заказать эту сборку'}
-              </Button>
-            </form>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Reserve Dialog — high-ticket */}
-      <Dialog open={reserveDialogOpen} onOpenChange={setReserveDialogOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-xl font-heading flex items-center gap-2">
-              <Icon name="Lock" size={20} className="text-orange-400" />
-              Забронировать сборку
+            <DialogTitle className="font-heading text-2xl font-black uppercase text-white">
+              {consultPC?.title}
             </DialogTitle>
           </DialogHeader>
-          <div className="space-y-5">
-            <div className="p-4 bg-gradient-to-br from-orange-500/15 to-amber-500/10 border border-orange-500/30 rounded-xl">
-              <p className="font-bold text-base mb-1">{reservePC?.title}</p>
-              <p className="text-2xl font-bold text-gradient">{reservePC?.price.toLocaleString()} ₽</p>
-            </div>
 
-            <div className="flex items-start gap-3 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
-              <Icon name="Clock" size={18} className="text-green-400 mt-0.5 shrink-0" />
-              <p className="text-sm text-muted-foreground">
-                Перезвоним в течение <span className="font-bold text-green-400">15 минут</span> для подтверждения конфигурации и условий бронирования.
-              </p>
-            </div>
-
-            <form onSubmit={handleReserveSubmit} className="space-y-4">
-              <div>
-                <Label htmlFor="reserve-name">Ваше имя *</Label>
-                <Input id="reserve-name" value={reserveName} onChange={(e) => setReserveName(e.target.value)} placeholder="Иван Иванов" required className="mt-1.5" />
-              </div>
-              <div>
-                <Label htmlFor="reserve-phone">Номер телефона *</Label>
-                <Input id="reserve-phone" value={reservePhone} onChange={(e) => setReservePhone(e.target.value)} placeholder="+7 999 123 45 67" required className="mt-1.5" />
-              </div>
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-base shadow-lg shadow-orange-500/30"
-                disabled={submitting}
-              >
-                <Icon name="Lock" size={18} className="mr-2" />
-                {submitting ? 'Отправка...' : 'Забронировать'}
-              </Button>
-            </form>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Credit Dialog */}
-      <Dialog open={creditDialogOpen} onOpenChange={setCreditDialogOpen}>
-        <DialogContent className="max-w-sm">
-          <DialogHeader>
-            <DialogTitle className="text-xl font-heading flex items-center gap-2">
-              <Icon name="CreditCard" size={22} className="text-primary" />
-              Кредит и рассрочка
-            </DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4 py-2">
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Мы работаем с <strong className="text-foreground">Т-Банком</strong> и <strong className="text-foreground">Сбербанком</strong>. Напишите нам в Telegram — пришлём ссылку на анкету, которую можно заполнить за 5 минут прямо с телефона.
+          <div className="space-y-3 pt-2">
+            <p className="text-white/60 text-sm">
+              Выберите удобный способ связи — ответим за 15 минут.
             </p>
-            <div className="bg-muted rounded-xl p-4 space-y-2">
-              <div className="flex items-center gap-2 text-sm">
-                <Icon name="CheckCircle" size={15} className="text-green-500 shrink-0" />
-                <span>Одобрение за 1-2 минуты</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Icon name="CheckCircle" size={15} className="text-green-500 shrink-0" />
-                <span>Рассрочка 0% до 12 месяцев</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Icon name="CheckCircle" size={15} className="text-green-500 shrink-0" />
-                <span>Кредит от 0,1% в день</span>
-              </div>
-            </div>
+
             <a
-              href="https://t.me/komplabvlz?text=Привет!%20Хочу%20оформить%20покупку%20ПК%20в%20кредит%2Fрассрочку"
+              href="tel:+79950272707"
+              className="flex items-center gap-4 border border-white/10 hover:border-[#FF6B00] bg-[#0D0D0D] p-4 group transition-all"
+              onClick={() => setConsultOpen(false)}
+            >
+              <div className="w-11 h-11 bg-[#FF6B00] flex items-center justify-center shrink-0">
+                <Icon name="Phone" size={20} className="text-black" />
+              </div>
+              <div>
+                <div className="font-heading font-black uppercase text-white group-hover:text-[#FF6B00] transition-colors">
+                  Позвонить
+                </div>
+                <div className="font-mono text-xs text-white/50 tracking-wider">+7 995 027-27-07</div>
+              </div>
+              <Icon name="ArrowRight" size={16} className="ml-auto text-white/30 group-hover:text-[#FF6B00]" />
+            </a>
+
+            <a
+              href={`https://t.me/komplabvlz?text=${encodeURIComponent(`Привет! Хочу узнать подробнее про ${consultPC?.title}`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="block"
+              className="flex items-center gap-4 border border-white/10 hover:border-[#FF6B00] bg-[#0D0D0D] p-4 group transition-all"
+              onClick={() => setConsultOpen(false)}
             >
-              <Button className="w-full bg-[#0088cc] hover:bg-[#0077bb] text-white font-bold" size="lg">
-                <Icon name="Send" size={16} className="mr-2" />
-                Написать в Telegram
-              </Button>
+              <div className="w-11 h-11 bg-[#229ED9] flex items-center justify-center shrink-0">
+                <Icon name="Send" size={20} className="text-white" />
+              </div>
+              <div>
+                <div className="font-heading font-black uppercase text-white group-hover:text-[#FF6B00] transition-colors">
+                  Telegram
+                </div>
+                <div className="font-mono text-xs text-white/50 tracking-wider">@komplabvlz</div>
+              </div>
+              <Icon name="ArrowRight" size={16} className="ml-auto text-white/30 group-hover:text-[#FF6B00]" />
+            </a>
+
+            <a
+              href={`https://wa.me/79950272707?text=${encodeURIComponent(`Привет! Хочу узнать подробнее про ${consultPC?.title}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 border border-white/10 hover:border-[#FF6B00] bg-[#0D0D0D] p-4 group transition-all"
+              onClick={() => setConsultOpen(false)}
+            >
+              <div className="w-11 h-11 bg-[#25D366] flex items-center justify-center shrink-0">
+                <Icon name="MessageCircle" size={20} className="text-white" />
+              </div>
+              <div>
+                <div className="font-heading font-black uppercase text-white group-hover:text-[#FF6B00] transition-colors">
+                  WhatsApp
+                </div>
+                <div className="font-mono text-xs text-white/50 tracking-wider">+7 995 027-27-07</div>
+              </div>
+              <Icon name="ArrowRight" size={16} className="ml-auto text-white/30 group-hover:text-[#FF6B00]" />
             </a>
           </div>
         </DialogContent>
       </Dialog>
 
       <Footer />
-      <CatalogPopup />
     </div>
   );
 };

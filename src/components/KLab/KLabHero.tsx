@@ -49,16 +49,16 @@ export const KLabHero = () => {
               className="bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold text-base tracking-wider uppercase px-10 py-7 rounded-none border-2 border-[#FF6B00] shadow-[0_0_40px_rgba(255,107,0,0.3)] hover:shadow-[0_0_60px_rgba(255,107,0,0.6)] transition-all"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              <Icon name="Zap" size={20} className="mr-2" />
-              Забронировать слот на сборку
+              <Icon name="MessageCircle" size={20} className="mr-2" />
+              Записаться на консультацию
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="border-2 border-white/20 hover:border-[#FF6B00] bg-transparent text-white hover:text-[#FF6B00] font-bold text-base tracking-wider uppercase px-10 py-7 rounded-none"
-              onClick={() => document.getElementById('editions')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => window.location.href = '/catalog'}
             >
-              Смотреть Editions
+              Смотреть каталог
             </Button>
           </div>
 
