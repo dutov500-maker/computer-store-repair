@@ -3,7 +3,7 @@ import Icon from '@/components/ui/icon';
 
 export const KLabTradeIn = () => {
   const steps = [
-    { icon: 'Camera', title: 'Фото вашего ПК', text: 'Присылаете фото в Telegram или WhatsApp' },
+    { icon: 'Camera', title: 'Фото вашего ПК', text: 'Присылаете фото в Telegram или мессенджер MAX' },
     { icon: 'Calculator', title: 'Оценка за 15 минут', text: 'Даём честную рыночную цену' },
     { icon: 'Repeat', title: 'Зачёт в новый проект', text: 'Сумма уходит в оплату новой сборки' },
   ];
@@ -66,7 +66,7 @@ export const KLabTradeIn = () => {
               // Гарантия
             </div>
             <h3 className="font-heading text-3xl md:text-4xl font-black uppercase text-white leading-tight mb-10">
-              Забудьте о железе на <span className="text-[#FF6B00]">5 лет</span>
+              Забудьте о железе на <span className="text-[#FF6B00]">3 года</span>
             </h3>
 
             <div className="space-y-6">

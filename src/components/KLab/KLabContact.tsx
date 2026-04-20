@@ -19,7 +19,7 @@ export const KLabContact = () => {
 
         <div className="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto">
           <a
-            href="https://t.me/klab_pc"
+            href="https://t.me/komplabvlz"
             target="_blank"
             rel="noreferrer"
             className="group relative bg-[#0D0D0D] border-2 border-white/10 hover:border-[#FF6B00] p-10 transition-all overflow-hidden"
@@ -31,7 +31,7 @@ export const KLabContact = () => {
               </div>
               <div className="text-left">
                 <div className="font-heading text-2xl font-black uppercase text-white">Telegram</div>
-                <div className="text-white/50 font-mono text-sm tracking-wider mt-1">@klab_pc</div>
+                <div className="text-white/50 font-mono text-sm tracking-wider mt-1">@komplabvlz</div>
               </div>
               <Icon
                 name="ArrowUpRight"
@@ -42,19 +42,19 @@ export const KLabContact = () => {
           </a>
 
           <a
-            href="https://wa.me/79000000000"
+            href="https://max.ru/u/f9LHodD0cOIA6d075Cod-oEXOD45O0dMe4dxvcb69ZiIjPWreMI9fiLCoVg"
             target="_blank"
             rel="noreferrer"
             className="group relative bg-[#0D0D0D] border-2 border-white/10 hover:border-[#FF6B00] p-10 transition-all overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-[#FF6B00]/0 to-[#FF6B00]/0 group-hover:from-[#FF6B00]/10 group-hover:to-transparent transition-all" />
             <div className="relative flex items-center gap-6">
-              <div className="w-16 h-16 bg-[#25D366] flex items-center justify-center shrink-0">
-                <Icon name="MessageCircle" size={28} className="text-white" />
+              <div className="w-16 h-16 bg-[#FF6B00] flex items-center justify-center shrink-0">
+                <Icon name="MessageCircle" size={28} className="text-black" />
               </div>
               <div className="text-left">
-                <div className="font-heading text-2xl font-black uppercase text-white">WhatsApp</div>
-                <div className="text-white/50 font-mono text-sm tracking-wider mt-1">+7 900 000-00-00</div>
+                <div className="font-heading text-2xl font-black uppercase text-white">Мессенджер MAX</div>
+                <div className="text-white/50 font-mono text-sm tracking-wider mt-1">Антоний Дутов</div>
               </div>
               <Icon
                 name="ArrowUpRight"

@@ -11,8 +11,8 @@ const contactInfo = [
 
 const channels = [
   { icon: 'Send', name: 'Telegram', handle: '@komplabvlz', url: 'https://t.me/komplabvlz', bg: '#229ED9' },
-  { icon: 'MessageCircle', name: 'WhatsApp', handle: '+7 995 027-27-07', url: 'https://wa.me/79950272707', bg: '#25D366' },
-  { icon: 'Phone', name: 'Звонок', handle: '+7 995 027-27-07', url: 'tel:+79950272707', bg: '#FF6B00' },
+  { icon: 'MessageCircle', name: 'Мессенджер MAX', handle: 'Написать MAX', url: 'https://max.ru/u/f9LHodD0cOIA6d075Cod-oEXOD45O0dMe4dxvcb69ZiIjPWreMI9fiLCoVg', bg: '#FF6B00' },
+  { icon: 'Phone', name: 'Звонок', handle: '+7 995 027-27-07', url: 'tel:+79950272707', bg: '#333' },
 ];
 
 const Contact = () => {

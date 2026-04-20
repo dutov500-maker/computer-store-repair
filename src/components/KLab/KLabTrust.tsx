@@ -19,24 +19,24 @@ export const KLabTrust = () => {
             // Founder
           </div>
           <h2 className="font-heading text-4xl md:text-6xl font-black uppercase text-white leading-none mb-12">
-            Антон Крылов<span className="text-[#FF6B00]">.</span>
+            Антоний Дутов<span className="text-[#FF6B00]">.</span>
             <br />
-            Основатель K|LAB
+            Основатель KLAB
           </h2>
 
           <div className="relative border-l-4 border-[#FF6B00] pl-8 py-4">
             <Icon name="Quote" size={32} className="text-[#FF6B00] mb-4" />
             <blockquote className="font-heading text-2xl md:text-3xl font-bold text-white leading-tight">
               Я лично отвечаю за каждый винтик в вашей сборке. Моя цель — чтобы вы забыли
-              о проблемах с железом на <span className="text-[#FF6B00]">5 лет</span>.
+              о проблемах с железом на <span className="text-[#FF6B00]">3 года</span>.
             </blockquote>
 
             <div className="mt-8 flex items-center gap-4">
               <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#FF6B00] to-[#FF8A2E] flex items-center justify-center font-heading font-black text-black text-xl">
-                АК
+                АД
               </div>
               <div>
-                <div className="font-heading font-black text-white uppercase">Антон Крылов</div>
+                <div className="font-heading font-black text-white uppercase">Антоний Дутов</div>
                 <div className="text-white/50 text-sm font-mono tracking-wider uppercase">
                   Founder · Lead Engineer
                 </div>

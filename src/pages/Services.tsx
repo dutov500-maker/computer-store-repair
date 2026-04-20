@@ -56,9 +56,9 @@ const SERVICES = [
     id: 5,
     icon: 'Monitor',
     category: 'ПРОГРАММЫ И ОС',
-    title: 'Установка и настройка',
+    title: 'Установка Windows',
     desc: 'Windows, драйверы, офисный пакет, антивирус. Настраиваем под задачи — ничего лишнего.',
-    price: 'от 800 ₽',
+    price: 'от 1 500 ₽',
     tags: ['Windows 11', 'Драйверы', 'Быстро'],
     accent: '#fb923c',
   },
@@ -79,23 +79,23 @@ const REVIEWS = [
     platform: 'Авито',
     icon: 'Star',
     rating: '5.0',
-    count: '200+',
+    count: '100+',
     color: '#00AEEF',
-    url: 'https://www.avito.ru/brands/i390049413',
+    url: 'https://www.avito.ru/brands/54e5b9245dfb13dda34429b64ed9ab14',
     border: 'border-[#00AEEF]/30',
     bg: 'bg-[#00AEEF]/5',
-    desc: 'Рейтинг 5.0 — более 200 довольных клиентов',
+    desc: 'Рейтинг 5.0 — более 100 довольных клиентов',
   },
   {
     platform: 'Яндекс.Карты',
     icon: 'MapPin',
-    rating: '4.9',
-    count: '50+',
+    rating: '5.0',
+    count: '30+',
     color: '#FF6B00',
     url: 'https://yandex.ru/maps/org/kompyuternaya_laboratoriya/105118454033/',
     border: 'border-[#FF6B00]/30',
     bg: 'bg-[#FF6B00]/5',
-    desc: 'Реальные отзывы и фото наших работ',
+    desc: 'Рейтинг 5.0 — реальные отзывы и фото наших работ',
   },
 ];
 
@@ -244,10 +244,10 @@ const Services = () => {
                 <Icon name="Send" size={16} />
                 Telegram
               </a>
-              <a href="https://wa.me/79950272707" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-[#25D366] hover:bg-[#1db354] text-white font-bold text-xs tracking-widest uppercase px-6 py-4 transition-all">
+              <a href="https://max.ru/u/f9LHodD0cOIA6d075Cod-oEXOD45O0dMe4dxvcb69ZiIjPWreMI9fiLCoVg" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs tracking-widest uppercase px-6 py-4 transition-all">
                 <Icon name="MessageCircle" size={16} />
-                WhatsApp
+                MAX
               </a>
             </div>
           </div>
@@ -444,6 +444,11 @@ const Services = () => {
                 className="flex items-center justify-center gap-2 border border-white/10 hover:border-[#229ED9] py-3 text-white/70 hover:text-[#229ED9] font-mono text-xs tracking-widest uppercase transition-all">
                 <Icon name="Send" size={12} />
                 Написать в Telegram
+              </a>
+              <a href="https://max.ru/u/f9LHodD0cOIA6d075Cod-oEXOD45O0dMe4dxvcb69ZiIjPWreMI9fiLCoVg" target="_blank" rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 border border-white/10 hover:border-[#FF6B00] py-3 text-white/70 hover:text-[#FF6B00] font-mono text-xs tracking-widest uppercase transition-all">
+                <Icon name="MessageCircle" size={12} />
+                Написать в MAX
               </a>
             </div>
           </div>

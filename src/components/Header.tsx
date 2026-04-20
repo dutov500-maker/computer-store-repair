@@ -80,13 +80,13 @@ const Header = () => {
               <span>+7 995 027-27-07</span>
             </a>
             <a
-              href="https://t.me/komplabvlz"
+              href="https://max.ru/u/f9LHodD0cOIA6d075Cod-oEXOD45O0dMe4dxvcb69ZiIjPWreMI9fiLCoVg"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:inline-flex items-center gap-2 bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold text-xs tracking-widest uppercase px-5 py-2.5 transition-all border border-[#FF6B00] hover:shadow-[0_0_24px_rgba(255,107,0,0.5)]"
             >
-              <Icon name="Send" size={14} />
-              Связь
+              <Icon name="MessageCircle" size={14} />
+              Мессенджер MAX
             </a>
 
             <button
@@ -166,13 +166,13 @@ const Header = () => {
                   <span className="font-mono text-sm tracking-wider">+7 995 027-27-07</span>
                 </a>
                 <a
-                  href="https://t.me/komplabvlz"
+                  href="https://max.ru/u/f9LHodD0cOIA6d075Cod-oEXOD45O0dMe4dxvcb69ZiIjPWreMI9fiLCoVg"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full inline-flex items-center justify-center gap-2 bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold text-xs tracking-widest uppercase py-3"
                 >
-                  <Icon name="Send" size={14} />
-                  Написать в Telegram
+                  <Icon name="MessageCircle" size={14} />
+                  Мессенджер MAX
                 </a>
               </div>
             </div>

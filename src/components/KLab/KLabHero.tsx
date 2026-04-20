@@ -64,8 +64,8 @@ export const KLabHero = () => {
 
           <div className="mt-20 grid grid-cols-3 gap-8 max-w-2xl border-t border-white/10 pt-10">
             {[
-              { num: '4', label: 'Проекта в месяц' },
-              { num: '5', label: 'Лет гарантии' },
+              { num: '3', label: 'Года гарантии' },
+              { num: '200+', label: 'Довольных клиентов' },
               { num: '20', label: 'Этапов проверки' },
             ].map((s) => (
               <div key={s.label}>

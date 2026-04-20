@@ -27,13 +27,13 @@ const StickyHelpButton = () => {
             Подобрать
           </Link>
           <a
-            href="https://t.me/komplabvlz?text=Привет!%20Нужна%20консультация"
+            href="https://max.ru/u/f9LHodD0cOIA6d075Cod-oEXOD45O0dMe4dxvcb69ZiIjPWreMI9fiLCoVg"
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 flex items-center justify-center gap-2 border-2 border-white/20 hover:border-[#FF6B00] text-white font-bold text-xs tracking-widest uppercase py-4"
           >
-            <Icon name="Send" size={16} />
-            Консультация
+            <Icon name="MessageCircle" size={16} />
+            Мессенджер MAX
           </a>
         </div>
       )}

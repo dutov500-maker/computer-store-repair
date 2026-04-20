@@ -322,20 +322,20 @@ const Catalog = () => {
             </a>
 
             <a
-              href={`https://wa.me/79950272707?text=${encodeURIComponent(`Привет! Хочу узнать подробнее про ${consultPC?.title}`)}`}
+              href="https://max.ru/u/f9LHodD0cOIA6d075Cod-oEXOD45O0dMe4dxvcb69ZiIjPWreMI9fiLCoVg"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 border border-white/10 hover:border-[#FF6B00] bg-[#0D0D0D] p-4 group transition-all"
               onClick={() => setConsultOpen(false)}
             >
-              <div className="w-11 h-11 bg-[#25D366] flex items-center justify-center shrink-0">
-                <Icon name="MessageCircle" size={20} className="text-white" />
+              <div className="w-11 h-11 bg-[#FF6B00] flex items-center justify-center shrink-0">
+                <Icon name="MessageCircle" size={20} className="text-black" />
               </div>
               <div>
                 <div className="font-heading font-black uppercase text-white group-hover:text-[#FF6B00] transition-colors">
-                  WhatsApp
+                  Мессенджер MAX
                 </div>
-                <div className="font-mono text-xs text-white/50 tracking-wider">+7 995 027-27-07</div>
+                <div className="font-mono text-xs text-white/50 tracking-wider">Антоний Дутов</div>
               </div>
               <Icon name="ArrowRight" size={16} className="ml-auto text-white/30 group-hover:text-[#FF6B00]" />
             </a>
