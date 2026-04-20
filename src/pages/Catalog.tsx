@@ -189,7 +189,7 @@ const Catalog = () => {
   const isHighTicket = (price: number) => price > 40000;
 
   return (
-    <div className="min-h-screen page-transition">
+    <div className="min-h-screen page-transition bg-[#0A0A0A] text-white">
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />

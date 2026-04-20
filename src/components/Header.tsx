@@ -1,54 +1,32 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
-import { initializeStorage, getSettings } from '@/lib/localStorage';
+
+const menuItems = [
+  { to: '/catalog', label: 'Каталог' },
+  { to: '/pc-selection', label: 'Подбор ПК' },
+  { to: '/services', label: 'Услуги' },
+  { to: '/repair-gallery', label: 'Галерея' },
+  { to: '/reviews', label: 'Отзывы' },
+  { to: '/blog', label: 'Журнал' },
+  { to: '/contact', label: 'Контакты' },
+];
 
 const Header = () => {
-  const [settings, setSettings] = useState<any>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
 
   useEffect(() => {
-    initializeStorage();
-    fetchSettings();
-    
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : 'unset';
   }, [mobileMenuOpen]);
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 75) {
-      return;
-    }
-    if (touchEnd - touchStart > 75) {
-      closeMenu();
-    }
-  };
 
   const closeMenu = () => {
     setIsClosing(true);
@@ -58,175 +36,149 @@ const Header = () => {
     }, 300);
   };
 
-  const fetchSettings = () => {
-    const data = getSettings();
-    setSettings(data);
-  };
-
-  const menuItems = [
-    { to: '/catalog', label: 'Каталог' },
-    { to: '/blog', label: 'Блог' },
-    { to: '/pc-selection', label: 'Подбор ПК' },
-    { to: '/services', label: 'Ремонт и Услуги' },
-    { to: '/repair-gallery', label: 'Галерея работ' },
-    { to: '/reviews', label: 'Отзывы' },
-    { to: '/contact', label: 'Контакты' }
-  ];
-
   return (
-    <header className={`bg-background/95 backdrop-blur-md border-b sticky top-0 z-50 transition-all duration-300 ${
-      scrolled ? 'border-primary/20 shadow-lg shadow-primary/5' : 'border-border'
-    }`}>
-      <div className="container mx-auto px-4">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 bg-[#0A0A0A]/90 backdrop-blur-md border-b ${
+        scrolled ? 'border-[#FF6B00]/40' : 'border-white/5'
+      }`}
+    >
+      <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <div className="absolute inset-0 rounded-full bg-red-500/30 blur-md group-hover:blur-xl group-hover:bg-red-500/50 transition-all duration-300"></div>
-              <img 
-                src="https://cdn.poehali.dev/files/1258a3ce-944b-46de-88b7-5a629a1775c1.png" 
-                alt="КЛАБ"
-                className="h-10 w-10 rounded-full object-cover relative group-hover:scale-110 group-hover:rotate-6 transition-all duration-300"
-              />
-              <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-orange-500 animate-pulse"></div>
+            <div className="w-9 h-9 border-2 border-[#FF6B00] flex items-center justify-center font-heading font-black text-[#FF6B00] text-sm group-hover:bg-[#FF6B00] group-hover:text-black transition-all">
+              K|L
             </div>
-            <span className="text-xl font-heading font-bold group-hover:text-red-500 transition-all duration-300">{settings?.company_name || 'Компьютерная Лаборатория'}</span>
+            <div className="flex flex-col leading-none">
+              <span className="font-heading font-black text-white tracking-widest text-sm uppercase">
+                K|LAB
+              </span>
+              <span className="font-mono text-[10px] tracking-[0.25em] text-white/40 uppercase">
+                Custom PC Atelier
+              </span>
+            </div>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-6">
-            <Link to="/catalog" className="text-sm font-medium hover:text-primary transition-all relative group">
-              <span className="relative z-10">Каталог</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all"></span>
-            </Link>
-            <Link to="/blog" className="text-sm font-medium hover:text-primary transition-all relative group">
-              <span className="relative z-10">Блог</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all"></span>
-            </Link>
-            <Link 
-              to="/pc-selection" 
-              className="text-sm font-medium hover:text-primary transition-all relative group"
-            >
-              <span className="relative z-10">Подбор ПК</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all"></span>
-            </Link>
-            <Link 
-              to="/services" 
-              className="text-sm font-medium hover:text-primary transition-all relative group"
-            >
-              <span className="relative z-10">Ремонт и Услуги</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all"></span>
-            </Link>
-
-            <Link 
-              to="/repair-gallery" 
-              className="text-sm font-medium hover:text-primary transition-all relative group"
-            >
-              <span className="relative z-10">Галерея работ</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all"></span>
-            </Link>
-            <Link 
-              to="/reviews" 
-              className="text-sm font-medium hover:text-primary transition-all relative group"
-            >
-              <span className="relative z-10">Отзывы</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all"></span>
-            </Link>
-            <Link 
-              to="/contact" 
-              className="text-sm font-medium hover:text-primary transition-all relative group"
-            >
-              <span className="relative z-10">Контакты</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all"></span>
-            </Link>
+          <nav className="hidden lg:flex items-center gap-1">
+            {menuItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="relative px-3 py-2 text-xs font-mono tracking-[0.2em] uppercase text-white/70 hover:text-[#FF6B00] transition-colors group"
+              >
+                {item.label}
+                <span className="absolute bottom-0 left-3 right-3 h-px bg-[#FF6B00] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+              </Link>
+            ))}
           </nav>
 
-          <div className="flex items-center gap-2 md:gap-4">
-            <a href="tel:+79950272707" className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-primary/10">
-              <Icon name="Phone" size={18} />
-              <span className="hidden sm:inline">+7 995 027 27 07</span>
+          <div className="flex items-center gap-3">
+            <a
+              href="tel:+79950272707"
+              className="hidden md:flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-white/70 hover:text-[#FF6B00] transition-colors"
+            >
+              <Icon name="Phone" size={14} />
+              <span>+7 995 027-27-07</span>
             </a>
-            <a href="https://t.me/komplabvlz" target="_blank" rel="noopener noreferrer" className="hidden sm:block">
-              <Button size="sm" className="bg-[#0088cc] hover:bg-[#0088cc]/90 text-white shadow-md hover:shadow-xl hover:scale-105 transition-all relative overflow-hidden group">
-                <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
-                <Icon name="Send" size={18} className="mr-2 relative z-10" />
-                <span className="relative z-10">Telegram</span>
-              </Button>
+            <a
+              href="https://t.me/komplabvlz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center gap-2 bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold text-xs tracking-widest uppercase px-5 py-2.5 transition-all border border-[#FF6B00] hover:shadow-[0_0_24px_rgba(255,107,0,0.5)]"
+            >
+              <Icon name="Send" size={14} />
+              Связь
             </a>
-            
+
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2.5 hover:bg-secondary rounded-lg transition-colors border border-border"
+              className="lg:hidden p-2 border border-white/10 hover:border-[#FF6B00] transition-colors"
               aria-label="Меню"
             >
-              <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} />
+              <Icon name={mobileMenuOpen ? 'X' : 'Menu'} size={20} className="text-white" />
             </button>
           </div>
         </div>
       </div>
 
-      {mobileMenuOpen && createPortal(
-        <>
-          <div 
-            className={`fixed inset-0 bg-black/70 z-[9998] md:hidden backdrop-blur-sm transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`}
-            onClick={closeMenu}
-          />
-          <div 
-            className={`fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white dark:bg-zinc-900 z-[9999] md:hidden shadow-2xl flex flex-col transition-transform duration-300 ease-out ${isClosing ? 'translate-x-full' : 'translate-x-0'}`}
-            style={{ minHeight: '100vh', maxHeight: '100vh' }}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-zinc-700 flex-shrink-0">
-              <span className="font-heading font-bold text-lg text-gray-900 dark:text-white">Меню</span>
-              <button
-                onClick={closeMenu}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
-              >
-                <Icon name="X" size={24} className="text-gray-900 dark:text-white" />
-              </button>
-            </div>
-            <nav className="px-4 py-6 flex-1 overflow-y-auto">
-              <ul className="space-y-2">
-                {menuItems.map((item, index) => (
-                  <li key={item.to} className="animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
-                    <Link
-                      to={item.to}
-                      onClick={closeMenu}
-                      className="block px-4 py-4 rounded-xl bg-gray-50 dark:bg-zinc-800 hover:bg-primary/10 dark:hover:bg-primary/20 transition-all font-medium text-lg text-gray-900 dark:text-white border border-gray-200 dark:border-zinc-700 hover:border-primary/40"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+      {mobileMenuOpen &&
+        createPortal(
+          <>
+            <div
+              className={`fixed inset-0 bg-black/80 z-[9998] lg:hidden backdrop-blur-sm transition-opacity duration-300 ${
+                isClosing ? 'opacity-0' : 'opacity-100'
+              }`}
+              onClick={closeMenu}
+            />
+            <div
+              className={`fixed inset-y-0 right-0 w-[85%] max-w-sm bg-[#0A0A0A] border-l border-[#FF6B00]/30 z-[9999] lg:hidden flex flex-col transition-transform duration-300 ${
+                isClosing ? 'translate-x-full' : 'translate-x-0'
+              }`}
+            >
+              <div className="flex items-center justify-between p-6 border-b border-white/10">
+                <div>
+                  <div className="font-heading font-black text-white tracking-widest uppercase">
+                    K|LAB
+                  </div>
+                  <div className="font-mono text-[10px] tracking-[0.25em] text-[#FF6B00] uppercase mt-1">
+                    // Навигация
+                  </div>
+                </div>
+                <button
+                  onClick={closeMenu}
+                  className="p-2 border border-white/10 hover:border-[#FF6B00] transition-colors"
+                >
+                  <Icon name="X" size={20} className="text-white" />
+                </button>
+              </div>
 
-              <div className="mt-8 pt-6 border-t border-gray-200 dark:border-zinc-700 space-y-3">
+              <nav className="flex-1 overflow-y-auto p-6">
+                <ul className="space-y-1">
+                  {menuItems.map((item, i) => (
+                    <li key={item.to}>
+                      <Link
+                        to={item.to}
+                        onClick={closeMenu}
+                        className="group flex items-center gap-4 p-4 border border-transparent hover:border-[#FF6B00]/40 hover:bg-[#FF6B00]/5 transition-all"
+                      >
+                        <span className="font-mono text-xs text-[#FF6B00]/50">
+                          0{i + 1}
+                        </span>
+                        <span className="font-heading font-bold text-white uppercase tracking-wider group-hover:text-[#FF6B00] transition-colors">
+                          {item.label}
+                        </span>
+                        <Icon
+                          name="ArrowRight"
+                          size={16}
+                          className="ml-auto text-white/30 group-hover:text-[#FF6B00] transition-colors"
+                        />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+
+              <div className="p-6 border-t border-white/10 space-y-3">
                 <a
                   href="tel:+79950272707"
-                  className="flex items-center gap-3 px-4 py-4 rounded-xl border-2 border-gray-200 dark:border-zinc-700 hover:border-primary dark:hover:border-primary transition-all bg-gray-50 dark:bg-zinc-800"
+                  className="flex items-center gap-3 text-white hover:text-[#FF6B00] transition-colors"
                 >
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <Icon name="Phone" size={20} className="text-primary" />
-                  </div>
-                  <span className="font-semibold text-gray-900 dark:text-white">+7 995 027 27 07</span>
+                  <Icon name="Phone" size={16} />
+                  <span className="font-mono text-sm tracking-wider">+7 995 027-27-07</span>
                 </a>
                 <a
                   href="https://t.me/komplabvlz"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-4 rounded-xl bg-[#0088cc] text-white shadow-lg hover:bg-[#0077b5] transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold text-xs tracking-widest uppercase py-3"
                 >
-                  <div className="p-2 bg-white/20 rounded-lg">
-                    <Icon name="Send" size={20} />
-                  </div>
-                  <span className="font-semibold">Написать в Telegram</span>
+                  <Icon name="Send" size={14} />
+                  Написать в Telegram
                 </a>
               </div>
-            </nav>
-          </div>
-        </>,
-        document.body
-      )}
+            </div>
+          </>,
+          document.body
+        )}
     </header>
   );
 };

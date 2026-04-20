@@ -61,29 +61,29 @@ const Breadcrumbs = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(generateBreadcrumbSchema()) }}
       />
-      <nav className="bg-white dark:bg-zinc-900 border-b border-gray-200 dark:border-zinc-800">
-        <div className="container mx-auto px-4 py-3">
-          <ol className="flex items-center space-x-2 text-sm">
+      <nav className="bg-[#0A0A0A] border-b border-white/5">
+        <div className="container mx-auto px-6 py-3">
+          <ol className="flex items-center space-x-2 text-xs font-mono tracking-widest uppercase">
             <li>
               <Link
                 to="/"
-                className="flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
+                className="flex items-center text-white/50 hover:text-[#FF6B00] transition-colors"
               >
-                <Home size={16} className="mr-1" />
+                <Home size={14} className="mr-1.5" />
                 <span className="hidden sm:inline">Главная</span>
               </Link>
             </li>
             {breadcrumbs.slice(1).map((crumb, index) => (
               <li key={crumb.path} className="flex items-center">
-                <ChevronRight size={16} className="text-gray-400 dark:text-gray-600 mx-1" />
+                <ChevronRight size={14} className="text-white/20 mx-1" />
                 {index === breadcrumbs.length - 2 ? (
-                  <span className="text-gray-900 dark:text-white font-medium">
+                  <span className="text-[#FF6B00] font-bold">
                     {crumb.label}
                   </span>
                 ) : (
                   <Link
                     to={crumb.path}
-                    className="text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
+                    className="text-white/50 hover:text-[#FF6B00] transition-colors"
                   >
                     {crumb.label}
                   </Link>

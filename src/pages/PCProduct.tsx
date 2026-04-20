@@ -88,7 +88,7 @@ export default function PCProduct() {
     return (
       <>
         <Header />
-        <div className="min-h-screen bg-background pt-24 pb-12">
+        <div className="min-h-screen bg-[#0A0A0A] text-white pt-24 pb-12">
           <div className="container mx-auto px-4">
             <h1 className="text-3xl font-bold mb-8">Товар не найден</h1>
             <Link to="/catalog"><Button>Вернуться в каталог</Button></Link>
@@ -163,7 +163,7 @@ export default function PCProduct() {
       <Header />
       <StickyHelpButton />
 
-      <div className="min-h-screen bg-background pt-24 pb-12">
+      <div className="min-h-screen bg-[#0A0A0A] text-white pt-24 pb-12">
         <div className="container mx-auto px-4">
           <Link to="/catalog" className="inline-flex items-center gap-2 text-primary hover:underline mb-6">
             <Icon name="ArrowLeft" size={20} />

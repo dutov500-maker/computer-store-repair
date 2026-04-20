@@ -16,12 +16,20 @@ const BlogPost = () => {
 
   if (!post) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-heading font-bold mb-4">Статья не найдена</h1>
-          <Button onClick={() => navigate('/blog')}>
-            <Icon name="ArrowLeft" className="mr-2" size={20} />
-            Вернуться к блогу
+      <div className="min-h-screen flex items-center justify-center bg-[#0A0A0A] text-white">
+        <div className="text-center px-6">
+          <div className="font-mono text-xs tracking-[0.3em] text-[#FF6B00] uppercase mb-4">
+            // 404
+          </div>
+          <h1 className="font-heading text-4xl font-black uppercase text-white mb-6">
+            Статья не найдена
+          </h1>
+          <Button
+            onClick={() => navigate('/blog')}
+            className="bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold tracking-widest uppercase rounded-none px-8 py-5 text-xs"
+          >
+            <Icon name="ArrowLeft" className="mr-2" size={16} />
+            К журналу
           </Button>
         </div>
       </div>
@@ -29,7 +37,7 @@ const BlogPost = () => {
   }
 
   return (
-    <div className="min-h-screen page-transition">
+    <div className="min-h-screen bg-[#0A0A0A] text-white page-transition">
       <Header />
       <article className="pt-8">
         <BlogPostHeader
@@ -40,8 +48,8 @@ const BlogPost = () => {
           icon={post.icon}
           image={post.image}
         />
-        
-        <div className="container mx-auto px-4 max-w-4xl pb-20">
+
+        <div className="container mx-auto px-6 max-w-4xl pb-20">
           <BlogPostContent content={post.content} />
           <RelatedPosts posts={blogPosts} currentPostId={post.id} />
         </div>

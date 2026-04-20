@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 import { useNavigate } from 'react-router-dom';
 import { blogPosts } from '@/components/BlogPost/BlogPostData';
@@ -13,123 +11,129 @@ const Blog = () => {
     ...post,
     excerpt: post.content.split('\n\n')[0].replace(/[#*]/g, '').trim()
   }));
-  
+
   const categories = ['Все', ...Array.from(new Set(blogPosts.map(p => p.category)))];
   const [selectedCategory, setSelectedCategory] = useState<string>('Все');
-  
-  const filteredPosts = selectedCategory === 'Все' 
-    ? postsWithExcerpt 
+
+  const filteredPosts = selectedCategory === 'Все'
+    ? postsWithExcerpt
     : postsWithExcerpt.filter(post => post.category === selectedCategory);
 
   return (
-    <div className="min-h-screen page-transition">
+    <div className="min-h-screen bg-[#0A0A0A] text-white page-transition">
       <Header />
-      
-      <section className="relative overflow-hidden py-20 bg-gradient-to-br from-primary/5 via-background to-primary/5">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent_70%)]"></div>
-        <div className="container mx-auto px-4 relative">
-          <div className="text-center mb-12 animate-slide-up">
-            <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
-              <span className="text-sm font-semibold text-primary">📚 БЛОГ</span>
+
+      <section className="py-24 md:py-32 border-b border-white/5">
+        <div className="container mx-auto px-6">
+          <div className="max-w-3xl">
+            <div className="text-[#FF6B00] font-mono text-sm tracking-[0.3em] uppercase mb-4">
+              // Journal
             </div>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold mb-4">
-              Блог о <span className="text-gradient">сборке ПК</span>
+            <h1 className="font-heading text-5xl md:text-7xl font-black uppercase leading-none">
+              Журнал
+              <br />
+              <span className="text-[#FF6B00]">K|LAB</span>
             </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Гайды, обзоры, советы и актуальные новости из мира компьютерного железа
+            <p className="text-white/60 text-lg mt-6 max-w-xl">
+              Гайды, обзоры железа, технические разборы и новости из мира ПК.
             </p>
           </div>
+        </div>
+      </section>
 
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? 'default' : 'outline'}
-                onClick={() => setSelectedCategory(category)}
-                className="rounded-full"
-              >
-                {category}
-              </Button>
-            ))}
-          </div>
+      <section className="py-20 container mx-auto px-6">
+        <div className="flex flex-wrap gap-2 mb-12 border-b border-white/10 pb-6">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-5 py-2 font-mono text-xs tracking-widest uppercase border transition-all ${
+                selectedCategory === category
+                  ? 'bg-[#FF6B00] text-black border-[#FF6B00]'
+                  : 'border-white/10 text-white/60 hover:border-[#FF6B00] hover:text-[#FF6B00]'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredPosts.map((post, index) => (
-              <Card
-                key={post.id}
-                className="group overflow-hidden hover:shadow-2xl transition-all duration-500 animate-slide-up hover:-translate-y-2 cursor-pointer"
-                style={{ animationDelay: `${index * 100}ms` }}
-                onClick={() => navigate(`/blog/${post.id}`)}
-              >
-                <div className="relative overflow-hidden aspect-video">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 left-4 z-20">
-                    <span className="px-3 py-1 bg-primary text-white text-xs font-semibold rounded-full">
-                      {post.category}
-                    </span>
-                  </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredPosts.map((post) => (
+            <article
+              key={post.id}
+              onClick={() => navigate(`/blog/${post.id}`)}
+              className="group border border-white/10 hover:border-[#FF6B00]/60 bg-[#0D0D0D] transition-all cursor-pointer overflow-hidden"
+            >
+              <div className="relative aspect-video overflow-hidden">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent to-transparent" />
+                <div className="absolute top-4 left-4 font-mono text-[10px] tracking-[0.2em] uppercase bg-[#FF6B00] text-black px-3 py-1">
+                  {post.category}
+                </div>
+              </div>
+
+              <div className="p-7">
+                <div className="flex items-center gap-4 text-xs font-mono tracking-wider uppercase text-white/40 mb-4">
+                  <span className="flex items-center gap-1.5">
+                    <Icon name="Calendar" size={12} />
+                    {post.date}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Icon name="Clock" size={12} />
+                    {post.readTime}
+                  </span>
                 </div>
 
-                <div className="p-6">
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                    <span className="flex items-center gap-1">
-                      <Icon name="Calendar" size={14} />
-                      {post.date}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Icon name="Clock" size={14} />
-                      {post.readTime}
-                    </span>
-                  </div>
+                <h3 className="font-heading font-black text-xl uppercase text-white mb-3 line-clamp-2 group-hover:text-[#FF6B00] transition-colors">
+                  {post.title}
+                </h3>
 
-                  <h3 className="font-heading font-bold text-xl mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                    {post.title}
-                  </h3>
+                <p className="text-white/60 text-sm mb-6 line-clamp-3 leading-relaxed">
+                  {post.excerpt}
+                </p>
 
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                    {post.excerpt}
-                  </p>
-
-                  <Button variant="ghost" className="w-full group-hover:bg-primary group-hover:text-white transition-colors">
-                    Читать статью
-                    <Icon name="ArrowRight" className="ml-2" size={16} />
-                  </Button>
+                <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                  <span className="font-mono text-xs tracking-widest uppercase text-[#FF6B00]">
+                    Читать
+                  </span>
+                  <Icon name="ArrowRight" size={16} className="text-[#FF6B00] group-hover:translate-x-1 transition-transform" />
                 </div>
-              </Card>
-            ))}
-          </div>
+              </div>
+            </article>
+          ))}
+        </div>
 
-          {filteredPosts.length === 0 && (
-            <div className="text-center py-12">
-              <Icon name="FileQuestion" className="mx-auto mb-4 text-muted-foreground" size={48} />
-              <p className="text-muted-foreground text-lg">
-                Статей в этой категории пока нет
-              </p>
-            </div>
-          )}
-
-          <div className="mt-16 text-center">
-            <Card className="p-8 max-w-2xl mx-auto gradient-card border-primary/20">
-              <Icon name="Mail" className="mx-auto mb-4 text-primary" size={48} />
-              <h3 className="font-heading font-bold text-2xl mb-3">
-                Хотите получать новые статьи?
-              </h3>
-              <p className="text-muted-foreground mb-6">
-                Подпишитесь на наш Telegram-канал и узнавайте первыми о новых гайдах и обзорах
-              </p>
-              <a href="https://t.me/+79950272707" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-[#0088cc] hover:bg-[#0088cc]/90">
-                  <Icon name="Send" className="mr-2" size={20} />
-                  Подписаться в Telegram
-                </Button>
-              </a>
-            </Card>
+        {filteredPosts.length === 0 && (
+          <div className="text-center py-20 border border-white/10">
+            <Icon name="FileQuestion" className="mx-auto mb-4 text-white/30" size={48} />
+            <p className="text-white/50 font-mono tracking-wider uppercase">
+              В категории пока нет статей
+            </p>
           </div>
+        )}
+
+        <div className="mt-16 border border-[#FF6B00]/30 bg-[#FF6B00]/5 p-10 md:p-14 text-center">
+          <Icon name="Send" className="mx-auto mb-6 text-[#FF6B00]" size={40} />
+          <h3 className="font-heading text-3xl md:text-4xl font-black uppercase text-white mb-3">
+            Новые статьи <span className="text-[#FF6B00]">первыми</span>
+          </h3>
+          <p className="text-white/70 mb-8 max-w-xl mx-auto">
+            Подпишитесь на Telegram-канал и получайте гайды и обзоры сразу после выхода.
+          </p>
+          <a
+            href="https://t.me/komplabvlz"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold tracking-widest uppercase px-10 py-5 text-sm"
+          >
+            <Icon name="Send" size={16} />
+            Подписаться
+          </a>
         </div>
       </section>
 

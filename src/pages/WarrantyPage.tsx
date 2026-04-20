@@ -1,218 +1,157 @@
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import Icon from '@/components/ui/icon';
 import { Link } from 'react-router-dom';
 
+const componentWarranty = [
+  { name: 'Процессоры', term: '1-3 года' },
+  { name: 'Видеокарты', term: '2-3 года' },
+  { name: 'Материнские платы', term: '3 года' },
+  { name: 'Оперативная память', term: 'Пожизненная' },
+  { name: 'Накопители SSD/HDD', term: '3-5 лет' },
+  { name: 'Блоки питания', term: '3-10 лет' },
+  { name: 'Корпуса', term: '1-2 года' },
+];
+
+const covered = [
+  'Неисправности по вине некачественной сборки',
+  'Проблемы совместимости компонентов',
+  'Производственный брак комплектующих',
+  'Сбои системы охлаждения по вине монтажа',
+];
+
+const notCovered = [
+  'Механические повреждения после передачи',
+  'Повреждения от жидкости',
+  'Последствия разгона и модификаций',
+  'Вмешательство сторонних лиц',
+];
+
 export default function WarrantyPage() {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-8 animate-fade-in">
-            <Link to="/">
-              <Button variant="outline" className="gap-2">
-                <Icon name="ArrowLeft" size={18} />
-                На главную
-              </Button>
-            </Link>
-          </div>
-          
-          <div className="text-center mb-12 animate-fade-in">
-            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-              <span className="text-gradient">Гарантия</span>
+    <div className="min-h-screen bg-[#0A0A0A] text-white page-transition">
+      <Header />
+
+      <section className="py-24 md:py-32 border-b border-white/5">
+        <div className="container mx-auto px-6">
+          <div className="max-w-3xl">
+            <div className="text-[#FF6B00] font-mono text-sm tracking-[0.3em] uppercase mb-4">
+              // Warranty
+            </div>
+            <h1 className="font-heading text-5xl md:text-7xl font-black uppercase leading-none">
+              Гарантия
+              <br />
+              <span className="text-[#FF6B00]">K|LAB</span>
             </h1>
-            <p className="text-muted-foreground text-lg">
-              Мы отвечаем за качество нашей работы
+            <p className="text-white/60 text-lg mt-6 max-w-xl">
+              Мы отвечаем за каждую сборку. До 5 лет гарантии от производителей
+              + 1 год от лаборатории + 1 год бесплатного ТО.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 container mx-auto px-6">
+        <div className="grid md:grid-cols-3 gap-px bg-white/5 border border-white/5 mb-16">
+          {[
+            { num: '01', icon: 'Shield', title: '1 год', sub: 'Гарантия от лаборатории' },
+            { num: '02', icon: 'Award', title: 'до 5 лет', sub: 'От производителей' },
+            { num: '03', icon: 'Wrench', title: '1 год ТО', sub: 'Бесплатное обслуживание' },
+          ].map((it) => (
+            <div key={it.num} className="bg-[#0A0A0A] p-10">
+              <div className="flex items-center justify-between mb-8">
+                <span className="font-mono text-xs tracking-widest text-white/30">{it.num} / 03</span>
+                <div className="w-12 h-12 border border-[#FF6B00]/40 flex items-center justify-center">
+                  <Icon name={it.icon} size={22} className="text-[#FF6B00]" />
+                </div>
+              </div>
+              <div className="font-heading text-4xl font-black uppercase text-[#FF6B00] mb-2">{it.title}</div>
+              <div className="text-white/60">{it.sub}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8 mb-16">
+          <div className="border border-white/10 bg-[#0D0D0D] p-10">
+            <div className="text-[#FF6B00] font-mono text-sm tracking-[0.3em] uppercase mb-4">
+              // Компоненты
+            </div>
+            <h2 className="font-heading text-3xl font-black uppercase text-white mb-8">
+              Гарантия на железо
+            </h2>
+            <div className="space-y-2">
+              {componentWarranty.map((c) => (
+                <div
+                  key={c.name}
+                  className="flex items-center justify-between p-4 border-l-2 border-[#FF6B00] bg-white/[0.02] hover:bg-white/[0.05] transition-all"
+                >
+                  <span className="text-white/80">{c.name}</span>
+                  <span className="font-mono text-sm font-bold text-[#FF6B00] tracking-wider">
+                    {c.term}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs font-mono text-white/40 mt-6 tracking-wider">
+              * С официальными гарантийными талонами
             </p>
           </div>
 
-          <div className="space-y-8">
-            <Card className="p-8 gradient-card animate-slide-in-up hover-lift">
-              <div className="flex items-start gap-4 mb-6">
-                <div className="p-3 bg-primary/20 rounded-xl">
-                  <Icon name="Shield" size={32} className="text-primary" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-heading font-bold mb-2">Гарантия на сборку</h2>
-                  <p className="text-muted-foreground mb-4">
-                    На все наши сборки предоставляется гарантия <span className="font-bold text-primary">12 месяцев</span>. 
-                    Это означает, что в течение года мы бесплатно устраним любые неисправности, 
-                    связанные с процессом сборки или совместимостью комплектующих.
-                  </p>
-                  <div className="space-y-3 mt-4">
-                    <div className="flex items-start gap-3">
-                      <Icon name="Check" size={20} className="text-primary mt-1 flex-shrink-0" />
-                      <p className="text-sm text-muted-foreground">
-                        Бесплатная диагностика и ремонт при гарантийных случаях
-                      </p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Icon name="Check" size={20} className="text-primary mt-1 flex-shrink-0" />
-                      <p className="text-sm text-muted-foreground">
-                        Быстрое реагирование — средний срок устранения проблемы 3-5 дней
-                      </p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Icon name="Check" size={20} className="text-primary mt-1 flex-shrink-0" />
-                      <p className="text-sm text-muted-foreground">
-                        Помощь в оформлении гарантийных случаев по комплектующим
-                      </p>
-                    </div>
-                  </div>
-                </div>
+          <div className="space-y-6">
+            <div className="border border-[#FF6B00]/30 bg-[#FF6B00]/5 p-10">
+              <div className="flex items-center gap-3 mb-6">
+                <Icon name="CheckCircle2" size={24} className="text-[#FF6B00]" />
+                <h3 className="font-heading text-2xl font-black uppercase text-white">
+                  Покрывается
+                </h3>
               </div>
-            </Card>
+              <ul className="space-y-3">
+                {covered.map((c) => (
+                  <li key={c} className="flex items-start gap-3 text-white/70">
+                    <Icon name="Check" size={18} className="text-[#FF6B00] mt-1 shrink-0" />
+                    <span>{c}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-            <Card className="p-8 gradient-card animate-slide-in-up hover-lift">
-              <div className="flex items-start gap-4 mb-6">
-                <div className="p-3 bg-primary/20 rounded-xl">
-                  <Icon name="Package" size={32} className="text-primary" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-heading font-bold mb-2">Гарантия на комплектующие</h2>
-                  <p className="text-muted-foreground mb-4">
-                    Все комплектующие, которые мы используем, имеют официальную гарантию от производителя:
-                  </p>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 bg-background/50 rounded-lg border border-primary/10">
-                      <span className="font-semibold">Процессоры</span>
-                      <span className="text-primary font-bold">1-3 года</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-background/50 rounded-lg border border-primary/10">
-                      <span className="font-semibold">Видеокарты</span>
-                      <span className="text-primary font-bold">2-3 года</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-background/50 rounded-lg border border-primary/10">
-                      <span className="font-semibold">Материнские платы</span>
-                      <span className="text-primary font-bold">3 года</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-background/50 rounded-lg border border-primary/10">
-                      <span className="font-semibold">Оперативная память</span>
-                      <span className="text-primary font-bold">Пожизненная</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-background/50 rounded-lg border border-primary/10">
-                      <span className="font-semibold">Накопители (SSD/HDD)</span>
-                      <span className="text-primary font-bold">3-5 лет</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-background/50 rounded-lg border border-primary/10">
-                      <span className="font-semibold">Блоки питания</span>
-                      <span className="text-primary font-bold">3-10 лет</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 bg-background/50 rounded-lg border border-primary/10">
-                      <span className="font-semibold">Корпуса</span>
-                      <span className="text-primary font-bold">1-2 года</span>
-                    </div>
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-4">
-                    * Все комплектующие поставляются с официальными гарантийными талонами
-                  </p>
-                </div>
+            <div className="border border-white/10 bg-[#0D0D0D] p-10">
+              <div className="flex items-center gap-3 mb-6">
+                <Icon name="AlertTriangle" size={24} className="text-white/60" />
+                <h3 className="font-heading text-2xl font-black uppercase text-white/80">
+                  Не покрывается
+                </h3>
               </div>
-            </Card>
-
-            <Card className="p-8 gradient-card animate-slide-in-up hover-lift">
-              <div className="flex items-start gap-4 mb-6">
-                <div className="p-3 bg-primary/20 rounded-xl">
-                  <Icon name="FileText" size={32} className="text-primary" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-heading font-bold mb-2">Условия гарантии</h2>
-                  <p className="text-muted-foreground mb-4">
-                    Гарантия распространяется на следующие случаи:
-                  </p>
-                  <div className="space-y-3 mb-6">
-                    <div className="flex items-start gap-3">
-                      <Icon name="CheckCircle2" size={20} className="text-primary mt-1 flex-shrink-0" />
-                      <p className="text-sm">
-                        Неисправности, возникшие по вине некачественной сборки
-                      </p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Icon name="CheckCircle2" size={20} className="text-primary mt-1 flex-shrink-0" />
-                      <p className="text-sm">
-                        Проблемы совместимости компонентов, не выявленные при тестировании
-                      </p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Icon name="CheckCircle2" size={20} className="text-primary mt-1 flex-shrink-0" />
-                      <p className="text-sm">
-                        Производственный брак комплектующих (в рамках гарантии производителя)
-                      </p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Icon name="CheckCircle2" size={20} className="text-primary mt-1 flex-shrink-0" />
-                      <p className="text-sm">
-                        Сбои в работе системы охлаждения, связанные с монтажом
-                      </p>
-                    </div>
-                  </div>
-                  <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
-                    <div className="flex items-start gap-3">
-                      <Icon name="AlertTriangle" size={20} className="text-destructive mt-1 flex-shrink-0" />
-                      <div>
-                        <h3 className="font-semibold text-destructive mb-2">Гарантия не распространяется на:</h3>
-                        <ul className="space-y-1 text-sm text-muted-foreground">
-                          <li>• Механические повреждения, полученные после передачи клиенту</li>
-                          <li>• Повреждения от жидкости, огня, перепадов напряжения</li>
-                          <li>• Самостоятельный ремонт или модификация без согласования</li>
-                          <li>• Естественный износ комплектующих</li>
-                          <li>• Программные ошибки операционной системы (кроме случаев предустановки ОС нами)</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-8 gradient-card animate-slide-in-up hover-lift">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-primary/20 rounded-xl">
-                  <Icon name="Headphones" size={32} className="text-primary" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-heading font-bold mb-2">Как воспользоваться гарантией?</h2>
-                  <div className="space-y-4 mt-4">
-                    <div className="flex gap-4">
-                      <div className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center font-bold text-primary">
-                        1
-                      </div>
-                      <div>
-                        <h3 className="font-semibold mb-1">Свяжитесь с нами</h3>
-                        <p className="text-sm text-muted-foreground">
-                          Опишите проблему по телефону или в Telegram
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex gap-4">
-                      <div className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center font-bold text-primary">
-                        2
-                      </div>
-                      <div>
-                        <h3 className="font-semibold mb-1">Диагностика</h3>
-                        <p className="text-sm text-muted-foreground">
-                          Мы проведём удалённую или очную диагностику проблемы
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex gap-4">
-                      <div className="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center font-bold text-primary">
-                        3
-                      </div>
-                      <div>
-                        <h3 className="font-semibold mb-1">Решение</h3>
-                        <p className="text-sm text-muted-foreground">
-                          Устраним неисправность бесплатно в рамках гарантийного срока
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
+              <ul className="space-y-3">
+                {notCovered.map((c) => (
+                  <li key={c} className="flex items-start gap-3 text-white/50">
+                    <Icon name="X" size={18} className="text-white/40 mt-1 shrink-0" />
+                    <span>{c}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+
+        <div className="border border-white/10 bg-[#0D0D0D] p-10 md:p-14 text-center">
+          <h3 className="font-heading text-3xl md:text-4xl font-black uppercase text-white mb-4">
+            Есть вопросы <span className="text-[#FF6B00]">по гарантии?</span>
+          </h3>
+          <p className="text-white/60 mb-8 max-w-xl mx-auto">
+            Свяжитесь с нами — расскажем всё подробно и поможем оформить обращение.
+          </p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold tracking-widest uppercase px-10 py-5 text-sm"
+          >
+            <Icon name="Phone" size={16} />
+            Связаться
+          </Link>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 }
