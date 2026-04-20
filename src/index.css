@@ -4,18 +4,18 @@
 
 @layer base {
   :root {
-    --background: 220 15% 10%;
-    --foreground: 0 0% 93%;
+    --background: 0 0% 4%;
+    --foreground: 0 0% 96%;
 
-    --card: 220 15% 13%;
-    --card-foreground: 0 0% 93%;
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 96%;
 
-    --popover: 220 15% 13%;
-    --popover-foreground: 0 0% 93%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 96%;
 
-    /* K|LAB Orange */
-    --primary: 25 95% 52%;
-    --primary-foreground: 0 0% 100%;
+    /* K|LAB Orange #FF6B00 */
+    --primary: 25 100% 50%;
+    --primary-foreground: 0 0% 4%;
 
     --secondary: 220 15% 18%;
     --secondary-foreground: 0 0% 93%;
