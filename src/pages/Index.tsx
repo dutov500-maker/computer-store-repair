@@ -6,6 +6,7 @@ import { KLabUSP } from '@/components/KLab/KLabUSP';
 import { KLabEditions } from '@/components/KLab/KLabEditions';
 import { KLabTradeIn } from '@/components/KLab/KLabTradeIn';
 import { KLabTrust } from '@/components/KLab/KLabTrust';
+import { KLabHappyClients } from '@/components/KLab/KLabHappyClients';
 import { KLabContact } from '@/components/KLab/KLabContact';
 import StickyHelpButton from '@/components/StickyHelpButton';
 import { initializeStorage } from '@/lib/localStorage';
@@ -24,6 +25,7 @@ const Index = () => {
         <KLabEditions />
         <KLabTradeIn />
         <KLabTrust />
+        <KLabHappyClients />
         <KLabContact />
       </main>
       <Footer />
