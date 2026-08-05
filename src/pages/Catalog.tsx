@@ -241,12 +241,10 @@ const Catalog = () => {
                       </div>
 
                       <div className="flex flex-col gap-2">
-                        <Link to={`/pc/${pc.id}`} className="w-full" onClick={(e) => e.stopPropagation()}>
-                          <button className="w-full flex items-center justify-center gap-2 bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold text-xs tracking-widest uppercase py-4 transition-all">
-                            <Icon name="ArrowRight" size={14} />
-                            Узнать больше
-                          </button>
-                        </Link>
+                        <button className="w-full flex items-center justify-center gap-2 bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold text-xs tracking-widest uppercase py-4 transition-all">
+                          <Icon name="ArrowRight" size={14} />
+                          Узнать больше
+                        </button>
                         <button
                           onClick={(e) => openConsult(e, pc)}
                           className="w-full flex items-center justify-center gap-2 border border-white/10 hover:border-[#FF6B00] text-white/70 hover:text-[#FF6B00] font-mono text-[10px] tracking-widest uppercase py-3.5 transition-all"
