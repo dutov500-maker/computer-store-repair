@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
 import StickyHelpButton from '@/components/StickyHelpButton';
+import { CatalogCases } from '@/components/Catalog/CatalogCases';
 import { CATALOG_DATA } from '@/data/catalog';
 
 interface CatalogItem {
@@ -117,6 +118,8 @@ const Catalog = () => {
             Узнать стоимость
           </a>
         </div>
+
+        <CatalogCases />
 
         {/* Sticky filters */}
         <div className="sticky top-0 z-30 bg-[#0A0A0A]/95 backdrop-blur-md py-4 -mx-6 px-6 border-b border-white/5 mb-10">
