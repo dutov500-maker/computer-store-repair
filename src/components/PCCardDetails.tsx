@@ -2,8 +2,8 @@
 export type FpsGroup = 'eco' | 'mid' | 'ultra';
 
 export function getFpsGroup(price: number): FpsGroup {
-  if (price <= 85000) return 'eco';
-  if (price <= 94999) return 'mid';
+  if (price <= 125000) return 'eco';
+  if (price <= 195000) return 'mid';
   return 'ultra';
 }
 

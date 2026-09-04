@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
 import StickyHelpButton from '@/components/StickyHelpButton';
@@ -17,43 +16,75 @@ interface CatalogItem {
   price: number;
   resolution: string;
   category: string;
+  brand: 'AMD' | 'Intel';
   image_url: string;
-  badge?: string;
-  fps?: string;
-  specs: { cpu: string; gpu: string; ram: string; storage: string };
+  tags?: string[];
+  signature?: 'orange' | 'snow' | 'obsidian' | 'glacier';
+  specs: { cpu: string; gpu: string; ram: string; storage: string; cooling?: string };
 }
 
 const STATIC_CATALOG = (CATALOG_DATA as (CatalogItem & { hidden?: boolean })[]).filter(item => !item.hidden);
 
 const CATEGORY_META: Record<string, { label: string; accent: string; border: string; bg: string; price: string }> = {
-  ECO:     { label: 'ECO',     accent: '#4ade80', border: 'border-green-500/40',  bg: 'bg-green-500/10',  price: '45-60К' },
-  SPECIAL: { label: 'SPECIAL', accent: '#60a5fa', border: 'border-blue-500/40',   bg: 'bg-blue-500/10',   price: '79-113К' },
-  PREMIUM: { label: 'PREMIUM', accent: '#c084fc', border: 'border-purple-500/40', bg: 'bg-purple-500/10', price: '115-205К' },
-  ULTRA:   { label: 'ULTRA',   accent: '#FF6B00', border: 'border-[#FF6B00]/50',  bg: 'bg-[#FF6B00]/10',  price: '235-270К' },
-  ELITE:   { label: 'ELITE',   accent: '#f87171', border: 'border-red-500/40',    bg: 'bg-red-500/10',    price: '530К' },
+  ECO:     { label: 'ECO',     accent: '#4ade80', border: 'border-green-500/40',  bg: 'bg-green-500/10',  price: '95К' },
+  SPECIAL: { label: 'SPECIAL', accent: '#60a5fa', border: 'border-blue-500/40',   bg: 'bg-blue-500/10',   price: '115-159К' },
+  PREMIUM: { label: 'PREMIUM', accent: '#c084fc', border: 'border-purple-500/40', bg: 'bg-purple-500/10', price: '160-195К' },
+  ULTRA:   { label: 'ULTRA',   accent: '#FF6B00', border: 'border-[#FF6B00]/50',  bg: 'bg-[#FF6B00]/10',  price: '209-290К' },
+  ELITE:   { label: 'ELITE',   accent: '#f87171', border: 'border-red-500/40',    bg: 'bg-red-500/10',    price: '320-345К' },
 };
+
+const SIGNATURE_META: Record<string, { label: string; accent: string; border: string; bg: string }> = {
+  orange:   { label: 'ORANGE EDITION',   accent: '#FF6B00', border: 'border-[#FF6B00]',   bg: 'bg-[#FF6B00]/10' },
+  snow:     { label: 'SNOW EDITION',     accent: '#f8fafc', border: 'border-white/70',    bg: 'bg-white/10' },
+  obsidian: { label: 'OBSIDIAN',         accent: '#ef4444', border: 'border-red-500/70',  bg: 'bg-red-500/10' },
+  glacier:  { label: 'GLACIER',          accent: '#7dd3fc', border: 'border-sky-300/70',  bg: 'bg-sky-300/10' },
+};
+
+type SortMode = 'default' | 'price-asc' | 'price-desc';
 
 const Catalog = () => {
   const [catalog] = useState<CatalogItem[]>(STATIC_CATALOG);
   const [activeFilter, setActiveFilter] = useState<string>('ALL');
+  const [activeBrand, setActiveBrand] = useState<'ALL' | 'AMD' | 'Intel'>('ALL');
+  const [sortMode, setSortMode] = useState<SortMode>('default');
   const [consultPC, setConsultPC] = useState<CatalogItem | null>(null);
   const [consultOpen, setConsultOpen] = useState(false);
 
   const seoTitle = 'Купить компьютер в Волжском — Готовые игровые ПК | K|LAB';
-  const seoDescription = 'Купить готовый игровой компьютер в Волжском. Сборки от 45 000₽. Новые комплектующие, гарантия до 3 лет. ☎️ +7 (995) 027-27-07';
+  const seoDescription = 'Купить готовый игровой компьютер в Волжском. Сборки от 95 000₽. Новые комплектующие, гарантия до 3 лет. ☎️ +7 (995) 027-27-07';
 
   const filters = [
     { id: 'ALL',     label: 'Все',     count: catalog.length },
-    { id: 'ECO',     label: 'Eco',     count: catalog.filter(pc => pc.category === 'ECO').length,     price: '45-60К' },
-    { id: 'SPECIAL', label: 'Special', count: catalog.filter(pc => pc.category === 'SPECIAL').length, price: '79-113К' },
-    { id: 'PREMIUM', label: 'Premium', count: catalog.filter(pc => pc.category === 'PREMIUM').length, price: '115-205К' },
-    { id: 'ULTRA',   label: 'Ultra',   count: catalog.filter(pc => pc.category === 'ULTRA').length,   price: '235-270К' },
-    { id: 'ELITE',   label: 'Elite',   count: catalog.filter(pc => pc.category === 'ELITE').length,   price: '530К' },
+    { id: 'ECO',     label: 'Eco',     count: catalog.filter(pc => pc.category === 'ECO').length,     price: '95К' },
+    { id: 'SPECIAL', label: 'Special', count: catalog.filter(pc => pc.category === 'SPECIAL').length, price: '115-159К' },
+    { id: 'PREMIUM', label: 'Premium', count: catalog.filter(pc => pc.category === 'PREMIUM').length, price: '160-195К' },
+    { id: 'ULTRA',   label: 'Ultra',   count: catalog.filter(pc => pc.category === 'ULTRA').length,   price: '209-290К' },
+    { id: 'ELITE',   label: 'Elite',   count: catalog.filter(pc => pc.category === 'ELITE').length,   price: '320-345К' },
   ];
 
-  const filteredCatalog = activeFilter === 'ALL'
-    ? catalog
-    : catalog.filter(pc => pc.category === activeFilter);
+  const brandFilters = [
+    { id: 'ALL' as const,   label: 'Все', count: catalog.length },
+    { id: 'AMD' as const,   label: 'AMD', count: catalog.filter(pc => pc.brand === 'AMD').length },
+    { id: 'Intel' as const, label: 'Intel', count: catalog.filter(pc => pc.brand === 'Intel').length },
+  ];
+
+  const filteredCatalog = useMemo(() => {
+    let result = activeFilter === 'ALL'
+      ? catalog
+      : catalog.filter(pc => pc.category === activeFilter);
+
+    if (activeBrand !== 'ALL') {
+      result = result.filter(pc => pc.brand === activeBrand);
+    }
+
+    if (sortMode === 'price-asc') {
+      result = [...result].sort((a, b) => a.price - b.price);
+    } else if (sortMode === 'price-desc') {
+      result = [...result].sort((a, b) => b.price - a.price);
+    }
+
+    return result;
+  }, [catalog, activeFilter, activeBrand, sortMode]);
 
   const openConsult = (e: React.MouseEvent, pc: CatalogItem) => {
     e.preventDefault();
@@ -122,7 +153,7 @@ const Catalog = () => {
         <CatalogCases />
 
         {/* Sticky filters */}
-        <div className="sticky top-0 z-30 bg-[#0A0A0A]/95 backdrop-blur-md py-4 -mx-6 px-6 border-b border-white/5 mb-10">
+        <div className="sticky top-0 z-30 bg-[#0A0A0A]/95 backdrop-blur-md py-4 -mx-6 px-6 border-b border-white/5 mb-10 space-y-3">
           <div className="flex flex-wrap gap-2">
             {filters.map((f) => (
               <button
@@ -144,19 +175,67 @@ const Catalog = () => {
               </button>
             ))}
           </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap gap-2">
+              {brandFilters.map((b) => (
+                <button
+                  key={b.id}
+                  onClick={() => setActiveBrand(b.id)}
+                  className={`flex items-center gap-2 px-3 py-1.5 border font-mono text-[10px] tracking-widest uppercase transition-all ${
+                    activeBrand === b.id
+                      ? 'bg-white text-black border-white font-bold'
+                      : 'border-white/10 text-white/50 hover:border-white/40 hover:text-white'
+                  }`}
+                >
+                  {b.id !== 'ALL' && <Icon name="Cpu" size={11} />}
+                  <span>{b.label}</span>
+                  <span className={`text-[9px] px-1 ${activeBrand === b.id ? 'bg-black/20' : 'bg-white/10'}`}>
+                    {b.count}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            <div className="flex gap-2">
+              {[
+                { id: 'default' as const, label: 'По умолчанию', icon: 'ListFilter' },
+                { id: 'price-asc' as const, label: 'Цена ↑', icon: 'ArrowUp' },
+                { id: 'price-desc' as const, label: 'Цена ↓', icon: 'ArrowDown' },
+              ].map((s) => (
+                <button
+                  key={s.id}
+                  onClick={() => setSortMode(s.id)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 border font-mono text-[10px] tracking-widest uppercase transition-all ${
+                    sortMode === s.id
+                      ? 'bg-[#FF6B00] border-[#FF6B00] text-black font-bold'
+                      : 'border-white/10 text-white/50 hover:border-[#FF6B00]/60 hover:text-white'
+                  }`}
+                >
+                  <Icon name={s.icon} size={11} />
+                  {s.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCatalog.map((pc) => {
             const cm = meta(pc.category);
+            const sig = pc.signature ? SIGNATURE_META[pc.signature] : null;
+            const accent = sig?.accent ?? cm.accent;
+            const border = sig?.border ?? cm.border;
+            const bg = sig?.bg ?? cm.bg;
+
             return (
               <Link key={pc.id} to={`/pc/${pc.id}`} className="block group">
-                <div className={`relative h-full flex flex-col bg-[#0D0D0D] border ${cm.border} hover:border-[#FF6B00] transition-all duration-500 overflow-hidden`}>
+                <div className={`relative h-full flex flex-col bg-[#0D0D0D] border ${border} ${sig ? 'border-2' : ''} hover:border-[#FF6B00] transition-all duration-500 overflow-hidden`}>
 
                   {/* Top accent line */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] transition-all duration-500"
-                    style={{ background: `linear-gradient(90deg, transparent, ${cm.accent}, transparent)`, opacity: 0.6 }} />
+                    style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)`, opacity: 0.7 }} />
 
                   {/* Image */}
                   <div className="relative aspect-[16/10] overflow-hidden">
@@ -168,16 +247,17 @@ const Catalog = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent to-transparent" />
 
                     {/* Badges */}
-                    <div className="absolute top-3 left-3 flex gap-2">
-                      <span className={`font-mono text-[10px] tracking-[0.2em] uppercase px-2.5 py-1 ${cm.bg} border ${cm.border}`}
-                        style={{ color: cm.accent }}>
-                        {pc.category}
-                      </span>
-                      {pc.badge && (
-                        <span className="font-mono text-[10px] tracking-[0.2em] uppercase px-2.5 py-1 bg-[#FF6B00] text-black">
-                          {pc.badge}
+                    <div className="absolute top-3 left-3 flex flex-wrap gap-2 max-w-[80%]">
+                      {sig && (
+                        <span className={`font-mono text-[10px] tracking-[0.2em] uppercase px-2.5 py-1 ${sig.bg} border ${sig.border} font-bold`}
+                          style={{ color: sig.accent }}>
+                          {sig.label}
                         </span>
                       )}
+                      <span className={`font-mono text-[10px] tracking-[0.2em] uppercase px-2.5 py-1 ${bg} border ${border}`}
+                        style={{ color: accent }}>
+                        {cm.label}
+                      </span>
                     </div>
                     <div className="absolute top-3 right-3">
                       <span className="font-mono text-[10px] tracking-widest uppercase px-2.5 py-1 bg-black/60 backdrop-blur border border-white/20 text-white/80">
@@ -196,9 +276,20 @@ const Catalog = () => {
 
                   {/* Content */}
                   <div className="p-6 flex flex-col flex-1">
-                    <h3 className="font-heading font-black text-lg uppercase text-white mb-3 group-hover:text-[#FF6B00] transition-colors line-clamp-2">
+                    <h3 className="font-heading font-black text-lg uppercase text-white mb-2 group-hover:text-[#FF6B00] transition-colors line-clamp-2">
                       {pc.title}
                     </h3>
+
+                    {/* Tags */}
+                    {pc.tags && pc.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {pc.tags.map((tag) => (
+                          <span key={tag} className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-white/5 border border-white/10 text-white/50">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
 
                     {/* Specs */}
                     <div className="space-y-1.5 mb-5">

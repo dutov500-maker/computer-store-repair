@@ -24,10 +24,13 @@ interface CatalogItem {
   price: number;
   resolution: string;
   category: string;
+  brand?: 'AMD' | 'Intel';
   image_url: string;
   badge?: string;
+  tags?: string[];
+  signature?: 'orange' | 'snow' | 'obsidian' | 'glacier';
   fps?: string;
-  specs: { cpu: string; gpu: string; ram: string; storage: string };
+  specs: { cpu: string; gpu: string; ram: string; storage: string; cooling?: string };
 }
 
 const STATIC_CATALOG = CATALOG_DATA as CatalogItem[];
@@ -37,6 +40,21 @@ const TRUST_BADGES = [
   { icon: 'Activity', label: 'Стресс-тест 4 ч.' },
   { icon: 'Wrench', label: 'Обслуживание 1 год бесплатно' },
 ];
+
+const SERVICE_FEATURES = [
+  { icon: 'ShieldCheck', title: 'Гарантия', text: '1 год от K Lab + до 5 лет от вендоров' },
+  { icon: 'Activity', title: 'Стресс-тест', text: '4 часа под OCCT, AIDA64, FurMark перед выдачей' },
+  { icon: 'Wrench', title: 'ТО в подарок', text: '1 год бесплатного планового обслуживания' },
+  { icon: 'ArrowLeftRight', title: 'Trade-in', text: 'Честный обмен старого ПК в счёт покупки' },
+  { icon: 'MonitorCheck', title: 'Windows 11 Pro', text: 'Предустановлена с драйверами и оптимизацией' },
+];
+
+const SIGNATURE_META: Record<string, { label: string; accent: string; text: string; border: string; bg: string; gradient: string }> = {
+  orange:   { label: 'ORANGE EDITION', accent: '#FF6B00', text: 'text-[#FF6B00]', border: 'border-[#FF6B00]/40', bg: 'bg-[#FF6B00]/10', gradient: 'from-orange-500/20 to-orange-600/10 border-orange-500/40' },
+  snow:     { label: 'SNOW EDITION',   accent: '#f8fafc', text: 'text-white',    border: 'border-white/50',     bg: 'bg-white/10',     gradient: 'from-white/20 to-white/5 border-white/40' },
+  obsidian: { label: 'OBSIDIAN',       accent: '#ef4444', text: 'text-red-400',  border: 'border-red-500/50',   bg: 'bg-red-500/10',   gradient: 'from-red-500/20 to-red-900/10 border-red-500/40' },
+  glacier:  { label: 'GLACIER',        accent: '#7dd3fc', text: 'text-sky-300',  border: 'border-sky-300/50',   bg: 'bg-sky-300/10',   gradient: 'from-sky-400/20 to-sky-900/10 border-sky-300/40' },
+};
 
 const getCategoryColor = (category: string) => {
   switch (category) {
@@ -100,6 +118,7 @@ export default function PCProduct() {
   }
 
   const isHighTicket = product.price > 40000;
+  const signature = product.signature ? SIGNATURE_META[product.signature] : null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -171,12 +190,19 @@ export default function PCProduct() {
           </Link>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div>
+            <div className={signature ? `p-1 rounded-xl bg-gradient-to-br ${signature.gradient} border` : ''}>
               <img src={product.image_url} alt={product.title} className="w-full rounded-xl shadow-lg" />
             </div>
 
             <div className="flex flex-col">
               <div className="flex items-center gap-2 flex-wrap mb-4">
+                {signature && (
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-bold border ${signature.border} ${signature.bg} ${signature.text}`}
+                  >
+                    {signature.label}
+                  </span>
+                )}
                 {product.badge && (
                   <span className="px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/30">
                     {product.badge}
@@ -185,10 +211,25 @@ export default function PCProduct() {
                 <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getCategoryBadgeColor(product.category)}`}>
                   {product.category}
                 </span>
+                {product.brand && (
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold border bg-muted text-muted-foreground border-border">
+                    {product.brand}
+                  </span>
+                )}
               </div>
 
               <h1 className="text-3xl md:text-4xl font-bold mb-3">{product.title}</h1>
               <p className="text-lg text-muted-foreground mb-5">{product.description}</p>
+
+              {product.tags && product.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {product.tags.map((tag) => (
+                    <span key={tag} className="text-xs font-mono uppercase tracking-wider px-2.5 py-1 bg-muted border border-border text-muted-foreground">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
 
               {/* Feature Tags */}
               <div className="flex flex-wrap gap-2 mb-5">
@@ -319,6 +360,27 @@ export default function PCProduct() {
                 <Icon name="Monitor" className="text-primary mt-1" />
                 <div><div className="font-semibold">Разрешение</div><div className="text-muted-foreground">{product.resolution}</div></div>
               </div>
+              {product.specs.cooling && (
+                <div className="flex items-start gap-3">
+                  <Icon name="Snowflake" className="text-primary mt-1" />
+                  <div><div className="font-semibold">Охлаждение</div><div className="text-muted-foreground">{product.specs.cooling}</div></div>
+                </div>
+              )}
+            </div>
+          </Card>
+
+          <Card className="p-6 bg-card/50 border mb-8">
+            <h2 className="text-2xl font-bold mb-6">Сервис K|LAB</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              {SERVICE_FEATURES.map((f) => (
+                <div key={f.title} className="flex flex-col items-center text-center gap-2 p-3">
+                  <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Icon name={f.icon} size={20} className="text-primary" />
+                  </div>
+                  <div className="font-semibold text-sm">{f.title}</div>
+                  <div className="text-xs text-muted-foreground leading-tight">{f.text}</div>
+                </div>
+              ))}
             </div>
           </Card>
         </div>

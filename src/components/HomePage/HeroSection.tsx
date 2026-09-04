@@ -5,28 +5,28 @@ import { useEffect, useState } from 'react';
 
 const SLIDER_IMAGES = [
   {
-    url: 'https://cdn.poehali.dev/files/ea9cf683-2a7b-4b39-978e-3b97077b4cf6.jpg',
-    title: 'Ultra 1 - 265К',
+    url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/afea9e97-6dd2-402c-a445-1eb7e176a2b4.jpg',
+    title: 'Obsidian Edition - 260К',
     category: 'ULTRA'
   },
   {
-    url: 'https://cdn.poehali.dev/files/c2e89173-e95e-4143-8090-a100f334c4cb.jpg',
-    title: 'Premium 2 - 165К',
+    url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/96373db8-4a19-4611-a80d-3127434e3dc6.jpg',
+    title: 'Orange Edition - 160К',
     category: 'PREMIUM'
   },
   {
-    url: 'https://cdn.poehali.dev/files/ef30776e-bc42-4a3c-9226-66f03dacf007.jpg',
-    title: 'Premium 1 - 145К',
-    category: 'PREMIUM'
+    url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/c562b256-d07c-4e66-8fea-e93bb3e9ea01.jpg',
+    title: 'Snow Edition - 209К',
+    category: 'ULTRA'
   },
   {
-    url: 'https://cdn.poehali.dev/files/5d2552b2-ef60-4635-a318-97fb773b7e5b.jpg',
-    title: 'Premium 4 - 225К',
-    category: 'PREMIUM'
+    url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/5f1f9f5a-771d-42f1-871d-5d49173ebdb4.jpg',
+    title: 'Glacier Edition - 320К',
+    category: 'ELITE'
   },
   {
-    url: 'https://cdn.poehali.dev/files/7596f8cc-1e94-4d3f-b548-2459676f4d29.jpg',
-    title: 'Eco 5 - 70К',
+    url: 'https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/76a2e785-c341-462e-bd95-4944011f5f39.jpg',
+    title: 'K Lab Start - 95К',
     category: 'ECO'
   }
 ];
