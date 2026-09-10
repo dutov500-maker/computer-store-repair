@@ -7,7 +7,7 @@ export const CATALOG_DATA = [
     resolution: "Full HD",
     category: "ECO",
     brand: "AMD",
-    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/76a2e785-c341-462e-bd95-4944011f5f39.jpg",
+    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/bucket/cea21748-5ec6-408f-b546-8327148e1f74.jpg",
     tags: ["Хит для 1080p", "CS2 / Dota / Tanks"],
     specs: {
       cpu: "AMD Ryzen 5 5500",
@@ -41,6 +41,7 @@ export const CATALOG_DATA = [
     resolution: "Full HD",
     category: "SPECIAL",
     brand: "Intel",
+    outOfStock: true,
     image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/76a2e785-c341-462e-bd95-4944011f5f39.jpg",
     tags: ["Вход в 2K"],
     specs: {
@@ -75,6 +76,7 @@ export const CATALOG_DATA = [
     resolution: "QHD",
     category: "SPECIAL",
     brand: "AMD",
+    outOfStock: true,
     image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/eac9fcd2-cb64-4b3a-9672-ddcaad87f917.jpg",
     tags: ["Баланс для 2K"],
     specs: {
@@ -145,6 +147,7 @@ export const CATALOG_DATA = [
     resolution: "QHD",
     category: "PREMIUM",
     brand: "Intel",
+    outOfStock: true,
     image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/217c1164-b977-4217-a993-7b10b3f726dc.jpg",
     tags: ["Arrow Lake", "2K Ultra"],
     specs: {
@@ -181,6 +184,7 @@ export const CATALOG_DATA = [
     resolution: "QHD",
     category: "ULTRA",
     brand: "Intel",
+    outOfStock: true,
     image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/217c1164-b977-4217-a993-7b10b3f726dc.jpg",
     tags: ["Overclocked"],
     specs: {
@@ -237,6 +241,7 @@ export const CATALOG_DATA = [
     category: "ULTRA",
     brand: "AMD",
     signature: "obsidian",
+    outOfStock: true,
     image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/afea9e97-6dd2-402c-a445-1eb7e176a2b4.jpg",
     tags: ["Total Black", "Top Performance"],
     specs: {
@@ -275,6 +280,7 @@ export const CATALOG_DATA = [
     category: "ELITE",
     brand: "AMD",
     signature: "glacier",
+    outOfStock: true,
     image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/5f1f9f5a-771d-42f1-871d-5d49173ebdb4.jpg",
     tags: ["Максимум K Lab", "Бескомпромиссный топ"],
     specs: {

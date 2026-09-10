@@ -29,6 +29,7 @@ interface CatalogItem {
   badge?: string;
   tags?: string[];
   signature?: 'orange' | 'snow' | 'obsidian' | 'glacier';
+  outOfStock?: boolean;
   fps?: string;
   specs: { cpu: string; gpu: string; ram: string; storage: string; cooling?: string };
 }
@@ -190,8 +191,15 @@ export default function PCProduct() {
           </Link>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className={signature ? `p-1 rounded-xl bg-gradient-to-br ${signature.gradient} border` : ''}>
-              <img src={product.image_url} alt={product.title} className="w-full rounded-xl shadow-lg" />
+            <div className={`relative ${signature ? `p-1 rounded-xl bg-gradient-to-br ${signature.gradient} border` : ''}`}>
+              <img src={product.image_url} alt={product.title} className={`w-full rounded-xl shadow-lg ${product.outOfStock ? 'grayscale' : ''}`} />
+              {product.outOfStock && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-xl">
+                  <span className="font-mono text-sm tracking-[0.2em] uppercase px-5 py-2.5 bg-black/80 border border-white/30 text-white/90 font-bold">
+                    Временно нет в наличии
+                  </span>
+                </div>
+              )}
             </div>
 
             <div className="flex flex-col">
@@ -276,7 +284,12 @@ export default function PCProduct() {
               )}
 
               {/* Primary CTA */}
-              {isHighTicket ? (
+              {product.outOfStock ? (
+                <Button size="lg" disabled className="w-full mb-3 bg-white/5 text-white/40 font-bold cursor-not-allowed">
+                  <Icon name="Clock" size={18} className="mr-2" />
+                  Временно нет в наличии
+                </Button>
+              ) : isHighTicket ? (
                 <Button
                   size="lg"
                   className="w-full mb-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold shadow-lg shadow-orange-500/30"

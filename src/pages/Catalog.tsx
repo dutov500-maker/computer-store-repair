@@ -20,6 +20,7 @@ interface CatalogItem {
   image_url: string;
   tags?: string[];
   signature?: 'orange' | 'snow' | 'obsidian' | 'glacier';
+  outOfStock?: boolean;
   specs: { cpu: string; gpu: string; ram: string; storage: string; cooling?: string };
 }
 
@@ -231,7 +232,7 @@ const Catalog = () => {
 
             return (
               <Link key={pc.id} to={`/pc/${pc.id}`} className="block group">
-                <div className={`relative h-full flex flex-col bg-[#0D0D0D] border ${border} ${sig ? 'border-2' : ''} hover:border-[#FF6B00] transition-all duration-500 overflow-hidden`}>
+                <div className={`relative h-full flex flex-col bg-[#0D0D0D] border ${border} ${sig ? 'border-2' : ''} hover:border-[#FF6B00] transition-all duration-500 overflow-hidden ${pc.outOfStock ? 'opacity-70' : ''}`}>
 
                   {/* Top accent line */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] transition-all duration-500"
@@ -242,9 +243,17 @@ const Catalog = () => {
                     <img
                       src={pc.image_url}
                       alt={pc.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className={`w-full h-full object-cover transition-transform duration-700 ${pc.outOfStock ? 'grayscale' : 'group-hover:scale-105'}`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent to-transparent" />
+
+                    {pc.outOfStock && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                        <span className="font-mono text-xs tracking-[0.2em] uppercase px-4 py-2 bg-black/80 border border-white/30 text-white/80 font-bold">
+                          Временно нет в наличии
+                        </span>
+                      </div>
+                    )}
 
                     {/* Badges */}
                     <div className="absolute top-3 left-3 flex flex-wrap gap-2 max-w-[80%]">
@@ -332,10 +341,17 @@ const Catalog = () => {
                       </div>
 
                       <div className="flex flex-col gap-2">
-                        <button className="w-full flex items-center justify-center gap-2 bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold text-xs tracking-widest uppercase py-4 transition-all">
-                          <Icon name="ArrowRight" size={14} />
-                          Узнать больше
-                        </button>
+                        {pc.outOfStock ? (
+                          <button disabled className="w-full flex items-center justify-center gap-2 bg-white/5 text-white/40 font-bold text-xs tracking-widest uppercase py-4 cursor-not-allowed">
+                            <Icon name="Clock" size={14} />
+                            Нет в наличии
+                          </button>
+                        ) : (
+                          <button className="w-full flex items-center justify-center gap-2 bg-[#FF6B00] hover:bg-[#FF8A2E] text-black font-bold text-xs tracking-widest uppercase py-4 transition-all">
+                            <Icon name="ArrowRight" size={14} />
+                            Узнать больше
+                          </button>
+                        )}
                         <button
                           onClick={(e) => openConsult(e, pc)}
                           className="w-full flex items-center justify-center gap-2 border border-white/10 hover:border-[#FF6B00] text-white/70 hover:text-[#FF6B00] font-mono text-[10px] tracking-widest uppercase py-3.5 transition-all"
