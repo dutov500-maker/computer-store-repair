@@ -24,7 +24,7 @@ export const CATALOG_DATA = [
     resolution: "Full HD",
     category: "SPECIAL",
     brand: "AMD",
-    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/eac9fcd2-cb64-4b3a-9672-ddcaad87f917.jpg",
+    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/bucket/2bf793f7-a11d-4360-af57-6f4894c84f63.jpg",
     tags: ["Ультра 1080p"],
     specs: {
       cpu: "AMD Ryzen 5 5600",
@@ -58,7 +58,7 @@ export const CATALOG_DATA = [
     resolution: "Full HD",
     category: "SPECIAL",
     brand: "AMD",
-    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/eac9fcd2-cb64-4b3a-9672-ddcaad87f917.jpg",
+    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/bucket/c652df5b-178e-4177-a036-4425e5c2c40c.jpg",
     tags: ["DDR5 База"],
     specs: {
       cpu: "AMD Ryzen 5 7500F",
@@ -92,7 +92,7 @@ export const CATALOG_DATA = [
     resolution: "QHD",
     category: "SPECIAL",
     brand: "AMD",
-    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/eac9fcd2-cb64-4b3a-9672-ddcaad87f917.jpg",
+    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/bucket/a844d193-9248-4c28-a55f-e304ee91ef43.jpg",
     tags: ["16GB VRAM"],
     specs: {
       cpu: "AMD Ryzen 5 7500F",
@@ -110,7 +110,7 @@ export const CATALOG_DATA = [
     category: "PREMIUM",
     brand: "Intel",
     signature: "orange",
-    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/96373db8-4a19-4611-a80d-3127434e3dc6.jpg",
+    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/bucket/9bee5dc3-e33b-4513-888e-fa7297d36aa0.jpg",
     tags: ["ХИТ K Lab", "Orange Style", "Плотный 2K"],
     specs: {
       cpu: "Intel Core i5-13400F",
@@ -128,7 +128,7 @@ export const CATALOG_DATA = [
     resolution: "QHD",
     category: "PREMIUM",
     brand: "AMD",
-    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/64ca24db-1e11-4c9b-9fd9-d87fe703dafb.jpg",
+    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/bucket/7f65e887-bb08-421c-afbd-2a8653b47d4f.jpg",
     tags: ["8 ядер AM5", "Стриминг / Рендер"],
     specs: {
       cpu: "AMD Ryzen 7 8700F",
@@ -163,7 +163,7 @@ export const CATALOG_DATA = [
     category: "ULTRA",
     brand: "AMD",
     signature: "snow",
-    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/c562b256-d07c-4e66-8fea-e93bb3e9ea01.jpg",
+    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/bucket/9f222e7d-da84-4ccc-8ea2-25b2adb74ade.jpg",
     tags: ["Snow White", "Total White", "Эстетика"],
     specs: {
       cpu: "AMD Ryzen 7 7700",
@@ -199,7 +199,7 @@ export const CATALOG_DATA = [
     category: "ULTRA",
     brand: "AMD",
     signature: "snow",
-    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/c562b256-d07c-4e66-8fea-e93bb3e9ea01.jpg",
+    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/bucket/8f33e0c6-438f-4ea1-be01-ddbc6cde511e.jpg",
     tags: ["White Custom"],
     specs: {
       cpu: "AMD Ryzen 7 7700",
@@ -218,7 +218,7 @@ export const CATALOG_DATA = [
     category: "ULTRA",
     brand: "AMD",
     signature: "obsidian",
-    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/afea9e97-6dd2-402c-a445-1eb7e176a2b4.jpg",
+    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/bucket/f5dc9a18-cfa2-4daa-9cd3-1b4d92652900.jpg",
     tags: ["3D V-Cache", "Флагман 2K/4K"],
     specs: {
       cpu: "AMD Ryzen 7 7800X3D",
@@ -256,7 +256,7 @@ export const CATALOG_DATA = [
     category: "ELITE",
     brand: "AMD",
     signature: "glacier",
-    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/files/5f1f9f5a-771d-42f1-871d-5d49173ebdb4.jpg",
+    image_url: "https://cdn.poehali.dev/projects/324d8ab1-51e4-4903-8847-156dc2773d3d/bucket/3cc816c6-a1fb-4243-ac6d-9f658933f768.jpg",
     tags: ["4K Ultra Gaming", "9800X3D"],
     specs: {
       cpu: "AMD Ryzen 7 9800X3D",
