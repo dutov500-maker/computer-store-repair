@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "@/lib/router-compat";
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import {

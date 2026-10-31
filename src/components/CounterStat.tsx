@@ -5,7 +5,7 @@ interface CounterStatProps {
   end: number;
   duration?: number;
   label: string;
-  icon: string;
+  icon?: string;
   suffix?: string;
   delay?: number;
 }

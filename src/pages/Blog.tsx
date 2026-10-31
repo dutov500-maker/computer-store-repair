@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Icon from '@/components/ui/icon';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "@/lib/router-compat";
 import { blogPosts } from '@/components/BlogPost/BlogPostData';
 
 const Blog = () => {

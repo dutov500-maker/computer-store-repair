@@ -1,7 +1,7 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
-import { Link } from 'react-router-dom';
+import { Link } from "@/lib/router-compat";
 import { BlogPost } from './BlogPostData';
 
 interface RelatedPostsProps {

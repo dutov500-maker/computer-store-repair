@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Icon from '@/components/ui/icon';
-import { Link } from 'react-router-dom';
+import { Link } from "@/lib/router-compat";
 
 const menuItems = [
   { to: '/catalog', label: 'Каталог' },

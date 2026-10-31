@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Icon from '@/components/ui/icon';
@@ -142,11 +141,6 @@ const Services = () => {
 
   return (
     <div className="min-h-screen page-transition bg-[#0A0A0A] text-white">
-      <Helmet>
-        <title>Ремонт компьютеров в Волжском | K|LAB — Мастерская</title>
-        <meta name="description" content="Ремонт компьютеров, ноутбуков, планшетов в Волжском. Диагностика 0₽. Гарантия 1 год. Вызов мастера на дом. ☎️ +7 995 027-27-07" />
-      </Helmet>
-
       <Header />
 
       {/* Hero */}

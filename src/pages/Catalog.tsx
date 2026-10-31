@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { Link } from "@/lib/router-compat";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -98,12 +97,6 @@ const Catalog = () => {
 
   return (
     <div className="min-h-screen page-transition bg-[#0A0A0A] text-white">
-      <Helmet>
-        <title>{seoTitle}</title>
-        <meta name="description" content={seoDescription} />
-        <link rel="canonical" href="https://комплаб.рф/catalog" />
-      </Helmet>
-
       <Header />
       <StickyHelpButton />
 

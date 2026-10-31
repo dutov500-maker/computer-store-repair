@@ -1,3 +1,0 @@
-# Сохранять права исполняемости для shell скриптов
-*.sh text eol=lf
-start-local.sh executable

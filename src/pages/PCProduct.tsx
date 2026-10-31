@@ -1,5 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import { useParams, Link } from "@/lib/router-compat";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
@@ -176,10 +175,6 @@ export default function PCProduct() {
 
   return (
     <>
-      <Helmet>
-        <title>{product.title} - Купить в КомпЛаб</title>
-        <meta name="description" content={`${product.description}. ${product.specs.cpu}, ${product.specs.gpu}, ${product.specs.ram}, ${product.specs.storage}. Цена: ${product.price.toLocaleString('ru-RU')} ₽`} />
-      </Helmet>
       <Header />
       <StickyHelpButton />
 

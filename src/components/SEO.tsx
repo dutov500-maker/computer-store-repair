@@ -1,6 +1,3 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-
 interface SEOProps {
   title?: string;
   description?: string;
@@ -386,71 +383,42 @@ const pageSEO: Record<string, SEOProps> = {
   }
 };
 
-const SEO = () => {
-  const location = useLocation();
+const SITE_URL = 'https://комплаб.рф';
 
-  useEffect(() => {
-    const currentPath = location.pathname;
-    const seo = pageSEO[currentPath] || defaultSEO;
-    const schema = pageSchemas[currentPath];
+export interface SEOOverride {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  canonical?: string;
+}
 
-    document.title = seo.title || defaultSEO.title;
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', seo.description || defaultSEO.description);
-    }
-
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (metaKeywords) {
-      metaKeywords.setAttribute('content', seo.keywords || defaultSEO.keywords);
-    }
-
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) {
-      ogTitle.setAttribute('content', seo.title || defaultSEO.title);
-    }
-
-    const ogDescription = document.querySelector('meta[property="og:description"]');
-    if (ogDescription) {
-      ogDescription.setAttribute('content', seo.description || defaultSEO.description);
-    }
-
-    const ogUrl = document.querySelector('meta[property="og:url"]');
-    if (ogUrl) {
-      ogUrl.setAttribute('content', `https://комплаб.рф${currentPath}`);
-    }
-
-    const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) {
-      canonical.setAttribute('href', `https://комплаб.рф${currentPath}`);
-    }
-
-    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
-    if (twitterTitle) {
-      twitterTitle.setAttribute('content', seo.title || defaultSEO.title);
-    }
-
-    const twitterDescription = document.querySelector('meta[name="twitter:description"]');
-    if (twitterDescription) {
-      twitterDescription.setAttribute('content', seo.description || defaultSEO.description);
-    }
-
-    let schemaScript = document.getElementById('page-schema');
-    if (schemaScript) {
-      schemaScript.remove();
-    }
-
-    if (schema) {
-      schemaScript = document.createElement('script');
-      schemaScript.id = 'page-schema';
-      schemaScript.type = 'application/ld+json';
-      schemaScript.textContent = JSON.stringify(Array.isArray(schema) ? schema : schema);
-      document.head.appendChild(schemaScript);
-    }
-  }, [location]);
-
-  return null;
+// head() for a route: per-page title/description/og/canonical and page JSON-LD
+// (previously applied in useEffect by the global <SEO /> component).
+export const seoHead = (path: string, override: SEOOverride = {}) => {
+  const seo = pageSEO[path] || defaultSEO;
+  const schema = pageSchemas[path];
+  const title = override.title || seo.title || defaultSEO.title;
+  const description = override.description || seo.description || defaultSEO.description;
+  const keywords = override.keywords || seo.keywords || defaultSEO.keywords;
+  const ogTitle = override.ogTitle || seo.title || defaultSEO.title;
+  const ogDescription = override.ogDescription || seo.description || defaultSEO.description;
+  const canonical = override.canonical || `${SITE_URL}${path}`;
+  return {
+    meta: [
+      { title },
+      { name: 'description', content: description },
+      { name: 'keywords', content: keywords },
+      { property: 'og:title', content: ogTitle },
+      { property: 'og:description', content: ogDescription },
+      { property: 'og:url', content: `${SITE_URL}${path}` },
+      { name: 'twitter:title', content: seo.title || defaultSEO.title },
+      { name: 'twitter:description', content: seo.description || defaultSEO.description },
+    ],
+    links: [{ rel: 'canonical', href: canonical }],
+    scripts: schema
+      ? [{ type: 'application/ld+json', children: JSON.stringify(schema) }]
+      : [],
+  };
 };
-
-export default SEO;
