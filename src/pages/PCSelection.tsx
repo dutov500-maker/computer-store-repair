@@ -4,12 +4,7 @@ import Footer from '@/components/Footer';
 import { PCSelectionSection } from '@/components/HomePage/PCSelectionSection';
 import { initializeStorage } from '@/lib/localStorage';
 
-const PCSelection = () => {
-  useEffect(() => {
-    initializeStorage();
-  }, []);
-
-  const generateServiceSchema = () => {
+export const generateServiceSchema = () => {
     return {
       "@context": "https://schema.org",
       "@type": "Service",
@@ -85,15 +80,15 @@ const PCSelection = () => {
         ]
       }
     };
-  };
+};
+
+const PCSelection = () => {
+  useEffect(() => {
+    initializeStorage();
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white page-transition">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(generateServiceSchema()) }}
-      />
-
       <Header />
       <section className="py-24 md:py-32 border-b border-white/5">
         <div className="container mx-auto px-6">

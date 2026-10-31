@@ -16,9 +16,7 @@ const breadcrumbNames: Record<string, string> = {
   '/pc-selection': 'Подбор компьютера',
   '/blog': 'Блог',
   '/warranty': 'Гарантия',
-  '/delivery': 'Доставка',
-  '/admin': 'Админ-панель',
-  '/admin/login': 'Вход'
+  '/delivery': 'Доставка'
 };
 
 const Breadcrumbs = () => {
@@ -40,27 +38,8 @@ const Breadcrumbs = () => {
     breadcrumbs.push({ label, path: currentPath });
   });
 
-  const generateBreadcrumbSchema = () => {
-    const itemListElement = breadcrumbs.map((crumb, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "name": crumb.label,
-      "item": `https://комплаб.рф${crumb.path}`
-    }));
-
-    return {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": itemListElement
-    };
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(generateBreadcrumbSchema()) }}
-      />
       <nav className="bg-[#0A0A0A] border-b border-white/5">
         <div className="container mx-auto px-6 py-3">
           <ol className="flex items-center space-x-2 text-xs font-mono tracking-widest uppercase">
